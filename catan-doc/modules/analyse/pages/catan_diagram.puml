@@ -1,0 +1,30 @@
+@startuml 'https://plantuml.com/activity-diagram-beta'
+
+class Joueur
+class Partie
+class Construction
+class Route
+class Ville
+class Pièce
+class Colonie
+class Dé
+enum Territoire
+enum Ressource
+class Plateau
+
+Joueur --> Construction : Possède [2:n]
+Joueur --> Route : Possède [2:n]
+Joueur --> Partie : [3:4]
+Joueur -- Plateau
+Construction --> Territoire : Adjaçant [2:3]
+Pièce --> Route : [?]
+Pièce --> Ville : [?]
+Pièce --> Colonie : [?]
+Pièce --> Plateau
+Dé --> Plateau : [2]
+Ressource --> Territoire
+Plateau --> Territoire : [19]
+Plateau --* Partie
+
+
+@enduml

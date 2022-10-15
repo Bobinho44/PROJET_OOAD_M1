@@ -1,5 +1,4 @@
-@startuml
-'https://plantuml.com/activity-diagram-beta
+@startuml 'https://plantuml.com/activity-diagram-beta
 
 start
 :ClickServlet.handleRequest();
