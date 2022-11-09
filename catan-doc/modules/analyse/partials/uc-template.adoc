@@ -1,4 +1,3 @@
-
 [cols="30s,70n",options="header", frame=sides]
 |===
 | Item | Description
@@ -7,51 +6,49 @@
 | 1
 
 | Cas d'utilisation	
-| _à compléter_
+| _Mise en place_
 
 | Alias
-| _à compléter_
+| _Préparation, Initialisation_
 
 | Objectif contextuel
-| _à compléter_
+| _Installer le plateau, avec les territoires, les ports, le voleur, les jetons, les cartes (fiche de coût, fiche spéciale, cartes de développement...). Les joueurs placent leurs premières colonies et routes pour commencer la partie_
 
 | Portée	
-| _à compléter_
+| _Le jeu_
 
 | Niveau
-| _à compléter_
+| _Summary_
 
 | Condition de succès
-| _à compléter_
+| _Le plateau, les cartes, les territoires sont mis en place. Les joueurs ont placé leurs pièce et ont leurs cartes_
 
 | Condition d'échec
-| _à compléter_
+| _Les cartes, pièces, territoires et le plateau ne sont pas distribués_
 
 | Acteurs principaux:
-| _à compléter_
+| _Les joueurs_
 
 | Acteurs secondaires
-| _à compléter_
+| __
 
 | Événement déclencheur
-| _à compléter_
+| _Le début du jeu_
 
 
 | Priorité
-| _à compléter_
+| _Haute_
 
 | Fréquence
-| _à compléter_
+| _Une fois par partie_
 
 | Pré-conditions 
-a| 
-- _à compléter_
-- _à compléter_
+| _Il y a entre trois et quatre joueurs disponibles_
 
 | Post-conditions
 a| 
-- _à compléter_
-- _à compléter_
+- _Le plateau est prêt_
+- _Tous les joueurs ont placé leurs 3(?) colonies et leurs routes_
 - _à compléter_
 
 
@@ -76,11 +73,10 @@ a|
 . _à compléter_
 
 | Cas d'utilisation supérieur
-| _à compléter_
+| _Aucun_
 
 | Cas d'utilisation subordonnés 
-| _à compléter_
-// _optional, depending on tools, links to sub.use cases_
+| _Aucun_
 
 | Objectif de performance
 | _à compléter_
@@ -91,13 +87,13 @@ a|
 - _à compléter_
 
 | Échéancier	
-| _à compléter_
+| _Version 1.0.0_
 
 | Contraintes
 | _à compléter_
 
 | Annexes
-| _à compléter_
+| _Aucun_
 
 |===
 
