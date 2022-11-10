@@ -41,7 +41,7 @@ include::partials$ImplementationActivityDiagramCatan.puml[]
 
 === Cas d'utilisation "Jouer un tour"
 
-include::partial$uc-template-en.adoc[leveloffset=+2]
+include::partials$UseCasePlayRoundCatan.adoc[]
 
 .Diagramme d'activités: Jouer un tour
 [plantuml]
