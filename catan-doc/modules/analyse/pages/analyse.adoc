@@ -16,7 +16,7 @@ Utilisez une approche itérative pour découvrir toutes les classes conceptuelle
 .Classes conceptuelles
 [plantuml]
 ....
-include::partials$CatanUMLDiagram.puml[]
+include::partial$CatanUMLDiagram.puml[]
 ....
 
 == Cas d'utilisation
@@ -31,17 +31,17 @@ Additionnellement, utilisez des diagrammes d'activités UML pour illustrer les c
 
 === Cas d'utilisation "Mise en place d'une partie"
 
-include::partials$UseCaseImplementationCatan.adoc.adoc[]
+include::partial$UseCaseImplementationCatan.adoc.adoc[]
 
 .Diagramme d'activités: Mise en place d'une partie
 [plantuml]
 ....
-include::partials$ImplementationActivityDiagramCatan.puml[]
+include::partial$ImplementationActivityDiagramCatan.puml[]
 ....
 
 === Cas d'utilisation "Jouer un tour"
 
-include::partials$UseCasePlayRoundCatan.adoc[]
+include::partial$UseCasePlayRoundCatan.adoc[]
 
 .Diagramme d'activités: Jouer un tour
 [plantuml]
