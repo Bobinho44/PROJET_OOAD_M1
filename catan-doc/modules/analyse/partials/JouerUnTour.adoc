@@ -1,0 +1,107 @@
+[cols="30s,70n",options="header", frame=sides]
+|===
+| Item | Description
+
+| # 
+| 1
+
+| Cas d'utilisation	
+| _Mise en place_
+
+| Alias
+| _Préparation, Initialisation_
+
+| Objectif contextuel
+| _Installer le plateau, avec les territoires, les ports, le voleur, les jetons, les cartes (fiche de coût, fiche spéciale, cartes de développement...). Les joueurs placent leurs premières colonies et routes pour commencer la partie_
+
+| Portée	
+| _Le jeu_
+
+| Niveau
+| _Summary_
+
+| Condition de succès
+| _Le plateau, les cartes, les territoires sont mis en place. Les joueurs ont placé leurs pièce et ont leur fiche de coût_
+
+| Condition d'échec
+| _Les fiches, pièces, territoires et le plateau ne sont pas distribués ou installés_
+
+| Acteurs principaux:
+| _Le joueur actif_
+
+| Acteurs secondaires
+| _Les autres joueurs_
+
+| Événement déclencheur
+| _La fin du tour du joueur précédent ou le lancement de la partie_
+
+
+| Priorité
+| _Haute_
+
+| Fréquence
+| _Autant de fois que nécessaire avant qu'un joueur gagne_
+
+| Pré-conditions 
+a| 
+- _a partie est lancée_
+- _Le joueur précédent a fini son tour_
+
+| Post-conditions
+| _Le joueur actif a fini son tour ou il a gagné la parite_
+
+
+| Scénario nominal
+a|
+. _Le joueur actif lance les deux dés_
+. _Pour chaque colonie adjacente à un territoire numéroté par la somme des dès lancés, les joueurs recoivent une ressource associé à ce territoire_
+. _Le joueur actif peut:_
+. - _Créer une route, payer sa construction et là placer sur un emplacement valide_
+. - _Créer une colonie, payer sa construction et là placer sur un emplacement valide_
+. - _Créer une ville, payer sa construction et là placer à la place d'une de ses colonies_
+. - _Acheter une carte développement_
+. - _Jouer une carte développement obtenue dans un des tour précédent_
+. - _Echanger des ressources avec les autres joueurs_
+. - _Echanger contre la "banque" 4 ressources du même type contre une ressource au choix_
+. _Vérifier si le joueur actif a gagné_
+
+
+| Extensions	
+
+| Alternatives	
+a| 
+- _Le joueur reçoit 2 ressources (au lieu d'une) si il possède une ville et non une colonie adjacente à un territoire_
+- _Si le joueur possède une colonie sur un port, il peut échanger 3 ressources associées à ce port contre une ressource au choix_
+- _Si le joueur possède une ville sur un port, il peut échanger 2 ressources associées à ce port contre une ressource au choix_
+- _Si le joueur obtiens 7 aux dés, tous les joueurs ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l'inférieur) et il déplace le voleur._
+- _Si le voleur est situé sur un territoire associé au résultat des dès, ce territoire ne donne pas de ressource_
+
+
+| Cas d'utilisation supérieur
+| _Aucun_
+
+| Cas d'utilisation subordonnés 
+| _Aucun_
+
+| Objectif de performance
+| _Le temps que les actions se fassent_
+
+| Problèmes ouverts	
+| __
+
+| Échéancier	
+| _Version 1.0.0_
+
+| Contraintes
+| __
+
+| Annexes
+| _Aucun_
+
+|===
+
+
+
+
+
+
