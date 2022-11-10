@@ -31,7 +31,7 @@ Additionnellement, utilisez des diagrammes d'activités UML pour illustrer les c
 
 === Cas d'utilisation "Mise en place d'une partie"
 
-include::partial$UseCaseImplementationCatan.adoc.adoc[]
+include::partial$UseCaseImplementationCatan.adoc[]
 
 .Diagramme d'activités: Mise en place d'une partie
 [plantuml]
