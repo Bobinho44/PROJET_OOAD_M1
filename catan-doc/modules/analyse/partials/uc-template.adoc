@@ -21,10 +21,10 @@
 | _Summary_
 
 | Condition de succès
-| _Le plateau, les cartes, les territoires sont mis en place. Les joueurs ont placé leurs pièce et ont leurs cartes_
+| _Le plateau, les cartes, les territoires sont mis en place. Les joueurs ont placé leurs pièce et ont leur fiche de coût_
 
 | Condition d'échec
-| _Les cartes, pièces, territoires et le plateau ne sont pas distribués_
+| _Les fiches, pièces, territoires et le plateau ne sont pas distribués ou installés_
 
 | Acteurs principaux:
 | _Les joueurs_
@@ -48,29 +48,31 @@
 | Post-conditions
 a| 
 - _Le plateau est prêt_
-- _Tous les joueurs ont placé leurs 3(?) colonies et leurs routes_
-- _à compléter_
+- _Les pièces sont placés (jeton, ressouces)_
+- _Le voleur est placé sur le territoire "désert"_
+- _Tous les joueurs ont placé leurs 2 colonies et leurs 2 routes_
+- _Les joueurs ont leurs fiches_
 
 
 | Scénario nominal
 a|
-. _à compléter_
-. _à compléter_
-. _à compléter_
-. _à compléter_
-. _à compléter_
-. _à compléter_
+. _Placer les six zones "mer" aléatoirement_
+. _Placer le désert au centre du plateau_
+. _Placer aléatoirement les pièces territoires en partant du centre du plateau et en avançant en spirale_
+. _Placer les jetons dans l'ordre lexicographique en partant du centre du plateau en tourant dans le sens des aiguilles d'une montre_
+. _Placer le voleur sur la case désert_
+. _Chaque joueur reçoit une fiche Coûts de construction et toutes les pièces de jeu de sa couleur_
+. _Les fiches spéciales Route la plus longue et Armée la plus puissante sont placées_
+. _Les cartes Ressource sont triées en 5 piles, par type et placées face visible_
+. _Les cartes Développement sont mélangées et placées face cachée_
+. _Chaque joueur place une colonie et une route (du plus jeune au plus vieux), et puis recommence l'opération une deuxième fois (du plus vieux au plus jeune)_
+. _Chaque joueur reçoit pour sa colonie marquée d’une étoile et sa première production_
 
 
 | Extensions	
-a| 
-. _à compléter_
-. _à compléter_
 
 | Alternatives	
-a| 
-. _à compléter_
-. _à compléter_
+| _On peut initialiser le plateau différemment en changeant la position du désert_
 
 | Cas d'utilisation supérieur
 | _Aucun_
@@ -79,18 +81,16 @@ a|
 | _Aucun_
 
 | Objectif de performance
-| _à compléter_
+| _Le temps que l'initialisation prend_
 
 | Problèmes ouverts	
-a|
-- _à compléter_
-- _à compléter_
+| _Les variantes ne sont pas considérées_
 
 | Échéancier	
 | _Version 1.0.0_
 
 | Contraintes
-| _à compléter_
+| __
 
 | Annexes
 | _Aucun_
