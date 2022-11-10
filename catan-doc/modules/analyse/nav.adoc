@@ -1,2 +1,1 @@
-.Analyse du domaine
 * xref:analyse.adoc[]
