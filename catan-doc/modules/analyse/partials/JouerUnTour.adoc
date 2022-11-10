@@ -60,7 +60,12 @@ a|
 . - _Créer une colonie, payer sa construction et là placer sur un emplacement valide_
 . - _Créer une ville, payer sa construction et là placer à la place d'une de ses colonies_
 . - _Acheter une carte développement_
-. - _Jouer une carte développement obtenue dans un des tour précédent_
+. - _Jouer une carte développement obtenue dans un des tour précédent parmi celles-ci:_
+. * _La carte chevalier: le joueur déplace le voleur sur un un autre territoire, et prend une carte aléatoirement dans la main d'un autre joueur_
+. * _La carte point de victoire: le joueur gagne un point de victoire_
+. * _Monopole: le joueur choisis une ressource, tous les autres joueurs donne au joueur les cartes de cette ressource qu'ils possèdent_
+. * _Construction de routes: le joueur construit deux routes gratuitement_
+. * _Invention: le joueur prend deux ressources au choix dans la réserve_
 . - _Echanger des ressources avec les autres joueurs_
 . - _Echanger contre la "banque" 4 ressources du même type contre une ressource au choix_
 . _Vérifier si le joueur actif a gagné_
@@ -73,8 +78,9 @@ a|
 - _Le joueur reçoit 2 ressources (au lieu d'une) si il possède une ville et non une colonie adjacente à un territoire_
 - _Si le joueur possède une colonie sur un port, il peut échanger 3 ressources associées à ce port contre une ressource au choix_
 - _Si le joueur possède une ville sur un port, il peut échanger 2 ressources associées à ce port contre une ressource au choix_
-- _Si le joueur obtiens 7 aux dés, tous les joueurs ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l'inférieur) et il déplace le voleur._
+- _Si le joueur obtiens 7 aux dés, tous les joueurs ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l'inférieur), il déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main d'un autre joueur._
 - _Si le voleur est situé sur un territoire associé au résultat des dès, ce territoire ne donne pas de ressource_
+- _Si il n'y a pas assez de carte ressource dans la pile de ressource lors des lancé de dés, la priorité des ressource qui sont donné se fait selon l'ordre du tour de jeu (en commençant par le joueur à qui c'est le tour).
 
 
 | Cas d'utilisation supérieur
