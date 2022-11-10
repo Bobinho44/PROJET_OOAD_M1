@@ -1,5 +1,7 @@
 @startuml 'https://plantuml.com/activity-diagram-beta'
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Ce sont toutes les instances de notre jeu de société.
 class Joueur
 class Partie
 class Construction
@@ -8,23 +10,53 @@ class Ville
 class Pièce
 class Colonie
 class Dé
-enum Territoire
-enum Ressource
+class Territoire
+enum TypeTerritoire
+class Ressource
+enum TypeRessource
 class Plateau
-
-Joueur --> Construction : Possède [2:n]
-Joueur --> Route : Possède [2:n]
-Joueur --> Partie : [3:4]
-Joueur -- Plateau
-Construction --> Territoire : Adjaçant [2:3]
-Pièce --> Route : [?]
-Pièce --> Ville : [?]
-Pièce --> Colonie : [?]
-Pièce --> Plateau
-Dé --> Plateau : [2]
-Ressource --> Territoire
+class ZoneBatiment
+class ZoneRoute
+class ZoneConstructible
+class Carte
+class Développement
+class Ressource
+class Fiche
+class Coût
+class Spéciales 
+class Progrès
+class Chevalier
+class CartePV
+enum TypeCartePV
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Ici, ce sont toutes nos relations entre nos différentes instances.
+Joueur <-- Partie : [3:4]
+Joueur <-- Pièce : [0,n]
+Joueur --> Carte : [0,n]
+Pièce --> Route : [1]
+ZoneRoute --> Route : [0,1]
+Construction --> Pièce :[1]
+Ville --|> Construction
+Colonie --|> Construction
+ZoneBatiment --> Construction : [0,1]
+Dé <-- Plateau : [2]
+Ressource <-- Territoire : [1]
 Plateau --> Territoire : [19]
 Plateau --* Partie
+Plateau --> ZoneConstructible
+Développement --|> Carte
+Ressource --|> Carte
+Fiche --|> Carte
+Progrès --|> Développement
+Chevalier --|> Développement
+CartePV --|> Développement
+ZoneRoute --|> ZoneConstructible
+ZoneBatiment --|> ZoneConstructible
+Territoire --- ZoneBatiment : [2:3]
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Enfin, ici, nous aurons toutes nos attributs et méthodes importants de notre classe.
 
 
 @enduml
