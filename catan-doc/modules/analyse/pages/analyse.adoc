@@ -13,15 +13,10 @@ Utilisez une approche itérative pour découvrir toutes les classes conceptuelle
 
 == Modèle du domaine
 
-[NOTE]
-====
-Décrivez ici les classes conceptuelles du domaine, ainsi que leurs attributs et associations.
-====
-
 .Classes conceptuelles
 [plantuml]
 ....
-include::example$cd-analyse.puml[]
+include::partials$CatanUMLDiagram.puml[]
 ....
 
 == Cas d'utilisation
@@ -36,19 +31,19 @@ Additionnellement, utilisez des diagrammes d'activités UML pour illustrer les c
 
 === Cas d'utilisation "Mise en place d'une partie"
 
-include::partial$uc-template.adoc[]
+include::partials$UseCaseImplementationCatan.adoc.adoc[]
 
 .Diagramme d'activités: Mise en place d'une partie
 [plantuml]
 ....
-include::example$ad-mise-en-place.puml[]
+include::partials$ImplementationActivityDiagramCatan.puml[]
 ....
 
-=== Cas d'utilisation B
+=== Cas d'utilisation "Jouer un tour"
 
 include::partial$uc-template-en.adoc[leveloffset=+2]
 
-.Diagramme d'activités: Cas d'utilisation B
+.Diagramme d'activités: Jouer un tour
 [plantuml]
 ....
 include::example$ad-mise-en-place.puml[]
