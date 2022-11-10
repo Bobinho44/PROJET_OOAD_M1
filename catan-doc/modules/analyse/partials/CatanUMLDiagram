@@ -1,0 +1,97 @@
+@startuml
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+class Joueur
+class Partie
+class Construction
+class Route
+class Ville
+class Pièce
+class Colonie
+class Dé
+class Territoire {
+  type: TypeTerritoire
+}
+enum TypeTerritoire {
+  FORET
+  PRE
+  CHAMPS
+  COLLINE
+  MONTAGNE
+  DESERT
+}
+class Ressource {
+  type: TypeRessource
+}
+enum TypeRessource {
+  BOIS
+  LAINE
+  BLE
+  ARGILE
+  MINERAI
+}
+enum TypeProgrès {
+  MONOPOLE
+  CONSTRUCTION_DE_ROUTES
+  INVENTION
+}
+enum TypeSpéciale {
+  ROUTE_LA_PLUS_LONGUE
+  ARMEE_LA_PLUS_PUISSANCE
+}
+class Plateau
+class ZoneBatiment
+class ZoneRoute
+class ZoneConstructible
+class Carte
+class Développement
+class Ressource
+class Fiche
+class Coût
+class Spéciale {
+  type: TypeSpéciale
+}
+class Progrès {
+  type: TypeProgrès
+}
+class Chevalier
+class CartePV {
+  type: TypeCartePV
+}
+enum TypeCartePV {
+  BIBLIOTHEQUE
+  PLACE_DU_MARCHE
+  PARLEMENT
+  EGLISE
+  UNIVERSITE
+}
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Ici, ce sont toutes nos relations entre nos différentes instances.
+Joueur <-- Partie : [3:4]
+Joueur <-- Pièce : [0,n]
+Joueur --> Carte : [0,n]
+Pièce --> Route : [1]
+ZoneRoute --> Route : [0,1]
+Construction --> Pièce :[1]
+Ville --|> Construction
+Colonie --|> Construction
+ZoneBatiment --> Construction : [0,1]
+Dé <-- Plateau : [2]
+Ressource <-- Territoire : [1]
+Plateau --> Territoire : [19]
+Plateau --* Partie
+Plateau --> ZoneConstructible
+Développement --|> Carte
+Ressource --|> Carte
+Fiche --|> Carte
+Progrès --|> Développement
+Chevalier --|> Développement
+CartePV --|> Développement
+ZoneRoute --|> ZoneConstructible
+ZoneBatiment --|> ZoneConstructible
+Territoire --- ZoneBatiment : [2:3]
+Coût --|> Fiche
+Spéciale--|> Fiche
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@enduml
