@@ -66,7 +66,7 @@ a|
 . _Les cartes Ressource sont triées en 5 piles, par type et placées face visible_
 . _Les cartes Développement sont mélangées et placées face cachée_
 . _Chaque joueur place une colonie et une route (du plus jeune au plus vieux), et puis recommence l'opération une deuxième fois (du plus vieux au plus jeune)_
-. _Chaque joueur reçoit pour sa colonie marquée d’une étoile et sa première production_
+. _Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production_
 
 
 | Extensions	
