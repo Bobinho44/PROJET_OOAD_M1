@@ -1,8 +1,6 @@
 :project: Catane
 = Analyse du domaine
 
-== Introduction 
-
 == Modèle du domaine
 
 .Classes conceptuelles
