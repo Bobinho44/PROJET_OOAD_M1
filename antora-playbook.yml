@@ -1,0 +1,21 @@
+site:
+  title: Catan Docs
+  start_page: Catan-doc::index.adoc
+  
+asciidoc:
+  attributes:
+    plantuml-server-url: http://www.plantuml.com/plantuml
+    plantuml-config: ../../diagram/plantuml/plantuml.config 
+  extensions:
+  - asciidoctor-plantuml
+  
+content:
+  sources:
+  - url: https://oauth2:glpat-V5xL5s3vjNdh_3mbkQsb@gitlab.univ-nantes.fr/E197248A/projet-2022
+    branches: master
+    start_path: catan-doc
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
