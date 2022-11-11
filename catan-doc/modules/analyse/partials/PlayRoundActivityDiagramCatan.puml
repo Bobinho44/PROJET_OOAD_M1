@@ -1,0 +1,88 @@
+@startuml
+start
+:lancer les deux dés;
+if (obtient 7?) then (yes)
+  while (joueur disponible?)
+    if (possède plus de 7 cartes?) then (yes)
+      :défausser la moitiée;
+    endif
+  endwhile
+  :déplacer voleur;
+  :prendre carte à un joueur;
+else (no)
+:ajouter les territoires ayant le numéro obtenue 
+dans la liste de territoire donnant des ressources;
+if (obtient le numéro 
+de territoire du voleur?) then (yes)
+:supprimer le territoire
+du voleur des territoires donnant
+des ressources;
+else (no)
+endif
+while (territoire donnant des ressources disponible?)
+  while (joueur ayant une construction adjacente disponible?)
+    if (la construction est une ville?) then (yes)
+      :reçoit 2 ressources associées au territoire;
+    else (no)
+      :reçoit 1 ressource associée au territoire;
+    endif
+  endwhile
+endwhile
+endif
+while (fin du tour?)
+switch (prochaine action?)
+case ( créer une route )
+  :payer la construction;
+  :placer une pièce route;
+case ( créer une colonie ) 
+  :payer la construction;
+  :placer une pièce route;
+case ( créer une ville )
+  :payer la construction;
+  :      placer une pièce ville
+à la place dune pièce colonie;
+case ( acheter carte développement )
+  :payer la carte;
+  :piocher la carte;
+case ( jouer carte développement )
+  switch (quelle carte?)
+case ( chevalier )
+  :déplacer le voleur;
+  :prend carte d’un autre joueur;
+case ( point de victoire )
+  :gagner un point de victoire;
+case ( monopole )
+  :prendre tous les 
+ressources d'un type
+choisi aux autres joueurs;
+case ( construction de routes )
+  :placer 2 routes;
+case ( invention )
+  :prendre 2 ressources au choix;
+endswitch
+case ( échanger avec un joueur )
+  if (joueur accepte un échange?) then (yes)
+    :échanger les ressources;
+  else (no)
+  endif
+case ( échanger avec la banque )
+  if (           a une ville sur 
+un port associé à la ressource?) then (yes)
+    :échanger 2 ressources 
+      contre une au choix;
+  elseif (                a une colonie 
+sur un port associé à la ressource?) then (yes)
+    :échanger 3 ressources 
+      contre une au choix;
+  else (no)
+    :échanger 4 ressources 
+      contre une au choix;
+  endif
+endswitch
+endwhile
+if (a gagné?) then (yes)
+stop
+else (no)
+stop
+endif
+@enduml
