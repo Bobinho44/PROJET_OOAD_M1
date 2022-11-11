@@ -30,21 +30,28 @@ while (territoire donnant des ressources disponible?)
 endwhile
 endif
 while (fin du tour?)
-switch (prochaine action?)
-case ( créer une route )
+if ( créer une route? ) then (yes)
   :payer la construction;
   :placer une pièce route;
-case ( créer une colonie ) 
+else (no)
+endif
+if ( créer une colonie? ) then (yes)
   :payer la construction;
   :placer une pièce route;
-case ( créer une ville )
+else (no)
+endif
+if ( créer une ville? ) then (yes)
   :payer la construction;
   :      placer une pièce ville
 à la place dune pièce colonie;
-case ( acheter carte développement )
+else (no)
+endif
+if ( acheter carte développement? ) then (yes)
   :payer la carte;
   :piocher la carte;
-case ( jouer carte développement )
+else (no)
+endif
+if ( jouer carte développement? ) then (yes)
   switch (quelle carte?)
 case ( chevalier )
   :déplacer le voleur;
@@ -59,13 +66,18 @@ case ( construction de routes )
   :placer 2 routes;
 case ( invention )
   :prendre 2 ressources au choix;
+
 endswitch
-case ( échanger avec un joueur )
+else (no)
+endif
+if ( échanger avec un joueur? ) then (yes)
   if (joueur accepte un échange?) then (yes)
     :échanger les ressources;
   else (no)
   endif
-case ( échanger avec la banque )
+else (no)
+endif
+if ( échanger avec la banque? ) then (yes)
   if (           a une ville sur 
 un port associé à la ressource?) then (yes)
     :échanger 2 ressources 
@@ -78,7 +90,7 @@ sur un port associé à la ressource?) then (yes)
     :échanger 4 ressources 
       contre une au choix;
   endif
-endswitch
+endif
 endwhile
 if (a gagné?) then (yes)
 stop
@@ -86,3 +98,4 @@ else (no)
 stop
 endif
 @enduml
+
