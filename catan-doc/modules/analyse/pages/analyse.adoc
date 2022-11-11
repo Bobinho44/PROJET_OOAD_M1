@@ -79,19 +79,27 @@ TODO
 Le joueur actif peut échanger n'importe qu'elle ressource avec n'importe quel joueur
 
 *pré-condition*
+
     Les deux joueurs sont d'accord
-    Les deux joueurs possèdent les ressources
+
+    Les deux joueurs possèdent les ressources+
+
 *post-condition*
+
     Chaque joueur a perdu les ressources qu'il échangeait et a gagné les ressources qui lui était promises
 
 === Echanger des ressources
 
-Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix
+Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix+
 
 *pré-condition*
+
     Le joueur possède assez de ressource du même type
+
     La banque possède la ressource que le joueur souhaite
+
 *post-condition*
+
     Le joueur a perdu ses ressources qu'il échangeait et a gagné la ressource souhaité
 
 === Construire une route
@@ -99,10 +107,15 @@ Le joueur actif peut échanger plusieurs ressources du même type contre une res
 Le joueur peut construire une route sur un chemin en échange de ressource. Cette route peut uniquement être construite sur une intersection voisine à une route, une colonie ou une ville de sa couleur
 
 *pré-condition*
+
     Le joueur a les ressource pour construire une route
+
     Un emplacement valide est disponible pour construire la route
+
 *post-condition*
-    Le joueur a perdu les ressources liées au coût de construction
+
+    Le joueur a perdu les ressources liées au coût de construction+
+
     Le joueur a placé une route sur le plateau
 
 === Construire une colonie
