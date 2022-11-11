@@ -33,10 +33,97 @@ include::partial$PlayRoundActivityDiagramCatan.puml[]
 
 == Activités
 
-[NOTE]
-====
+=== Préparer le plateau
 
-====
+TODO
+
+=== Choix d’une couleur
+
+Chaque joueur choisit une couleur parmis le rouge, le orange, le blanc et le bleu
+
+=== Distribution du matériel
+
+Chaque joueur reçoit une fiche Coûts de construction et toutes les pièces de jeu de sa couleur : 5 Colonies, 4 Villes et 15 Routes
+
+=== Placement des premières constructions
+
+Chaque joueur (du plus vieux au plus jeune) place tour à tour une route et une colonie sur le plateau. L'opération est recommencé une deuxième fois dans le sens inverse
+Chaque joueur place devant lui ses pièces de jeu restantes. S’il n’y a que 3 joueurs, les pièces de jeu rouges retournent dans la boîte
+
+=== Placement des fiches spéciales et des dés
+
+Les fiches spéciales Route la plus longue et Armée la plus puissante sont placées à côté de la zone de jeu, ainsi que les 2 dés
+
+=== Créer la pioche ressource
+
+Les cartes Ressource sont triées en 5 piles, par type et placées face visible
+
+=== Créer la pioche développement
+
+Les cartes Développement sont mélangées et placées face cachée
+
+=== Distribution de la première production
+
+Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production
+
+=== Choix du joueur qui débute
+
+Le joueur le plus agée débute la partie
+
+=== Lancer les dés
+
+TODO
+
+=== Commercer avec les joueurs
+
+Le joueur actif peut échanger n'importe qu'elle ressource avec n'importe quel joueur
+
+*pré-condition*
+    Les deux joueurs sont d'accord
+    Les deux joueurs possèdent les ressources
+*post-condition*
+    Chaque joueur a perdu les ressources qu'il échangeait et a gagné les ressources qui lui était promises
+
+=== Echanger des ressources
+
+Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix
+
+*pré-condition*
+    Le joueur possède assez de ressource du même type
+    La banque possède la ressource que le joueur souhaite
+*post-condition*
+    Le joueur a perdu ses ressources qu'il échangeait et a gagné la ressource souhaité
+
+=== Construire une route
+
+Le joueur peut construire une route sur un chemin en échange de ressource. Cette route peut uniquement être construite sur une intersection voisine à une route, une colonie ou une ville de sa couleur
+
+*pré-condition*
+    Le joueur a les ressource pour construire une route
+    Un emplacement valide est disponible pour construire la route
+*post-condition*
+    Le joueur a perdu les ressources liées au coût de construction
+    Le joueur a placé une route sur le plateau
+
+=== Construire une colonie
+
+TODO
+
+=== Construire une ville
+
+TODO
+
+=== Acheter une carte développement
+
+TODO
+
+=== Utiliser une carte développement
+
+TODO
+
+=== Déplacer le voleur
+
+TODO
 
 == Opérations
 
