@@ -1,14 +1,6 @@
 :project: Catane
 = Analyse du domaine
 
-== Travail à réaliser
-
-Objectif::
-Description du jeu _{project}_ sous la forme d'un diagramme de classes conceptuelles et d'actions.
-
-Moyens::
-Utilisez une approche itérative pour découvrir toutes les classes conceptuelles et les actions du jeu.
-
 == Introduction 
 
 == Modèle du domaine
@@ -20,14 +12,6 @@ include::partial$CatanUMLDiagram.puml[]
 ....
 
 == Cas d'utilisation
-
-[NOTE]
-====
-Utilisez le canevas proposé par Alistar Cockburn pour décrire les cas d'utilisation.
-
-Additionnellement, utilisez des diagrammes d'activités UML pour illustrer les cas d'utilisation.
-====
-
 
 === Cas d'utilisation "Mise en place d'une partie"
 
@@ -46,7 +30,7 @@ include::partial$UseCasePlayRoundCatan.adoc[]
 .Diagramme d'activités: Jouer un tour
 [plantuml]
 ....
-include::example$ad-mise-en-place.puml[]
+include::partial$PlayRoundActivityDiagramCatan.puml[]
 ....
 
 == Activités
