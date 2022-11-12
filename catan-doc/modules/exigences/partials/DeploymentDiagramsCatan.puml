@@ -1,0 +1,17 @@
+@startuml
+
+node Client {
+    artifact WebClient
+}
+node Server {
+    artifact GameServer
+}
+
+node Database {
+    artifact DBMS
+}
+
+WebClient -right- Server : HTTP
+Server -up- Database :    TCP/IP
+
+@enduml
