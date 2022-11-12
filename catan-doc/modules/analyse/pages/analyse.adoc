@@ -35,7 +35,7 @@ include::partial$PlayRoundActivityDiagramCatan.puml[]
 
 === Préparer le plateau
 
-TODO
+Les zones mers sont placé aléatoirement, le désert est placé au centre du plateau, les territoires sont placé dans un ordre aléatoire en suivant un chemin en escargot partant du désert. Ensuite les jetons sont placé en suivant le même ordre.
 
 === Choix d’une couleur
 
@@ -88,7 +88,7 @@ Le joueur actif peut échanger n'importe qu'elle ressource avec n'importe quel j
 
 *pré-condition*
 
-    Les deux joueurs sont d'accord
+    Les deux joueurs sont d'accord ET
 
     Les deux joueurs possèdent les ressources
 
@@ -102,7 +102,7 @@ Le joueur actif peut échanger plusieurs ressources du même type contre une res
 
 *pré-condition*
 
-    Le joueur possède assez de ressource du même type
+    Le joueur possède assez de ressource du même type ET
 
     La banque possède la ressource que le joueur souhaite
 
@@ -116,13 +116,13 @@ Le joueur peut construire une route sur un chemin en échange de ressource. Cett
 
 *pré-condition*
 
-    Le joueur a les ressource pour construire une route
+    Le joueur a les ressource pour construire une route ET
 
     Un emplacement valide est disponible pour construire la route
 
 *post-condition*
 
-    Le joueur a perdu les ressources liées au coût de construction
+    Le joueur a perdu les ressources liées au coût de construction ET
 
     Le joueur a placé une route sur le plateau
 
@@ -132,13 +132,13 @@ Le joueur actif peut installer une nouvelle colonie sur une intersection en éch
 
 *pré-condition*
 
-    Le joueur a les ressource pour construire une colonie
+    Le joueur a les ressource pour construire une colonie ET
 
     Un emplacement valide est disponible pour construire la colonie
 
 *post-condition*
-
-    Le joueur a perdu les ressources liées au coût de construction
+ 
+    Le joueur a perdu les ressources liées au coût de construction ET
 
     Le joueur a placé une colonie sur le plateau
 
@@ -148,27 +148,61 @@ Le joueur actif peut installer une nouvelle ville à la place d'une colonie en �
 
 *pré-condition*
 
-    Le joueur a les ressource pour construire une ville
+    Le joueur a les ressource pour construire une ville ET
 
     Le joueur possède une colonie
 
 *post-condition*
 
-    Le joueur a perdu les ressources liées au coût de construction
+    Le joueur a perdu les ressources liées au coût de construction ET
 
     Le joueur a retiré une colonie du plateau et y a placé une ville
 
 === Acheter une carte développement
 
-TODO
+Le joueur actif peut acheter une carte développement en échange de ressource.
+
+*pré-condition*
+
+    Le joueur a les ressource pour acheter la carte développement ET
+
+    La carte développement est disponible
+
+*post-condition*
+
+    Le joueur a perdu les ressources liées au coût l'achat de la carte développement ET
+
+    Le joueur a possède la carte développement
 
 === Utiliser une carte développement
 
-TODO
+Le joueur actif peut utiliser une carte développement
+
+*pré-condition*
+
+    Le joueur possède une carte développement
+
+*post-condition*
+
+    L'effet de la carte développement a été activé
 
 === Déplacer le voleur
 
-TODO
+Le joueur actif peut installer déplacer le voleur sur un nouveau territoire
+
+*pré-condition*
+
+    Le joueur a réalisé un 7 aux dés OU
+
+    Le joueur utilise une carte chevalier
+
+*post-condition*
+
+    Le voleur a changé de territoire ET
+
+    Le joueur actif a volé une carte ET
+
+    Un joueur possèdant une colonie adjacente au voleur s'est fait volé une carte
 
 == Opérations
 
