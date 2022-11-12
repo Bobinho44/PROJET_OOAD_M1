@@ -1,0 +1,15 @@
+@startuml
+
+Joueur -> (Carte chevalier) : joue
+Joueur -> (7 aux dés) : obtiens
+Joueur --> (Territoire B) : choisis
+Joueur ---> Voleur : déplace
+
+Voleur---> (Territoire A) #line:red;line.dotted;text:red  : quitte
+Voleur---> (Territoire B) #line:green;line.dashed;text:green  : rejoins
+
+note "Entraine la possibilité de choix d'un territoire" as Note
+(7 aux dés).. Note
+Note .. (Carte chevalier)
+
+@enduml
