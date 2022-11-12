@@ -178,6 +178,12 @@ Le joueur actif peut acheter une carte développement en échange de ressource.
 
 Le joueur actif peut utiliser une carte développement
 
+.Diagramme de classes des cartes développement
+[plantuml]
+....
+include::partial$DevelopmentCardUMLDiagram.puml[]
+....
+
 *pré-condition*
 
     Le joueur possède une carte développement
