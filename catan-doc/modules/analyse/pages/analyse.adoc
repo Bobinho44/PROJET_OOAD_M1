@@ -194,7 +194,13 @@ include::partial$DevelopmentCardUMLDiagram.puml[]
 
 === Déplacer le voleur
 
-Le joueur actif peut installer déplacer le voleur sur un nouveau territoire
+Le joueur actif peut déplacer le voleur sur un nouveau territoire
+
+.Diagramme d'utilisation du déplacement du voleur
+[plantuml]
+....
+include::partial$ThiefUseCaseDiagramCatan.puml[]
+....
 
 *pré-condition*
 
