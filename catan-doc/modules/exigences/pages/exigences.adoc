@@ -6,12 +6,9 @@
 
 Ce chapitre décrit les exigences du projet «{project}». Il suit la norme IEEE 830-1998.
 
-=== Avant-propos
-
 L'objectif de ce document est de décrire les spécifications des exigences du projet "{project}" pour les étudiants en génie logiciel.
 
 Le public visé par cette spécification comprend les développeurs potentiels de l'application, ainsi que les personnes chargées de l'évaluation technique.
-
 
 === Définitions, acronymes et abréviations
 
@@ -19,12 +16,15 @@ Aucune jusqu'à présent.
 
 === Public visé et suggestions de lecture
 
-[NOTE]
-====
-Décrire les différents types de lecteurs auxquels le document est destiné, tels que les développeurs, les chefs de projet, le personnel du marketing, les utilisateurs, les testeurs et les rédacteurs de la documentation. 
+Le public visé par cette spécification sont les développeurs ainsi que les personnes chargées de l'évaluation technique de l'application.
 
-Décrivez le contenu et l'organisation du reste de ce SRS. Suggérer un ordre de lecture du document, en commençant par les sections d'aperçu et en poursuivant par les sections les plus pertinentes pour chaque type de lecteur.
-====
+La section <<description>> s'adresse à tous les lecteurs de ce document. Elle permet de bien comprendre le but de cette application. 
+
+La partie <<contrainte>> s'adresse principalement aux développeurs, et défini toutes les bonnes pratiques, les contraintes et les différentes technologies à utiliser pour le développement de cette application. 
+
+La section <<features>> s'adresse une nouvelle fois aux développeurs et aux personnes chargées de l'évaluation technique. Cette section décrit concrètement toutes les fonctionnalitées que doit posséder l'application. 
+
+Enfin, la partie <<nonfunctional>> s'adresse exclusivement aux développeurs.
 
 === Portée du projet
 
@@ -56,20 +56,11 @@ La figure <<deployment>> présente l'architecture globale du logiciel.
 Les joueurs interagissent avec un client Web, qui utilise le protocole HTTP pour communiquer avec (au maximum) un serveur de jeu.
 Les serveurs utilisent le protocole TCP/IP pour communiquer avec un serveur de gestion de base de données, qui stocke toutes les données du logiciel.
 
-[NOTE]
-====
-Améliorez le diagramme de déploiement pour qu'il représente le système que vous allez développer.
-
-Pour plus de détails sur les diagrammes de déploiement{nbsp}:
-
-* https://www.uml-diagrams.org/deployment-diagrams-overview.html
-====
-
 [#deployment]
 .UML Diagramme de déploiement 
 [plantuml]
 ----
-include::example$deployment-diagram.puml[]
+include::partial$DeploymentDiagramsCatan.puml[]
 ----
 
 [NOTE]
@@ -125,6 +116,7 @@ Le client Web devrait fonctionner sur tout navigateur Web récent{nbsp}: Firefox
 TODO: Complétez la description ci-dessus
 ====
 
+[#contrainte]
 == Contraintes de conception et de mise en œuvre
 
 === Langages de programmation
