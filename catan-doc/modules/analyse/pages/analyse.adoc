@@ -236,7 +236,8 @@ include::partial$ThiefUseCaseDiagramCatan.puml[]
         Le joueur a joué la carte
 
     post:
-        Le joueur a placé 2 nouvelles routes sur le plateau, adjacentes à une de ses villes, colonies ou routes
+        Le joueur a placé 2 nouvelles routes sur le plateau, adjacentes 
+        à une de ses villes, colonies ou routes
 
 *Invention::effet()*
 
