@@ -1,6 +1,12 @@
 :project: Catane
 = Analyse du domaine
 
+== Introduction 
+
+Ce chapitre décrit le domaine du projet «{project}».
+
+L'objectif de ce document est de comprendre les concepts, la dynamique, les règles générales qui définissent le domaine d'application dans lequel l'application «{project}» doit être utilisé.
+
 == Modèle du domaine
 
 .Classes conceptuelles
