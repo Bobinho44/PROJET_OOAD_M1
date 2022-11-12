@@ -8,8 +8,6 @@ Ce chapitre décrit les exigences du projet «{project}». Il suit la norme IEEE
 
 L'objectif de ce document est de décrire les spécifications des exigences du projet "{project}" pour les étudiants en génie logiciel.
 
-Le public visé par cette spécification comprend les développeurs potentiels de l'application, ainsi que les personnes chargées de l'évaluation technique.
-
 === Définitions, acronymes et abréviations
 
 Aucune jusqu'à présent.
