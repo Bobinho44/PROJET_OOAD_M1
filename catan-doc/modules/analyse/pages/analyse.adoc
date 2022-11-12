@@ -218,4 +218,79 @@ include::partial$ThiefUseCaseDiagramCatan.puml[]
 
 == Opérations
 
+*Monopole::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte ET
+        Le joueur a choisit une ressource
+
+    post:
+        Le joueur a volé toutes les ressources du type choisi aux autres joueurs ET
+        Les autres joueurs ne possèdent plus de ressources du type choisi
+
+*ConstructionDeRoute::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a placé 2 nouvelles routes sur le plateau, adjacentes à une de ses villes, colonies ou routes
+
+*Invention::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur gagne 2 ressources au choix ET
+        La réserve perd ces 2 ressources
+
+*Bibliothèque::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a gagné un point de victoire
+
+*PlaceDuMarché::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a gagné un point de victoire
+
+*Parlement::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a gagné un point de victoire
+
+*Eglise::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a gagné un point de victoire
+
+*Université::effet()*
+
+    pre:
+        Le joueur possède la carte ET
+        Le joueur a joué la carte
+
+    post:
+        Le joueur a gagné un point de victoire
+
 // include::uc-template.adoc[]
