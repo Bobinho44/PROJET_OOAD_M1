@@ -1,0 +1,38 @@
+@startuml
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+class Joueur
+abstract Carte {
+  effet()
+}
+abstract Développement
+class Monopole
+class ConstructionDeRoutes
+class Invention
+class Bibliothèque
+class PlaceDuMarché
+class Parlement
+class Eglise
+class Université
+abstract Progrès
+class Chevalier
+abstract CartePV
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' Ici, ce sont toutes nos relations entre nos différentes instances.
+Joueur --> "0..*  " Carte : joue
+
+Développement --|> Carte
+Progrès --|> Développement
+Chevalier --|> Développement
+CartePV --|> Développement
+Monopole --|> Progrès
+ConstructionDeRoutes --|> Progrès
+Invention --|> Progrès
+Bibliothèque --|> CartePV
+PlaceDuMarché --|> CartePV
+Parlement --|> CartePV
+Eglise --|> CartePV
+Université --|> CartePV
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@enduml
