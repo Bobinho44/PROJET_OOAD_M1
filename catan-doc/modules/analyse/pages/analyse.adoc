@@ -72,7 +72,15 @@ Le joueur le plus agée débute la partie
 
 === Lancer les dés
 
-TODO
+Le joueur actif lancent les deux dés
+
+*pré-condition*
+
+    Le lanceur est le joueur actif
+
+*post-condition*
+
+    Le résultat est compris entre 2 et 12
 
 === Commercer avec les joueurs
 
@@ -82,7 +90,7 @@ Le joueur actif peut échanger n'importe qu'elle ressource avec n'importe quel j
 
     Les deux joueurs sont d'accord
 
-    Les deux joueurs possèdent les ressources+
+    Les deux joueurs possèdent les ressources
 
 *post-condition*
 
@@ -90,7 +98,7 @@ Le joueur actif peut échanger n'importe qu'elle ressource avec n'importe quel j
 
 === Echanger des ressources
 
-Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix+
+Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix
 
 *pré-condition*
 
@@ -104,7 +112,7 @@ Le joueur actif peut échanger plusieurs ressources du même type contre une res
 
 === Construire une route
 
-Le joueur peut construire une route sur un chemin en échange de ressource. Cette route peut uniquement être construite sur une intersection voisine à une route, une colonie ou une ville de sa couleur
+Le joueur peut construire une route sur un chemin en échange de ressource. Cette route peut uniquement être construite sur un chelin voisin à une route, une colonie ou une ville de sa couleur
 
 *pré-condition*
 
@@ -114,17 +122,41 @@ Le joueur peut construire une route sur un chemin en échange de ressource. Cett
 
 *post-condition*
 
-    Le joueur a perdu les ressources liées au coût de construction+
+    Le joueur a perdu les ressources liées au coût de construction
 
     Le joueur a placé une route sur le plateau
 
 === Construire une colonie
 
-TODO
+Le joueur actif peut installer une nouvelle colonie sur une intersection en échange de ressource. Cette colonie peut uniquement être construite sur une intersection voisine à une route, une colonie ou une ville de sa couleur
+
+*pré-condition*
+
+    Le joueur a les ressource pour construire une colonie
+
+    Un emplacement valide est disponible pour construire la colonie
+
+*post-condition*
+
+    Le joueur a perdu les ressources liées au coût de construction
+
+    Le joueur a placé une colonie sur le plateau
 
 === Construire une ville
 
-TODO
+Le joueur actif peut installer une nouvelle ville à la place d'une colonie en échange de ressource. Cette ville peut uniquement être construite sur colonie de sa couleur
+
+*pré-condition*
+
+    Le joueur a les ressource pour construire une ville
+
+    Le joueur possède une colonie
+
+*post-condition*
+
+    Le joueur a perdu les ressources liées au coût de construction
+
+    Le joueur a retiré une colonie du plateau et y a placé une ville
 
 === Acheter une carte développement
 
