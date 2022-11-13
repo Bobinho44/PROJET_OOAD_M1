@@ -61,15 +61,6 @@ Les serveurs utilisent le protocole TCP/IP pour communiquer avec un serveur de g
 include::partial$DeploymentDiagramsCatan.puml[]
 ----
 
-[NOTE]
-====
-Décrivez le contexte et l'origine du produit spécifié dans ce SRS.  
-Par exemple, indiquez si ce produit est un membre suivant d'une famille de produits, un remplacement de certains systèmes existants ou un nouveau produit autonome. 
-
-Si le SRS définit un composant d'un système plus vaste, faites le lien entre les exigences du système plus vaste et la fonctionnalité de ce logiciel et identifiez les interfaces entre les deux. 
-Un diagramme simple qui montre les principaux composants du système global, les interconnexions des sous-systèmes et les interfaces externes peut être utile.
-====
-
 === Fonctionnalités du produit
 
 Le logiciel {project} doit assurer deux fonctions principales :
@@ -157,12 +148,10 @@ Aucun jusqu'à présent.
 
 === Exigences reportées
 
-[NOTE]
-====
-Énumérer les exigences qui peuvent être réalisées dans des versions futures du système.
-Les versions futures du système comprendront l’utilisation d’un mécanisme de persistance de données ainsi que différentes interfaces utilisateur: web, IHM classique, etc.
-Elles permettront aussi l’accès distant à travers une interface REST.
-====
+
+Les versions futures du système comprendront l’utilisation d’un mécanisme de persistance de données ainsi que différentes interfaces utilisateur: web, IHM classique, etc. Elles permettront aussi l’accès distant à travers une interface REST.
+
+Les versions futures pourraient permettre de jouer une partie avec plus de deux joueurs (3-4).
 
 == Exigences en matière d'interface externe
 
