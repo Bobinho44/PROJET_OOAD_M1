@@ -1,5 +1,5 @@
 package fr.univnantes.alma.Model;
 
-public interface Carte {
+public interface Card {
     
 }

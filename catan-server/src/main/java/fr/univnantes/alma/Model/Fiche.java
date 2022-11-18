@@ -1,5 +1,5 @@
 package fr.univnantes.alma.Model;
 
-public interface Fiche extends Carte {
+public interface Fiche extends Card {
     
 }
