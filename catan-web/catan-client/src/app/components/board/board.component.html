@@ -1,4 +1,29 @@
-<section class="hexagon-gallery">
-    <div *ngFor="let tile of tilesList; index as i" class="hex"><img (src)="tilesList" alt="some"></div>
-  </section>
+<div class="main">
+  <div class="menu">
+    <h2>Mon joli Menu</h2>
+    <p>couleur du jouerur : valeur bidon</p>
+    <p>ressources:
+      <br>
+        brick,
+      <br>
+        ore,
+      <br>
+        sheep,
+      <br>
+        wheat,
+      <br>
+        wood
+    </p>
+    <p>Cartes développement: </p>
+    <p>Points de victoire: </p>
+    <p>Route disponibles: </p>
+    <p>Colonies disponible: </p>
+    <p>Villes disponibles: </p>
 
+  </div>
+  <div class="map">
+    <section class="hexagon-gallery">
+      <div *ngFor="let tile of tilesList; index as i" class="hex"><img (src)="tilesList" alt="some"></div>
+    </section>
+  </div>
+</div>

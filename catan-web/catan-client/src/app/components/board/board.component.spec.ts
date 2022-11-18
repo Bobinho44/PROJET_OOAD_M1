@@ -5,6 +5,12 @@ import { BoardComponent } from './board.component';
 describe('BoardComponent', () => {
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
+  let ressources: String[] = [
+    "brick",
+    "ore",
+    "sheep",
+    "wheat",
+  ]
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
