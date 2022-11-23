@@ -1,5 +1,5 @@
-<div class="main">
-  <div class="menu">
+<div class="grid grid-cols-3 ">
+  <div class="menu col-span-1 rounded-lg bg-stone-300">
     <h2>Mon joli Menu</h2>
     <p>couleur du jouerur : valeur bidon</p>
     <p>ressources:
@@ -19,11 +19,13 @@
     <p>Route disponibles: </p>
     <p>Colonies disponible: </p>
     <p>Villes disponibles: </p>
+    <p>Fiches spéciales: </p>
+
 
   </div>
-  <div class="map">
+  <div class="map col-span-2">
     <section class="hexagon-gallery">
-      <div *ngFor="let tile of tilesList; index as i" class="hex"><img (src)="tilesList" alt="some"></div>
+      <div *ngFor="let tile of tilesList; index as i" class="hex"><img (src)="tilesList"></div>
     </section>
   </div>
 </div>

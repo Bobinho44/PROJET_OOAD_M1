@@ -8,7 +8,7 @@ img {
 .hexagon-gallery {
   margin: auto;
   margin-top: 20px;
-  max-width: 77%;
+  max-width: 60%;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-auto-rows: 100px;
@@ -127,16 +127,15 @@ img {
   grid-column: 7 / span 2;
 } 
 
-.main{
-  /* put it to the left*/
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
+  /* .main{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-.map{
-  grid-column: 2;
-}
+  .map{
+    grid-column: 2;
+  }
 
-.menu{
-  grid-column: 1;
-}
+  .menu{
+    grid-column: 1;
+  } */
