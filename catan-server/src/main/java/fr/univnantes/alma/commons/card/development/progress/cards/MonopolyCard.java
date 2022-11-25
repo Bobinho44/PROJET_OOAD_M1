@@ -15,8 +15,14 @@ public class MonopolyCard extends ProgressCard {
      * Creates a new monopoly card
      */
     public MonopolyCard() {
-        super("Monopoly");
+        super("Monopoly", "catan-web/catan-client/src/assets/special-card/Monopoly.png");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() { return this.getFileLocation(); }
 
     /**
      * {@inheritDoc}

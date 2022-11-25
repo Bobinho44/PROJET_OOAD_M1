@@ -11,7 +11,14 @@ public class LibraryCard extends VictoryPointCard {
      * Creates a new library card
      */
     public LibraryCard() {
-        super("Library");
+        super("Library", "catan-web/catan-client/src/assets/special-card/Librairy.png");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() {
+        return this.getFileLocation();
+    }
 }
