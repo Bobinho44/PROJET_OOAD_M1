@@ -1,7 +1,7 @@
 package fr.univnantes.alma.commons.card.development.victoryPoint;
 
 import fr.univnantes.alma.Player;
-import fr.univnantes.alma.commons.card.development.DevelopmentCard;
+import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;

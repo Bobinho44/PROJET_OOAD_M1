@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.card.special.cards;
 
-import fr.univnantes.alma.commons.card.special.SpecialCard;
+import fr.univnantes.alma.core.card.type.SpecialCard;
 
 /**
  * Class representing the special card: longest road

@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.card.development.progress;
 
-import fr.univnantes.alma.commons.card.development.DevelopmentCard;
+import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import org.springframework.lang.NonNull;
 
 /**

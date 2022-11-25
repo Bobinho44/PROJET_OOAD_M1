@@ -1,10 +1,29 @@
 package fr.univnantes.alma.commons.board;
 
+import fr.univnantes.alma.core.card.type.DevelopmentCard;
+import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.board.Board;
+import fr.univnantes.alma.core.ressource.Resource;
 
 public class BoardImpl implements Board {
+
     @Override
     public void build() {
+
+    }
+
+    @Override
+    public void createDevelopmentCardDeck() {
+
+    }
+
+    @Override
+    public void createSpecialCardDeck() {
+
+    }
+
+    @Override
+    public void createResourceDeck() {
 
     }
 
@@ -29,17 +48,17 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public Ressource pickRessource(Ressource ressource, int amount) {
+    public Resource pickResource(Resource resource, int amount) {
         return null;
     }
 
     @Override
-    public Developpement pickDeveloppement() {
+    public DevelopmentCard pickDevelopmentCard() {
         return null;
     }
 
     @Override
-    public Special pickSpecial(Special special) {
+    public <S extends SpecialCard> S pickSpecialCard(Class<S> type) {
         return null;
     }
 }

@@ -1,4 +1,4 @@
-package fr.univnantes.alma.commons.card.special;
+package fr.univnantes.alma.core.card.type;
 
 import fr.univnantes.alma.Player;
 import fr.univnantes.alma.core.card.Card;
