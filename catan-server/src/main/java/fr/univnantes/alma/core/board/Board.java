@@ -1,7 +1,5 @@
 package fr.univnantes.alma.core.board;
 
-import fr.univnantes.alma.Model.BuildableArea;
-
 public interface Board {
 
     /**
@@ -16,9 +14,9 @@ public interface Board {
      */
 
     /**
-     * TODO change
+     * Builds the board
      */
-    void initilization();
+    void build();
 
     void buildRoad(Road road, BuildableArea buildableArea);
 

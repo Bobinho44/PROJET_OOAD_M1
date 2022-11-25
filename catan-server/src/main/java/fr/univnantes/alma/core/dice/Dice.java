@@ -3,10 +3,14 @@ package fr.univnantes.alma.core.dice;
 public interface Dice {
 
     /**
-     * Rolls the dices
-     *
-     * @return the roll's value
+     * Gets the dice score
+     * @return the dice score
      */
-    int rollDice();
+    int getScore();
+
+    /**
+     * Rolls the dice
+     */
+    void roll();
 
 }
