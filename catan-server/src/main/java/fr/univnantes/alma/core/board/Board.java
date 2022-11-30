@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.board;
 
+import fr.univnantes.alma.core.buildArea.BuildableArea;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.ressource.Resource;
