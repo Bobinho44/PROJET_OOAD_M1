@@ -15,21 +15,20 @@ public abstract class SpecialCard implements Card {
      * Fields
      */
     private final String name;
-
-    private final String fileLocation;
+    private final String picture;
 
     /**
      * Creates a new special card
      *
      * @param name the name
-     * @param fileLocation the URL location of the picture
+     * @param picture the picture
      */
-    public SpecialCard(@NonNull String name, String fileLocation) {
+    public SpecialCard(@NonNull String name, String picture) {
         Objects.requireNonNull(name, "name cannot be null!");
-        Objects.requireNonNull(name, "No URL file input!");
+        Objects.requireNonNull(name, "picture cannot be null!");
 
         this.name = name;
-        this.fileLocation = fileLocation;
+        this.picture = picture;
     }
 
     /**
@@ -41,10 +40,12 @@ public abstract class SpecialCard implements Card {
         return name;
     }
 
-    /** To get the localization file of the picture.
-     * @return the URL of the picture file.
+    /**
+     * Gets the card picture
+     *
+     * @return the picture
      */
-    public @NonNull String getFileLocation() { return this.fileLocation; }
+    public @NonNull String getPicture() { return picture; }
 
     /**
      * {@inheritDoc}

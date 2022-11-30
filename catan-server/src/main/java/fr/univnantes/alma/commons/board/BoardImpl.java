@@ -13,6 +13,65 @@ import fr.univnantes.alma.commons.territory.Territory;
 
 public class BoardImpl implements Board {
 
+/**TODO après
+        /
+        private final int RESOURCE_NUMBER_PER_TYPE = 19;
+
+
+        private final Stack<Resource> resources = new Stack<>();
+        private final Stack<SpecialCard> specialCards = new Stack<>();
+
+        @Override
+        public void build() {
+
+        }
+
+        @Override
+        public void createDevelopmentCardDeck() {
+
+        }
+
+        @Override
+        public void createSpecialCardDeck() {
+            IntStream.range(0, 1)
+                    .forEach(i -> specialCards.addAll(ReflectionUtils.getInstancesOf(SpecialCard.class, "fr/univnantes/alma/commons/card/special")));
+
+            Collections.shuffle(specialCards);
+        }
+
+        @Override
+        public void createResourceDeck() {
+            IntStream.range(0, RESOURCE_NUMBER_PER_TYPE)
+                    .forEach(i -> resources.addAll(List.of(ResourceImpl.values())));
+
+            Collections.shuffle(resources);
+        }
+
+        @Override
+        public List<Resource> pickResource(Resource resource, int amount) {
+            return IntStream.range(0, amount)
+                    .mapToObj(i -> resources.remove(resources.search(resource)))
+                    .toList();
+        }
+
+        @Override
+        public List<Resource> pickResource(int amount) {
+            return IntStream.range(0, amount)
+                    .mapToObj(i -> resources.pop())
+                    .toList();
+        }
+
+        @Override
+        public DevelopmentCard pickDevelopmentCard() {
+            return null;
+        }
+
+        @Override
+        public <S extends SpecialCard> S pickSpecialCard(Class<S> type) {
+            return null;
+        }
+    }
+*/
     @Override
     public void build() {
 
