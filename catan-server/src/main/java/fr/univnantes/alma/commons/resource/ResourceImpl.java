@@ -5,7 +5,16 @@ import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
-public abstract class ResourceImpl implements Resource {
+/**
+ * Enum representing resource
+ */
+public enum ResourceImpl implements Resource {
+    WOOD("Wood"),
+    WOOL("Wool"),
+    WHEAT("Wheat"),
+    CLAY("Clay"),
+    ORE("Ore"),
+    NONE("None");
 
     /**
      * Fields
@@ -17,7 +26,7 @@ public abstract class ResourceImpl implements Resource {
      *
      * @param name the name
      */
-    public ResourceImpl(@NonNull String name) {
+    ResourceImpl(@NonNull String name) {
         Objects.requireNonNull(name, "name cannot be null!");
 
         this.name = name;
