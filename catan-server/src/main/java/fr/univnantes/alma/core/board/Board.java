@@ -1,5 +1,9 @@
 package fr.univnantes.alma.core.board;
 
+import fr.univnantes.alma.commons.road.Road;
+import fr.univnantes.alma.commons.territory.Territory;
+import fr.univnantes.alma.commons.town.City;
+import fr.univnantes.alma.commons.town.Colony;
 import fr.univnantes.alma.core.buildArea.BuildableArea;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
