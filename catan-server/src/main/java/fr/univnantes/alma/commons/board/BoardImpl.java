@@ -1,10 +1,15 @@
 package fr.univnantes.alma.commons.board;
 
+import fr.univnantes.alma.commons.town.City;
+import fr.univnantes.alma.commons.town.Colony;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.board.Board;
 import fr.univnantes.alma.core.buildArea.BuildableArea;
 import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.commons.road.Road;
+import fr.univnantes.alma.commons.territory.Territory;
+
 
 public class BoardImpl implements Board {
 
@@ -34,12 +39,12 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public void buildColony(Colony colony, BuildableBuildingArea buildableBuildingArea) {
+    public void buildColony(Colony colony, BuildableArea buildableArea) {
 
     }
 
     @Override
-    public void buildCity(City city, BuildableBuildingArea buildableBuildingArea) {
+    public void buildCity(City city, BuildableArea buildableArea) {
 
     }
 
