@@ -5,7 +5,7 @@ import fr.univnantes.alma.core.buildArea.BuildableArea;
 
 import java.util.List;
 
-public class BuildableRoadArea<road> implements BuildableArea {
+public class BuildableRoadArea implements BuildableArea {
     private Road road = null;
     final private List<BuildableRoadArea> neighboursRoad;
 
@@ -17,8 +17,12 @@ public class BuildableRoadArea<road> implements BuildableArea {
         return road;
     }
 
-    public Road placeRoad(){
-        return null;
+    public boolean placeRoad(Road road,Player p){
+        if(isPlacable(p)) {
+            this.road = road;
+            return true;
+        }
+        return false;
     }
 
     public boolean isPlacable(Player p){

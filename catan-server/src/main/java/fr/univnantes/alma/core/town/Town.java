@@ -10,4 +10,5 @@ public interface Town {
 
     public List<Resource> giveRessource(Resource typeRessource);
 
+
 }

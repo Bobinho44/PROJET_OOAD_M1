@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.board;
 
+import fr.univnantes.alma.commons.road.BuildableRoadArea;
 import fr.univnantes.alma.commons.road.Road;
 import fr.univnantes.alma.commons.territory.Territory;
 import fr.univnantes.alma.commons.town.City;
@@ -34,13 +35,13 @@ public interface Board {
 
     void createResourceDeck();
 
-    void buildRoad(Road road, BuildableArea buildableArea);
+    void buildRoad(Road road, BuildableRoadArea buildableRoadArea);
 
     void buildColony(Colony colony, BuildableArea buildableArea);
 
     void buildCity(City city, BuildableArea buildableArea);
 
-    void moveThief(Territory territory);
+    void moveThief(Territory fromTerritory,Territory toTerritory);
 
     Resource pickResource(Resource resource, int amount);
 

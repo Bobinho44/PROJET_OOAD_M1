@@ -26,4 +26,10 @@ public class Colony implements Town {
         //TODO: prend 1 ressource dans les ressources dans la banque et les retourne
         return ressources;
     }
+
+
+    @Override
+    public String toString() {
+        return "Colony";
+    }
 }

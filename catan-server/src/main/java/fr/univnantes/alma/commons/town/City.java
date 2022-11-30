@@ -25,4 +25,9 @@ public class City implements Town {
         //TODO: prend 2 ressource dans les ressources dans la banque et les retourne
         return ressources;
     }
+
+    @Override
+    public String toString() {
+        return "City";
+    }
 }
