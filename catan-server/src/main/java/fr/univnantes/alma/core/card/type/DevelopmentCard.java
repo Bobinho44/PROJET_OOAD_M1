@@ -17,14 +17,22 @@ public abstract class DevelopmentCard implements Card {
     private final String name;
 
     /**
+     * Location
+     */
+    private final String fileLocation;
+
+    /**
      * Creates a new special card
      *
      * @param name the name
+     * @param fileLocation the URL location of the picture
      */
-    public DevelopmentCard(@NonNull String name) {
+    public DevelopmentCard(@NonNull String name, String fileLocation) {
         Objects.requireNonNull(name, "name cannot be null!");
+        Objects.requireNonNull(fileLocation, "No URL file input!");
 
         this.name = name;
+        this.fileLocation = fileLocation;
     }
 
     /**
@@ -35,6 +43,11 @@ public abstract class DevelopmentCard implements Card {
     public @NonNull String getName() {
         return name;
     }
+
+    /** To get the localization file of the picture.
+     * @return the URL of the picture file.
+     */
+    public @NonNull String getFileLocation() { return this.fileLocation; }
 
     /**
      * {@inheritDoc}

@@ -15,8 +15,14 @@ public class RoadBuildingCard extends ProgressCard {
      * Creates a new road building card
      */
     public RoadBuildingCard() {
-        super("Road building");
+        super("Road building", "catan-web/catan-client/src/assets/special-card/RoadBuilding.png");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() { return this.getFileLocation(); }
 
     /**
      * {@inheritDoc}

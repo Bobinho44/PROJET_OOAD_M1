@@ -11,7 +11,15 @@ public class ParliamentCard extends VictoryPointCard {
      * Creates a new parliament card
      */
     public ParliamentCard() {
-        super("Parliament");
+        super("Parliament", "catan-web/catan-client/src/assets/special-card/Parliament.png");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() {
+        return this.getFileLocation();
     }
 
 }

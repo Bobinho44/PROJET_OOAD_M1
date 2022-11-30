@@ -11,7 +11,14 @@ public class LongestRoadCard extends SpecialCard {
      * Creates a new longest road card
      */
     public LongestRoadCard() {
-        super("Longest road");
+        super("Longest road", "NaN (image pas encore créée)");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() {
+        return this.getFileLocation();
+    }
 }

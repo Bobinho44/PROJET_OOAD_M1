@@ -15,7 +15,12 @@ public class KnightCard extends DevelopmentCard {
      * Creates a new knight card
      */
     public KnightCard() {
-        super("Knight");
+        super("Knight", "catan-web/catan-client/src/assets/special-card/Knight.png");
+    }
+
+    @Override
+    public String getSourcePicture() {
+        return this.getFileLocation();
     }
 
     /**

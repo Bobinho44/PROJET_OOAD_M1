@@ -15,8 +15,14 @@ public class InventionCard extends ProgressCard {
      * Creates a new invention card
      */
     public InventionCard() {
-        super("Invention");
+        super("Invention", "catan-web/catan-client/src/assets/special-card/Monopoly.png");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSourcePicture() { return this.getFileLocation(); }
 
     /**
      * {@inheritDoc}

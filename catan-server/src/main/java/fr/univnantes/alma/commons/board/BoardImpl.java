@@ -2,6 +2,8 @@ package fr.univnantes.alma.commons.board;
 
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
+import fr.univnantes.alma.commons.buildArea.BuildableBuildingArea;
+import fr.univnantes.alma.commons.buildArea.BuildableRoadArea;
 import fr.univnantes.alma.core.board.Board;
 import fr.univnantes.alma.core.ressource.Resource;
 
@@ -28,17 +30,17 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public void buildRoad(Road road, BuildableArea buildableArea) {
+    public void buildRoad(Road road, BuildableRoadArea buildableRoadArea) {
 
     }
 
     @Override
-    public void buildColony(Colony colony, BuildableArea buildableArea) {
+    public void buildColony(Colony colony, BuildableBuildingArea buildableBuildingArea) {
 
     }
 
     @Override
-    public void buildCity(City city, BuildableArea buildableArea) {
+    public void buildCity(City city, BuildableBuildingArea buildableBuildingArea) {
 
     }
 

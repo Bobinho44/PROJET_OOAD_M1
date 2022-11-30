@@ -8,6 +8,11 @@ import org.springframework.lang.NonNull;
  */
 public interface Card {
 
+    /** To get the localization file of the picture.
+     * @return the URL of the picture file.
+     */
+    String getSourcePicture();
+
     /**
      * Applies the use effect of the card
      *

@@ -14,8 +14,8 @@ public abstract class VictoryPointCard extends DevelopmentCard {
     /**
      * Creates a new victory point card
      */
-    public VictoryPointCard(@NonNull String name) {
-        super(name);
+    public VictoryPointCard(@NonNull String name, String fileLocation) {
+        super(name, fileLocation);
     }
 
     /**
