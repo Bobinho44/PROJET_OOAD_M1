@@ -1,7 +1,7 @@
 package fr.univnantes.alma.core.card.type;
 
-import fr.univnantes.alma.Player;
 import fr.univnantes.alma.core.card.Card;
+import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;

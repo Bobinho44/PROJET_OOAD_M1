@@ -1,17 +1,12 @@
 package fr.univnantes.alma.core.card;
 
-import fr.univnantes.alma.Player;
+import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
 /**
  * Interface representing cards
  */
 public interface Card {
-
-    /** To get the localization file of the picture.
-     * @return the URL of the picture file.
-     */
-    String getSourcePicture();
 
     /**
      * Applies the use effect of the card

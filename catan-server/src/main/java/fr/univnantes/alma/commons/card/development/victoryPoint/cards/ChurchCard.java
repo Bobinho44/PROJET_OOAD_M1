@@ -1,10 +1,12 @@
 package fr.univnantes.alma.commons.card.development.victoryPoint.cards;
 
+import fr.univnantes.alma.commons.annotation.CardAmount;
 import fr.univnantes.alma.commons.card.development.victoryPoint.VictoryPointCard;
 
 /**
  * Class representing the victory point card: church
  */
+@CardAmount(1)
 public class ChurchCard extends VictoryPointCard {
 
     /**
@@ -14,11 +16,4 @@ public class ChurchCard extends VictoryPointCard {
         super("Church", "catan-web/catan-client/src/assets/special-card/Church.png");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSourcePicture() {
-        return this.getFileLocation();
-    }
 }

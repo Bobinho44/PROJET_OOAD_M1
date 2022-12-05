@@ -1,6 +1,6 @@
 package fr.univnantes.alma.websocket;
 
-import fr.univnantes.alma.Player;
+import fr.univnantes.alma.core.player.Player;
 
 import java.util.Date;
 

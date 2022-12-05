@@ -1,6 +1,7 @@
 package fr.univnantes.alma.commons.card.development.knight;
 
-import fr.univnantes.alma.Player;
+import fr.univnantes.alma.commons.annotation.CardAmount;
+import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import org.springframework.lang.NonNull;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 /**
  * Class representing knight cards
  */
+@CardAmount(14)
 public class KnightCard extends DevelopmentCard {
 
     /**
@@ -16,11 +18,6 @@ public class KnightCard extends DevelopmentCard {
      */
     public KnightCard() {
         super("Knight", "catan-web/catan-client/src/assets/special-card/Knight.png");
-    }
-
-    @Override
-    public String getSourcePicture() {
-        return this.getFileLocation();
     }
 
     /**

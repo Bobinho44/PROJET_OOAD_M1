@@ -11,8 +11,8 @@ public abstract class ProgressCard extends DevelopmentCard {
     /**
      * Creates a new progress card
      */
-    public ProgressCard(@NonNull String name, @NonNull String fileLocation) {
-        super(name, fileLocation);
+    public ProgressCard(@NonNull String name, @NonNull String picture) {
+        super(name, picture);
     }
 
 }

@@ -1,6 +1,7 @@
 package fr.univnantes.alma.commons.card.development.progress.cards;
 
-import fr.univnantes.alma.Player;
+import fr.univnantes.alma.commons.annotation.CardAmount;
+import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import org.springframework.lang.NonNull;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 /**
  * Class representing the progress card: road building
  */
+@CardAmount(2)
 public class RoadBuildingCard extends ProgressCard {
 
     /**
@@ -17,12 +19,6 @@ public class RoadBuildingCard extends ProgressCard {
     public RoadBuildingCard() {
         super("Road building", "catan-web/catan-client/src/assets/special-card/RoadBuilding.png");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSourcePicture() { return this.getFileLocation(); }
 
     /**
      * {@inheritDoc}

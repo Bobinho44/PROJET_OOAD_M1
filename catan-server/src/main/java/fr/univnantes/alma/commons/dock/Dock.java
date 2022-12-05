@@ -19,4 +19,5 @@ public class Dock {
     public Resource getResource() {
         return resource;
     }
+
 }

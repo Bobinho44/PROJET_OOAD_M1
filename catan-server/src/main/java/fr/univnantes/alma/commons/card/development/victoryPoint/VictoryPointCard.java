@@ -1,7 +1,7 @@
 package fr.univnantes.alma.commons.card.development.victoryPoint;
 
-import fr.univnantes.alma.Player;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
+import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -14,8 +14,8 @@ public abstract class VictoryPointCard extends DevelopmentCard {
     /**
      * Creates a new victory point card
      */
-    public VictoryPointCard(@NonNull String name, String fileLocation) {
-        super(name, fileLocation);
+    public VictoryPointCard(@NonNull String name, String picture) {
+        super(name, picture);
     }
 
     /**

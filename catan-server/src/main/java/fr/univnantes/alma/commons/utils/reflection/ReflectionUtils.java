@@ -1,23 +1,25 @@
 package fr.univnantes.alma.commons.utils.reflection;
 
-import fr.univnantes.alma.core.card.type.SpecialCard;
 import org.reflections.Reflections;
 import org.springframework.lang.NonNull;
 
-import java.lang.annotation.Annotation;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 public class ReflectionUtils {
-    public static <T> List<? extends T> getInstancesOf(Class<? extends T> type, @NonNull String path) {
+
+    public static <T> List<Class<? extends T>> getClassesOf(Class<T> type, @NonNull String path) {
         return new Reflections(path).getSubTypesOf(type).stream()
-                .map(clazz -> {
-                    try {
-                        return clazz.getDeclaredConstructor().newInstance();
-                    } catch (Exception e) {
-                        throw new RuntimeException();
-                    }
-                })
+                .filter(clazz -> !clazz.isAssignableFrom(type) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers()))
                 .toList();
+    }
+
+    public static <T> T getInstancesOf(Class<T> type) {
+        try {
+            return type.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 
 }

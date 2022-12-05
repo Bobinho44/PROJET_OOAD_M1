@@ -8,25 +8,20 @@ import java.util.Objects;
 /**
  * Enum representing resource
  */
-public enum ResourceImpl implements Resource {
-    WOOD("Wood"),
-    WOOL("Wool"),
-    WHEAT("Wheat"),
-    CLAY("Clay"),
-    ORE("Ore"),
-    NONE("None");
+public abstract class ResourceImpl implements Resource {
 
     /**
      * Fields
      */
     private final String name;
+    private int amount = 1;
 
     /**
      * Creates a new Resource
      *
      * @param name the name
      */
-    ResourceImpl(@NonNull String name) {
+    public ResourceImpl(@NonNull String name) {
         Objects.requireNonNull(name, "name cannot be null!");
 
         this.name = name;
@@ -41,4 +36,26 @@ public enum ResourceImpl implements Resource {
         return name;
     }
 
+
+    public Resource amount(int amount) {
+        this.amount = amount;
+
+        return this;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void increaseAmount(int amount) {
+        this.amount += amount;
+    }
+
+    public void decreaseAmount(int amount) {
+        this.amount -= amount;
+    }
+
+    public boolean isSimilar(Resource resource) {
+        return name.equals(resource.getName());
+    }
 }

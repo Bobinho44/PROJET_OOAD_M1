@@ -2,59 +2,62 @@ package fr.univnantes.alma.commons.territory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import fr.univnantes.alma.commons.road.BuildableRoadArea;
-import fr.univnantes.alma.commons.town.BuildableTownArea;
-import fr.univnantes.alma.core.card.type.DevelopmentCard;
-import fr.univnantes.alma.core.card.type.SpecialCard;
-import fr.univnantes.alma.core.board.Board;
-import fr.univnantes.alma.core.buildArea.BuildableArea;
+import fr.univnantes.alma.commons.construction.building.Building;
+import fr.univnantes.alma.commons.construction.road.Road;
+import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.ressource.Resource;
-import fr.univnantes.alma.commons.road.Road;
-import fr.univnantes.alma.commons.territory.Territory;
+import fr.univnantes.alma.core.token.Token;
+import org.springframework.lang.Nullable;
 
 public class Territory {
-    private final List<BuildableTownArea> buildableTown;
-    private final List<BuildableRoadArea> buildableRoads;
-    private final Resource ressource;
-    private final Integer numberAssociated;
-    private boolean thiefOccupation;
+    private final List<ConstructableArea<Building>> buildableTown = new ArrayList<>();
+    private final List<ConstructableArea<Road>> buildableRoads = new ArrayList<>();
+    private final Resource resource;
+    private Token token;
+    private boolean hasThief;
 
-    public Territory(List<BuildableTownArea> buildableTown, List<BuildableRoadArea> buildableRoads, Resource ressource, Integer numberAssociated) {
-        this.buildableTown = buildableTown;
-        this.buildableRoads = buildableRoads;
-        this.ressource = ressource;
-        this.numberAssociated = numberAssociated;
-        this.thiefOccupation = this.ressource.getClass().getName().equals("None");
+    public Territory(@Nullable Resource resource) {
+        this.resource = resource;
+        this.hasThief = resource == null;
     }
 
-    public List<BuildableTownArea> getBuildableTown() {
+    public Optional<Resource> getResource() {
+        return Optional.ofNullable(resource);
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
+    public Token getToken() {
+        return token;
+    }
+
+    public boolean hasThief() {
+        return hasThief;
+    }
+
+    public List<ConstructableArea<Building>> getBuildableTown() {
         return buildableTown;
     }
 
-    public List<BuildableRoadArea> getBuildableRoads() {
+    public List<ConstructableArea<Road>> getBuildableRoads() {
         return buildableRoads;
     }
 
-    public Resource getRessource() {
-        return ressource;
+    public void setThiefOccupation(boolean hasThief) {
+        this.hasThief = hasThief;
     }
 
-    public Integer getNumberAssociated(){
-        return numberAssociated;
-    }
-
-    public void setThiefOccupation(boolean thiefOccupation) {
-        this.thiefOccupation = thiefOccupation;
-    }
-
-    public void distributeRessources(){
-        if(thiefOccupation)
+    /**public void distributeResources(){
+        if(hasThief)
             return;
-        for (BuildableTownArea bta: buildableTown) {
-            if(bta.getTown() != null){
-                bta.getTown().giveRessource(ressource);
+        for (BuildableBuildingArea bta: buildableTown) {
+            if(bta.getBuilding() != null){
+                bta.getBuilding().giveRessource(resource);
             }
         }
-    }
+    }*/
 }
