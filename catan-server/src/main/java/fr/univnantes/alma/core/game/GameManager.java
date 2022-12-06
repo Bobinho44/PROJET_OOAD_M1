@@ -1,8 +1,8 @@
 package fr.univnantes.alma.core.game;
 
-import fr.univnantes.alma.commons.construction.building.Building;
-import fr.univnantes.alma.commons.construction.road.Road;
-import fr.univnantes.alma.commons.territory.Territory;
+import fr.univnantes.alma.core.construction.type.Building;
+import fr.univnantes.alma.core.construction.type.Road;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.player.Player;
@@ -30,7 +30,7 @@ public interface GameManager {
      *
      * @param territory the territory
      */
-    void moveThief(@NonNull Territory territory);
+    void moveThief(@NonNull TerritoryImpl territory);
 
     /**
      * Builds a road

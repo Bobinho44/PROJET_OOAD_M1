@@ -1,18 +1,18 @@
 package fr.univnantes.alma.commons.card;
 
 import fr.univnantes.alma.commons.annotation.CardAmount;
+import fr.univnantes.alma.commons.annotation.DevelopmentCardCost;
+import fr.univnantes.alma.commons.resource.ResourceImpl;
 import fr.univnantes.alma.commons.utils.collector.CollectorsUtils;
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
+import fr.univnantes.alma.commons.utils.stream.IndexedStream;
 import fr.univnantes.alma.core.card.CardManager;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class CardController implements CardManager {
@@ -49,24 +49,30 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean canPickDevelopmentCard() {
-        return !developments.empty();
+    public <T extends DevelopmentCard> boolean canPickDevelopmentCard(@NonNull Class<T> type) {
+        return developments.stream().anyMatch(development -> development.getClass() == type);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<Resource> getDevelopmentCardCost() {
-        return List.of();
+    public <T extends DevelopmentCard> @NonNull List<Resource> getDevelopmentCardCost(@NonNull Class<T> type) {
+        return Arrays.stream(type.getAnnotation(DevelopmentCardCost.class).resources())
+                .map(resource -> new ResourceImpl(resource.name()) {}.amount(resource.amount()))
+                .toList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull DevelopmentCard pickDevelopmentCard() {
-        return developments.pop();
+    public <T extends DevelopmentCard> @NonNull DevelopmentCard pickDevelopmentCard(@NonNull Class<T> type) {
+        return developments.remove(IndexedStream.from(developments)
+                .filter((development, i) -> development.getClass() == type)
+                .map((development, i) -> i)
+                .findFirst()
+                .orElseThrow(RuntimeException::new).intValue());
     }
 
     /**
@@ -87,10 +93,10 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public <S extends SpecialCard> @NonNull Optional<S> pickSpecialCard(@NonNull Class<S> type) {
+    public <T extends SpecialCard> @NonNull Optional<T> pickSpecialCard(@NonNull Class<T> type) {
         return specials.stream()
                 .filter(specialCard -> specialCard.getClass() == type)
-                .map(specialCard -> (S) specialCard)
+                .map(specialCard -> (T) specialCard)
                 .findFirst();
     }
 

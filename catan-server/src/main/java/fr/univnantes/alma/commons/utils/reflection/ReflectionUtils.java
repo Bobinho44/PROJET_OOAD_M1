@@ -4,7 +4,9 @@ import org.reflections.Reflections;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ReflectionUtils {
 
@@ -14,9 +16,9 @@ public class ReflectionUtils {
                 .toList();
     }
 
-    public static <T> T getInstancesOf(Class<T> type) {
+    public static <T> T getInstancesOf(Class<T> type, Objects... args) {
         try {
-            return type.getDeclaredConstructor().newInstance();
+            return type.getDeclaredConstructor((Class<?>[]) Arrays.stream(args).map(Objects::getClass).toArray()).newInstance(Arrays.stream(args).toArray());
         } catch (Exception e) {
             throw new RuntimeException();
         }

@@ -1,11 +1,12 @@
-package fr.univnantes.alma.commons.construction.road;
+package fr.univnantes.alma.commons.construction.constructableArea;
 
-import fr.univnantes.alma.commons.construction.building.Building;
+import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.dock.Dock;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.construction.constructStrategy.ConstructStrategy;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.construction.lootStrategy.LootStrategy;
+import fr.univnantes.alma.core.construction.type.Road;
 import org.springframework.lang.NonNull;
 
 import java.util.List;

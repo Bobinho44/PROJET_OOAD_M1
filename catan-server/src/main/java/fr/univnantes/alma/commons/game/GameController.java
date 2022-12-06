@@ -1,16 +1,18 @@
 package fr.univnantes.alma.commons.game;
 
 import fr.univnantes.alma.commons.card.CardController;
+import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import fr.univnantes.alma.commons.construction.ConstructionController;
-import fr.univnantes.alma.commons.construction.building.Building;
+import fr.univnantes.alma.commons.construction.type.road.RoadImpl;
+import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.dice.DiceImpl;
-import fr.univnantes.alma.commons.player.PlayerManager;
-import fr.univnantes.alma.commons.construction.road.Road;
+import fr.univnantes.alma.commons.player.PlayerController;
+import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.commons.resource.ResourceController;
-import fr.univnantes.alma.commons.territory.Territory;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 import fr.univnantes.alma.commons.territory.TerritoryController;
-import fr.univnantes.alma.commons.construction.building.type.city.City;
-import fr.univnantes.alma.commons.construction.building.type.colony.Colony;
+import fr.univnantes.alma.commons.construction.type.building.city.City;
+import fr.univnantes.alma.commons.construction.type.building.colony.Colony;
 import fr.univnantes.alma.core.card.CardManager;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.ConstructionManager;
@@ -27,7 +29,7 @@ public class GameController implements GameManager {
 
     private final TerritoryController territoryManager = new TerritoryController();
     private final ConstructionManager constructionManager = new ConstructionController();
-    private final PlayerManager playerManager = new PlayerManager();
+    private final PlayerController playerManager = new PlayerController();
     private final CardManager cardManager = new CardController();
     private final ResourceManager resourceManager = new ResourceController();
 
@@ -36,11 +38,17 @@ public class GameController implements GameManager {
      */
     private final Dice dice = new DiceImpl();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void build() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int rollDice() {
         dice.roll();
@@ -48,29 +56,42 @@ public class GameController implements GameManager {
         return dice.getScore();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void moveThief(@NonNull Territory territory) {
+    public void moveThief(@NonNull TerritoryImpl territory) {
         territoryManager.moveThief(territory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buildRoad(@NonNull Player player, @NonNull ConstructableArea<Road> buildableRoadArea) {
-        if (playerManager.canBuild(player, Road.class, constructionManager.getConstructionCost(Road.class))) {
+        Road road = constructionManager.getConstruction(player, RoadImpl.class);
+
+        if (playerManager.canConstruct(player, road, constructionManager.getConstructionCost(RoadImpl.class))) {
             return;
         }
 
-        if (!constructionManager.isConstructable(buildableRoadArea, new Road(player))) {
+        if (!constructionManager.isConstructable(buildableRoadArea, new RoadImpl(player))) {
             return;
         }
 
-        constructionManager.construct(buildableRoadArea, new Road(player));
-        playerManager.removeResource(player, constructionManager.getConstructionCost(Road.class));
-        playerManager.removeConstruction(player, Road.class);
+        constructionManager.construct(buildableRoadArea, road);
+        playerManager.removeResources(player, constructionManager.getConstructionCost(RoadImpl.class));
+        playerManager.removeConstruction(player, road);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buildColony(@NonNull Player player, @NonNull ConstructableArea<Building> buildableBuildingArea) {
-        if (playerManager.canBuild(player, Colony.class, constructionManager.getConstructionCost(Colony.class))) {
+        Colony colony = constructionManager.getConstruction(player, Colony.class);
+
+        if (playerManager.canConstruct(player, colony, constructionManager.getConstructionCost(Colony.class))) {
             return;
         }
 
@@ -78,14 +99,19 @@ public class GameController implements GameManager {
             return;
         }
 
-        constructionManager.construct(buildableBuildingArea, new Colony(player));
-        playerManager.removeResource(player, constructionManager.getConstructionCost(Colony.class));
-        playerManager.removeConstruction(player, Colony.class);
+        constructionManager.construct(buildableBuildingArea, colony);
+        playerManager.removeResources(player, constructionManager.getConstructionCost(Colony.class));
+        playerManager.removeConstruction(player, colony);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buildCity(@NonNull Player player, @NonNull ConstructableArea<Building> buildableBuildingArea) {
-        if (playerManager.canBuild(player, City.class, constructionManager.getConstructionCost(City.class))) {
+        City city = constructionManager.getConstruction(player, City.class);
+
+        if (playerManager.canConstruct(player, city, constructionManager.getConstructionCost(City.class))) {
             return;
         }
 
@@ -93,54 +119,70 @@ public class GameController implements GameManager {
             return;
         }
 
-        constructionManager.construct(buildableBuildingArea, new City(player));
-        playerManager.removeResource(player, constructionManager.getConstructionCost(Colony.class));
-        playerManager.removeConstruction(player, City.class);
+        constructionManager.construct(buildableBuildingArea, city);
+        playerManager.removeResources(player, constructionManager.getConstructionCost(Colony.class));
+        playerManager.removeConstruction(player, city);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buyDevelopmentCard(@NonNull Player player) {
-        if (!playerManager.canBuyDevelopmentCard(player, cardManager.getDevelopmentCardCost())) {
+        if (!playerManager.canBuyDevelopmentCard(player, cardManager.getDevelopmentCardCost(ProgressCard.class))) {
             return;
         }
 
-        if (cardManager.canPickDevelopmentCard()) {
+        if (cardManager.canPickDevelopmentCard(ProgressCard.class)) {
             return;
         }
 
-        playerManager.removeResource(player, cardManager.getDevelopmentCardCost());
-        //playerManager.giveDevelopmentCard(player, cardManager.pickDevelopmentCard());
+        playerManager.removeResources(player, cardManager.getDevelopmentCardCost(ProgressCard.class));
+        playerManager.addDevelopmentCard(player, cardManager.pickDevelopmentCard(ProgressCard.class));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard) {
         if (!playerManager.hasDevelopmentCard(player, developmentCard)) {
             return;
         }
 
-        playerManager.pickDevelopmentCard(player, developmentCard).useEffect(player);
+        playerManager.removeDevelopmentCard(player, developmentCard);
+        developmentCard.useEffect(player);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void tradeWithPlayer(UUID proposal) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void tradeWithBank(UUID proposal) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void giveLoot() {
         territoryManager.getLoot(dice.getScore()).forEach(loot -> {
 
-            if (!resourceManager.canPickResource(loot.right, 1)) {
+            if (!resourceManager.canPickResource(loot.getValue(), 1)) {
                 return;
             }
 
-            playerManager.giveResource(loot.left, loot.right);
-            resourceManager.removeResource(loot.right, 1);
+            playerManager.addResource(loot.getKey(), loot.getValue());
+            resourceManager.removeResource(loot.getValue(), 1);
         });
     }
 

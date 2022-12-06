@@ -1,9 +1,13 @@
 package fr.univnantes.alma.commons.construction;
 
+import fr.univnantes.alma.commons.annotation.ConstructionCost;
+import fr.univnantes.alma.commons.resource.ResourceImpl;
+import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.construction.ConstructionManager;
 import fr.univnantes.alma.core.construction.constructStrategy.ConstructStrategy;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.lang.NonNull;
@@ -18,10 +22,17 @@ public class ConstructionController implements ConstructionManager {
     private final Map<UUID, ConstructableArea<? extends Construction>> constructableAreas = new HashMap<>();
 
     /**
+     * Creates a new construction manager
+     */
+    public ConstructionController() {
+        //TODO createConstructableArea
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public <T extends Construction> Optional<ConstructableArea<T>> getConstructableArea(@NonNull UUID uuid, @NonNull Class<T> type) {
+    public <T extends Construction> @NonNull Optional<ConstructableArea<T>> getConstructableArea(@NonNull UUID uuid, @NonNull Class<T> type) {
         return constructableAreas.entrySet().stream()
                 .filter(constructableArea -> constructableArea.getKey().equals(uuid))
                 .filter(constructableArea -> GenericTypeResolver.resolveTypeArgument(constructableArea.getValue().getConstructStrategy().getClass(), ConstructStrategy.class).isAssignableFrom(type))
@@ -33,8 +44,18 @@ public class ConstructionController implements ConstructionManager {
      * {@inheritDoc}
      */
     @Override
-    public <T extends Construction> List<Resource> getConstructionCost(@NonNull Class<T> type) {
-        return null;
+    public <T extends Construction> T getConstruction(@NonNull Player owner, @NonNull Class<T> type) {
+        return ReflectionUtils.getInstancesOf(type);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <T extends Construction> @NonNull List<Resource> getConstructionCost(@NonNull Class<T> type) {
+        return Arrays.stream(type.getAnnotation(ConstructionCost.class).resources())
+                .map(resource -> new ResourceImpl(resource.name()) {}.amount(resource.amount()))
+                .toList();
     }
 
     /**

@@ -7,36 +7,39 @@ import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Stack;
 
 public interface CardManager {
 
     /**
      * Checks if a development card can be picked
      *
+     * @param type the type
      * @return true if a development card can be picked, false otherwise
      */
-    boolean canPickDevelopmentCard();
+    <T extends DevelopmentCard> boolean canPickDevelopmentCard(@NonNull Class<T> type);
 
     /**
      * Gets the development card cost
      *
+     * @param type the type
      * @return the development card cost
      */
-    @NonNull List<Resource> getDevelopmentCardCost();
+    @NonNull <T extends DevelopmentCard> List<Resource> getDevelopmentCardCost(@NonNull Class<T> type);
 
     /**
      * Picks a development card
      *
+     * @param type the type
      * @return the development card
      */
-    @NonNull DevelopmentCard pickDevelopmentCard();
+    @NonNull <T extends DevelopmentCard> DevelopmentCard pickDevelopmentCard(@NonNull Class<T> type);
 
     /**
      * Picks a special card
+     *
      * @param type the type
      * @return the special card
      */
-    <S extends SpecialCard> @NonNull Optional<S> pickSpecialCard(@NonNull Class<S> type);
+    <T extends SpecialCard> @NonNull Optional<T> pickSpecialCard(@NonNull Class<T> type);
 
 }

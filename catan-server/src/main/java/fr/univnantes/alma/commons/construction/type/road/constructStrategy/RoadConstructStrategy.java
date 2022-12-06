@@ -1,14 +1,20 @@
-package fr.univnantes.alma.commons.construction.road.constructStrategy;
+package fr.univnantes.alma.commons.construction.type.road.constructStrategy;
 
-import fr.univnantes.alma.commons.construction.road.Road;
+import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.construction.constructStrategy.ConstructStrategy;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import org.springframework.lang.NonNull;
 
 public class RoadConstructStrategy implements ConstructStrategy<Road> {
 
+    /**
+     * Singleton
+     */
     public static final RoadConstructStrategy ROAD_CONSTRUCT_STRATEGY = new RoadConstructStrategy();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isConstructable(@NonNull ConstructableArea<Road> area, @NonNull Road road) {
         if (area.getConstruction().isPresent()) {
@@ -22,6 +28,9 @@ public class RoadConstructStrategy implements ConstructStrategy<Road> {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void construct(@NonNull ConstructableArea<Road> area, @NonNull Road road) {
         area.setConstruction(road);

@@ -38,7 +38,7 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean canPickResource(Resource resource, int amount) {
+    public boolean canPickResource(@NonNull Resource resource, int amount) {
         return resources.stream()
                 .filter(pickableResource -> pickableResource.isSimilar(resource))
                 .anyMatch(pickSpecialCard -> pickSpecialCard.getAmount() >= amount);
@@ -48,7 +48,7 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
-    public void removeResource(Resource resource, int amount) {
+    public void removeResource(@NonNull Resource resource, int amount) {
         resources.stream()
                 .filter(pickableResource -> pickableResource.isSimilar(resource))
                 .filter(pickSpecialCard -> pickSpecialCard.getAmount() >= amount)
@@ -60,7 +60,7 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
-    public void addResource(Resource resource, int amount) {
+    public void addResource(@NonNull Resource resource, int amount) {
         resources.stream()
                 .filter(pickableResource -> pickableResource.isSimilar(resource))
                 .filter(pickSpecialCard -> pickSpecialCard.getAmount() >= amount)

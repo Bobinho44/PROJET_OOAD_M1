@@ -7,19 +7,19 @@ import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.commons.utils.stream.IndexedStream;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
-import org.atlanmod.commons.tuple.Pair;
+import fr.univnantes.alma.core.territory.TerritoryManager;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class TerritoryController {
+public class TerritoryController implements TerritoryManager {
 
     /**
      * Fields
      */
-    private final Map<UUID, Territory> territories;
+    private final Map<UUID, TerritoryImpl> territories;
 
     /**
      * Creates a new territory manager
@@ -30,12 +30,13 @@ public class TerritoryController {
         affectTokens();
     }
 
-    public Optional<Territory> getTerritory(@NonNull UUID uuid) {
-        return Optional.ofNullable(territories.get(uuid));
-    }
-
-    private Map<UUID, Territory> createTerritories() {
-        return ReflectionUtils.getClassesOf(Territory.class, "fr.univnantes.alma.commons.territory.type").stream()
+    /**
+     * Creates all territories
+     *
+     * @return all territories
+     */
+    private @NonNull Map<UUID, TerritoryImpl> createTerritories() {
+        return ReflectionUtils.getClassesOf(TerritoryImpl.class, "fr.univnantes.alma.commons.territory.type").stream()
                 .map(territory -> IntStream.range(0, territory.getAnnotation(TerritoryAmount.class).value())
                         .mapToObj(i -> Map.entry(UUID.randomUUID(), ReflectionUtils.getInstancesOf(territory)))
                         .toList())
@@ -43,31 +44,54 @@ public class TerritoryController {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
+    /**
+     * Affects the tokens
+     */
     private void affectTokens() {
         IndexedStream.from(territories.values().stream()
-                        .filter(territory -> territory.getResource().isPresent())
+                        .filter(TerritoryImpl::hasResource)
                         .collect(CollectorsUtils.toShuffledList()))
                 .forEach((territory, i) -> territory.setToken(TokenImpl.values()[i]));
     }
 
-    public Optional<Territory> getThiefTerritory() {
-        return territories.values().stream().filter(Territory::hasThief).findFirst();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull Optional<TerritoryImpl> getTerritory(@NonNull UUID uuid) {
+        return Optional.ofNullable(territories.get(uuid));
     }
 
-    public void moveThief(@NonNull Territory territory) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull Optional<TerritoryImpl> getThiefTerritory() {
+        return territories.values().stream().filter(TerritoryImpl::hasThief).findFirst();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveThief(@NonNull TerritoryImpl territory) {
         getThiefTerritory().ifPresent(from -> from.setThiefOccupation(false));
         territory.setThiefOccupation(true);
     }
 
-    public List<Pair<Player, Resource>> getLoot(int score) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull List<Map.Entry<Player, Resource>> getLoot(int number) {
         return territories.values().stream()
-                .filter(territory -> territory.getToken().getNumber() == score)
-                .filter(territory -> territory.getResource().isPresent())
+                .filter(territory -> territory.getToken().getNumber() == number)
+                .filter(TerritoryImpl::hasResource)
                 .filter(territory -> !territory.hasThief())
-                .map(territory -> territory.getBuildableTown().stream()
+                .map(territory -> territory.getNeighbourBuildings().stream()
                         .filter(area -> area.getConstruction().isPresent())
                         .map(area -> IntStream.range(0, area.getLootAmount())
-                                .mapToObj(i -> Pair.of(area.getConstruction().get().getOwner(), territory.getResource().get()))
+                                .mapToObj(i -> Map.entry(area.getConstruction().get().getOwner(), territory.getResource().get()))
                                 .toList())
                         .flatMap(Collection::stream)
                         .toList())
@@ -75,4 +99,5 @@ public class TerritoryController {
                 //.sorted() //TODO Trié les joueurs ?
                 .toList();
     }
+
 }

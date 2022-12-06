@@ -17,7 +17,7 @@ public abstract class ResourceImpl implements Resource {
     private int amount = 1;
 
     /**
-     * Creates a new Resource
+     * Creates a new resource
      *
      * @param name the name
      */
@@ -37,25 +37,42 @@ public abstract class ResourceImpl implements Resource {
     }
 
 
-    public Resource amount(int amount) {
+    public @NonNull Resource amount(int amount) {
         this.amount = amount;
 
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void increaseAmount(int amount) {
         this.amount += amount;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void decreaseAmount(int amount) {
         this.amount -= amount;
     }
 
-    public boolean isSimilar(Resource resource) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSimilar(@NonNull Resource resource) {
         return name.equals(resource.getName());
     }
+
 }
