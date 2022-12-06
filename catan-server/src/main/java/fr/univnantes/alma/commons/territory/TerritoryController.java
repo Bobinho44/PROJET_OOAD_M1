@@ -7,6 +7,7 @@ import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.commons.utils.stream.IndexedStream;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.core.territory.TerritoryManager;
 import org.springframework.lang.NonNull;
 
@@ -19,7 +20,7 @@ public class TerritoryController implements TerritoryManager {
     /**
      * Fields
      */
-    private final Map<UUID, TerritoryImpl> territories;
+    private final Map<UUID, Territory> territories;
 
     /**
      * Creates a new territory manager
@@ -35,13 +36,15 @@ public class TerritoryController implements TerritoryManager {
      *
      * @return all territories
      */
-    private @NonNull Map<UUID, TerritoryImpl> createTerritories() {
-        return ReflectionUtils.getClassesOf(TerritoryImpl.class, "fr.univnantes.alma.commons.territory.type").stream()
+    private @NonNull Map<UUID, Territory> createTerritories() {
+        return ReflectionUtils.getClassesOf(Territory.class, "fr.univnantes.alma.commons.territory.type").stream()
                 .map(territory -> IntStream.range(0, territory.getAnnotation(TerritoryAmount.class).value())
                         .mapToObj(i -> Map.entry(UUID.randomUUID(), ReflectionUtils.getInstancesOf(territory)))
                         .toList())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        //TODO add constructableArea
     }
 
     /**
@@ -49,7 +52,7 @@ public class TerritoryController implements TerritoryManager {
      */
     private void affectTokens() {
         IndexedStream.from(territories.values().stream()
-                        .filter(TerritoryImpl::hasResource)
+                        .filter(Territory::hasResource)
                         .collect(CollectorsUtils.toShuffledList()))
                 .forEach((territory, i) -> territory.setToken(TokenImpl.values()[i]));
     }
@@ -58,7 +61,7 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Optional<TerritoryImpl> getTerritory(@NonNull UUID uuid) {
+    public @NonNull Optional<Territory> getTerritory(@NonNull UUID uuid) {
         return Optional.ofNullable(territories.get(uuid));
     }
 
@@ -66,15 +69,15 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Optional<TerritoryImpl> getThiefTerritory() {
-        return territories.values().stream().filter(TerritoryImpl::hasThief).findFirst();
+    public @NonNull Optional<Territory> getThiefTerritory() {
+        return territories.values().stream().filter(Territory::hasThief).findFirst();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void moveThief(@NonNull TerritoryImpl territory) {
+    public void moveThief(@NonNull Territory territory) {
         getThiefTerritory().ifPresent(from -> from.setThiefOccupation(false));
         territory.setThiefOccupation(true);
     }
@@ -86,7 +89,7 @@ public class TerritoryController implements TerritoryManager {
     public @NonNull List<Map.Entry<Player, Resource>> getLoot(int number) {
         return territories.values().stream()
                 .filter(territory -> territory.getToken().getNumber() == number)
-                .filter(TerritoryImpl::hasResource)
+                .filter(Territory::hasResource)
                 .filter(territory -> !territory.hasThief())
                 .map(territory -> territory.getNeighbourBuildings().stream()
                         .filter(area -> area.getConstruction().isPresent())

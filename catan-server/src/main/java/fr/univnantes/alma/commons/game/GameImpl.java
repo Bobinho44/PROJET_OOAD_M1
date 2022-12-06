@@ -3,6 +3,7 @@ package fr.univnantes.alma.commons.game;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.game.Game;
 import fr.univnantes.alma.core.game.GameManager;
+import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 
 import java.util.UUID;
@@ -72,12 +73,12 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void tradeWithPlayer(@NonNull UUID proposal) {
+    public void tradeWithPlayer(@NonNull Trade trade) {
 
     }
 
     @Override
-    public void tradeWithBank(@NonNull UUID proposal) {
+    public void tradeWithBank(@NonNull Trade trade) {
 
     }
 

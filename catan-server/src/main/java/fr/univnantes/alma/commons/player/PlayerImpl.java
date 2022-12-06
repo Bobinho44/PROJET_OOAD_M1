@@ -17,6 +17,7 @@ public class PlayerImpl implements Player {
     private final List<Construction> constructions = new ArrayList<>();
     private final List<Resource> resources = new ArrayList<>();
     private final List<DevelopmentCard> developmentCards = new ArrayList<>();
+    private int victoryPoints;
 
     /**
      * {@inheritDoc}
@@ -88,6 +89,30 @@ public class PlayerImpl implements Player {
     @Override
     public void removeDevelopmentCard(@NonNull DevelopmentCard developmentCard) {
         developmentCards.remove(developmentCard);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getsVictoryPoint() {
+        return victoryPoints;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addVictoryPoints(int amount) {
+        victoryPoints += amount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeVictoryPoints(int amount) {
+        victoryPoints -= amount;
     }
 
 }

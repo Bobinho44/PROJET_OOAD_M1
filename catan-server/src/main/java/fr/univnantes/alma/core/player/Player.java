@@ -72,4 +72,25 @@ public interface Player {
      */
     void removeDevelopmentCard(@NonNull DevelopmentCard developmentCard);
 
+    /**
+     * Gets the victory points
+     *
+     * @return the victory points
+     */
+    int getsVictoryPoint();
+
+    /**
+     * Adds victory points to the player
+     *
+     * @param amount the amount
+     */
+    void addVictoryPoints(int amount);
+
+    /**
+     * Removes victory point from the player
+     *
+     * @param amount the amount
+     */
+    void removeVictoryPoints(int amount);
+
 }

@@ -4,6 +4,7 @@ import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -77,16 +78,16 @@ public interface Game {
     /**
      * Trades with another player
      *
-     * @param proposal the trade proposal
+     * @param trade the trade
      */
-    void tradeWithPlayer(@NonNull UUID proposal);
+    void tradeWithPlayer(@NonNull Trade trade);
 
     /**
      * Trades with the bank
      *
-     * @param proposal the trade proposal
+     * @param trade the trade
      */
-    void tradeWithBank(@NonNull UUID proposal);
+    void tradeWithBank(@NonNull Trade trade);
 
     /**
      * Finishes the tour

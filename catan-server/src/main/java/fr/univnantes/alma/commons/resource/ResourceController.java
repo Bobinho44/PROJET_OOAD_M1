@@ -38,6 +38,14 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
+    public boolean hasResources(@NonNull List<Resource> resources) {
+        return resources.stream().allMatch(resource -> canPickResource(resource, resource.getAmount()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean canPickResource(@NonNull Resource resource, int amount) {
         return resources.stream()
                 .filter(pickableResource -> pickableResource.isSimilar(resource))
@@ -48,12 +56,8 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
-    public void removeResource(@NonNull Resource resource, int amount) {
-        resources.stream()
-                .filter(pickableResource -> pickableResource.isSimilar(resource))
-                .filter(pickSpecialCard -> pickSpecialCard.getAmount() >= amount)
-                .findFirst()
-                .ifPresent(pickableResource -> pickableResource.decreaseAmount(amount));
+    public void addResources(@NonNull List<Resource> resources) {
+        resources.stream().forEach(resource -> addResource(resource, resource.getAmount()));
     }
 
     /**
@@ -66,6 +70,26 @@ public class ResourceController implements ResourceManager {
                 .filter(pickSpecialCard -> pickSpecialCard.getAmount() >= amount)
                 .findFirst()
                 .ifPresent(pickableResource -> pickableResource.increaseAmount(amount));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeResources(@NonNull List<Resource> resources) {
+        resources.stream().forEach(resource -> removeResource(resource, resource.getAmount()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeResource(@NonNull Resource resource, int amount) {
+        resources.stream()
+                .filter(pickableResource -> pickableResource.isSimilar(resource))
+                .filter(pickSpecialCard -> pickSpecialCard.getAmount() >= amount)
+                .findFirst()
+                .ifPresent(pickableResource -> pickableResource.decreaseAmount(amount));
     }
 
 }

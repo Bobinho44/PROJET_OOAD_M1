@@ -4,12 +4,13 @@ import fr.univnantes.alma.commons.card.CardController;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import fr.univnantes.alma.commons.construction.ConstructionController;
 import fr.univnantes.alma.commons.construction.type.road.RoadImpl;
+import fr.univnantes.alma.commons.trade.TradeController;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.dice.DiceImpl;
 import fr.univnantes.alma.commons.player.PlayerController;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.commons.resource.ResourceController;
-import fr.univnantes.alma.commons.territory.TerritoryImpl;
+import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.commons.territory.TerritoryController;
 import fr.univnantes.alma.commons.construction.type.building.city.City;
 import fr.univnantes.alma.commons.construction.type.building.colony.Colony;
@@ -20,18 +21,23 @@ import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.dice.Dice;
 import fr.univnantes.alma.core.game.GameManager;
 import fr.univnantes.alma.core.player.Player;
+import fr.univnantes.alma.core.player.PlayerManager;
 import fr.univnantes.alma.core.ressource.ResourceManager;
+import fr.univnantes.alma.core.territory.TerritoryManager;
+import fr.univnantes.alma.core.trade.Trade;
+import fr.univnantes.alma.core.trade.TradeManager;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
 
 public class GameController implements GameManager {
 
-    private final TerritoryController territoryManager = new TerritoryController();
+    private final TerritoryManager territoryManager = new TerritoryController();
     private final ConstructionManager constructionManager = new ConstructionController();
-    private final PlayerController playerManager = new PlayerController();
+    private final PlayerManager playerManager = new PlayerController();
     private final CardManager cardManager = new CardController();
     private final ResourceManager resourceManager = new ResourceController();
+    private final TradeManager tradeManager = new TradeController();
 
     /**
      * Fields
@@ -60,7 +66,7 @@ public class GameController implements GameManager {
      * {@inheritDoc}
      */
     @Override
-    public void moveThief(@NonNull TerritoryImpl territory) {
+    public void moveThief(@NonNull Territory territory) {
         territoryManager.moveThief(territory);
     }
 
@@ -158,16 +164,26 @@ public class GameController implements GameManager {
      * {@inheritDoc}
      */
     @Override
-    public void tradeWithPlayer(UUID proposal) {
-
+    public void tradeWithPlayer(@NonNull Trade trade) {
+        tradeManager.addTrade(trade);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void tradeWithBank(UUID proposal) {
+    public void tradeWithBank(@NonNull Trade trade) {
+        if (!playerManager.hasResources(trade.getSender(), trade.getOffer())) {
+            return;
+        }
 
+        if (!resourceManager.hasResources(trade.getRequest())) {
+            return;
+        }
+
+        resourceManager.addResources(trade.getOffer());
+        resourceManager.removeResources(trade.getRequest());
+        playerManager.addResources(trade.getSender(), trade.getRequest());
     }
 
     /**

@@ -2,10 +2,11 @@ package fr.univnantes.alma.core.game;
 
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
-import fr.univnantes.alma.commons.territory.TerritoryImpl;
+import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.player.Player;
+import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 
 import java.util.UUID;
@@ -30,7 +31,7 @@ public interface GameManager {
      *
      * @param territory the territory
      */
-    void moveThief(@NonNull TerritoryImpl territory);
+    void moveThief(@NonNull Territory territory);
 
     /**
      * Builds a road
@@ -75,17 +76,17 @@ public interface GameManager {
      * TODO
      * Trades with another player
      *
-     * @param proposal the trade proposal
+     * @param trade the trade
      */
-    void tradeWithPlayer(@NonNull UUID proposal);
+    void tradeWithPlayer(@NonNull Trade trade);
 
     /**
      * TODO
      * Trades with the bank
      *
-     * @param proposal the trade proposal
+     * @param trade the trade
      */
-    void tradeWithBank(@NonNull UUID proposal);
+    void tradeWithBank(@NonNull Trade trade);
 
     void giveLoot();
 

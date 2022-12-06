@@ -20,6 +20,7 @@ public class PlayerController implements PlayerManager {
      * Creates a new player manager
      */
     public PlayerController() {
+        //Initialize
         players.values().forEach(player -> {
             //ReflectionUtils.getInstancesOf(Building.class, "fr.univnantes.alma.commons.construction.building.type")
             //      .forEach(building -> IntStream.range(0, building.getAmount()).forEach(i -> player.addConstruction(building).add(progress)));
@@ -68,7 +69,7 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public boolean canConstruct(@NonNull Player player, @NonNull Construction construction, @NonNull List<Resource> resources) {
-        return hasConstruction(player, construction) && resources.stream().allMatch(resource -> hasResources(player, resource));
+        return hasConstruction(player, construction) && hasResources(player, resources);
     }
 
     /**
@@ -91,8 +92,17 @@ public class PlayerController implements PlayerManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasResources(@NonNull Player player, @NonNull Resource resource) {
-        return player.getResources().stream().anyMatch(playerResource -> playerResource.isSimilar(resource) && playerResource.getAmount() >= resource.getAmount());
+    public boolean hasResource(@NonNull Player player, @NonNull Resource resource) {
+        return player.getResources().stream()
+                .anyMatch(playerResource -> playerResource.isSimilar(resource) && playerResource.getAmount() >= resource.getAmount());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasResources(@NonNull Player player, @NonNull List<Resource> resources) {
+        return resources.stream().allMatch(resource -> hasResource(player, resource));
     }
 
     /**
@@ -160,6 +170,30 @@ public class PlayerController implements PlayerManager {
     @Override
     public void removeDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard) {
         player.removeDevelopmentCard(developmentCard);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getsVictoryPoint(@NonNull Player player) {
+        return player.getsVictoryPoint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addVictoryPoints(@NonNull Player player, int amount) {
+        player.addVictoryPoints(amount);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeVictoryPoints(@NonNull Player player, int amount) {
+        player.removeVictoryPoints(amount);
     }
 
 }

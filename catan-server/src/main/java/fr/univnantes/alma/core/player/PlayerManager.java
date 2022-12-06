@@ -75,7 +75,16 @@ public interface PlayerManager {
      * @param resource the resource
      * @return true if the player has the resource, false otherwise
      */
-    boolean hasResources(@NonNull Player player, @NonNull Resource resource);
+    boolean hasResource(@NonNull Player player, @NonNull Resource resource);
+
+    /**
+     * Checks if the player has all resources
+     *
+     * @param player the player
+     * @param resources all resources
+     * @return true if the player has all resources, false otherwise
+     */
+    boolean hasResources(@NonNull Player player, @NonNull List<Resource> resources);
 
     /**
      * Adds the resource to the player
@@ -142,5 +151,29 @@ public interface PlayerManager {
      * @param developmentCard the development card
      */
     void removeDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard);
+
+    /**
+     * Gets the victory points
+     *
+     * @param player the player
+     * @return the victory points
+     */
+    int getsVictoryPoint(@NonNull Player player);
+
+    /**
+     * Adds victory points to the player
+     * 
+     * @param player the player
+     * @param amount the amount
+     */
+    void addVictoryPoints(@NonNull Player player, int amount);
+
+    /**
+     * Removes victory points from the player
+     *
+     * @param player the player
+     * @param amount the amount
+     */
+    void removeVictoryPoints(@NonNull Player player, int amount);
 
 }

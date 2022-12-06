@@ -21,7 +21,7 @@ public class RoadConstructStrategy implements ConstructStrategy<Road> {
             return false;
         }
 
-        return area.getRoadNeighbours().stream()
+        return area.getNeighbourRoads().stream()
                 .anyMatch(roadNeighbour -> roadNeighbour.getConstruction()
                         .map(nearbyRoad -> nearbyRoad.getOwner().equals(road.getOwner()))
                         .orElse(false));

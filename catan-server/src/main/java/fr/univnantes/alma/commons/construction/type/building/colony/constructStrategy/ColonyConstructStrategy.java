@@ -23,11 +23,11 @@ public class ColonyConstructStrategy implements ConstructStrategy<Building> {
             return false;
         }
 
-        if (!area.getBuildingNeighbours().isEmpty()) {
+        if (!area.getNeighbourBuildings().isEmpty()) {
             return false;
         }
 
-        return area.getRoadNeighbours().stream()
+        return area.getNeighbourRoads().stream()
                 .anyMatch(roadNeighbour -> roadNeighbour.getConstruction()
                         .map(nearbyRoad -> nearbyRoad.getOwner().equals(building.getOwner()))
                         .orElse(false));
