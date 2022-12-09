@@ -1,24 +1,33 @@
 import { Injectable } from '@angular/core';
+// import * as SockJS from 'sockjs-client';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class WebsocketService {
-  private String url;
-  constructor() { }
+    private url: String;
+    private stompClient: any;
+    constructor(url: String) {
+        this.url = url;
+    }
 
-  connect(url: string | URL) {
-    this.socket = new SockJS(url);
 
-  }
+    // connect() {
+    //     var socket = new SockJS('/catan-websocket');
+    //     socket.onopen = function () {
+    //         console.log('open');
+    //     }
+    // }
 
-  disconnect() {
-    this.socket.close();
-  }
+    // disconnect() {
+    //     if (this.stompClient !== null) {
+    //         this.stompClient.disconnect();
+    //     }
+    //     console.log("Disconnected");
+    // }
 
-  send(message: string) {
-    this.socket.send(message);
-  }
-
+    // sendName() {
+    //     this.stompClient.send("/app/player", {}, JSON.stringify({ 'message': 'jean' }));
+    // }
 }
 

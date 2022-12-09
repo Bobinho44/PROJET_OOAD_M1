@@ -25,7 +25,7 @@
   </div>
   <div class="map col-span-2">
     <section class="hexagon-gallery">
-      <div *ngFor="let tile of tilesList; index as i" class="hex"><img (src)="tilesList"></div>
+      <div *ngFor="let tile of tilesList; index as i" class="hex"><img  [src]="getRandomUrl(i)"/></div>
     </section>
   </div>
 </div>

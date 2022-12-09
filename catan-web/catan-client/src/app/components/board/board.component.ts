@@ -5,7 +5,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent {
-  tilesList: any[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+  //get url from assets
+  tilesList: String[] = ["assets/tiles/clay.png",
+    "assets/tiles/clay.png",
+    "assets/tiles/clay.png",
+    "assets/tiles/desert.png",
+    "assets/tiles/forest.png",
+    "assets/tiles/forest.png",
+    "assets/tiles/forest.png",
+    "assets/tiles/forest.png",
+    "assets/tiles/montain.png",
+    "assets/tiles/montain.png",
+    "assets/tiles/montain.png",
+    "assets/tiles/sheep.png",
+    "assets/tiles/sheep.png",
+    "assets/tiles/sheep.png",
+    "assets/tiles/sheep.png",
+    "assets/tiles/wheat.png",
+    "assets/tiles/wheat.png",
+    "assets/tiles/wheat.png",
+    "assets/tiles/wheat.png",
+  ]
+
 
 
   oninit() {
@@ -16,8 +37,8 @@ export class BoardComponent {
   }
 
   //function to return random url from tiles
-  getRandomUrl() {
-    //TODO websocket get tableau of tiles
+  getRandomUrl(i: number) {
+    return this.tilesList[i];
   }
 
 }
