@@ -30,10 +30,6 @@ export class BoardComponent {
 
 
   oninit() {
-    //get random images url from assets
-    //set images url to items
-    console.log('getRandomUrl');
-
   }
 
   //function to return random url from tiles
@@ -41,4 +37,46 @@ export class BoardComponent {
     return this.tilesList[i];
   }
 
+  moveThief() {
+
+  }
+
+  stealCardFromPlayer() {
+
+  }
+
+  discardHalfCards() {
+
+  }
+
+  buildRoad() {
+  }
+
+  buildColony() {
+
+  }
+
+  buildCity() {
+
+  }
+
+  buyDevelopmentCard() {
+
+  }
+
+  playDevelopmentCard() {
+
+  }
+
+  tradeWithPlayer() {
+
+  }
+
+  tradeWithBank() {
+
+  }
+
+  finishTheTour() {
+
+  }
 }

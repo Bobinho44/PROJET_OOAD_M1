@@ -28,4 +28,19 @@
       <div *ngFor="let tile of tilesList; index as i" class="hex"><img  [src]="getRandomUrl(i)"/></div>
     </section>
   </div>
+
+  <div class="button">
+    <!-- Button for function in board ts -->
+    <button class="btn btn-blue" (click)="moveThief()">Move Thief</button>
+    <button class="btn btn-blue" (click)="stealCardFromPlayer()">Steal Card From Player</button>
+    <button class="btn btn-blue"(click)="discardHalfCards()">Discard Half Cards</button>
+    <button class="btn btn-blue" (click)="buildRoad()">Build Road</button>
+    <button class="btn btn-blue" (click)="buildColony()">Build Colony</button>
+    <button class="btn btn-blue" (click)="buildCity()">Build City</button>
+    <button class="btn btn-blue" (click)="buyDevelopmentCard()">Buy Dev Card</button>
+    <button class="btn btn-blue" (click)="playDevelopmentCard()">Play Dev Card</button>
+    <button class="btn btn-blue" (click)="tradeWithPlayer()">Trade with player</button>
+    <button class="btn btn-blue" (click)="tradeWithBank()">Trade with bank</button> 
+    <button class="btn btn-blue" (click)="finishTheTour()">End Turn</button>
+  </div>
 </div>
