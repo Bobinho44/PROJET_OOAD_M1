@@ -4,6 +4,89 @@ img {
   display: block;
   object-fit: cover;
 }
+/********************/
+/** Partie du menu **/
+
+.joli_menu {
+  color: rgb(17 24 39);
+  text-transform: capitalize;
+}
+
+.text_menu {
+  color: rgb(243 244 246);
+}
+
+/***************************************************/
+/** Partie des mains et scores des autres joueurs **/
+
+.roster {
+  height: 195px;
+  width: calc(var(--width-body) * 0.05);
+  background-color: rgb(243, 226, 138);
+}
+
+.player-roster-list {
+  margin: 0px;
+  padding: 2px;
+}
+
+.player-roster.current-player {
+  border-right: 4px solid black;
+  border-left: 4px solid black;
+}
+
+.player-roster {
+  display: block;
+  left: 0px;
+  right: 0px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 2px;
+  background-color:red;
+  position: relative;
+}
+.player-roster .points {
+  right: 15px;
+  top: 2px;
+  position: absolute;
+  border-radius: 5px;
+
+}
+.player-roster .points::after {
+  content: " points";
+}
+
+.roster-card-bank {
+  margin-left: 20px;
+}
+
+.roster-card-stack {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  margin-right: 20px;
+}
+
+.roster-card {
+  display: block;
+  height: 30px;
+  width: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  float:left;
+  margin-left: -15px;
+  background-color: rgb(231, 222, 206);
+}
+
+.clear { clear: both; }
+
+
+.red { background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); }
+.white { background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); }
+.blue { background: linear-gradient(to bottom, #49c0f0 0%,#2cafe3 100%); }
+
+/***********************************/
+/** Partie du plateau en hexagone **/
 
 .hexagon-gallery {
   margin: auto;
@@ -120,22 +203,9 @@ img {
 .hex:nth-child(18){
   grid-row-start: 5;
   grid-column: 5 / span 2;
-} 
+}
 
 .hex:nth-child(19){
   grid-row-start: 5;
   grid-column: 7 / span 2;
-} 
-
-  /* .main{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .map{
-    grid-column: 2;
-  }
-
-  .menu{
-    grid-column: 1;
-  } */
+}

@@ -1,29 +1,111 @@
 <div class="grid grid-cols-3 ">
   <div class="menu col-span-1 rounded-lg bg-stone-300">
-    <h2>Mon joli Menu</h2>
-    <p>couleur du jouerur : valeur bidon</p>
-    <p>ressources:
-      <br>
-      brick,
-      <br>
-      ore,
-      <br>
-      sheep,
-      <br>
-      wheat,
-      <br>
+    <h2 class="joli_menu">Mon joli Menu</h2>
+    <p class="text_menu">Couleur du joueur : valeur bidon</p>
+    <p class="text_menu">Ressources:
+      <br class="brick_card">
+      brick
+      <br class="ore_card">
+      ore
+      <br class="sheep_card">
+      sheep
+      <br class="wheat_card">
+      wheat
+      <br class="wood_card">
       wood
     </p>
-    <p>Cartes développement: </p>
-    <p>Points de victoire: </p>
-    <p>Route disponibles: </p>
-    <p>Colonies disponible: </p>
-    <p>Villes disponibles: </p>
-    <p>Fiches spéciales: </p>
+    <p class="text_menu">Cartes développement:</p>
+    <p class="text_menu">Points de victoire: </p>
+    <p class="text_menu">Route disponibles: </p>
+    <p class="text_menu">Colonies disponible: </p>
+    <p class="text_menu">Villes disponibles: </p>
+    <p class="text_menu pb-10">Fiches spéciales: </p>
+
+    <!-- Partie scores des joueurs -->
+
+    <div class="roster">
+      <ul class="player-roster-list">
+
+        <li class="player-roster red">
+          Allen
+          <div class='points'>5</div>
+
+          <div class='roster-card-bank'>
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+          </div>
+          <div class='clear'></div>
+        </li>
+
+
+        <li class="player-roster white current-player">
+          Chaz
+          <div class='points'>5</div>
+          <div class='roster-card-bank'>
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+          </div>
+          <div class='clear'></div>
+        </li>
+
+        <li class="player-roster blue">
+          Eric
+          <div class='points'>5</div>
+          <div class='roster-card-bank'>
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+              <li class='roster-card'></li>
+            </ul>
+
+            <ul class='roster-card-stack'>
+              <li class='roster-card'></li>
+            </ul>
+
+
+
+          </div>
+          <div class='clear'></div>
+        </li>
+
+      </ul>
+
+    </div>
 
 
   </div>
-  <div class="map col-span-2">
+
+<div class="map col-span-2">
     <section class="hexagon-gallery">
       <div *ngFor="let tile of tilesList; index as i" class="hex"><img [src]="getRandomUrl(i)" /></div>
     </section>
