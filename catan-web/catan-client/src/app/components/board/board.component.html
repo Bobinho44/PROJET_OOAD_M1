@@ -4,15 +4,15 @@
     <p>couleur du jouerur : valeur bidon</p>
     <p>ressources:
       <br>
-        brick,
+      brick,
       <br>
-        ore,
+      ore,
       <br>
-        sheep,
+      sheep,
       <br>
-        wheat,
+      wheat,
       <br>
-        wood
+      wood
     </p>
     <p>Cartes développement: </p>
     <p>Points de victoire: </p>
@@ -25,22 +25,55 @@
   </div>
   <div class="map col-span-2">
     <section class="hexagon-gallery">
-      <div *ngFor="let tile of tilesList; index as i" class="hex"><img  [src]="getRandomUrl(i)"/></div>
+      <div *ngFor="let tile of tilesList; index as i" class="hex"><img [src]="getRandomUrl(i)" /></div>
     </section>
   </div>
 
-  <div class="button">
+  <div class="boutton ">
     <!-- Button for function in board ts -->
-    <button class="btn btn-blue" (click)="moveThief()">Move Thief</button>
-    <button class="btn btn-blue" (click)="stealCardFromPlayer()">Steal Card From Player</button>
-    <button class="btn btn-blue"(click)="discardHalfCards()">Discard Half Cards</button>
-    <button class="btn btn-blue" (click)="buildRoad()">Build Road</button>
-    <button class="btn btn-blue" (click)="buildColony()">Build Colony</button>
-    <button class="btn btn-blue" (click)="buildCity()">Build City</button>
-    <button class="btn btn-blue" (click)="buyDevelopmentCard()">Buy Dev Card</button>
-    <button class="btn btn-blue" (click)="playDevelopmentCard()">Play Dev Card</button>
-    <button class="btn btn-blue" (click)="tradeWithPlayer()">Trade with player</button>
-    <button class="btn btn-blue" (click)="tradeWithBank()">Trade with bank</button> 
-    <button class="btn btn-blue" (click)="finishTheTour()">End Turn</button>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="moveThief()">Move Thief</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="stealCardFromPlayer()">Steal Card From Player</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="discardHalfCards()">Discard Half Cards</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="buildRoad()">Build Road</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="buildColony()">Build Colony</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="buildCity()">Build City</button>
+    <br>
+    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="buyDevelopmentCard()">Buy Dev Card</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="playDevelopmentCard()">Play Dev Card</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="tradeWithPlayer()">Trade with player</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="tradeWithBank()">Trade with bank</button>
+    <br>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="finishTheTour()">End Turn</button>
+
   </div>
+
+
 </div>
