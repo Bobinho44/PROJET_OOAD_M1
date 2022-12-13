@@ -26,9 +26,9 @@
     <div class="roster">
       <ul class="player-roster-list">
 
-        <li class="player-roster red">
+        <li class="player-roster px-3 bg-red-500 rounded">
           Allen
-          <div class='points'>5</div>
+          <p>5 points</p>
 
           <div class='roster-card-bank'>
             <ul class='roster-card-stack'>
@@ -56,47 +56,7 @@
           </div>
           <div class='clear'></div>
         </li>
-
-
-        <li class="player-roster white current-player">
-          Chaz
-          <div class='points'>5</div>
-          <div class='roster-card-bank'>
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
-
-          </div>
-          <div class='clear'></div>
-        </li>
-
-        <li class="player-roster blue">
-          Eric
-          <div class='points'>5</div>
-          <div class='roster-card-bank'>
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
-
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-            </ul>
-
-
-
-          </div>
-          <div class='clear'></div>
-        </li>
+        <div class='clear'></div>
 
       </ul>
 
@@ -105,7 +65,7 @@
 
   </div>
 
-<div class="map col-span-2">
+  <div class="map col-span-2">
     <section class="hexagon-gallery">
       <div *ngFor="let tile of tilesList; index as i" class="hex"><img [src]="getRandomUrl(i)" /></div>
     </section>
@@ -137,7 +97,9 @@
       class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       (click)="buildCity()">Build City</button>
     <br>
-    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="buyDevelopmentCard()">Buy Dev Card</button>
+    <button
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      (click)="buyDevelopmentCard()">Buy Dev Card</button>
     <br>
     <button
       class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

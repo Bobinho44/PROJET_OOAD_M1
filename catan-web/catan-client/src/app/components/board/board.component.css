@@ -4,6 +4,7 @@ img {
   display: block;
   object-fit: cover;
 }
+
 /********************/
 /** Partie du menu **/
 
@@ -12,49 +13,8 @@ img {
   text-transform: capitalize;
 }
 
-.text_menu {
-  color: rgb(243 244 246);
-}
-
 /***************************************************/
 /** Partie des mains et scores des autres joueurs **/
-
-.roster {
-  height: 195px;
-  width: calc(var(--width-body) * 0.05);
-  background-color: rgb(243, 226, 138);
-}
-
-.player-roster-list {
-  margin: 0px;
-  padding: 2px;
-}
-
-.player-roster.current-player {
-  border-right: 4px solid black;
-  border-left: 4px solid black;
-}
-
-.player-roster {
-  display: block;
-  left: 0px;
-  right: 0px;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 2px;
-  background-color:red;
-  position: relative;
-}
-.player-roster .points {
-  right: 15px;
-  top: 2px;
-  position: absolute;
-  border-radius: 5px;
-
-}
-.player-roster .points::after {
-  content: " points";
-}
 
 .roster-card-bank {
   margin-left: 20px;
@@ -73,17 +33,27 @@ img {
   width: 20px;
   border: 1px solid black;
   border-radius: 5px;
-  float:left;
+  float: left;
   margin-left: -15px;
   background-color: rgb(231, 222, 206);
 }
 
-.clear { clear: both; }
+.clear {
+  clear: both;
+}
 
 
-.red { background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); }
-.white { background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); }
-.blue { background: linear-gradient(to bottom, #49c0f0 0%,#2cafe3 100%); }
+.red {
+  background: linear-gradient(to bottom, #ff3019 0%, #cf0404 100%);
+}
+
+.white {
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+}
+
+.blue {
+  background: linear-gradient(to bottom, #49c0f0 0%, #2cafe3 100%);
+}
 
 /***********************************/
 /** Partie du plateau en hexagone **/
@@ -158,6 +128,7 @@ img {
   grid-row-start: 3;
   grid-column: 5 / span 2;
 }
+
 /* loop for .hex:nth-child
 @each $i from 1 through 19 {
   .hex:nth-child(#{$i}) {
@@ -165,47 +136,47 @@ img {
     grid-column: 6 / span 2;
   }
 } */
-.hex:nth-child(11){
+.hex:nth-child(11) {
   grid-row-start: 3;
   grid-column: 7 / span 2;
 }
 
-.hex:nth-child(12){
+.hex:nth-child(12) {
   grid-row-start: 3;
   grid-column: 9 / span 2;
 }
 
-.hex:nth-child(13){
+.hex:nth-child(13) {
   grid-row-start: 4;
   grid-column: 2 / span 2;
 }
 
-.hex:nth-child(14){
+.hex:nth-child(14) {
   grid-row-start: 4;
   grid-column: 4 / span 2;
 }
 
-.hex:nth-child(15){
+.hex:nth-child(15) {
   grid-row-start: 4;
   grid-column: 6 / span 2;
 }
 
-.hex:nth-child(16){
+.hex:nth-child(16) {
   grid-row-start: 4;
   grid-column: 8 / span 2;
 }
 
-.hex:nth-child(17){
+.hex:nth-child(17) {
   grid-row-start: 5;
   grid-column: 3 / span 2;
 }
 
-.hex:nth-child(18){
+.hex:nth-child(18) {
   grid-row-start: 5;
   grid-column: 5 / span 2;
 }
 
-.hex:nth-child(19){
+.hex:nth-child(19) {
   grid-row-start: 5;
   grid-column: 7 / span 2;
 }
