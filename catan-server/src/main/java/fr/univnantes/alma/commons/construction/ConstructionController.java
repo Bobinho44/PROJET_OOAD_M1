@@ -1,18 +1,25 @@
 package fr.univnantes.alma.commons.construction;
 
 import fr.univnantes.alma.commons.annotation.ConstructionCost;
+import fr.univnantes.alma.commons.construction.constructableArea.ConstructableAreaImpl;
+import fr.univnantes.alma.commons.construction.type.building.colony.constructStrategy.ColonyConstructStrategy;
+import fr.univnantes.alma.commons.construction.type.building.colony.lootStrategy.ColonyLootStrategy;
 import fr.univnantes.alma.commons.resource.ResourceImpl;
+import fr.univnantes.alma.commons.territory.type.PositionConstructableArea;
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
+import fr.univnantes.alma.commons.utils.stream.IndexedStream;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.construction.ConstructionManager;
 import fr.univnantes.alma.core.construction.constructStrategy.ConstructStrategy;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.territory.Territory;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ConstructionController implements ConstructionManager {
 
@@ -24,7 +31,9 @@ public class ConstructionController implements ConstructionManager {
     /**
      * Creates a new construction manager
      */
-    public ConstructionController() {
+    public ConstructionController(@NonNull List<Territory> territories) {
+        
+
         //TODO createConstructableArea
     }
 

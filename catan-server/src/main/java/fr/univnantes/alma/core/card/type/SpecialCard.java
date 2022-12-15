@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.card.type;
 
+import fr.univnantes.alma.commons.game.GameController;
 import fr.univnantes.alma.core.card.Card;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
@@ -51,7 +52,7 @@ public abstract class SpecialCard implements Card {
      * {@inheritDoc}
      */
     @Override
-    public void useEffect(@NonNull Player player) {}
+    public void useEffect(@NonNull GameController gameController, @NonNull Player player) {}
 
     /**
      * {@inheritDoc}
@@ -59,11 +60,7 @@ public abstract class SpecialCard implements Card {
     @Override
     public void getEffect(@NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
-
-        /*
-        TODO:
-            - give 1 victory point
-         */
+        player.addVictoryPoints(2);
     }
 
     /**
@@ -73,9 +70,6 @@ public abstract class SpecialCard implements Card {
     public void looseEffect(@NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        /*
-        TODO:
-            - remove 1 victory point
-         */
+        player.addVictoryPoints(2);
     }
 }

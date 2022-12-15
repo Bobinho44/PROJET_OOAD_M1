@@ -1,6 +1,7 @@
 package fr.univnantes.alma.commons.card.development.progress.cards;
 
 import fr.univnantes.alma.commons.annotation.CardAmount;
+import fr.univnantes.alma.commons.game.GameController;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import org.springframework.lang.NonNull;
@@ -24,7 +25,7 @@ public class RoadBuildingCard extends ProgressCard {
      * {@inheritDoc}
      */
     @Override
-    public void useEffect(@NonNull Player player) {
+    public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
         /*

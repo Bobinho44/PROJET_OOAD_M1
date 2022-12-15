@@ -1,9 +1,8 @@
 package fr.univnantes.alma.commons.territory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import fr.univnantes.alma.commons.territory.type.PositionConstructableArea;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
@@ -18,7 +17,7 @@ public class TerritoryImpl implements Territory {
     /**
      * Fields
      */
-    private final List<ConstructableArea<Building>> neighbourBuildings = new ArrayList<>();
+    private final Map<PositionConstructableArea,ConstructableArea<Building>> neighbourBuildings = new HashMap<>();
     private final List<ConstructableArea<Road>> neighbourRoads = new ArrayList<>();
     private final Resource resource;
     private Token token;
@@ -38,7 +37,7 @@ public class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<ConstructableArea<Building>> getNeighbourBuildings() {
+    public @NonNull Map<PositionConstructableArea,ConstructableArea<Building>> getNeighbourBuildings() {
         return neighbourBuildings;
     }
 
@@ -54,8 +53,8 @@ public class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public void addNeighbourBuilding(@NonNull ConstructableArea<Building> building) {
-        neighbourBuildings.add(building);
+    public void addNeighbourBuilding(@NonNull ConstructableArea<Building> building,PositionConstructableArea pca) {
+        neighbourBuildings.put(pca,building);
     }
 
     /**

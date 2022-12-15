@@ -196,4 +196,12 @@ public class PlayerController implements PlayerManager {
         player.removeVictoryPoints(amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Collection<Player> getAllPlayers(){
+        return players.values();
+    }
+
 }

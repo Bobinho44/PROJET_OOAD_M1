@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.card.development.victoryPoint;
 
 import fr.univnantes.alma.commons.annotation.DevelopmentCardCost;
 import fr.univnantes.alma.commons.annotation.ResourceInformation;
+import fr.univnantes.alma.commons.game.GameController;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
@@ -29,13 +30,10 @@ public abstract class VictoryPointCard extends DevelopmentCard {
      * {@inheritDoc}
      */
     @Override
-    public void useEffect(@NonNull Player player) {
+    public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        /*
-        TODO:
-            - give a victory point
-         */
+        player.addVictoryPoints(1);
     }
 
 }

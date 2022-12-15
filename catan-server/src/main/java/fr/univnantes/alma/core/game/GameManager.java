@@ -2,6 +2,7 @@ package fr.univnantes.alma.core.game;
 
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
+import fr.univnantes.alma.core.ressource.Resource;
 import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
@@ -90,4 +91,29 @@ public interface GameManager {
 
     void giveLoot();
 
+    /**
+     * Take all the resources of type given, exept from one player given
+     *
+     * @param player from who we don't take the resource
+     * @return all the resources from the other player
+     */
+    Resource takeResourcesAllPlayer(Player player, Resource resource);
+
+    /**
+     * choose another player
+     * @return Player
+     */
+    Player pickOtherPlayer();
+
+    /**
+     * choose a resource
+     * @return Resource
+     */
+    Resource pickResource();
+
+    /**
+     * choose a resource from what's left in bank
+     * @return resource
+     */
+    Resource pickResourceBank();
 }

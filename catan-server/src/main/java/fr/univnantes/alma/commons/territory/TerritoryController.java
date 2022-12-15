@@ -61,6 +61,14 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
+    public @NonNull List<Territory> getTerritories() {
+        return new ArrayList<>(territories.values());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public @NonNull Optional<Territory> getTerritory(@NonNull UUID uuid) {
         return Optional.ofNullable(territories.get(uuid));
     }
@@ -91,7 +99,7 @@ public class TerritoryController implements TerritoryManager {
                 .filter(territory -> territory.getToken().getNumber() == number)
                 .filter(Territory::hasResource)
                 .filter(territory -> !territory.hasThief())
-                .map(territory -> territory.getNeighbourBuildings().stream()
+                .map(territory -> territory.getNeighbourBuildings().values().stream()
                         .filter(area -> area.getConstruction().isPresent())
                         .map(area -> IntStream.range(0, area.getLootAmount())
                                 .mapToObj(i -> Map.entry(area.getConstruction().get().getOwner(), territory.getResource().get()))

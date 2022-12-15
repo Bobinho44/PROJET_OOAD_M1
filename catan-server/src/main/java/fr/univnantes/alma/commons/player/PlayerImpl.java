@@ -1,13 +1,18 @@
 package fr.univnantes.alma.commons.player;
 
+import fr.univnantes.alma.commons.resource.ResourceImpl;
+import fr.univnantes.alma.commons.resource.type.*;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerImpl implements Player {
 
@@ -18,6 +23,18 @@ public class PlayerImpl implements Player {
     private final List<Resource> resources = new ArrayList<>();
     private final List<DevelopmentCard> developmentCards = new ArrayList<>();
     private int victoryPoints;
+    private Map<Resource,Integer> ruleTradeWithBank = new HashMap<>();
+
+    /**
+     * Create a new player
+     */
+    public PlayerImpl(){
+        ruleTradeWithBank.put(new ClayResource(),4);
+        ruleTradeWithBank.put(new OreResource(),4);
+        ruleTradeWithBank.put(new WheatResource(),4);
+        ruleTradeWithBank.put(new WoodResource(),4);
+        ruleTradeWithBank.put(new WoolResource(),4);
+    }
 
     /**
      * {@inheritDoc}
@@ -64,7 +81,25 @@ public class PlayerImpl implements Player {
      */
     @Override
     public void removeResource(@NonNull Resource resource) {
-        resources.remove(resource);
+        resources.stream()
+                .filter(playerResource -> playerResource.isSimilar(resource) && playerResource.getAmount() >= resource.getAmount())
+                        .forEach(playerResource -> {
+                            playerResource.decreaseAmount(resource.getAmount());
+                            if (playerResource.getAmount() == 0) {
+                                resources.remove(resource);
+                            }
+                        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Resource removeAllResource(@NonNull Resource resource){
+        return resources.stream()
+                .filter(playerResource -> playerResource.isSimilar(resource))
+                .findFirst()
+                .map(playerResource -> resources.remove(resources.indexOf(playerResource)))
+                .orElse(null);
     }
 
     /**
@@ -113,6 +148,19 @@ public class PlayerImpl implements Player {
     @Override
     public void removeVictoryPoints(int amount) {
         victoryPoints -= amount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changeRuleTradeWithBank(@Nullable Resource resource, int ratio){
+        if(resource == null) {
+            ruleTradeWithBank.replaceAll((r, v) -> ratio);
+        }
+        else{
+            ruleTradeWithBank.replace(resource,ratio);
+        }
     }
 
 }

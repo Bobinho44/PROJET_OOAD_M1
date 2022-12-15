@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.card;
 
+import fr.univnantes.alma.commons.game.GameController;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
@@ -13,7 +14,7 @@ public interface Card {
      *
      * @param player the affected player
      */
-    void useEffect(@NonNull Player player);
+    void useEffect(@NonNull GameController gameController, @NonNull Player player);
 
     /**
      * Applies the get effect of the card

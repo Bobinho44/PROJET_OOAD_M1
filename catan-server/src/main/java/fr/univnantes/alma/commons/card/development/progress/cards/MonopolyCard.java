@@ -1,10 +1,16 @@
 package fr.univnantes.alma.commons.card.development.progress.cards;
 
 import fr.univnantes.alma.commons.annotation.CardAmount;
+import fr.univnantes.alma.commons.game.GameController;
+import fr.univnantes.alma.commons.trade.TradeImpl;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
+import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -24,13 +30,18 @@ public class MonopolyCard extends ProgressCard {
      * {@inheritDoc}
      */
     @Override
-    public void useEffect(@NonNull Player player) {
+    public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
+        Resource resource = gameController.pickResource();
+        gameController.takeResourcesAllPlayer(player,resource);
 
-        /*
-        TODO:
-            - take all resources of a chosen type from all players
-         */
+        for (Resource r: player.getResources()) {
+            if(r.isSimilar(resource)){
+                r.increaseAmount(resource.getAmount());
+                return;
+            }
+        }
+        player.addResource(resource);
     }
 
 }

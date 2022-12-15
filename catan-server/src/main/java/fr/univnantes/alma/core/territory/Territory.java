@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.territory;
 
+import fr.univnantes.alma.commons.territory.type.PositionConstructableArea;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
@@ -8,6 +9,7 @@ import fr.univnantes.alma.core.token.Token;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface Territory {
@@ -17,7 +19,8 @@ public interface Territory {
      *
      * @return all neighbour buildings
      */
-    @NonNull List<ConstructableArea<Building>> getNeighbourBuildings();
+    @NonNull
+    Map<PositionConstructableArea,ConstructableArea<Building>> getNeighbourBuildings();
 
     /**
      * Checks if the territory has neighbour buildings
@@ -31,7 +34,7 @@ public interface Territory {
      *
      * @param building the building (constructableArea with a building)
      */
-    void addNeighbourBuilding(@NonNull ConstructableArea<Building> building);
+    void addNeighbourBuilding(@NonNull ConstructableArea<Building> building,PositionConstructableArea pca);
 
     /**
      * Removes a neighbour building from the territory

@@ -9,6 +9,13 @@ import java.util.*;
 public interface TerritoryManager {
 
     /**
+     * Gets all territories
+     *
+     * @return all territories
+     */
+    @NonNull List<Territory> getTerritories();
+
+    /**
      * Gets the territory
      *
      * @param uuid the territory uuid

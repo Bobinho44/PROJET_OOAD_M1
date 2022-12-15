@@ -4,12 +4,14 @@ import fr.univnantes.alma.commons.card.CardController;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import fr.univnantes.alma.commons.construction.ConstructionController;
 import fr.univnantes.alma.commons.construction.type.road.RoadImpl;
+import fr.univnantes.alma.commons.resource.ResourceImpl;
 import fr.univnantes.alma.commons.trade.TradeController;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.dice.DiceImpl;
 import fr.univnantes.alma.commons.player.PlayerController;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.commons.resource.ResourceController;
+import fr.univnantes.alma.core.ressource.Resource;
 import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.commons.territory.TerritoryController;
 import fr.univnantes.alma.commons.construction.type.building.city.City;
@@ -26,14 +28,13 @@ import fr.univnantes.alma.core.ressource.ResourceManager;
 import fr.univnantes.alma.core.territory.TerritoryManager;
 import fr.univnantes.alma.core.trade.Trade;
 import fr.univnantes.alma.core.trade.TradeManager;
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.lang.NonNull;
-
-import java.util.*;
 
 public class GameController implements GameManager {
 
     private final TerritoryManager territoryManager = new TerritoryController();
-    private final ConstructionManager constructionManager = new ConstructionController();
+    private final ConstructionManager constructionManager = new ConstructionController(territoryManager.getTerritories());
     private final PlayerManager playerManager = new PlayerController();
     private final CardManager cardManager = new CardController();
     private final ResourceManager resourceManager = new ResourceController();
@@ -88,6 +89,7 @@ public class GameController implements GameManager {
         constructionManager.construct(buildableRoadArea, road);
         playerManager.removeResources(player, constructionManager.getConstructionCost(RoadImpl.class));
         playerManager.removeConstruction(player, road);
+
     }
 
     /**
@@ -108,6 +110,8 @@ public class GameController implements GameManager {
         constructionManager.construct(buildableBuildingArea, colony);
         playerManager.removeResources(player, constructionManager.getConstructionCost(Colony.class));
         playerManager.removeConstruction(player, colony);
+        if(buildableBuildingArea.hasDock())
+            player.changeRuleTradeWithBank(buildableBuildingArea.getDock().get().getResource(), buildableBuildingArea.getDock().get().getRatio());
     }
 
     /**
@@ -157,7 +161,7 @@ public class GameController implements GameManager {
         }
 
         playerManager.removeDevelopmentCard(player, developmentCard);
-        developmentCard.useEffect(player);
+        developmentCard.useEffect(this,player);
     }
 
     /**
@@ -200,6 +204,51 @@ public class GameController implements GameManager {
             playerManager.addResource(loot.getKey(), loot.getValue());
             resourceManager.removeResource(loot.getValue(), 1);
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Resource takeResourcesAllPlayer(@NonNull Player player,@NonNull Resource resource){
+        resource.amount(0);
+        Resource resourceGiven;
+        for (Player p: playerManager.getAllPlayers()) {
+            if(p != player) {
+                resourceGiven = p.removeAllResource(resource);
+                if (resourceGiven != null) {
+                    resource.increaseAmount(resourceGiven.getAmount());
+                }
+            }
+        }
+        return resource;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Player pickOtherPlayer(){
+        //TODO: renvoie un autre joueur choisi par le joueur
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Resource pickResource(){
+        //TODO: renvoie une ressource choisi par le joueur
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Resource pickResourceBank(){
+        //TODO: renvoie une ressource qui est dans la bank choisi par le joueur
+        return null;
     }
 
 }

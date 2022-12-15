@@ -5,6 +5,7 @@ import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -125,6 +126,8 @@ public interface PlayerManager {
      * @param developmentCard the development card
      * @return true if the player has the development card, false otherwise
      */
+
+
     boolean hasDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard);
 
     /**
@@ -175,5 +178,12 @@ public interface PlayerManager {
      * @param amount the amount
      */
     void removeVictoryPoints(@NonNull Player player, int amount);
+
+    /**
+     * Get all the players
+     *
+     * @return all the players
+     */
+    Collection<Player> getAllPlayers();
 
 }
