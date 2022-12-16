@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { WebsocketService } from 'src/app/service/websocket.service';
 import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/service/websocket.service';
 
 @Component({
   selector: 'app-lobby',
@@ -16,8 +16,11 @@ export class LobbyComponent {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
   });
+  websocket!: WebsocketService;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, websocket: WebsocketService) {
+    this.websocket = websocket;
+  }
 
   updateValidName() {
     this.validName = (this.name.target as HTMLInputElement).value.length > 0;
@@ -26,8 +29,8 @@ export class LobbyComponent {
   updateJeu() {
     console.log(this.profileForm.value);
     // if (this.validName) {
-      //redirect to board page with the name of the player
-      this.router.navigate(['/board']);
+    //redirect to board page with the name of the player
+    this.router.navigate(['/board']);
     // }
   }
 

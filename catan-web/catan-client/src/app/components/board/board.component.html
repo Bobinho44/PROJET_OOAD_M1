@@ -1,122 +1,132 @@
-<div class="grid grid-cols-3">
-  <div class="menu col-span-1 rounded-lg bg-stone-300">
-    <h2 class="joli_menu">Mon joli Menu</h2>
-    <p class="text_menu">Couleur du joueur : valeur bidon</p>
-    <p class="text_menu">Ressources:
-      <br class="brick_card">
-      brick
-      <br class="ore_card">
-      ore
-      <br class="sheep_card">
-      sheep
-      <br class="wheat_card">
-      wheat
-      <br class="wood_card">
-      wood
-    </p>
-    <p class="text_menu">Cartes développement:</p>
-    <p class="text_menu">Points de victoire: </p>
-    <p class="text_menu">Route disponibles: </p>
-    <p class="text_menu">Colonies disponible: </p>
-    <p class="text_menu">Villes disponibles: </p>
-    <p class="text_menu pb-10">Fiches spéciales: </p>
+<div *ngIf="waitingScreen">
+  <!-- <svg class="motion-safe:animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+     ...
+  </svg> -->
+  <div class="bg-teal-500 h-20 w-20 rounded-full animate-pulse mx-auto"></div>
+<p class="text-center text-grey text-2xl">Waiting for other players to join...</p>
 
-    <!-- Partie scores des joueurs -->
+</div>
+<div *ngIf="!waitingScreen">
+  <div class="grid grid-cols-3">
+    <div class="menu col-span-1 rounded-lg bg-stone-300">
+      <h2 class="joli_menu">Mon joli Menu</h2>
+      <p class="text_menu">Couleur du joueur : valeur bidon</p>
+      <p class="text_menu">Ressources:
+        <br class="brick_card">
+        brick
+        <br class="ore_card">
+        ore
+        <br class="sheep_card">
+        sheep
+        <br class="wheat_card">
+        wheat
+        <br class="wood_card">
+        wood
+      </p>
+      <p class="text_menu">Cartes développement:</p>
+      <p class="text_menu">Points de victoire: </p>
+      <p class="text_menu">Route disponibles: </p>
+      <p class="text_menu">Colonies disponible: </p>
+      <p class="text_menu">Villes disponibles: </p>
+      <p class="text_menu pb-10">Fiches spéciales: </p>
 
-    <div class="roster pb-10">
-      <ul class="player-roster-list">
+      <!-- Partie scores des joueurs -->
 
-        <li class="player-roster px-3 bg-red-500 rounded">
-          Allen
-          <p>5 points</p>
+      <div class="roster pb-10">
+        <ul class="player-roster-list">
 
-          <div class='roster-card-bank'>
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
+          <li class="player-roster px-3 bg-red-500 rounded">
+            Allen
+            <p>5 points</p>
 
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
+            <div class='roster-card-bank'>
+              <ul class='roster-card-stack'>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+              </ul>
 
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
+              <ul class='roster-card-stack'>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+              </ul>
 
-            <ul class='roster-card-stack'>
-              <li class='roster-card'></li>
-              <li class='roster-card'></li>
-            </ul>
+              <ul class='roster-card-stack'>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+              </ul>
 
-          </div>
+              <ul class='roster-card-stack'>
+                <li class='roster-card'></li>
+                <li class='roster-card'></li>
+              </ul>
+
+            </div>
+            <div class='clear'></div>
+          </li>
           <div class='clear'></div>
-        </li>
-        <div class='clear'></div>
 
-      </ul>
+        </ul>
+
+      </div>
+
+      <div class="boutton ">
+        <!-- Button for function in board ts -->
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="moveThief()">Move Thief</button>
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="stealCardFromPlayer()">Steal Card From Player</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="discardHalfCards()">Discard Half Cards</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="buildRoad()">Build Road</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="buildColony()">Build Colony</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="buildCity()">Build City</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="buyDevelopmentCard()">Buy Dev Card</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="playDevelopmentCard()">Play Dev Card</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="tradeWithPlayer()">Trade with player</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="tradeWithBank()">Trade with bank</button>
+
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          (click)="finishTheTour()">End Turn</button>
+
+      </div>
 
     </div>
 
-    <div class="boutton ">
-      <!-- Button for function in board ts -->
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="moveThief()">Move Thief</button>
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="stealCardFromPlayer()">Steal Card From Player</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="discardHalfCards()">Discard Half Cards</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="buildRoad()">Build Road</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="buildColony()">Build Colony</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="buildCity()">Build City</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="buyDevelopmentCard()">Buy Dev Card</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="playDevelopmentCard()">Play Dev Card</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="tradeWithPlayer()">Trade with player</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="tradeWithBank()">Trade with bank</button>
-
-      <button
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="finishTheTour()">End Turn</button>
-
+    <div class="map col-span-2">
+      <section class="hexagon-gallery">
+        <div *ngFor="let tile of tilesList; index as i" class="hex"><img [src]="getRandomUrl(i)" /></div>
+      </section>
     </div>
 
+
+
   </div>
-
-  <div class="map col-span-2">
-    <section class="hexagon-gallery">
-      <div *ngFor="let tile of tilesList; index as i" class="hex"><img [src]="getRandomUrl(i)" /></div>
-    </section>
-  </div>
-
-
-
 </div>
