@@ -1,6 +1,5 @@
 package fr.univnantes.alma.core.territory;
 
-import fr.univnantes.alma.commons.territory.type.PositionConstructableArea;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
@@ -20,7 +19,7 @@ public interface Territory {
      * @return all neighbour buildings
      */
     @NonNull
-    Map<PositionConstructableArea,ConstructableArea<Building>> getNeighbourBuildings();
+    List<ConstructableArea<Building>> getNeighbourBuildings();
 
     /**
      * Checks if the territory has neighbour buildings
@@ -34,7 +33,7 @@ public interface Territory {
      *
      * @param building the building (constructableArea with a building)
      */
-    void addNeighbourBuilding(@NonNull ConstructableArea<Building> building,PositionConstructableArea pca);
+    void addNeighbourBuilding(@NonNull ConstructableArea<Building> building);
 
     /**
      * Removes a neighbour building from the territory
