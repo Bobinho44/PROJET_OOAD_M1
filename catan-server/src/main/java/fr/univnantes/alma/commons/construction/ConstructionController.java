@@ -56,12 +56,9 @@ public class ConstructionController implements ConstructionManager {
      */
     @Override
     public <T extends Construction> @NonNull List<Resource> getConstructionCost(@NonNull Class<T> type) {
-        /*return Arrays.stream(type.getAnnotation(ConstructionCost.class).resources())
+        return Arrays.stream(type.getAnnotation(ConstructionCost.class).resources())
                 .map(resource -> new ResourceImpl(resource.name()) {}.amount(resource.amount()))
                 .toList();
-                TODO: DEBUGGER :)
-                */
-        return null;
     }
 
     /**

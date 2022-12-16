@@ -4,6 +4,7 @@ import fr.univnantes.alma.commons.annotation.CardAmount;
 import fr.univnantes.alma.commons.annotation.DevelopmentCardCost;
 import fr.univnantes.alma.commons.annotation.ResourceInformation;
 import fr.univnantes.alma.commons.game.GameController;
+import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import org.springframework.lang.NonNull;
@@ -37,7 +38,20 @@ public class KnightCard extends DevelopmentCard {
 
         gameController.moveThief(gameController.pickTerritory());
         Player playerToSteal = gameController.pickOtherPlayer();
-        player.addResource(playerToSteal.popRandomRessource());
+        player.addResource(playerToSteal.popRandomResource());
+        player.addKnightInArmy(this);
+
+        //test if the player has the biggest army, if so give him the special card
+        for (SpecialCard specialCard : gameController.getSpecialsCards()) {
+            if(specialCard.getName().equals("Most powerful army")){
+                if(specialCard.getOwner() == player)
+                    return;
+                if(specialCard.getOwner().sizeArmy() <= player.sizeArmy()){
+                    specialCard.looseEffect(specialCard.getOwner());
+                    specialCard.getEffect(player);
+                }
+            }
+        }
     }
 
 }
