@@ -42,13 +42,16 @@ public class KnightCard extends DevelopmentCard {
         player.addKnightInArmy(this);
 
         //test if the player has the biggest army, if so give him the special card
-        for (SpecialCard specialCard : gameController.getSpecialsCards()) {
-            if(specialCard.getName().equals("Most powerful army")){
-                if(specialCard.getOwner() == player)
-                    return;
-                if(specialCard.getOwner().sizeArmy() <= player.sizeArmy()){
-                    specialCard.looseEffect(specialCard.getOwner());
-                    specialCard.getEffect(player);
+        if(player.sizeArmy() >= 3){
+            for (SpecialCard specialCard : gameController.getSpecialsCards()) {
+                if(specialCard.getName().equals("Most powerful army")){
+                    if(specialCard.getOwner() == null){
+                        specialCard.getEffect(playerToSteal);
+                    }
+                    if(specialCard.getOwner().sizeArmy() <= player.sizeArmy() && specialCard.getOwner() != player){
+                        specialCard.looseEffect(specialCard.getOwner());
+                        specialCard.getEffect(player);
+                    }
                 }
             }
         }
