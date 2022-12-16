@@ -4,11 +4,11 @@ while (zone mer disponible?)
   :prendre une zone mer aléatoirement; #Lime
   :placer la zone mer;
 endwhile
-while (territoire disponible?) #Red
+while (territoire disponible? #Red)
   :prendre un territoire aléatoirement; #Lime
   :placer le territoire en spirale dans le sens horraire;
 endwhile
-while (jeton disponible?) #Red
+while (jeton disponible? #Red)
   :Placer les jetons dans l’ordre lexicographique en escargot dans le sens horraire; #Lime
 endwhile
 :Placer le voleur sur la case désert; #Red
@@ -17,7 +17,7 @@ while (joueur disponible?)
   :reçoit toutes les pièces de jeu de sa couleur;
   :place une colonie et une route;
 endwhile
-while (joueur disponible?) #Red
+while (joueur disponible? #Red)
   :place une colonie et une route; #Lime
   :place une étoile sur une de ses colonies
   :reçoit pour sa colonie marquée d’une étoile sa première production;

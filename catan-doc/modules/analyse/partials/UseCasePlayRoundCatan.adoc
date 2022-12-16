@@ -21,16 +21,16 @@
 | _Summary_
 
 | Condition de succès
-| _Le joueur finis son tour ou gagne la partie_
+| _Le joueur finit son tour ou gagne la partie_
 
 | Condition d'échec
-| _Le joueur n'a pas finis son tour_
+| _Le joueur n'a pas finit son tour_
 
 | Acteurs principaux:
 | _Le joueur actif_
 
 | Acteurs secondaires
-| _Les autres joueurs_
+| _L'autre joueur_
 
 | Événement déclencheur
 | _La fin du tour du joueur précédent ou le lancement de la partie_
@@ -48,20 +48,21 @@ a|
 - _Le joueur précédent a fini son tour_
 
 | Post-conditions
-| _Le joueur actif a fini son tour ou il a gagné la parite_
+| _Le joueur actif a fini son tour ou il a gagné la partie_
 
 
 | Scénario nominal
 a|
 . _Le joueur actif lance les deux dés_
-. _Pour chaque colonie adjacente à un territoire numéroté par la somme des dès lancés, les joueurs recoivent une ressource associé à ce territoire_
+. _Pour chaque colonie adjacente à un territoire numéroté par la somme des dès lancés, les joueurs recoivent une ressource associée à ce territoire._
 . _Le joueur actif peut:_
- - _Créer une route, payer sa construction et là placer sur un emplacement valide_
- - _Créer une colonie, payer sa construction et là placer sur un emplacement valide_
- - _Créer une ville, payer sa construction et là placer à la place d'une de ses colonies_
+ - _Créer une route, payer sa construction et la placer sur un emplacement valide_
+ - _Créer une colonie, payer sa construction et la placer sur un emplacement valide_
+ - _Créer une ville, payer sa construction et la placer à la place d'une de ses colonies_
  - _Acheter une carte développement_
- - _Jouer une carte développement obtenue dans un des tour précédent_
- - _Echanger des ressources avec les autres joueurs_
+ - _Jouer une carte développement obtenue dans un des tours précédents_
+ - _Négocier des ressources à échanger avec l'autre joueur_
+ - _Echanger des ressources avec l'autre joueur_
  - _Echanger contre la "banque" 4 ressources du même type contre une ressource au choix_
 . _Vérifier si le joueur actif a gagné_
 
@@ -71,14 +72,14 @@ a|
 
 | Alternatives	
 a| 
-- _Le joueur reçoit 2 ressources (au lieu d'une) si il possède une ville et non une colonie adjacente à un territoire_
-- _Si le joueur possède une colonie sur un port, il peut échanger 3 ressources associées à ce port contre une ressource au choix_
-- _Si le joueur possède une ville sur un port, il peut échanger 2 ressources associées à ce port contre une ressource au choix_
-- _Si le joueur obtiens 7 aux dés, tous les joueurs ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l'inférieur), il déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main d'un autre joueur._
+- _Le joueur reçoit 2 ressources (au lieu d'une) si il possède une ville au lieu d'une colonie, qui est elle aussi adjacente à un territoire associée à la ressource_
+- _Si le joueur possède une ville ou une colonie sur un port qui ne demande pas de ressource précise, il peut échanger 3 ressources au choix contre une ressource au choix_
+- _Si le joueur possède une ville ou une colonie sur un port qui demande une ressource précisément, il peut échanger 2 ressources associées à ce port contre une ressource au choix__
+- _Si le joueur obtiens 7 aux dés, tous les joueurs (y compris le joueur actuel) ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l'inférieur). Puis il déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main de l'autre joueur._
 - _Si le voleur est situé sur un territoire associé au résultat des dès, ce territoire ne donne pas de ressource_
-- _Si il n'y a pas assez de carte ressource dans la pile de ressource lors des lancé de dés, la priorité des ressource qui sont donné se fait selon l'ordre du tour de jeu (en commençant par le joueur à qui c'est le tour)_
-- _Si le joueur choisis une carte développement:_
-. _La carte chevalier: le joueur déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main d'un autre joueur_
+- _Si lors d'un lancé de dés, le nombre de carte ressources à distribuer est inférieur au nombre de cartes ressources restantes, celles-ci sont distribués jusqu'à épuisement dans l'ordre du tour de jeu, en partant du joueur qui vient de lancer les dés_
+- _Si le joueur choisit d'utiliser une carte développement dans sa main:_
+. _La carte chevalier: le joueur déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main de l'autre joueur_
 . _La carte point de victoire: le joueur gagne un point de victoire_
 . _La carte monopole: le joueur choisis une ressource, tous les autres joueurs donnent au joueur actuf les cartes de cette ressource qu'ils possèdent_
 . _La carte construction de routes: le joueur construit deux routes gratuitement_
