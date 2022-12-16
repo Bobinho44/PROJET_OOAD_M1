@@ -12,7 +12,7 @@
 | _Préparation, Initialisation_
 
 | Objectif contextuel
-| _Installer le plateau, avec les territoires, les ports, le voleur, les jetons, les cartes (fiche de coût, fiche spéciale, cartes de développement...). Les joueurs placent leurs premières colonies et routes pour commencer la partie_
+| _Installer le plateau, avec les territoires, les ports, le voleur, les jetons, les cartes (fiche de coût, fiche spéciale, cartes de développement...). Les joueurs placent leurs premières colonies et routes pour commencer la partie._
 
 | Portée	
 | _Le jeu_
@@ -43,7 +43,7 @@
 | _Une fois par partie_
 
 | Pré-conditions 
-| _Il y a entre trois et quatre joueurs disponibles_
+| _Il y a spécifiquement 2 joueurs disponibles_
 
 | Post-conditions
 a| 
@@ -57,22 +57,22 @@ a|
 | Scénario nominal
 a|
 . _Placer les six zones "mer" aléatoirement_
-. _Placer le désert au centre du plateau_
-. _Placer aléatoirement les pièces territoires en partant du centre du plateau et en avançant en spirale_
+. _Placer aléatoirement les tuiles territoires en partant du centre du plateau et en avançant en spirale_
 . _Placer les jetons dans l'ordre lexicographique en partant du centre du plateau en tourant dans le sens des aiguilles d'une montre_
 . _Placer le voleur sur la case désert_
-. _Chaque joueur reçoit une fiche Coûts de construction et toutes les pièces de jeu de sa couleur_
-. _Les fiches spéciales Route la plus longue et Armée la plus puissante sont placées_
+. _Chaque joueur reçoit une fiche "Coûts de construction" et toutes les pièces de jeu de sa couleur_
+. _Les fiches spéciales "Route la plus longue" et "Armée la plus puissante" sont placées face visible_
 . _Les cartes Ressource sont triées en 5 piles, par type et placées face visible_
 . _Les cartes Développement sont mélangées et placées face cachée_
-. _Chaque joueur place une colonie et une route (du plus jeune au plus vieux), et puis recommence l'opération une deuxième fois (du plus vieux au plus jeune)_
-. _Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production_
+. _Chaque joueur place une première colonie, qui sera marquée d'une étoile, et une route (du plus jeune au plus vieux), et puis recommence l'opération une deuxième fois dans l'autre sens (du plus vieux au plus jeune)_
+. _Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production de ressources_
 
 
-| Extensions	
+| Extensions
+| __
 
 | Alternatives	
-| _On peut initialiser le plateau différemment en changeant la position du désert_
+| _On peut, au lieu de partir du centre du plateau, partir d'un emplacement frontalier d'une zone "mer" pour placer la première tuile de ressource. Le placement des tuiles suivantes se fera toujours en spirale jusqu'au centre du plateau_
 
 | Cas d'utilisation supérieur
 | _Aucun_
