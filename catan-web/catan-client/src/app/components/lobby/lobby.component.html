@@ -1,8 +1,13 @@
-<img id="joinGameImage" src="assets/Catan-Logo.png" alt="joinGame" width="500" height="auto">
+<div class="grid grid-cols-1 gap-4 place-content-center">
+  <img id="joinGameImage" src="assets/Catan-Logo.png" alt="joinGame" width="500" height="auto" class="mx-auto">
 
-<!-- input to fill the name value-->
-<input id="nameInput" type="text" placeholder="Enter your name" name="value" minlength="1" onchange="updateValidName()">
+  <!-- input to fill the name value-->
+  <input id="nameInput" type="text" placeholder="Enter your name" name="value" minlength="1"
+    onchange="updateValidName()" class="rounded-lg bg-stone-300 text-center text-black font-bold text-xl mb-2 w-1/4 mx-auto">
   <!-- <div *ngIf="validName" > -->
-    <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" (click)="updateJeu()">JOUER</button>
-    
+  <button type="button"
+    class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2  w-1/8 mx-auto"
+    (click)="updateJeu()">JOUER</button>
+
   <!-- </div> -->
+</div>
