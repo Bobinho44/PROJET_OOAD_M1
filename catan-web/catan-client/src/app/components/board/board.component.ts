@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebsocketService } from 'src/app/service/websocket.service';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -26,10 +27,22 @@ export class BoardComponent {
     "assets/tiles/wheat.png",
     "assets/tiles/wheat.png",
   ]
+  websocket: WebsocketService;
+  waitingScreen: boolean = true;
+
+  constructor(websocket: WebsocketService) {
+    this.websocket = websocket;
+  }
 
 
 
-  oninit() {
+  ngOnInit() {
+    this.websocket.connect("ws://localhost:8080/catan-websocket")?.pipe().subscribe((message: any) => {
+      if (message.body == "start") {
+        console.log("start");
+        this.waitingScreen = false;
+      }
+    });
   }
 
   //function to return random url from tiles
