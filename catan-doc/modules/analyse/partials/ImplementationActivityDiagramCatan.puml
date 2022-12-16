@@ -1,28 +1,28 @@
 @startuml
 start
 while (zone mer disponible?)
-  #Lime:prendre une zone mer aléatoirement;
+  #PaleGreen:prendre une zone mer aléatoirement;
   :placer la zone mer;
 endwhile
-while (#Red:territoire disponible?)
-  #Lime:prendre un territoire aléatoirement;
+while (territoire disponible?)
+  #PaleGreen:prendre un territoire aléatoirement;
   :placer le territoire en spirale dans le sens horraire;
 endwhile
-while (#Red:jeton disponible?)
-  #Lime:Placer les jetons dans l’ordre lexicographique en escargot dans le sens horraire; #Lime
+while (jeton disponible?)
+  #PaleGreen:Placer les jetons dans l’ordre lexicographique en escargot dans le sens horraire;
 endwhile
-#Red:Placer le voleur sur la case désert;
+:Placer le voleur sur la case désert;
 while (joueur disponible?)
-  #Lime:reçoit une fiche Coûts de construction;
+  #PaleGreen:reçoit une fiche Coûts de construction;
   :reçoit toutes les pièces de jeu de sa couleur;
   :place une colonie et une route;
+  :place une étoile sur cette première colonie;
 endwhile
-while (#Red:joueur disponible?)
-  #Lime:place une colonie et une route;
-  :place une étoile sur une de ses colonies
+while (joueur disponible?)
+  #PaleGreen:place une colonie et une route;
   :reçoit pour sa colonie marquée d’une étoile sa première production;
 endwhile
-#Red:placement fiches spéciales;
+:placement fiches spéciales;
 :placement carte ressource;
 :placement carte développement;
 stop
