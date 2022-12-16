@@ -9,10 +9,8 @@ import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.format.ResolverStyle;
+import java.util.*;
 
 public class PlayerImpl implements Player {
 
@@ -24,6 +22,7 @@ public class PlayerImpl implements Player {
     private final List<DevelopmentCard> developmentCards = new ArrayList<>();
     private int victoryPoints;
     private Map<Resource,Integer> ruleTradeWithBank = new HashMap<>();
+    private final Random random = new Random();
 
     /**
      * Create a new player
@@ -161,6 +160,17 @@ public class PlayerImpl implements Player {
         else{
             ruleTradeWithBank.replace(resource,ratio);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Resource popRandomRessource(){
+        int i = random.nextInt(resources.size());
+        Resource stolenResource = resources.get(i).newResource();
+        resources.remove(1);
+        return stolenResource;
     }
 
 }

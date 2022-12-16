@@ -110,4 +110,11 @@ public interface Player {
      */
     void changeRuleTradeWithBank(@Nullable Resource resource, int ratio);
 
+    /**
+     * Steal a random resource from the player
+     *
+     * @return random resource
+     */
+    Resource popRandomRessource();
+
 }

@@ -47,4 +47,11 @@ public interface Resource {
      * @return true if the resources are similar, false otherwise
      */
     boolean isSimilar(@NonNull Resource resource);
+
+    /**
+     * Create a resource with the same type, and return it
+     *
+     * @return a new instance of resource with the same type
+     */
+    Resource newResource();
 }

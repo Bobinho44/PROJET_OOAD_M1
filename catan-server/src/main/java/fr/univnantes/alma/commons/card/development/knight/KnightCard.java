@@ -35,11 +35,9 @@ public class KnightCard extends DevelopmentCard {
     public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        /*
-        TODO:
-            - move thief
-            - take a card from another player
-         */
+        gameController.moveThief(gameController.pickTerritory());
+        Player playerToSteal = gameController.pickOtherPlayer();
+        player.addResource(playerToSteal.popRandomRessource());
     }
 
 }

@@ -75,4 +75,5 @@ public abstract class ResourceImpl implements Resource {
         return name.equals(resource.getName());
     }
 
+
 }

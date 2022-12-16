@@ -33,15 +33,16 @@ public class MonopolyCard extends ProgressCard {
     public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
         Resource resource = gameController.pickResource();
-        gameController.takeResourcesAllPlayer(player,resource);
-
+        Resource addResource = gameController.takeResourcesAllPlayer(player,resource);
+        if(addResource == null)
+            return;
         for (Resource r: player.getResources()) {
-            if(r.isSimilar(resource)){
-                r.increaseAmount(resource.getAmount());
+            if(r.isSimilar(addResource)){
+                r.increaseAmount(addResource.getAmount());
                 return;
             }
         }
-        player.addResource(resource);
+        player.addResource(addResource);
     }
 
 }

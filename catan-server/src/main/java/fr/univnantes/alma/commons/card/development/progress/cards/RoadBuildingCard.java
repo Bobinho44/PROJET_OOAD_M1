@@ -2,6 +2,8 @@ package fr.univnantes.alma.commons.card.development.progress.cards;
 
 import fr.univnantes.alma.commons.annotation.CardAmount;
 import fr.univnantes.alma.commons.game.GameController;
+import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import org.springframework.lang.NonNull;
@@ -28,10 +30,11 @@ public class RoadBuildingCard extends ProgressCard {
     public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        /*
-        TODO:
-            - place two free road
-         */
+        ConstructableArea<Road> roadArea = gameController.pickConstructableRoadArea();
+        gameController.buildRoad(player,roadArea);
+
+        roadArea = gameController.pickConstructableRoadArea();
+        gameController.buildRoad(player,roadArea);
     }
 
 }

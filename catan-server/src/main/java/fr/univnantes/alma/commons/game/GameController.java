@@ -31,6 +31,8 @@ import fr.univnantes.alma.core.trade.TradeManager;
 import jdk.jshell.spi.ExecutionControl;
 import org.springframework.lang.NonNull;
 
+import javax.annotation.Nullable;
+
 public class GameController implements GameManager {
 
     private final TerritoryManager territoryManager = new TerritoryController();
@@ -210,18 +212,21 @@ public class GameController implements GameManager {
      * {@inheritDoc}
      */
     @Override
-    public Resource takeResourcesAllPlayer(@NonNull Player player,@NonNull Resource resource){
-        resource.amount(0);
-        Resource resourceGiven;
+    public @Nullable Resource takeResourcesAllPlayer(@NonNull Player player, @NonNull Resource resource){
+        Resource resourceGiven = resource.newResource();
+        resourceGiven.amount(0);
+        Resource resourceTmp;
         for (Player p: playerManager.getAllPlayers()) {
             if(p != player) {
-                resourceGiven = p.removeAllResource(resource);
-                if (resourceGiven != null) {
-                    resource.increaseAmount(resourceGiven.getAmount());
+                resourceTmp = p.removeAllResource(resource);
+                if (resourceTmp != null) {
+                    resource.increaseAmount(resourceTmp.getAmount());
                 }
             }
         }
-        return resource;
+        if(resourceGiven.getAmount() != 0)
+            return resourceGiven;
+        return null;
     }
 
     /**
@@ -248,6 +253,24 @@ public class GameController implements GameManager {
     @Override
     public Resource pickResourceBank(){
         //TODO: renvoie une ressource qui est dans la bank choisi par le joueur
+        return null;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Territory pickTerritory(){
+        //TODO: renvoie un territoire choisi par le joueur
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ConstructableArea<Road> pickConstructableRoadArea(){
+        //TODO: renvoie un contructableArea de route
         return null;
     }
 

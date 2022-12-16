@@ -113,7 +113,19 @@ public interface GameManager {
 
     /**
      * choose a resource from what's left in bank
-     * @return resource
+     * @return Resource
      */
     Resource pickResourceBank();
+
+    /**
+     * choose a territory
+     * @return Territory
+     */
+    Territory pickTerritory();
+
+    /**
+     * choose a constructable road area
+     * @return ConstructableArea of road
+     */
+    ConstructableArea<Road> pickConstructableRoadArea();
 }
