@@ -55,7 +55,7 @@ Les joueurs interagissent avec un client Web, qui utilise le protocole HTTP pour
 Les serveurs utilisent le protocole TCP/IP pour communiquer avec un serveur de gestion de base de données, qui stocke toutes les données du logiciel.
 
 [#deployment]
-.UML Diagramme de déploiement 
+.Diagramme de déploiement 
 [plantuml]
 ----
 include::partial$DeploymentDiagramsCatan.puml[]
