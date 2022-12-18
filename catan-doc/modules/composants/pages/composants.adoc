@@ -11,5 +11,5 @@ L’objectif de ce document est de décrire l'échange de messages entre les com
 .Diagramme de composants
 [plantuml]
 ....
-include::partial$CatanComponentDiagram.puml
+include::partial$CatanComponentDiagram.puml[]
 ....
