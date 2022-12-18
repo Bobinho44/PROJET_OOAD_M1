@@ -1,0 +1,30 @@
+@startuml
+
+left to right direction
+
+component Client
+
+
+component ClientMiddleware {
+   portout "         ws "
+   portin "ts      "
+}
+
+component ServerMiddleware {
+   port "ws      "
+}
+
+component Server{
+   port "java         "
+}
+
+Client --( "        jeu"
+"        jeu" -- "ts      "
+
+"         ws " --( "        jeu "
+"        jeu " -- "ws      "
+
+ServerMiddleware --( "        jeu  "
+"        jeu  " -- "java         "
+
+@enduml
