@@ -87,11 +87,12 @@ Distinguez les classes d'utilisateurs les plus importantes pour ce produit de ce
 Le logiciel {project} n'a qu'une seule classe d'utilisateurs : les joueurs.
 Les joueurs peuvent avoir différents niveaux : débutants, intermédiaires ou experts.
 Cependant, indépendamment de leur niveau, les joueurs doivent utiliser la même interface utilisateur pour jouer les uns contre les autres.
+Il doit être possible d'inviter différents joueurs à jouer ensemble.
 
-[NOTE]
-====
-TODO: Complétez la description ci-dessus
-====
+[#nonfunctional]
+
+[#nonfunctional]
+
 
 === Environnement opérationnel
 
@@ -157,15 +158,26 @@ Les versions futures pourraient permettre de jouer une partie avec plus de deux 
 
 === Interfaces utilisateur
 
-[NOTE]
-====
-Décrivez les caractéristiques logiques de chaque interface entre le produit logiciel et les utilisateurs. 
+L'interface web du logiciel devra comporter les éléments suivants:
 
-Il peut s'agir d'exemples d'images d'écran, de normes d'interface graphique ou de guides de style de famille de produits à respecter, de contraintes de disposition des écrans, de boutons et de fonctions standard (p. ex., aide) qui apparaîtront sur chaque écran, de raccourcis clavier, de normes d'affichage des messages d'erreur, etc. 
+- un champ de saisie pour le nom du joueur
+- un bouton pour lancer une partie
+- un bouton pour quitter la partie
+- plusieurs boutons représentant les actions possibles pour le joueur
+- une représentation du plateau de jeu  
+- les ressources d'un joueur (nombre de pièces, nombre de points de victoire ...)
+- une représentation des cartes en main du joueur adverse
 
-Définissez les composants logiciels pour lesquels une interface utilisateur est nécessaire. 
-Les détails de la conception de l'interface utilisateur doivent être documentés dans une spécification d'interface utilisateur distincte.
-====
+
+// [NOTE]
+// ====
+// Décrivez les caractéristiques logiques de chaque interface entre le produit logiciel et les utilisateurs. 
+
+// Il peut s'agir d'exemples d'images d'écran, de normes d'interface graphique ou de guides de style de famille de produits à respecter, de contraintes de disposition des écrans, de boutons et de fonctions standard (p. ex., aide) qui apparaîtront sur chaque écran, de raccourcis clavier, de normes d'affichage des messages d'erreur, etc. 
+
+// Définissez les composants logiciels pour lesquels une interface utilisateur est nécessaire. 
+// Les détails de la conception de l'interface utilisateur doivent être documentés dans une spécification d'interface utilisateur distincte.
+// ====
 
 === Interfaces matérielles
 
@@ -198,7 +210,7 @@ Ici, il ne s'agit plus de décrire le domaine métier, mais de spécifier ce que
 N'oubliez pas qu'il s'agit d'une spécification de que le système *doit* faire et non pas de *comment* il le fait.
 ====
 
-=== Fonctionnalité A
+=== Fonctionnalité Rejoindre une partie
 
 [NOTE]
 ====
@@ -209,6 +221,9 @@ TIP: Ne dites pas vraiment "Fonctionnalité A". Indiquez le nom de la fonctionna
 
 ==== Description et priorité
 
+La fonctionnalité Rejoindre une partie permet à un joueur de rejoindre une partie en cours, en fournissant son nom.
+Cette fonctionnalité a une priorité moyenne.
+
 [NOTE]
 ====
 Fournissez une brève description de la fonctionnalité et indiquez si elle a une priorité élevée, moyenne ou faible. 
@@ -217,9 +232,15 @@ Vous pouvez également inclure des évaluations spécifiques des éléments de p
 
 ==== Séquences de Stimulus/Réponse
 
+La fonctionnalité Rejoindre une partie est déclenchée par l'action de l'utilisateur de cliquer sur le bouton "Rejoindre une partie" de l'interface web.
+
 NOTE: Liste des séquences d'actions de l'utilisateur et des réponses du système qui stimulent le comportement défini pour cette fonctionnalité. Celles-ci correspondront aux éléments de dialogue associés aux cas d'utilisation.
 
 ==== Exigences fonctionnelles
+* REQ-1: Le système doit permettre à un joueur de fournir son nom.
+* REQ-2: Le système doit permettre à un joueur de rejoindre une partie en cours.
+* REQ-3: Le sustème doit vérifier que le nom du joueur est valide.
+
 
 [NOTE]
 ====
