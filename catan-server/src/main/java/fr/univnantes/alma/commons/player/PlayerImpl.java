@@ -1,5 +1,6 @@
 package fr.univnantes.alma.commons.player;
 
+import fr.univnantes.alma.commons.card.development.knight.KnightCard;
 import fr.univnantes.alma.commons.resource.ResourceImpl;
 import fr.univnantes.alma.commons.resource.type.*;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
@@ -23,6 +24,8 @@ public class PlayerImpl implements Player {
     private int victoryPoints;
     private Map<Resource,Integer> ruleTradeWithBank = new HashMap<>();
     private final Random random = new Random();
+
+    private List<KnightCard> army = new ArrayList<>();
 
     /**
      * Create a new player
@@ -166,11 +169,28 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}
      */
     @Override
-    public Resource popRandomRessource(){
+    public Resource popRandomResource(){
         int i = random.nextInt(resources.size());
         Resource stolenResource = resources.get(i).newResource();
         resources.remove(1);
         return stolenResource;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addKnightInArmy(KnightCard knight){
+        army.add(knight);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int sizeArmy(){
+        return army.size();
+    }
+
 
 }

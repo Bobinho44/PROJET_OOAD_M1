@@ -15,7 +15,7 @@ public class Client {
     }
 
     public void requestJoinGame(GameManager gameManager) {
-        game = gameManager.join(player);
+        //game = gameManager.join(player);
     }
 
     public UUID getGame() {

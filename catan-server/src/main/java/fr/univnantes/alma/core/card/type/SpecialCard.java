@@ -5,6 +5,7 @@ import fr.univnantes.alma.core.card.Card;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
@@ -17,6 +18,8 @@ public abstract class SpecialCard implements Card {
      */
     private final String name;
     private final String picture;
+
+    private @Nullable Player owner;
 
     /**
      * Creates a new special card
@@ -61,6 +64,8 @@ public abstract class SpecialCard implements Card {
     public void getEffect(@NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
         player.addVictoryPoints(2);
+
+        owner = player;
     }
 
     /**
@@ -71,5 +76,13 @@ public abstract class SpecialCard implements Card {
         Objects.requireNonNull(player, "player cannot be null!");
 
         player.addVictoryPoints(2);
+        owner = null;
+    }
+
+    /**
+     * @return the owner of the card, null if there is not yet
+     */
+    public Player getOwner(){
+        return owner;
     }
 }

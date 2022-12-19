@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.game;
 
+import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.ressource.Resource;
@@ -10,6 +11,7 @@ import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface GameManager {
@@ -99,6 +101,8 @@ public interface GameManager {
      */
     Resource takeResourcesAllPlayer(Player player, Resource resource);
 
+
+
     /**
      * choose another player
      * @return Player
@@ -128,4 +132,9 @@ public interface GameManager {
      * @return ConstructableArea of road
      */
     ConstructableArea<Road> pickConstructableRoadArea();
+
+    /**
+     * @return special cards
+     */
+    List<SpecialCard> getSpecialsCards();
 }

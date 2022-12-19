@@ -42,4 +42,9 @@ public interface CardManager {
      */
     <T extends SpecialCard> @NonNull Optional<T> pickSpecialCard(@NonNull Class<T> type);
 
+    /**
+     * @return special cards
+     */
+    List<SpecialCard> getSpecialsCards();
+
 }

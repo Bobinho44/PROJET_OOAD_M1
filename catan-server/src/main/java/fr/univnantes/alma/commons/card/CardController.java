@@ -21,7 +21,7 @@ public class CardController implements CardManager {
      * Fields
      */
     private final Stack<DevelopmentCard> developments;
-    private final Stack<SpecialCard> specials;
+    private final List<SpecialCard> specials;
 
     /**
      * Creates a new card manager
@@ -98,6 +98,14 @@ public class CardController implements CardManager {
                 .filter(specialCard -> specialCard.getClass() == type)
                 .map(specialCard -> (T) specialCard)
                 .findFirst();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SpecialCard> getSpecialsCards(){
+        return specials;
     }
 
 }

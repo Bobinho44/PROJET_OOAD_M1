@@ -1,5 +1,6 @@
 package fr.univnantes.alma.core.player;
 
+import fr.univnantes.alma.commons.card.development.knight.KnightCard;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.ressource.Resource;
@@ -115,6 +116,16 @@ public interface Player {
      *
      * @return random resource
      */
-    Resource popRandomRessource();
+    Resource popRandomResource();
+
+    /**
+     * @param knight card
+     */
+    void addKnightInArmy(KnightCard knight);
+
+    /**
+     * @return the size of the army
+     */
+    int sizeArmy();
 
 }

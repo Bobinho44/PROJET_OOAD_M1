@@ -6,6 +6,7 @@ import fr.univnantes.alma.commons.construction.ConstructionController;
 import fr.univnantes.alma.commons.construction.type.road.RoadImpl;
 import fr.univnantes.alma.commons.resource.ResourceImpl;
 import fr.univnantes.alma.commons.trade.TradeController;
+import fr.univnantes.alma.core.card.type.SpecialCard;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.dice.DiceImpl;
 import fr.univnantes.alma.commons.player.PlayerController;
@@ -32,6 +33,7 @@ import jdk.jshell.spi.ExecutionControl;
 import org.springframework.lang.NonNull;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class GameController implements GameManager {
 
@@ -228,6 +230,15 @@ public class GameController implements GameManager {
             return resourceGiven;
         return null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SpecialCard> getSpecialsCards(){
+        return cardManager.getSpecialsCards();
+    }
+
 
     /**
      * {@inheritDoc}

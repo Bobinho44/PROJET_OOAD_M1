@@ -3,6 +3,7 @@
 node Client {
     artifact WebClient
 }
+
 node Server {
     artifact GameServer
 }
