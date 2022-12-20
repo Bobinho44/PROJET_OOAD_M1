@@ -26,7 +26,7 @@
 | Condition d'échec
 | _Le joueur n'a pas finit son tour_
 
-| Acteurs principaux:
+| Acteurs principaux
 | _Le joueur actif_
 
 | Acteurs secondaires

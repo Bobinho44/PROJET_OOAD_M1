@@ -4,17 +4,16 @@ start
 if (obtient 7?) then (yes)
   while (joueur disponible?)
     if (possède plus de 7 cartes?) then (yes)
-      :défausser la moitiée;
+      #PaleGreen:défausser la moitié;
     endif
   endwhile
   :déplacer voleur;
   :prendre carte à un joueur;
 else (no)
-:ajouter les territoires ayant le numéro obtenue 
+#Pink:ajouter les territoires ayant le numéro obtenue 
 dans la liste de territoire donnant des ressources;
-if (obtient le numéro 
-de territoire du voleur?) then (yes)
-:supprimer le territoire
+if (obtient le numéro de territoire du voleur?) then (yes)
+#PaleGreen:supprimer le territoire
 du voleur des territoires donnant
 des ressources;
 else (no)
@@ -22,32 +21,41 @@ endif
 while (territoire donnant des ressources disponible?)
   while (joueur ayant une construction adjacente disponible?)
     if (la construction est une ville?) then (yes)
-      :reçoit 2 ressources associées au territoire;
+      #PaleGreen:reçoit 2 ressources associées au territoire;
     else (no)
-      :reçoit 1 ressource associée au territoire;
+      #Pink:reçoit 1 ressource associée au territoire;
     endif
   endwhile
 endwhile
 endif
 while (fin du tour?)
 if ( créer une route? ) then (yes)
-  :payer la construction;
+  #PaleGreen:payer la construction;
   :placer une pièce route;
+  if ( joueur actuel ne possède pas la carte "Route la plus longue" ET nombre de route >= 5 ?) then (yes)
+    if ( carte "Route la plus longue" déjà remportée par un autre joueur ) then (yes)
+      if ( route la plus longue du joueur actuel > celle de l'adversaire) then (yes)
+        #PaleGreen:le joueur actuel remporte la carte "Route la plus longue";
+      endif
+    else (no)
+      #Pink:le joueur actuel remporte la carte "Route la plus longue";
+    endif
+  endif
 else (no)
 endif
 if ( créer une colonie? ) then (yes)
-  :payer la construction;
-  :placer une pièce route;
+  #PaleGreen:payer la construction;
+  :placer une pièce colonie;
 else (no)
 endif
 if ( créer une ville? ) then (yes)
-  :payer la construction;
-  :      placer une pièce ville
+  #PaleGreen:payer la construction;
+  :placer une pièce ville
 à la place dune pièce colonie;
 else (no)
 endif
 if ( acheter carte développement? ) then (yes)
-  :payer la carte;
+  #PaleGreen:payer la carte;
   :piocher la carte;
 else (no)
 endif
@@ -56,6 +64,15 @@ if ( jouer carte développement? ) then (yes)
 case ( chevalier )
   :déplacer le voleur;
   :prend carte d’un autre joueur;
+  if ( joueur actuel ne possède pas la carte "Plus grosse armée" ET nombre de carte chevalier >= 3 ?) then (yes)
+    if ( carte "Plus grosse armée" déjà remportée par un autre joueur ) then (yes)
+      if ( nombre de chevaliers du joueur actuel > celui de l'adversaire) then (yes)
+        #PaleGreen:le joueur actuel remporte la carte "Plus grosse armée";
+      endif
+    else (no)
+      #Pink:le joueur actuel remporte la carte "Plus grosse armée";
+    endif
+  endif
 case ( point de victoire )
   :gagner un point de victoire;
 case ( monopole )
@@ -64,15 +81,23 @@ ressources d'un type
 choisi aux autres joueurs;
 case ( construction de routes )
   :placer 2 routes;
+  if ( joueur actuel ne possède pas la carte "Route la plus longue" ET nombre de route >= 5 ?) then (yes)
+    if ( carte "Route la plus longue" déjà remportée par un autre joueur ) then (yes)
+      if ( route la plus longue du joueur actuel > celle de l'adversaire) then (yes)
+        #PaleGreen:le joueur actuel remporte la carte "Route la plus longue";
+      endif
+    else (no)
+      #Pink:le joueur actuel remporte la carte "Route la plus longue";
+    endif
+  endif
 case ( invention )
   :prendre 2 ressources au choix;
-
 endswitch
 else (no)
 endif
 if ( échanger avec un joueur? ) then (yes)
   if (joueur accepte un échange?) then (yes)
-    :échanger les ressources;
+    #PaleGreen:échanger les ressources;
   else (no)
   endif
 else (no)
@@ -80,14 +105,14 @@ endif
 if ( échanger avec la banque? ) then (yes)
   if (           a une ville sur 
 un port associé à la ressource?) then (yes)
-    :échanger 2 ressources 
+    #PaleGreen:échanger 2 ressources 
       contre une au choix;
   elseif (                a une colonie 
 sur un port associé à la ressource?) then (yes)
-    :échanger 3 ressources 
+    #LimeGreen:échanger 3 ressources 
       contre une au choix;
   else (no)
-    :échanger 4 ressources 
+    #Pink:échanger 4 ressources 
       contre une au choix;
   endif
 endif

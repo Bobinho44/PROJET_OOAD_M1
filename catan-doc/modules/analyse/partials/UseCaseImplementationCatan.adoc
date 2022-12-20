@@ -26,7 +26,7 @@
 | Condition d'échec
 | _Les fiches, pièces, territoires et le plateau ne sont pas distribués ou installés_
 
-| Acteurs principaux:
+| Acteurs principaux
 | _Les joueurs_
 
 | Acteurs secondaires
