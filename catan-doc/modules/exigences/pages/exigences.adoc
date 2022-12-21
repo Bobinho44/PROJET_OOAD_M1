@@ -287,13 +287,30 @@ La fonctionnalité Jouer un tour est déclenchée par le serveur qui indique au 
 .Cas d'utilisation Jouer un tour
 include::partial$uc-b.adoc[]
 
-=== Fonctionnalité C
+=== Fonctionnalité Finir la partie
 
-NOTE: Ajoutez la description de la fonctionnalité "C" en vous basant sur la structure de la fonctionnalité "A"
+La fonctionnalité Vérifier fin de partie permet de vérifier si la partie est terminée. Si c'est le cas, le système doit afficher le gagnant, et clôturer la partie.
+
+
+==== Description et priorité
+
+La fonctionnalité Vérifier fin de partie permet de vérifier si la partie est terminée. Si c'est le cas, le système doit afficher le gagnant, et clôturer la partie.
+Cette fonctionnalité a une priorité moyenne.
+
+==== Séquences de Stimulus/Réponse
+
+La fonctionnalité Vérifier fin de partie est déclenchée à chaque fois qu'un joueur joue un tour. Le système vérifie alors si la partie est terminée. Si c'est le cas, le système affiche le gagnant, et clôture la partie.
+
+
+==== Exigences fonctionnelles
+
+* REQ-1: Le système doit pouvoir vérifier si la partie est terminée.
+* REQ-2: Le système doit pouvoir afficher le gagnant de la partie.
+* REQ-3: Le système doit pouvoir clôturer la partie.
 
 ==== Description sous la forme d'un cas d'utilisation
 
-.Cas d'utilisation C
+.Cas d'utilisation Finir la partie
 include::partial$uc-c.adoc[]
 
 
