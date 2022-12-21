@@ -261,12 +261,30 @@ Chaque exigence doit être identifiée de manière unique par un numéro de séq
 .Cas d'utilisation A
 include::partial$uc-a.adoc[]
 
-=== Fonctionnalité B
+=== Fonctionnalité Jouer un tour
 
-NOTE: Ajoutez la description de la fonctionnalité "B" en vous basant sur la structure de la fonctionnalité "A"
+La fonctionnalité Jouer un tour permet à un joueur de jouer un tour en choisissant quelles actions il veut effectuer.
+
+
+==== Description et priorité
+
+La fonctionnalité Jouer un tour permet à un joueur de jouer un tour en choisissant quelles actions il veut effectuer, en fonction de ses cartes en main et de la situation de la partie.
+Cette fonctionnalité a une priorité moyenne.
+
+==== Séquences de Stimulus/Réponse
+
+La fonctionnalité Jouer un tour est déclenchée par le serveur qui indique au joueur qu'il est son tour de jouer.
+
+
+==== Exigences fonctionnelles
+
+* REQ-1: Le système doit permettre de communiquer au joueur qu'il est son tour de jouer.
+* REQ-2: Le système doit permettre au joueur de choisir une action à effectuer.
+
+
 
 ==== Description sous la forme d'un cas d'utilisation
-.Cas d'utilisation B
+.Cas d'utilisation Jouer un tour
 include::partial$uc-b.adoc[]
 
 === Fonctionnalité C
