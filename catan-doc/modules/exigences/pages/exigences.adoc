@@ -327,6 +327,14 @@ include::partial$uc-c.adoc[]
 
 NOTE: Précisez toute exigence concernant les questions de sécurité ou de confidentialité entourant l'utilisation du produit ou la protection des données utilisées ou créées par le produit. Définissez toute exigence en matière d'authentification de l'identité de l'utilisateur. Faites référence à toute politique ou réglementation externe contenant des questions de sécurité qui affectent le produit. Définissez toutes les certifications de sécurité ou de confidentialité qui doivent être satisfaites.
 
+[%hardbreaks]
+Les exigences de sécurité suivantes doivent être satisfaites :
+- Un joueur ne peut pas jouer un tour s'il n'est pas son tour. 
+- Un joueur ne peut pas jouer un tour s'il n'est pas connecté au serveur.
+- Un joueur ne peut pas jeffectuer une action qui n'est pas autorisée par les règles du jeu.
+- Un joueur ne peut pas voir les cartes d'un autre joueur.
+- Un joueur ne peut pas jouer à la place d'un autre joueur.
+
 === Attributs de qualité logicielle
 
 [NOTE]
@@ -338,9 +346,11 @@ Rédigez-les de manière à ce qu'elles soient spécifiques, quantitatives et v�
 Au minimum, clarifiez les préférences relatives pour divers attributs, comme la facilité d'utilisation par rapport à la facilité d'apprentissage. 
 ====
 
+
 ==== Extensibilité
 
-NOTE: TODO
+Il doit être possible d'ajouter des règles de jeu supplémentaires.
+Ainsi que des cartes supplémentaires.
 
 ==== Maintenabilité
 
