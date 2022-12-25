@@ -2,11 +2,12 @@ package fr.univnantes.alma.commons.resource;
 
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 
 /**
- * Enum representing resource
+ * Implementation of a resource
  */
 public abstract class ResourceImpl implements Resource {
 
@@ -28,19 +29,24 @@ public abstract class ResourceImpl implements Resource {
     }
 
     /**
+     * Sets the amount
+     *
+     * @param amount the amount
+     * @return the resource
+     */
+    public @NonNull ResourceImpl amount(int amount) {
+        this.amount = amount;
+
+        return this;
+    }
+
+    /**
      * Gets the resource name
      *
      * @return the resource name
      */
     public @NonNull String getName() {
         return name;
-    }
-
-
-    public @NonNull Resource amount(int amount) {
-        this.amount = amount;
-
-        return this;
     }
 
     /**
@@ -71,9 +77,19 @@ public abstract class ResourceImpl implements Resource {
      * {@inheritDoc}
      */
     @Override
-    public boolean isSimilar(@NonNull Resource resource) {
-        return name.equals(resource.getName());
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResourceImpl)) return false;
+
+        return name.equals(((ResourceImpl) o).getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 
 }

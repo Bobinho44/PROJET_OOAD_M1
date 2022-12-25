@@ -1,6 +1,11 @@
 package fr.univnantes.alma.commons.player;
 
+import fr.univnantes.alma.commons.card.development.DevelopmentCardJSON;
+import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.commons.construction.ConstructionJSON;
+import fr.univnantes.alma.commons.resource.ResourceJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
+import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.player.PlayerManager;
@@ -9,50 +14,125 @@ import org.springframework.lang.NonNull;
 
 import java.util.*;
 
+/**
+ * Implementation of a player manager
+ */
 public class PlayerController implements PlayerManager {
 
     /**
      * Fields
      */
     private final Map<UUID, Player> players = new HashMap<>();
+    private int actualPlayer = -1;
 
     /**
-     * Creates a new player manager
+     * {@inheritDoc}
      */
-    public PlayerController() {
-        //Initialize
-        players.values().forEach(player -> {
-            //ReflectionUtils.getInstancesOf(Building.class, "fr.univnantes.alma.commons.construction.building.type")
-            //      .forEach(building -> IntStream.range(0, building.getAmount()).forEach(i -> player.addConstruction(building).add(progress)));
+    @Override
+    public @NonNull List<PlayerJSON> getPlayerInformation() {
 
-        });
+        return players.values().stream()
+                .map(player -> new PlayerJSON(player.getUUID())
+                        .constructions(getPlayerConstructionsInformation(player))
+                        .resources(getPlayerResourcesInformation(player))
+                        .developmentCards(getPlayerDevelopmentCardInformation(player))
+                        .victoryPoints(getVictoryPoint(player)))
+                .toList();
+    }
+
+    /**
+     * Gets the constructions information from the player
+     *
+     * @param player the player
+     * @return the constructions information from the player
+     */
+    private @NonNull List<ConstructionJSON> getPlayerConstructionsInformation(@NonNull Player player) {
+        return player.getConstructions().stream()
+                .map(construction -> new ConstructionJSON(construction.getUUID(), construction.getClass().getName()))
+                .toList();
+    }
+
+    /**
+     * Gets the resources information from the player
+     *
+     * @param player the player
+     * @return the resources information from the player
+     */
+    private @NonNull List<ResourceJSON> getPlayerResourcesInformation(@NonNull Player player) {
+        return player.getResources().stream()
+                .map(resource -> new ResourceJSON(resource.getName(), resource.getAmount()))
+                .toList();
+    }
+
+    /**
+     * Gets the development cards information from the player
+     *
+     * @param player the player
+     * @return the development cards information from the player
+     */
+    private @NonNull List<DevelopmentCardJSON> getPlayerDevelopmentCardInformation(@NonNull Player player) {
+        return player.getDevelopmentCard().stream()
+                .map(developmentCard -> new DevelopmentCardJSON(developmentCard.getUUID(), developmentCard.getClass().getName()))
+                .toList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Optional<Player> getPlayer(@NonNull UUID uuid) {
-        return Optional.ofNullable(players.get(uuid));
+    public @NonNull Player getPlayer(@NonNull PlayerJSON playerJSON) throws RuntimeException {
+        return Optional.ofNullable(players.get(playerJSON.getUuid())).orElseThrow();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addPlayer(@NonNull Player player) {
-        players.put(UUID.randomUUID(), player);
+    public boolean hasPlayer(@NonNull PlayerJSON playerJSON) {
+        return Optional.ofNullable(players.get(playerJSON.getUuid())).isPresent();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removePlayer(@NonNull Player player) {
-        players.entrySet().stream()
-                .filter(registeredPlayer -> registeredPlayer.getValue().equals(player))
-                .findFirst()
-                .ifPresent(players::remove);
+    public void createPlayer(@NonNull PlayerJSON playerJSON) {
+        Player player = new PlayerImpl(playerJSON.getUuid());
+
+        players.put(player.getUUID(), player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deletePlayer(@NonNull Player player) {
+        players.remove(player.getUUID());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean canPlay(@NonNull Player player) {
+        return actualPlayer != -1 && getActualPlayer().equals(player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void nextPlayer() {
+        actualPlayer = (actualPlayer + 1) % players.size();
+    }
+
+    /**
+     * Gets the actual player
+     *
+     * @return the actual player
+     */
+    private @NonNull Player getActualPlayer() {
+        return players.values().stream().toList().get(actualPlayer);
     }
 
     /**
@@ -61,15 +141,7 @@ public class PlayerController implements PlayerManager {
     @Override
     public boolean hasConstruction(@NonNull Player player, @NonNull Construction construction) {
         return player.getConstructions().stream()
-                .anyMatch(playerConstruction -> playerConstruction.equals(construction));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean canConstruct(@NonNull Player player, @NonNull Construction construction, @NonNull List<Resource> resources) {
-        return hasConstruction(player, construction) && hasResources(player, resources);
+                        .anyMatch(playerConstruction -> playerConstruction.equals(construction));
     }
 
     /**
@@ -77,7 +149,7 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void addConstruction(@NonNull Player player, @NonNull Construction construction) {
-       player.addConstruction(construction);
+        player.getConstructions().add(construction);
     }
 
     /**
@@ -85,7 +157,7 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void removeConstruction(@NonNull Player player, @NonNull Construction construction) {
-        player.removeConstruction(construction);
+        player.getConstructions().remove(construction);
     }
 
     /**
@@ -94,7 +166,7 @@ public class PlayerController implements PlayerManager {
     @Override
     public boolean hasResource(@NonNull Player player, @NonNull Resource resource) {
         return player.getResources().stream()
-                .anyMatch(playerResource -> playerResource.isSimilar(resource) && playerResource.getAmount() >= resource.getAmount());
+                .anyMatch(playerResource -> playerResource.equals(resource) && playerResource.getAmount() >= resource.getAmount());
     }
 
     /**
@@ -110,7 +182,13 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void addResource(@NonNull Player player, @NonNull Resource resource) {
-        player.addResource(resource);
+        player.getResources().stream()
+                .filter(playerResource -> playerResource.equals(resource))
+                .findFirst()
+                .ifPresentOrElse(
+                        playerResource -> playerResource.increaseAmount(resource.getAmount()),
+                        () -> player.getResources().add(resource)
+                );
     }
 
     /**
@@ -118,7 +196,7 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void addResources(@NonNull Player player, @NonNull List<Resource> resources) {
-        resources.forEach(player::addResource);
+        resources.forEach(resource -> addResource(player, resource));
     }
 
     /**
@@ -126,7 +204,10 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void removeResource(@NonNull Player player, @NonNull Resource resource) {
-        player.removeResource(resource);
+        player.getResources().stream()
+                .filter(playerResource -> playerResource.equals(resource) && playerResource.getAmount() >= resource.getAmount())
+                .findFirst()
+                .ifPresent(playerResource -> playerResource.decreaseAmount(resource.getAmount()));
     }
 
     /**
@@ -134,7 +215,28 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void removeResources(@NonNull Player player, @NonNull List<Resource> resources) {
-        resources.forEach(player::removeResource);
+        resources.forEach(resource -> removeResource(player, resource));
+    }
+
+    public void pickAllResources(@NonNull Player player, @NonNull Resource resource) {
+        players.values().stream()
+                .filter(otherPlayer -> !otherPlayer.equals(player))
+                .forEach(otherPlayer -> {
+                    List<Resource> resources = otherPlayer.getResources().stream()
+                            .filter(playerResource -> playerResource.equals(resource))
+                            .toList();
+
+                    addResources(player, resources);
+                    removeResources(otherPlayer, resources);
+                });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull DevelopmentCard getDevelopmentCard(@NonNull Player player) throws RuntimeException {
+        return player.getDevelopmentCard().stream().findAny().orElseThrow();
     }
 
     /**
@@ -143,17 +245,15 @@ public class PlayerController implements PlayerManager {
     @Override
     public boolean hasDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard) {
         return player.getDevelopmentCard().stream()
-                .anyMatch(development -> development.equals(developmentCard));
+                    .anyMatch(development -> development.equals(developmentCard));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean canBuyDevelopmentCard(@NonNull Player player, @NonNull List<Resource> resources) {
-        return resources.stream()
-                .allMatch(resource -> player.getResources().stream()
-                        .anyMatch(playerResource -> playerResource.isSimilar(resource)));
+    public boolean hasDevelopmentCard(@NonNull Player player) {
+        return !player.getDevelopmentCard().isEmpty();
     }
 
     /**
@@ -161,7 +261,7 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void addDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard) {
-        player.addDevelopmentCard(developmentCard);
+        player.getDevelopmentCard().add(developmentCard);
     }
 
     /**
@@ -169,15 +269,26 @@ public class PlayerController implements PlayerManager {
      */
     @Override
     public void removeDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard) {
-        player.removeDevelopmentCard(developmentCard);
+        player.getDevelopmentCard().remove(developmentCard);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
+    @Override
+    public @NonNull NotificationJSON useDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard, @NonNull CommandManager commandManager) {
+        removeDevelopmentCard(player, developmentCard);
+        return developmentCard.useEffect(commandManager, player);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getsVictoryPoint(@NonNull Player player) {
-        return player.getsVictoryPoint();
+    public int getVictoryPoint(@NonNull Player player) {
+        return player.getVictoryPoint();
     }
 
     /**
@@ -194,14 +305,6 @@ public class PlayerController implements PlayerManager {
     @Override
     public void removeVictoryPoints(@NonNull Player player, int amount) {
         player.removeVictoryPoints(amount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<Player> getAllPlayers(){
-        return players.values();
     }
 
 }

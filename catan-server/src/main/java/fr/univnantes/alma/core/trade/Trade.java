@@ -6,8 +6,19 @@ import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+/**
+ * Interface representing a resource
+ */
 public interface Trade {
+
+    /**
+     * Gets the uuid
+     *
+     * @return the uuid
+     */
+    @NonNull UUID getUUID();
 
     /**
      * Gets the sender

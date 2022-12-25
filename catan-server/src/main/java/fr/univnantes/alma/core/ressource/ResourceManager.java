@@ -1,54 +1,85 @@
 package fr.univnantes.alma.core.ressource;
 
+import fr.univnantes.alma.commons.resource.ResourceImpl;
+import fr.univnantes.alma.commons.resource.ResourceJSON;
+import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
+/**
+ * Interface representing a resource manager
+ */
 public interface ResourceManager {
 
     /**
-     * Checks if the list of resource is available
+     * Gets the resources information
+     *
+     * @return the resources information
+     */
+    @NonNull List<ResourceJSON> getResourcesInformation();
+
+    /**
+     * Generates the resource
+     *
+     * @param resourceJSON the resource information
+     * @return the resource
+     */
+    @NonNull Resource generateResource(@NonNull ResourceJSON resourceJSON);
+
+    /**
+     * Generates the resources
+     *
+     * @param resourcesJSON the resources information
+     * @return the resources
+     */
+    @NonNull List<Resource> generateResources(@NonNull List<ResourceJSON> resourcesJSON);
+
+    /**
+     * Checks if there is the resource
+     *
+     * @param resource the resource
+     * @return true if there is the resource, false otherwise
+     */
+    boolean hasResource(@NonNull Resource resource);
+
+    /**
+     * Checks if there is the resources
      *
      * @param resources the resources
-     * @return true if the list of resource is available
+     * @return true if there is the resources, false otherwise
      */
-    public boolean hasResources(@NonNull List<Resource> resources);
+    boolean hasResources(@NonNull List<Resource> resources);
 
     /**
-     * Checks if a resource can be picked
+     * Adds the resource
      *
-     * @return true if a resource can be picked, false otherwise
+     * @param resource the resource
      */
-    boolean canPickResource(@NonNull Resource resource, int amount);
+    void addResource(@NonNull Resource resource);
 
     /**
-     * Adds all resources
+     * Adds the resources
      *
-     * @param resources all resources
+     * @param resources the resources
      */
     void addResources(@NonNull List<Resource> resources);
 
     /**
-     * adds a resource
+     * Removes the resource
      *
      * @param resource the resource
-     * @param amount the amount
      */
-    void addResource(@NonNull Resource resource, int amount);
+    void removeResource(@NonNull Resource resource);
 
     /**
-     * Removes all resources
+     * Removes the resources
      *
-     * @param resources all resources
+     * @param resources the resources
      */
     void removeResources(@NonNull List<Resource> resources);
-
-    /**
-     * Removes a resource
-     *
-     * @param resource the resource
-     * @param amount the amount
-     */
-    void removeResource(@NonNull Resource resource, int amount);
 
 }

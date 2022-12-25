@@ -2,6 +2,9 @@ package fr.univnantes.alma.core.ressource;
 
 import org.springframework.lang.NonNull;
 
+/**
+ * Interface representing a resource
+ */
 public interface Resource {
 
     /**
@@ -10,14 +13,6 @@ public interface Resource {
      * @return the name
      */
     @NonNull String getName();
-
-    /**
-     * Sets the amount
-     *
-     * @param amount the amount
-     * @return the resource
-     */
-    @NonNull Resource amount(int amount);
 
     /**
      * Gets the amount
@@ -40,18 +35,5 @@ public interface Resource {
      */
     void decreaseAmount(int amount);
 
-    /**
-     * Checks if the resources are similar (same name)
-     *
-     * @param resource the other resource
-     * @return true if the resources are similar, false otherwise
-     */
-    boolean isSimilar(@NonNull Resource resource);
 
-    /**
-     * Create a resource with the same type, and return it
-     *
-     * @return a new instance of resource with the same type
-     */
-    Resource newResource();
 }

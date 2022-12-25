@@ -1,140 +1,72 @@
 package fr.univnantes.alma.core.game;
 
-import fr.univnantes.alma.core.card.type.SpecialCard;
-import fr.univnantes.alma.core.construction.type.Building;
-import fr.univnantes.alma.core.construction.type.Road;
-import fr.univnantes.alma.core.ressource.Resource;
-import fr.univnantes.alma.core.territory.Territory;
-import fr.univnantes.alma.core.card.type.DevelopmentCard;
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
-import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.trade.Trade;
+import fr.univnantes.alma.commons.command.CommandJSON;
+import fr.univnantes.alma.commons.game.GameJSON;
+import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.commons.player.PlayerJSON;
 import org.springframework.lang.NonNull;
 
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * Interface representing a game manager
+ */
 public interface GameManager {
 
     /**
-     * Builds the board
-     */
-    void build();
-
-
-    /**
-     * Rolls the dice
+     * Gets a game
      *
-     * @return the dice score
+     * @param gameJSON the game information
+     * @return the optional game
      */
-    int rollDice();
+    @NonNull Game getGame(@NonNull GameJSON gameJSON);
 
     /**
-     * Moves the thief
+     * Checks if the game exist
      *
-     * @param territory the territory
+     * @param gameJSON the game information
+     * @return true if the game exist, false otherwise
      */
-    void moveThief(@NonNull Territory territory);
+    boolean hasGame(@NonNull GameJSON gameJSON);
 
     /**
-     * Builds a road
+     * Adds a new game
      *
-     * @param player the player
-     * @param buildableRoadArea the buildable road area
+     * @param gameJSON the game information
      */
-    void buildRoad(@NonNull Player player, @NonNull ConstructableArea<Road> buildableRoadArea);
+    void addGame(@NonNull GameJSON gameJSON);
 
     /**
-     * Builds a colony
+     * Removes a game
      *
-     * @param player the player
-     * @param buildableBuildingArea the buildable building area
+     * @param game the game
      */
-    void buildColony(@NonNull Player player, @NonNull ConstructableArea<Building> buildableBuildingArea);
+    void removeGame(@NonNull Game game);
 
     /**
-     * Builds a city
+     * Joins a game
      *
-     * @param player the player
-     * @param buildableBuildingArea the buildable building area
+     * @param playerJSON the player json information
+     * @return the game json information
      */
-    void buildCity(@NonNull Player player, @NonNull ConstructableArea<Building> buildableBuildingArea);
+    @NonNull GameJSON join(@NonNull PlayerJSON playerJSON);
 
     /**
-     * Buys a development card
+     * Leaves a game
      *
-     * @param player the player
+     * @param gameJSON the game json information
+     * @param playerJSON the player json information
      */
-    void buyDevelopmentCard(@NonNull Player player);
+    void leave(@NonNull GameJSON gameJSON, @NonNull PlayerJSON playerJSON);
 
     /**
-     * Play a development card
+     * Executes a command
      *
-     * @param player the player
-     * @param developmentCard the development card
+     * @param gameJSON the game json information
+     * @param commandJSON the command json information
+     * @return the notification json information
      */
-    void playDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard);
+    @NonNull NotificationJSON executeCommand(@NonNull GameJSON gameJSON, @NonNull CommandJSON commandJSON);
 
-    /**
-     * TODO
-     * Trades with another player
-     *
-     * @param trade the trade
-     */
-    void tradeWithPlayer(@NonNull Trade trade);
-
-    /**
-     * TODO
-     * Trades with the bank
-     *
-     * @param trade the trade
-     */
-    void tradeWithBank(@NonNull Trade trade);
-
-    void giveLoot();
-
-    /**
-     * Take all the resources of type given, exept from one player given
-     *
-     * @param player from who we don't take the resource
-     * @return all the resources from the other player
-     */
-    Resource takeResourcesAllPlayer(Player player, Resource resource);
-
-
-
-    /**
-     * choose another player
-     * @return Player
-     */
-    Player pickOtherPlayer();
-
-    /**
-     * choose a resource
-     * @return Resource
-     */
-    Resource pickResource();
-
-    /**
-     * choose a resource from what's left in bank
-     * @return Resource
-     */
-    Resource pickResourceBank();
-
-    /**
-     * choose a territory
-     * @return Territory
-     */
-    Territory pickTerritory();
-
-    /**
-     * choose a constructable road area
-     * @return ConstructableArea of road
-     */
-    ConstructableArea<Road> pickConstructableRoadArea();
-
-    /**
-     * @return special cards
-     */
-    List<SpecialCard> getSpecialsCards();
+    @NonNull GameJSON updateInformation(@NonNull GameJSON gameJSON);
 }

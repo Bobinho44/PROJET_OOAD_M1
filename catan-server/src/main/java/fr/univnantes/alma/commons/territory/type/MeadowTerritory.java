@@ -1,11 +1,9 @@
 package fr.univnantes.alma.commons.territory.type;
 
-import fr.univnantes.alma.commons.annotation.TerritoryAmount;
 import fr.univnantes.alma.commons.resource.type.WoolResource;
-import fr.univnantes.alma.core.territory.type.TerritoryType;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 
-@TerritoryAmount(4)
-public class MeadowTerritory extends TerritoryType {
+public class MeadowTerritory extends TerritoryImpl {
 
     /**
      * Creates the meadow territory

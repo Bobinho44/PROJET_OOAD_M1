@@ -1,0 +1,59 @@
+####################
+# Territory amount #
+####################
+
+DesertTerritory: 1
+FieldTerritory: 4
+ForestTerritory: 4
+HillTerritory: 3
+MeadowTerritory: 4
+MountainTerritory: 3
+
+###################
+# Resource amount #
+###################
+
+ClayResource: 19
+OreResource: 19
+WheatResource: 19
+WoodResource: 19
+WoolResource: 19
+
+#########################
+# Development card cost #
+#########################
+
+DevelopmentCardCost:
+  - "Wheat:1"
+  - "Wool:1"
+  - "Ore:1"
+
+###########################
+# Development card amount #
+###########################
+
+KnightCard: 14
+InventionCard: 2
+MonopolyCard: 2
+RoadBuildingCard: 2
+ChurchCard: 1
+LibraryCard: 1
+MarketplaceCard: 1
+ParliamentCard: 1
+UniversityCard: 1
+
+#####################
+# Construction cost #
+#####################
+
+City:
+  - "Wheat:2"
+  - "Ore:3"
+Colony:
+  - "Wood:1"
+  - "Clay:1"
+  - "Wheat:1"
+  - "Wool:1"
+RoadImpl:
+  - "Wood:1"
+  - "Clay:1"

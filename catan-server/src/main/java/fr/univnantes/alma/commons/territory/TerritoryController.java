@@ -1,10 +1,14 @@
 package fr.univnantes.alma.commons.territory;
 
-import fr.univnantes.alma.commons.annotation.TerritoryAmount;
+import fr.univnantes.alma.commons.resource.ResourceJSON;
 import fr.univnantes.alma.commons.token.TokenImpl;
 import fr.univnantes.alma.commons.utils.collector.CollectorsUtils;
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.commons.utils.stream.IndexedStream;
+import fr.univnantes.alma.core.configuration.Configuration;
+import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.type.Building;
+import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
 import fr.univnantes.alma.core.territory.Territory;
@@ -12,9 +16,12 @@ import fr.univnantes.alma.core.territory.TerritoryManager;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+/**
+ * Implementation of a territory manager
+ */
 public class TerritoryController implements TerritoryManager {
 
     /**
@@ -38,13 +45,9 @@ public class TerritoryController implements TerritoryManager {
      */
     private @NonNull Map<UUID, Territory> createTerritories() {
         return ReflectionUtils.getClassesOf(Territory.class, "fr.univnantes.alma.commons.territory.type").stream()
-                .map(territory -> IntStream.range(0, territory.getAnnotation(TerritoryAmount.class).value())
-                        .mapToObj(i -> Map.entry(UUID.randomUUID(), ReflectionUtils.getInstancesOf(territory)))
-                        .toList())
-                .flatMap(Collection::stream)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        //TODO add constructableArea
+                .flatMap(territory -> IntStream.range(0, Configuration.getTerritoryAmount(territory.getSimpleName()))
+                        .mapToObj(i -> ReflectionUtils.getInstancesOf(territory)))
+                .collect(CollectorsUtils.toShuffledMap(Territory::getUUID, territory -> territory));
     }
 
     /**
@@ -52,8 +55,8 @@ public class TerritoryController implements TerritoryManager {
      */
     private void affectTokens() {
         IndexedStream.from(territories.values().stream()
-                        .filter(Territory::hasResource)
-                        .collect(CollectorsUtils.toShuffledList()))
+                        .filter(this::hasResource)
+                        .toList())
                 .forEach((territory, i) -> territory.setToken(TokenImpl.values()[i]));
     }
 
@@ -61,24 +64,106 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
+    public @NonNull List<TerritoryJSON> getTerritoriesInformation() {
+        return territories.values().stream()
+                .map(territory -> {
+                    TerritoryJSON territoryJSON = new TerritoryJSON(territory.getUUID(), territory.hasThief());
+
+                    if (hasResource(territory)) {
+                        territoryJSON.resource(new ResourceJSON(getResource(territory).getName(), getResource(territory).getAmount()));
+                    }
+
+                    return territoryJSON;
+                })
+                .toList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public @NonNull List<Territory> getTerritories() {
-        return new ArrayList<>(territories.values());
+        return territories.values().stream().toList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Optional<Territory> getTerritory(@NonNull UUID uuid) {
-        return Optional.ofNullable(territories.get(uuid));
+    public @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws RuntimeException {
+        return Optional.ofNullable(territories.get(territoryJSON.getUUID())).orElseThrow();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Optional<Territory> getThiefTerritory() {
-        return territories.values().stream().filter(Territory::hasThief).findFirst();
+    public boolean hasTerritory(@NonNull TerritoryJSON territoryJSON) {
+        return Optional.ofNullable(territories.get(territoryJSON.getUUID())).isPresent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> constructableArea) {
+        return territory.getNeighbourBuildings().contains(constructableArea);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building) {
+        territory.getNeighbourBuildings().add(building);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building) {
+        territory.getNeighbourBuildings().remove(building);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> constructableArea) {
+        return territory.getNeighbourRoads().contains(constructableArea);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road) {
+        territory.getNeighbourRoads().add(road);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road) {
+        territory.getNeighbourRoads().remove(road);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasResource(@NonNull Territory territory) {
+        return territory.getResource().isPresent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull Resource getResource(@NonNull Territory territory) {
+        return territory.getResource().orElseThrow();
     }
 
     /**
@@ -86,7 +171,7 @@ public class TerritoryController implements TerritoryManager {
      */
     @Override
     public void moveThief(@NonNull Territory territory) {
-        getThiefTerritory().ifPresent(from -> from.setThiefOccupation(false));
+        territories.values().stream().filter(Territory::hasThief).findFirst().ifPresent(from -> from.setThiefOccupation(false));
         territory.setThiefOccupation(true);
     }
 
@@ -94,21 +179,20 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<Map.Entry<Player, Resource>> getLoot(int number) {
+    public @NonNull List<Map.Entry<Player, Resource>> getLoot(int diceNumber) {
         return territories.values().stream()
-                .filter(territory -> territory.getToken().getNumber() == number)
-                .filter(Territory::hasResource)
+                .filter(this::hasResource)
+                .filter(territory -> territory.getToken().getNumber() == diceNumber)
                 .filter(territory -> !territory.hasThief())
-                .map(territory -> territory.getNeighbourBuildings().values().stream()
-                        .filter(area -> area.getConstruction().isPresent())
-                        .map(area -> IntStream.range(0, area.getLootAmount())
-                                .mapToObj(i -> Map.entry(area.getConstruction().get().getOwner(), territory.getResource().get()))
-                                .toList())
-                        .flatMap(Collection::stream)
-                        .toList())
-                .flatMap(Collection::stream)
-                //.sorted() //TODO Trié les joueurs ?
+                .flatMap(this::extractLoot)
                 .toList();
+    }
+
+    private Stream<Map.Entry<Player, Resource>> extractLoot(@NonNull Territory territory) {
+        return territory.getNeighbourBuildings().stream()
+                .filter(area -> area.getConstruction().isPresent())
+                .flatMap(area -> IntStream.range(0, area.getLootAmount())
+                        .mapToObj(i -> Map.entry(area.getConstruction().get().getOwner(), getResource(territory))));
     }
 
 }

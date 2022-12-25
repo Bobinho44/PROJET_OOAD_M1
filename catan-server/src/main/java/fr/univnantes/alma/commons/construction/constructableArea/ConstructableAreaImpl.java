@@ -13,12 +13,14 @@ import org.springframework.lang.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ConstructableAreaImpl<T extends Construction> implements ConstructableArea<T> {
 
     /**
      * Fields
      */
+    private final UUID uuid;
     private final List<ConstructableArea<Building>> neighbourBuildings = new ArrayList<>();
     private final List<ConstructableArea<Road>> neighbourRoads = new ArrayList<>();
     private T construction;
@@ -34,9 +36,15 @@ public class ConstructableAreaImpl<T extends Construction> implements Constructa
      * @param dock the dock
      */
     public ConstructableAreaImpl(@NonNull ConstructStrategy<T> constructStrategy, @NonNull LootStrategy<T> lootStrategy, @Nullable Dock dock) {
+        this.uuid = UUID.randomUUID();
         this.constructStrategy = constructStrategy;
         this.lootStrategy = lootStrategy;
         this.dock = dock;
+    }
+
+    @Override
+    public @NonNull UUID getUUID() {
+        return uuid;
     }
 
     /**
@@ -189,6 +197,26 @@ public class ConstructableAreaImpl<T extends Construction> implements Constructa
     @Override
     public boolean hasDock() {
         return dock != null;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConstructableAreaImpl<?>)) return false;
+
+        return uuid.equals(((ConstructableAreaImpl<?>) o).getUUID());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 
 }

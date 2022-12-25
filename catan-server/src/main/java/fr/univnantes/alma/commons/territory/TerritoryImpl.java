@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.territory;
 
 import java.util.*;
 
+import fr.univnantes.alma.commons.trade.TradeImpl;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
@@ -11,11 +12,15 @@ import fr.univnantes.alma.core.token.Token;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-public class TerritoryImpl implements Territory {
+/**
+ * Implementation of a territory
+ */
+public abstract class TerritoryImpl implements Territory {
 
     /**
      * Fields
      */
+    private final UUID uuid;
     private final List<ConstructableArea<Building>> neighbourBuildings = new ArrayList<>();
     private final List<ConstructableArea<Road>> neighbourRoads = new ArrayList<>();
     private final Resource resource;
@@ -28,8 +33,17 @@ public class TerritoryImpl implements Territory {
      * @param resource the resource (null for desert)
      */
     public TerritoryImpl(@Nullable Resource resource) {
+        this.uuid = UUID.randomUUID();
         this.resource = resource;
         this.hasThief = resource == null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull UUID getUUID() {
+        return uuid;
     }
 
     /**
@@ -44,30 +58,6 @@ public class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasNeighbourBuilding() {
-        return !neighbourBuildings.isEmpty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addNeighbourBuilding(@NonNull ConstructableArea<Building> building) {
-        neighbourBuildings.add(building);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void removeNeighbourBuilding(@NonNull ConstructableArea<Building> building) {
-        neighbourBuildings.remove(building);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public @NonNull List<ConstructableArea<Road>> getNeighbourRoads() {
         return neighbourRoads;
     }
@@ -76,40 +66,8 @@ public class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasNeighbourRoad() {
-        return !neighbourRoads.isEmpty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addNeighbourRoad(@NonNull ConstructableArea<Road> road) {
-        neighbourRoads.add(road);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void removeNeighbourRoad(@NonNull ConstructableArea<Road> road) {
-        neighbourRoads.remove(road);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public @NonNull Optional<Resource> getResource() {
         return Optional.ofNullable(resource);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasResource() {
-        return resource != null;
     }
 
     /**
@@ -142,6 +100,25 @@ public class TerritoryImpl implements Territory {
     @Override
     public void setThiefOccupation(boolean hasThief) {
         this.hasThief = hasThief;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TerritoryImpl)) return false;
+
+        return uuid.equals(((TerritoryImpl) o).getUUID());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 
 }

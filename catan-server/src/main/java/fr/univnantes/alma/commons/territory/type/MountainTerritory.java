@@ -1,11 +1,9 @@
 package fr.univnantes.alma.commons.territory.type;
 
-import fr.univnantes.alma.commons.annotation.TerritoryAmount;
 import fr.univnantes.alma.commons.resource.type.OreResource;
-import fr.univnantes.alma.core.territory.type.TerritoryType;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 
-@TerritoryAmount(3)
-public class MountainTerritory extends TerritoryType {
+public class MountainTerritory extends TerritoryImpl {
 
     /**
      * Creates the mountain territory

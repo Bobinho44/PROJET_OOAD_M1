@@ -1,33 +1,63 @@
 package fr.univnantes.alma.core.card;
 
-import fr.univnantes.alma.commons.game.GameController;
+import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
+import java.util.UUID;
+
 /**
- * Interface representing cards
+ * Interface representing a card
  */
 public interface Card {
 
     /**
-     * Applies the use effect of the card
+     * Gets uuid
      *
-     * @param player the affected player
+     * @return the uuid;
      */
-    void useEffect(@NonNull GameController gameController, @NonNull Player player);
+    @NonNull UUID getUUID();
 
     /**
-     * Applies the get effect of the card
+     * Gets the name
      *
-     * @param player the affected player
+     * @return the name
      */
-    void getEffect(@NonNull Player player);
+    @NonNull String getName();
 
     /**
-     * Applies the loose effect of the card
+     * Gets the picture
      *
-     * @param player the affected player
+     * @return the picture
      */
-    void looseEffect(@NonNull Player player);
+    @NonNull String getPicture();
+
+    /**
+     * Applies the use effect
+     *
+     * @param commandManager the command manager
+     * @param player         the player
+     * @return the command result json information
+     */
+    @NonNull NotificationJSON useEffect(@NonNull CommandManager commandManager, @NonNull Player player);
+
+    /**
+     * Applies the get effect
+     *
+     * @param commandManager the command manager
+     * @param player         the player
+     * @return the command result json information
+     */
+    @NonNull NotificationJSON getEffect(@NonNull CommandManager commandManager, @NonNull Player player);
+
+    /**
+     * Applies the loose effect
+     *
+     * @param commandManager the command manager
+     * @param player         the player
+     * @return the command result json information
+     */
+    @NonNull NotificationJSON looseEffect(@NonNull CommandManager commandManager, @NonNull Player player);
 
 }

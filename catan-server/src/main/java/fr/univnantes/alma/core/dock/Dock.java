@@ -2,7 +2,6 @@ package fr.univnantes.alma.core.dock;
 
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 public interface Dock {
 
@@ -11,8 +10,7 @@ public interface Dock {
      *
      * @return the resource
      */
-    @Nullable
-    Resource getResource();
+    @NonNull Resource getResource();
 
     /**
      * Gets the ratio

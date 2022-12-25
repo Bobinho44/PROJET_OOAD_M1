@@ -1,22 +1,17 @@
 package fr.univnantes.alma.commons.card.development.victoryPoint;
 
-import fr.univnantes.alma.commons.annotation.DevelopmentCardCost;
-import fr.univnantes.alma.commons.annotation.ResourceInformation;
-import fr.univnantes.alma.commons.game.GameController;
+import fr.univnantes.alma.core.notification.NotificationJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
+import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Abstract Class representing victory point cards
  */
-@DevelopmentCardCost(resources = {
-        @ResourceInformation(name = "Wheat", amount = 1),
-        @ResourceInformation(name = "Wool", amount = 1),
-        @ResourceInformation(name = "Ore", amount = 1)
-})
 public abstract class VictoryPointCard extends DevelopmentCard {
 
     /**
@@ -28,12 +23,15 @@ public abstract class VictoryPointCard extends DevelopmentCard {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void useEffect(@NonNull GameController gameController, @NonNull Player player) {
+    public @NonNull NotificationJSON useEffect(@NonNull CommandManager commandManager, @NonNull Player player) {
+        Objects.requireNonNull(commandManager, "commandManager cannot be null!");
         Objects.requireNonNull(player, "player cannot be null!");
 
-        player.addVictoryPoints(1);
+        return commandManager.execute("addVictoryPoint", List.of(player, 1));
     }
 
 }

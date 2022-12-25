@@ -2,6 +2,9 @@ package fr.univnantes.alma.commons.token;
 
 import fr.univnantes.alma.core.token.Token;
 
+/**
+ * Implementation of a token
+ */
 public enum TokenImpl implements Token {
     A(5),
     B(2),
@@ -22,12 +25,23 @@ public enum TokenImpl implements Token {
     Q(3),
     R(11);
 
+    /**
+     * Fields
+     */
     private final int number;
 
+    /**
+     * Creates a new token
+     *
+     * @param number the number
+     */
     TokenImpl(int number) {
         this.number = number;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getNumber() {
         return number;

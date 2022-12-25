@@ -1,57 +1,84 @@
 package fr.univnantes.alma.core.construction;
 
+import fr.univnantes.alma.commons.construction.ConstructionJSON;
+import fr.univnantes.alma.commons.construction.constructableArea.ConstructableAreaJSON;
 import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
+/**
+ * Interface representing a construction manager
+ */
 public interface ConstructionManager {
 
     /**
-     * Gets a constructable area
+     * Gets the constructable areas information
      *
-     * @param uuid the constructable area uuid
-     * @param type the type
-     * @return the constructable area
+     * @return the constructable areas information
      */
-    <T extends Construction> @NonNull Optional<ConstructableArea<T>> getConstructableArea(@NonNull UUID uuid, @NonNull Class<T> type);
+    @NonNull List<ConstructableAreaJSON> getConstructableAreasInformation();
 
     /**
-     * Gets a construction
+     * Gets the constructable area
      *
-     * @param owner the owner
-     * @param type the type
+     * @param constructableAreaJSON the constructable area information
+     * @return the constructable area
+     * @throws RuntimeException if the constructable area does not exist
+     */
+    @NonNull <T extends Construction> ConstructableArea<T> getConstructableArea(@NonNull ConstructableAreaJSON constructableAreaJSON, @NonNull Class<T> type) throws RuntimeException;
+
+    /**
+     * Checks if the constructable area exist
+     *
+     * @param constructableAreaJSON the constructable area information
+     * @return true if the constructable area exist, false otherwise
+     */
+    <T extends Construction> boolean hasConstructableArea(@NonNull ConstructableAreaJSON constructableAreaJSON, @NonNull Class<T> type);
+
+    /**
+     * Generates the construction
+     *
+     * @param constructionJSON the construction information
      * @return the construction
      */
-    <T extends Construction> T getConstruction(@NonNull Player owner, @NonNull Class<T> type);
+    @NonNull <T extends Construction> T generateConstruction(@NonNull ConstructionJSON constructionJSON, @NonNull Class<T> type, @NonNull Player player);
 
+    <T extends Construction> boolean hasConstruction(@NonNull ConstructionJSON constructionJSON, @NonNull Class<T> type, @NonNull Player player);
     /**
-     * Gets a construction cost
+     * Gets the construction cost
      *
-     * @param type the type
+     * @param construction the construction
      * @return the construction cost
      */
-    <T extends Construction> @NonNull List<Resource> getConstructionCost(@NonNull Class<T> type);
+    @NonNull List<Resource> getConstructionCost(@NonNull Construction construction);
 
     /**
      * Checks if the construction is constructable
      *
-     * @param area the area
+     * @param constructableArea the constructable area
      * @param construction the construction
      * @return true if the construction is constructable, false otherwise
      */
-    <A extends Construction, T extends A> boolean isConstructable(@NonNull ConstructableArea<A> area, @NonNull T construction);
+    <T extends Construction> boolean isConstructable(@NonNull ConstructableArea<T> constructableArea, @NonNull T construction);
 
     /**
      * Constructs the construction on the area
      *
-     * @param area the area
+     * @param constructableArea the constructable area
      * @param construction the construction
      */
-    <A extends Construction, T extends A> void construct(@NonNull ConstructableArea<A> area, @NonNull T construction);
+    <T extends Construction> void construct(@NonNull ConstructableArea<T> constructableArea, @NonNull T construction);
+
+    /**
+     * Gets the minimum dock ratio of the player for the selected resource
+     *
+     * @param player the player
+     * @param resource the resource
+     * @return the minimum dock ratio of the player for the selected resource
+     */
+    int getPlayerDockRatio(@NonNull Player player, @NonNull Resource resource);
 
 }

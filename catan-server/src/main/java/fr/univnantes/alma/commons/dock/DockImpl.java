@@ -18,7 +18,7 @@ public class DockImpl implements Dock {
      * @param resource the resource
      * @param ratio the ratio
      */
-    public DockImpl(Resource resource, int ratio) {
+    public DockImpl(@NonNull Resource resource, int ratio) {
         this.ratio = ratio;
         this.resource = resource;
     }
@@ -35,7 +35,7 @@ public class DockImpl implements Dock {
      * {@inheritDoc}
      */
     @Override
-    public Resource getResource() {
+    public @NonNull Resource getResource() {
         return resource;
     }
 

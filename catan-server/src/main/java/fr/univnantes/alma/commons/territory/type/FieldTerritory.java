@@ -1,11 +1,9 @@
 package fr.univnantes.alma.commons.territory.type;
 
-import fr.univnantes.alma.commons.annotation.TerritoryAmount;
 import fr.univnantes.alma.commons.resource.type.WheatResource;
-import fr.univnantes.alma.core.territory.type.TerritoryType;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 
-@TerritoryAmount(4)
-public class FieldTerritory extends TerritoryType {
+public class FieldTerritory extends TerritoryImpl {
 
     /**
      * Creates the field territory

@@ -1,10 +1,10 @@
 package fr.univnantes.alma.commons.resource.type;
 
-import fr.univnantes.alma.commons.annotation.CardAmount;
 import fr.univnantes.alma.commons.resource.ResourceImpl;
-import fr.univnantes.alma.core.ressource.Resource;
 
-@CardAmount(19)
+/**
+ * Class representing the resource: clay
+ */
 public class ClayResource  extends ResourceImpl {
 
     /**
@@ -14,11 +14,4 @@ public class ClayResource  extends ResourceImpl {
         super("Clay");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Resource newResource() {
-        return new ClayResource();
-    }
 }

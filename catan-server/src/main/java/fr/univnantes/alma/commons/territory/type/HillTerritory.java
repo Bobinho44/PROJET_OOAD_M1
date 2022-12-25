@@ -1,11 +1,9 @@
 package fr.univnantes.alma.commons.territory.type;
 
-import fr.univnantes.alma.commons.annotation.TerritoryAmount;
 import fr.univnantes.alma.commons.resource.type.ClayResource;
-import fr.univnantes.alma.core.territory.type.TerritoryType;
+import fr.univnantes.alma.commons.territory.TerritoryImpl;
 
-@TerritoryAmount(3)
-public class HillTerritory extends TerritoryType {
+public class HillTerritory extends TerritoryImpl {
 
     /**
      * Creates the hill territory

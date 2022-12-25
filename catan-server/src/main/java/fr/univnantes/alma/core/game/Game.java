@@ -1,96 +1,68 @@
 package fr.univnantes.alma.core.game;
 
-import fr.univnantes.alma.core.card.type.DevelopmentCard;
-import fr.univnantes.alma.core.card.type.SpecialCard;
-import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
-import fr.univnantes.alma.core.trade.Trade;
+import fr.univnantes.alma.commons.game.GameJSON;
+import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.commons.player.PlayerJSON;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Interface representing a game
+ */
 public interface Game {
 
-    void rollDice();
-
     /**
-     * Moves the thief
+     * Gets the uuid
      *
-     * @param uuid the territory uuid
+     * @return the uuid
      */
-    void moveThief(@NonNull UUID uuid);
+    @NonNull UUID getUUID();
 
     /**
-     * Steals a card from another player
+     * Gets the game information
      *
-     * @param stealer the stealer uuid
-     * @param stolen the stealer uuid
+     * @return the game information
      */
-    void stealCardFromPlayer(@NonNull UUID stealer, @NonNull UUID stolen);
+    @NonNull GameJSON getGameInformation();
 
     /**
-     * Discards half of the player's cards
+     * Checks if the game is full
      *
-     * @param player the player uuid
+     * @return true if the game is full, false otherwise
      */
-    void discardHalfCards(@NonNull UUID player);
+    boolean isFull();
 
     /**
-     * Builds a road
+     * Adds the player to the game
      *
-     * @param player the player uuid
-     * @param buildableRoadArea the buildable road area uuid
+     * @param playerJSON the player information
      */
-    void buildRoad(@NonNull UUID player, @NonNull UUID buildableRoadArea);
+    void addPlayer(@NonNull PlayerJSON playerJSON);
 
     /**
-     * Builds a colony
+     * Removes the player from the game
      *
-     * @param player the player uuid
-     * @param buildableColonyArea the buildable colony area uuid
+     * @param playerJSON the player information
      */
-    void buildColony(@NonNull UUID player, @NonNull UUID buildableColonyArea);
+    void removePlayer(@NonNull PlayerJSON playerJSON);
 
     /**
-     * Builds a city
+     * Checks if the player can play
      *
-     * @param player the player uuid
-     * @param buildableCityArea the buildable city area uuid
+     * @param playerJSON the player information
+     * @return true if the player from the game, false otherwise
      */
-    void buildCity(@NonNull UUID player, @NonNull UUID buildableCityArea);
+    boolean canPlay(@NonNull PlayerJSON playerJSON);
 
     /**
-     * Buys a development card
+     * Executes a command
      *
-     * @param player the player uuid
+     * @param name the name
+     * @param parameters the parameters
+     * @return the result notification
      */
-    void buyDevelopmentCard(@NonNull UUID player);
+    @NonNull NotificationJSON executeCommand(@NonNull String name, @NonNull List<Object> parameters);
 
-    /**
-     * TODO voir comment on communique la carte du client vers le serveur
-     * Play a development card
-     *
-     * @param player the player uuid
-     */
-    void playDevelopmentCard(@NonNull UUID player, @NonNull DevelopmentCard developmentCard);
-
-    /**
-     * Trades with another player
-     *
-     * @param trade the trade
-     */
-    void tradeWithPlayer(@NonNull Trade trade);
-
-    /**
-     * Trades with the bank
-     *
-     * @param trade the trade
-     */
-    void tradeWithBank(@NonNull Trade trade);
-
-    /**
-     * Finishes the tour
-     */
-    void finishTheTour();
 }

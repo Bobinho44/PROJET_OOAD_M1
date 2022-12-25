@@ -1,50 +1,103 @@
 package fr.univnantes.alma.core.card;
 
+import fr.univnantes.alma.commons.card.development.DevelopmentCardJSON;
+import fr.univnantes.alma.commons.card.special.SpecialCardJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
+import fr.univnantes.alma.core.command.CommandManager;
+import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.ressource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Interface representing a card manager
+ */
 public interface CardManager {
 
     /**
-     * Checks if a development card can be picked
+     * Gets the development cards information
      *
-     * @param type the type
-     * @return true if a development card can be picked, false otherwise
+     * @return the development cards information
      */
-    <T extends DevelopmentCard> boolean canPickDevelopmentCard(@NonNull Class<T> type);
+    @NonNull List<DevelopmentCardJSON> getDevelopmentCardsInformation();
+
+    /**
+     * Generates the development card
+     *
+     * @param developmentCardJSON the development card information
+     * @return the development card
+     */
+    @NonNull DevelopmentCard generateDevelopmentCard(@NonNull DevelopmentCardJSON developmentCardJSON);
+
+    /**
+     * Gets a development card
+     *
+     * @return the development card
+     * @throws RuntimeException if there is no development card
+     */
+    @NonNull DevelopmentCard getDevelopmentCard() throws RuntimeException;
+
+    /**
+     * Checks if a development card exist
+     *
+     * @return true if a development card exist, false otherwise
+     */
+    boolean hasDevelopmentCard();
 
     /**
      * Gets the development card cost
      *
-     * @param type the type
      * @return the development card cost
      */
-    @NonNull <T extends DevelopmentCard> List<Resource> getDevelopmentCardCost(@NonNull Class<T> type);
+    @NonNull List<Resource> getDevelopmentCardCost();
 
     /**
-     * Picks a development card
+     * Adds the development card
      *
-     * @param type the type
-     * @return the development card
+     * @param developmentCard the development card
      */
-    @NonNull <T extends DevelopmentCard> DevelopmentCard pickDevelopmentCard(@NonNull Class<T> type);
+    void addDevelopmentCard(@NonNull DevelopmentCard developmentCard);
 
     /**
-     * Picks a special card
+     * Removes the development card
      *
-     * @param type the type
+     * @param developmentCard the development card
+     */
+    void removeDevelopmentCard(@NonNull DevelopmentCard developmentCard);
+
+    /**
+     * Gets the special cards information
+     *
+     * @return the special cards information
+     */
+    @NonNull List<SpecialCardJSON> getSpecialCardsInformation();
+
+    /**
+     * Gets the special card
+     *
+     * @param specialCardJSON the special card
      * @return the special card
+     * @throws RuntimeException if the special card does not exist
      */
-    <T extends SpecialCard> @NonNull Optional<T> pickSpecialCard(@NonNull Class<T> type);
+    @NonNull SpecialCard getSpecialCard(@NonNull SpecialCardJSON specialCardJSON) throws RuntimeException;
 
     /**
-     * @return special cards
+     * Checks if the special card exist
+     *
+     * @param specialCardJSON the special card
+     * @return true if the special card exist, false otherwise
      */
-    List<SpecialCard> getSpecialsCards();
+    boolean hasSpecialCard(@NonNull SpecialCardJSON specialCardJSON);
+
+    /**
+     * Uses the special card
+     *
+     * @param specialCard    the special card
+     * @param owner          the new owner
+     * @param commandManager the command manager
+     */
+    void useSpecialCard(@NonNull SpecialCard specialCard, @NonNull Player owner, @NonNull CommandManager commandManager);
 
 }
