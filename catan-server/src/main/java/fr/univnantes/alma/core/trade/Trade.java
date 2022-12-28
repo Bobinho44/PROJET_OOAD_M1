@@ -1,7 +1,7 @@
 package fr.univnantes.alma.core.trade;
 
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;

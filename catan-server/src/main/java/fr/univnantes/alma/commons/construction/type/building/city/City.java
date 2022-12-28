@@ -4,6 +4,9 @@ import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
+/**
+ * Implementation of a building: city
+ */
 public class City extends Building {
 
     /**

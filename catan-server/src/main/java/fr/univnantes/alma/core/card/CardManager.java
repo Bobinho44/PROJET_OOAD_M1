@@ -1,12 +1,12 @@
 package fr.univnantes.alma.core.card;
 
-import fr.univnantes.alma.commons.card.development.DevelopmentCardJSON;
-import fr.univnantes.alma.commons.card.special.SpecialCardJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
-import fr.univnantes.alma.core.command.CommandManager;
+import fr.univnantes.alma.core.exception.EmptyCardDeckException;
+import fr.univnantes.alma.core.exception.UndefinedCardOwnerException;
+import fr.univnantes.alma.core.exception.UnregisteredCardException;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -21,23 +21,24 @@ public interface CardManager {
      *
      * @return the development cards information
      */
-    @NonNull List<DevelopmentCardJSON> getDevelopmentCardsInformation();
+    @NonNull List<CardJSON> getDevelopmentCardsInformation();
 
     /**
      * Generates the development card
      *
-     * @param developmentCardJSON the development card information
+     * @param cardJSON the development card information
      * @return the development card
+     * @throws UnregisteredCardException if the development card does not exist
      */
-    @NonNull DevelopmentCard generateDevelopmentCard(@NonNull DevelopmentCardJSON developmentCardJSON);
+    @NonNull DevelopmentCard generateDevelopmentCard(@NonNull CardJSON cardJSON) throws UnregisteredCardException;
 
     /**
      * Gets a development card
      *
      * @return the development card
-     * @throws RuntimeException if there is no development card
+     * @throws EmptyCardDeckException if there is no development card
      */
-    @NonNull DevelopmentCard getDevelopmentCard() throws RuntimeException;
+    @NonNull DevelopmentCard getDevelopmentCard() throws EmptyCardDeckException;
 
     /**
      * Checks if a development card exist
@@ -72,32 +73,48 @@ public interface CardManager {
      *
      * @return the special cards information
      */
-    @NonNull List<SpecialCardJSON> getSpecialCardsInformation();
+    @NonNull List<CardJSON> getSpecialCardsInformation();
 
     /**
      * Gets the special card
      *
-     * @param specialCardJSON the special card
+     * @param cardJSON the special card information
      * @return the special card
-     * @throws RuntimeException if the special card does not exist
+     * @throws UnregisteredCardException if the special card does not exist
      */
-    @NonNull SpecialCard getSpecialCard(@NonNull SpecialCardJSON specialCardJSON) throws RuntimeException;
+    @NonNull SpecialCard getSpecialCard(@NonNull CardJSON cardJSON) throws UnregisteredCardException;
 
     /**
      * Checks if the special card exist
      *
-     * @param specialCardJSON the special card
+     * @param cardJSON the special card information
      * @return true if the special card exist, false otherwise
      */
-    boolean hasSpecialCard(@NonNull SpecialCardJSON specialCardJSON);
+    boolean hasSpecialCard(@NonNull CardJSON cardJSON);
+
+    /**
+     * Gets the special card owner
+     *
+     * @param specialCard the special card
+     * @return the special card owner
+     * @throws UndefinedCardOwnerException if the owner does not exist
+     */
+    @NonNull Player getSpecialCardOwner(@NonNull SpecialCard specialCard) throws UndefinedCardOwnerException;
+
+    /**
+     * Checks if the special has an owner
+     *
+     * @param specialCard the special card
+     * @return true if the special has an owner, false otherwise
+     */
+    boolean hasSpecialCardOwner(@NonNull SpecialCard specialCard);
 
     /**
      * Uses the special card
      *
      * @param specialCard    the special card
      * @param owner          the new owner
-     * @param commandManager the command manager
      */
-    void useSpecialCard(@NonNull SpecialCard specialCard, @NonNull Player owner, @NonNull CommandManager commandManager);
+    void useSpecialCard(@NonNull SpecialCard specialCard, @NonNull Player owner);
 
 }

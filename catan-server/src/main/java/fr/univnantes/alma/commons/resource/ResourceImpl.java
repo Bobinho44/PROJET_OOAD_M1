@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.resource;
 
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 

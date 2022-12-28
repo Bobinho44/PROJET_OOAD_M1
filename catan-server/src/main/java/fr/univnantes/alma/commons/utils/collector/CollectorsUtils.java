@@ -7,29 +7,31 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class CollectorsUtils {
+/**
+ * Utility class that handles collectors
+ */
+public final class CollectorsUtils {
 
-    public static <T> Collector<T, ?, List<T>> toShuffledList() {
+    /**
+     * Disabling the constructor (utility class)
+     */
+    private CollectorsUtils() {}
+
+    /**
+     * Creates the collector to collect element to shuffled map
+     *
+     * @param keyMapper the key mapper
+     * @param valueMapper the value mapper
+     * @return the collector to collect element to shuffled map
+     */
+    public static @NonNull <T, K, U> Collector<T, ?, Map<K, U>> toShuffledMap(@NonNull Function<T, K> keyMapper, @NonNull Function<T, U> valueMapper) {
+        Objects.requireNonNull(keyMapper, "keyMapper cannot be null!");
+        Objects.requireNonNull(valueMapper, "valueMapper cannot be null!");
+
         return Collectors.collectingAndThen(
                 Collectors.toCollection(ArrayList::new),
-                list -> {
-                    Collections.shuffle(list);
-                    return list;
-                });
-    }
 
-    public static <T> Collector<T, ?, Stack<T>> toShuffledStack() {
-        return Collectors.collectingAndThen(
-                Collectors.toCollection(Stack::new),
-                list -> {
-                    Collections.shuffle(list);
-                    return list;
-                });
-    }
-
-    public static <T, K, U> Collector<T, ?, Map<K, U>> toShuffledMap(@NonNull Function<T, K> keyMapper, Function<T, U> valueMapper) {
-        return Collectors.collectingAndThen(
-                Collectors.toCollection(ArrayList::new),
+                //Shuffle the list before collecting
                 list -> {
                     List<T> objects = new ArrayList<>(list);
                     Collections.shuffle(objects);

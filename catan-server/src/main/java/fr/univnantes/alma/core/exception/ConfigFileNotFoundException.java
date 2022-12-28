@@ -1,3 +1,6 @@
 package fr.univnantes.alma.core.exception;
 
-public class ConfigFileNotFoundException extends RuntimeException {}
+/**
+ * Implementation of a runtime exception: config file not found exception
+ */
+public final class ConfigFileNotFoundException extends RuntimeException {}

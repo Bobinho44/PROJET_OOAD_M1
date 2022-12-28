@@ -4,7 +4,7 @@ import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import org.springframework.lang.NonNull;
 
 /**
- * Abstract Class representing progress cards
+ * Abstract Implementation of a progress cards
  */
 public abstract class ProgressCard extends DevelopmentCard {
 

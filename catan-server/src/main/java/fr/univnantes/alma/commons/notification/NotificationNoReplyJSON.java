@@ -6,14 +6,17 @@ import org.springframework.lang.NonNull;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Implementation of a no reply notification
+ */
 public enum NotificationNoReplyJSON implements NotificationJSON {
     COMMAND_SUCCESS,
     COMMAND_NOT_FOUND,
     PLAYER_NOT_FOUND,
     PLAYER_HAS_NOT_CONSTRUCTION,
     PLAYER_CAN_NOT_BUY_DEVELOPMENT_CARD,
-    PLAYER_HAS_NOT_DEVELOPMENT_CARD,
-    PLAYER_HAS_NOT_RESOURCE,
+    PLAYER_HAS_NO_DEVELOPMENT_CARD,
+    PLAYER_HAS_NO_RESOURCE,
     PLAYER_CAN_NOT_PLAY,
     CONSTRUCTABLE_AREA_NOT_FOUND,
     CONSTRUCTION_NOT_FOUND,
@@ -23,16 +26,21 @@ public enum NotificationNoReplyJSON implements NotificationJSON {
     TERRITORY_NOT_FOUND,
     TRADE_NOT_FOUND,
     GAME_NOT_FOUND,
-    IMPOSSIBLE_ACTION;
+    CLIENT_HAS_NO_GAME;
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean needReply() {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public @NonNull List<Object> getInformationReply() {
+    public @NonNull List<Object> replyInformation() {
         return Collections.emptyList();
     }
 

@@ -1,9 +1,9 @@
 package fr.univnantes.alma.core.territory;
 
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.constructableArea.Area;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import fr.univnantes.alma.core.token.Token;
 import org.springframework.lang.NonNull;
 
@@ -28,14 +28,14 @@ public interface Territory {
      *
      * @return all neighbour buildings
      */
-    @NonNull List<ConstructableArea<Building>> getNeighbourBuildings();
+    @NonNull List<Area<Building>> getNeighbourBuildings();
 
     /**
      * Gets all neighbour roads
      *
      * @return all neighbour roads
      */
-    @NonNull List<ConstructableArea<Road>> getNeighbourRoads();
+    @NonNull List<Area<Road>> getNeighbourRoads();
 
     /**
      * Gets the resource

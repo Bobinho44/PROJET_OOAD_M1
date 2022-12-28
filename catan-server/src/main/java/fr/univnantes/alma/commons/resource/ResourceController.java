@@ -2,8 +2,10 @@ package fr.univnantes.alma.commons.resource;
 
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.core.configuration.Configuration;
-import fr.univnantes.alma.core.ressource.Resource;
-import fr.univnantes.alma.core.ressource.ResourceManager;
+import fr.univnantes.alma.core.exception.InvalidInformationException;
+import fr.univnantes.alma.core.resource.Resource;
+import fr.univnantes.alma.core.resource.ResourceJSON;
+import fr.univnantes.alma.core.resource.ResourceManager;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class ResourceController implements ResourceManager {
      * @return the resource deck
      */
     private @NonNull Map<String, Resource> createResourceDeck() {
-        return ReflectionUtils.getClassesOf(ResourceImpl.class, "fr.univnantes.alma.commons.resource.type").stream()
+        return ReflectionUtils.getSubClassesOf(ResourceImpl.class, "fr.univnantes.alma.commons.resource.type").stream()
                 .map(resource -> ReflectionUtils.getInstancesOf(resource).amount(Configuration.getResourceAmount(resource.getSimpleName())))
                 .collect(Collectors.toMap(Resource::getName, resource -> resource));
     }
@@ -46,7 +48,7 @@ public class ResourceController implements ResourceManager {
     @Override
     public @NonNull List<ResourceJSON> getResourcesInformation() {
         return resources.values().stream()
-                .map(resource -> new ResourceJSON(resource.getName(), resource.getAmount()))
+                .map(resource -> (ResourceJSON) new ResourceJSONImpl(resource.getName(), resource.getAmount()))
                 .toList();
     }
 
@@ -54,14 +56,14 @@ public class ResourceController implements ResourceManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Resource generateResource(@NonNull ResourceJSON resourceJSON) {
+    public @NonNull Resource generateResource(@NonNull ResourceJSON resourceJSON) throws InvalidInformationException {
         Objects.requireNonNull(resourceJSON, "resourceJSON cannot be null!");
 
-        return ReflectionUtils.getClassesOf(ResourceImpl.class, "fr.univnantes.alma.commons.resource.type").stream()
+        return ReflectionUtils.getSubClassesOf(ResourceImpl.class, "fr.univnantes.alma.commons.resource.type").stream()
                 .map(type -> ReflectionUtils.getInstancesOf(type).amount(resourceJSON.getAmount()))
                 .filter(resource -> resource.getName().equals(resourceJSON.getName()))
                 .findFirst()
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(InvalidInformationException::new);
     }
 
     /**

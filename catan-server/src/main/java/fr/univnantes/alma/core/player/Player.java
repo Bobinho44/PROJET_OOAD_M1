@@ -2,7 +2,7 @@ package fr.univnantes.alma.core.player;
 
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.Construction;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;

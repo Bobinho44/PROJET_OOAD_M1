@@ -4,7 +4,10 @@ import fr.univnantes.alma.core.dice.Dice;
 
 import java.util.Random;
 
-public class DiceImpl implements Dice {
+/**
+ * Implementation of a dice
+ */
+public final class DiceImpl implements Dice {
 
     /**
      * Fields

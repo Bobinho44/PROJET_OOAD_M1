@@ -2,11 +2,10 @@ package fr.univnantes.alma.commons.territory;
 
 import java.util.*;
 
-import fr.univnantes.alma.commons.trade.TradeImpl;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.construction.constructableArea.Area;
+import fr.univnantes.alma.core.resource.Resource;
 import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.core.token.Token;
 import org.springframework.lang.NonNull;
@@ -21,8 +20,8 @@ public abstract class TerritoryImpl implements Territory {
      * Fields
      */
     private final UUID uuid;
-    private final List<ConstructableArea<Building>> neighbourBuildings = new ArrayList<>();
-    private final List<ConstructableArea<Road>> neighbourRoads = new ArrayList<>();
+    private final List<Area<Building>> neighbourBuildings = new ArrayList<>();
+    private final List<Area<Road>> neighbourRoads = new ArrayList<>();
     private final Resource resource;
     private Token token;
     private boolean hasThief;
@@ -50,7 +49,7 @@ public abstract class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<ConstructableArea<Building>> getNeighbourBuildings() {
+    public @NonNull List<Area<Building>> getNeighbourBuildings() {
         return neighbourBuildings;
     }
 
@@ -58,7 +57,7 @@ public abstract class TerritoryImpl implements Territory {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<ConstructableArea<Road>> getNeighbourRoads() {
+    public @NonNull List<Area<Road>> getNeighbourRoads() {
         return neighbourRoads;
     }
 
@@ -83,6 +82,8 @@ public abstract class TerritoryImpl implements Territory {
      */
     @Override
     public void setToken(@NonNull Token token) {
+        Objects.requireNonNull(token, "token cannot be null!");
+
         this.token = token;
     }
 

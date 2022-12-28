@@ -1,8 +1,7 @@
 package fr.univnantes.alma.core.game;
 
-import fr.univnantes.alma.commons.game.GameJSON;
 import fr.univnantes.alma.core.notification.NotificationJSON;
-import fr.univnantes.alma.commons.player.PlayerJSON;
+import fr.univnantes.alma.core.player.PlayerJSON;
 import org.springframework.lang.NonNull;
 
 import java.util.List;

@@ -1,13 +1,16 @@
 package fr.univnantes.alma.core.construction.type;
 
-import fr.univnantes.alma.commons.territory.TerritoryImpl;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.construction.Construction;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Abstract Class representing a building
+ */
 public abstract class Building implements Construction {
 
     /**
@@ -22,6 +25,8 @@ public abstract class Building implements Construction {
      * @param owner the owner
      */
     public Building(@NonNull Player owner) {
+        Objects.requireNonNull(owner, "owner cannot be null!");
+
         this.uuid = UUID.randomUUID();
         this.owner = owner;
     }

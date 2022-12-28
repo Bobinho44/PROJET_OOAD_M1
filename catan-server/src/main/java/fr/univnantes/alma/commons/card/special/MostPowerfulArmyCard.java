@@ -3,7 +3,7 @@ package fr.univnantes.alma.commons.card.special;
 import fr.univnantes.alma.core.card.type.SpecialCard;
 
 /**
- * Class representing the special card: most powerful army
+ * Class representing a special card: most powerful army
  */
 public class MostPowerfulArmyCard extends SpecialCard {
 

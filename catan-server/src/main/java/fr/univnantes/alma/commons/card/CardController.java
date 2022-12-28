@@ -1,22 +1,23 @@
 package fr.univnantes.alma.commons.card;
 
-import fr.univnantes.alma.commons.card.development.DevelopmentCardJSON;
-import fr.univnantes.alma.commons.card.special.SpecialCardJSON;
 import fr.univnantes.alma.commons.resource.ResourceImpl;
 import fr.univnantes.alma.commons.utils.collector.CollectorsUtils;
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
+import fr.univnantes.alma.core.card.CardJSON;
 import fr.univnantes.alma.core.card.CardManager;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.card.type.SpecialCard;
-import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.configuration.Configuration;
+import fr.univnantes.alma.core.exception.EmptyCardDeckException;
+import fr.univnantes.alma.core.exception.UndefinedCardOwnerException;
+import fr.univnantes.alma.core.exception.UnregisteredCardException;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
 import java.util.stream.IntStream;
-//TODO ajouter isSimilar
+
 /**
  * Implementation of a card manager
  */
@@ -42,7 +43,7 @@ public class CardController implements CardManager {
      * @return the development card deck
      */
     private @NonNull Map<UUID, DevelopmentCard> createDevelopmentCardDeck() {
-        return ReflectionUtils.getClassesOf(DevelopmentCard.class, "fr.univnantes.alma.commons.card.development").stream()
+        return ReflectionUtils.getSubClassesOf(DevelopmentCard.class, "fr.univnantes.alma.commons.card.development").stream()
                 .flatMap(development -> IntStream.range(0, Configuration.getCardAmount(development.getSimpleName()))
                         .mapToObj(i -> ReflectionUtils.getInstancesOf(development)))
                 .collect(CollectorsUtils.toShuffledMap(DevelopmentCard::getUUID, development -> development));
@@ -52,9 +53,9 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<DevelopmentCardJSON> getDevelopmentCardsInformation() {
+    public @NonNull List<CardJSON> getDevelopmentCardsInformation() {
         return developments.values().stream()
-                .map(developmentCard -> new DevelopmentCardJSON(developmentCard.getUUID(), developmentCard.getClass().getName()))
+                .map(developmentCard -> (CardJSON) new CardJSONImpl(developmentCard.getUUID(), developmentCard.getClass().getName()))
                 .toList();
     }
 
@@ -62,15 +63,17 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull DevelopmentCard generateDevelopmentCard(@NonNull DevelopmentCardJSON developmentCardJSON) {
-        try {
-            DevelopmentCard developmentCard = (DevelopmentCard) ReflectionUtils.getInstancesOf(Class.forName(developmentCardJSON.getType()));
+    public @NonNull DevelopmentCard generateDevelopmentCard(@NonNull CardJSON cardJSON) throws UnregisteredCardException {
+        Objects.requireNonNull(cardJSON, "cardJSON cannot be null!");
 
-            return ReflectionUtils.changeObjectField(developmentCard, "uuid", developmentCardJSON.getUUID());
+        try {
+            DevelopmentCard developmentCard = (DevelopmentCard) ReflectionUtils.getInstancesOf(Class.forName(cardJSON.getType()));
+
+            return ReflectionUtils.changeObjectField(developmentCard, "uuid", cardJSON.getUUID());
         }
 
         catch (ClassNotFoundException e) {
-            throw new RuntimeException();
+            throw new UnregisteredCardException();
         }
     }
 
@@ -78,8 +81,8 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull DevelopmentCard getDevelopmentCard() throws RuntimeException {
-       return developments.values().stream().findAny().orElseThrow();
+    public @NonNull DevelopmentCard getDevelopmentCard() throws EmptyCardDeckException {
+       return developments.values().stream().findAny().orElseThrow(EmptyCardDeckException::new);
     }
 
     /**
@@ -105,6 +108,8 @@ public class CardController implements CardManager {
      */
     @Override
     public void addDevelopmentCard(@NonNull DevelopmentCard developmentCard) {
+        Objects.requireNonNull(developmentCard, "developmentCard cannot be null!");
+
         developments.put(developmentCard.getUUID(), developmentCard);
     }
 
@@ -113,21 +118,18 @@ public class CardController implements CardManager {
      */
     @Override
     public void removeDevelopmentCard(@NonNull DevelopmentCard developmentCard) {
+        Objects.requireNonNull(developmentCard, "developmentCard cannot be null!");
+
         developments.remove(developmentCard.getUUID());
     }
 
-    public void a() {
-        developments.keySet().forEach(System.out::println);
-        System.out.println("=============================");
-        getDevelopmentCardsInformation().forEach(a -> System.out.println(a.getUUID()));
-    }
     /**
      * Creates the special card deck
      *
      * @return the special card deck
      */
     private @NonNull Map<UUID, SpecialCard> createSpecialCardDeck() {
-        return ReflectionUtils.getClassesOf(SpecialCard.class, "fr.univnantes.alma.commons.card.special").stream()
+        return ReflectionUtils.getSubClassesOf(SpecialCard.class, "fr.univnantes.alma.commons.card.special").stream()
                 .map(ReflectionUtils::getInstancesOf)
                 .collect(CollectorsUtils.toShuffledMap(SpecialCard::getUUID, special -> special));
     }
@@ -136,9 +138,9 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<SpecialCardJSON> getSpecialCardsInformation() {
+    public @NonNull List<CardJSON> getSpecialCardsInformation() {
         return specials.values().stream()
-                .map(specialCard -> new SpecialCardJSON(specialCard.getUUID(), specialCard.getClass().getName()))
+                .map(specialCard -> (CardJSON) new CardJSONImpl(specialCard.getUUID(), specialCard.getClass().getName()))
                 .toList();
     }
 
@@ -146,30 +148,51 @@ public class CardController implements CardManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull SpecialCard getSpecialCard(@NonNull SpecialCardJSON specialCardJSON) throws RuntimeException {
-        return Optional.ofNullable(specials.get(specialCardJSON.getUUID())).orElseThrow();
+    public @NonNull SpecialCard getSpecialCard(@NonNull CardJSON cardJSON) throws UnregisteredCardException {
+        Objects.requireNonNull(cardJSON, "cardJSON cannot be null!");
+
+        return Optional.ofNullable(specials.get(cardJSON.getUUID())).orElseThrow(UnregisteredCardException::new);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean hasSpecialCard(@NonNull SpecialCardJSON specialCardJSON) {
-        return Optional.ofNullable(specials.get(specialCardJSON.getUUID())).isPresent();
+    public boolean hasSpecialCard(@NonNull CardJSON cardJSON) {
+        Objects.requireNonNull(cardJSON, "cardJSON cannot be null!");
+
+        return Optional.ofNullable(specials.get(cardJSON.getUUID())).isPresent();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void useSpecialCard(@NonNull SpecialCard specialCard, @NonNull Player owner, @NonNull CommandManager commandManager) {
+    public @NonNull Player getSpecialCardOwner(@NonNull SpecialCard specialCard) throws UndefinedCardOwnerException {
+        Objects.requireNonNull(specialCard, "specialCard cannot be null!");
 
-        if (specialCard.hasOwner()) {
-            specialCard.looseEffect(commandManager, specialCard.getOwner());
-        }
+        return specialCard.getOwner().orElseThrow(UndefinedCardOwnerException::new);
+    }
 
-        specialCard.getEffect(commandManager, owner);
-        specialCard.setOwner(owner);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public @NonNull boolean hasSpecialCardOwner(@NonNull SpecialCard specialCard) {
+        Objects.requireNonNull(specialCard, "specialCard cannot be null!");
+
+        return specialCard.getOwner().isPresent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void useSpecialCard(@NonNull SpecialCard specialCard, @NonNull Player owner) {
+        Objects.requireNonNull(specialCard, "specialCard cannot be null!");
+        Objects.requireNonNull(owner, "owner cannot be null!");
+
+        specialCard.useEffect(owner);
     }
 
 }

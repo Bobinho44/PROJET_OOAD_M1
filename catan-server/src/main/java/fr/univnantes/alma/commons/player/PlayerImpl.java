@@ -1,10 +1,9 @@
 package fr.univnantes.alma.commons.player;
 
-import fr.univnantes.alma.commons.trade.TradeImpl;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -33,6 +32,8 @@ public class PlayerImpl implements Player {
      * @param uuid the uuid
      */
     public PlayerImpl(@NonNull UUID uuid) {
+        Objects.requireNonNull(uuid, "uuid cannot be null!");
+
         this.uuid = uuid;
     }
 

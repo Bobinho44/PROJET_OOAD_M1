@@ -1,8 +1,9 @@
 package fr.univnantes.alma.core.trade;
 
-import fr.univnantes.alma.commons.trade.TradeJSON;
+import fr.univnantes.alma.core.exception.UndefinedTradeReceiverException;
+import fr.univnantes.alma.core.exception.UnregisteredTradeException;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -19,9 +20,9 @@ public interface TradeManager {
      *
      * @param tradeJSON the trade information
      * @return the trade
-     * @throws RuntimeException if the trade does not exist
+     * @throws UnregisteredTradeException if the trade does not exist
      */
-    @NonNull Trade getTrade(@NonNull TradeJSON tradeJSON) throws RuntimeException;
+    @NonNull Trade getTrade(@NonNull TradeJSON tradeJSON) throws UnregisteredTradeException;
 
     /**
      * Checks if the trade between the sender and the receiver exist
@@ -71,9 +72,9 @@ public interface TradeManager {
      *
      * @param trade the trade
      * @return the trade receiver
-     * @throws RuntimeException if the receiver does not exist
+     * @throws UndefinedTradeReceiverException if the trade does not have receiver
      */
-    @NonNull Player getReceiver(@NonNull Trade trade) throws RuntimeException;
+    @NonNull Player getReceiver(@NonNull Trade trade) throws UndefinedTradeReceiverException;
 
     /**
      * Gets the trade offer

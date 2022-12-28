@@ -5,8 +5,12 @@ import fr.univnantes.alma.core.construction.Construction;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Abstract Class representing a road
+ */
 public abstract class Road implements Construction {
 
     /**
@@ -21,6 +25,8 @@ public abstract class Road implements Construction {
      * @param owner the owner
      */
     public Road(@NonNull Player owner) {
+        Objects.requireNonNull(owner, "owner cannot be null!");
+
         this.uuid = UUID.randomUUID();
         this.owner = owner;
     }

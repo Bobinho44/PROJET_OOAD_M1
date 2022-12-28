@@ -1,17 +1,14 @@
 package fr.univnantes.alma.commons.command;
 
+import fr.univnantes.alma.core.exception.UnregisteredCommandException;
 import fr.univnantes.alma.core.notification.NotificationJSON;
-import fr.univnantes.alma.commons.notification.NotificationNoReplyJSON;
 import fr.univnantes.alma.core.command.Command;
 import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.command.executor.CommandExecutor;
 import org.springframework.lang.NonNull;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -25,13 +22,23 @@ public class CommandController implements CommandManager {
     private final Map<String, Command> commands = new HashMap<>();
 
     /**
-     * Gets a command
-     *
-     * @param name the name
-     * @return the optional command
+     * {@inheritDoc}
      */
-    private Optional<Command> getCommand(@NonNull String name) {
-        return Optional.ofNullable(commands.get(name));
+    @Override
+    public @NonNull Command getCommand(@NonNull String name) throws UnregisteredCommandException {
+        Objects.requireNonNull(name, "name cannot be null!");
+
+        return Optional.ofNullable(commands.get(name)).orElseThrow(UnregisteredCommandException::new);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasCommand(@NonNull String name) {
+        Objects.requireNonNull(name, "name cannot be null!");
+
+        return Optional.ofNullable(commands.get(name)).isPresent();
     }
 
     /**
@@ -39,25 +46,31 @@ public class CommandController implements CommandManager {
      */
     @Override
     public void addCommand(@NonNull String name, @Nonnull Function<CommandExecutor, NotificationJSON> action) {
-        commands.put(name, new CommandImpl(action));
+        Objects.requireNonNull(name, "name cannot be null!");
+        Objects.requireNonNull(action, "action cannot be null!");
+
+        commands.put(name, new CommandImpl(name, action));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeCommand(@NonNull String name) {
-        commands.remove(name);
+    public void removeCommand(@NonNull Command command) {
+        Objects.requireNonNull(command, "command cannot be null!");
+
+        commands.remove(command.getName());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public @NonNull NotificationJSON execute(@NonNull String name, @NonNull List<Object> parameters) {
-        return getCommand(name)
-                .map(command -> command.execute(parameters))
-                .orElse(NotificationNoReplyJSON.COMMAND_NOT_FOUND);
+    public @NonNull NotificationJSON execute(@NonNull Command command, @NonNull List<Object> parameters) {
+        Objects.requireNonNull(command, "command cannot be null!");
+        Objects.requireNonNull(parameters, "parameters cannot be null!");
+
+        return command.execute(parameters);
     }
 
 }

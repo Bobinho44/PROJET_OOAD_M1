@@ -3,7 +3,7 @@ package fr.univnantes.alma.commons.card.development.victoryPoint.cards;
 import fr.univnantes.alma.commons.card.development.victoryPoint.VictoryPointCard;
 
 /**
- * Class representing the victory point card: marketplace
+ * Implementation of a victory point card: marketplace
  */
 public class MarketplaceCard extends VictoryPointCard {
 

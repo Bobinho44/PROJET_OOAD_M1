@@ -1,11 +1,12 @@
 package fr.univnantes.alma.core.player;
 
+import fr.univnantes.alma.core.command.CommandJSON;
+import fr.univnantes.alma.core.exception.EmptyCardDeckException;
+import fr.univnantes.alma.core.exception.UnregisteredPlayerException;
 import fr.univnantes.alma.core.notification.NotificationJSON;
-import fr.univnantes.alma.commons.player.PlayerJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
-import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.construction.Construction;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -27,9 +28,9 @@ public interface PlayerManager {
      *
      * @param playerJSON the player information
      * @return the player
-     * @throws RuntimeException if the player does not exist
+     * @throws UnregisteredPlayerException if the player does not exist
      */
-    @NonNull Player getPlayer(@NonNull PlayerJSON playerJSON) throws RuntimeException;
+    @NonNull Player getPlayer(@NonNull PlayerJSON playerJSON) throws UnregisteredPlayerException;
 
     /**
      * Checks if the player exist
@@ -154,9 +155,9 @@ public interface PlayerManager {
      *
      * @param player the player
      * @return the development card
-     * @throws RuntimeException if the player has not available development card
+     * @throws EmptyCardDeckException if the player has not available development card
      */
-    @NonNull DevelopmentCard getDevelopmentCard(@NonNull Player player) throws RuntimeException;
+    @NonNull DevelopmentCard getDevelopmentCard(@NonNull Player player) throws EmptyCardDeckException;
 
     /**
      * Checks if the player has the development card
@@ -196,10 +197,9 @@ public interface PlayerManager {
      *
      * @param player          the player
      * @param developmentCard the development card
-     * @param commandManager  the command manager
-     * @return
+     * @return the result command information
      */
-    @NonNull NotificationJSON useDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard, @NonNull CommandManager commandManager);
+    @NonNull CommandJSON useDevelopmentCard(@NonNull Player player, @NonNull DevelopmentCard developmentCard);
 
     /**
      * Gets the victory points of the player

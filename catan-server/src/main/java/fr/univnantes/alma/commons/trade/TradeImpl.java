@@ -1,7 +1,7 @@
 package fr.univnantes.alma.commons.trade;
 
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import fr.univnantes.alma.core.trade.Trade;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -34,6 +34,11 @@ public class TradeImpl implements Trade {
      * @param request the receiver
      */
     public TradeImpl(@NonNull UUID uuid, @NonNull Player sender, @Nullable Player receiver, @NonNull List<Resource> offer, @NonNull List<Resource> request) {
+        Objects.requireNonNull(uuid, "uuid cannot be null!");
+        Objects.requireNonNull(sender, "sender cannot be null!");
+        Objects.requireNonNull(offer, "offer cannot be null!");
+        Objects.requireNonNull(request, "request cannot be null!");
+
         this.uuid = uuid;
         this.sender = sender;
         this.receiver = receiver;

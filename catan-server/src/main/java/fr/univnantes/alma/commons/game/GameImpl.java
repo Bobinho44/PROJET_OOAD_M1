@@ -1,14 +1,17 @@
 package fr.univnantes.alma.commons.game;
 
 import fr.univnantes.alma.commons.card.CardController;
-import fr.univnantes.alma.commons.card.development.DevelopmentCardJSON;
+import fr.univnantes.alma.core.card.CardJSON;
+import fr.univnantes.alma.core.command.Command;
+import fr.univnantes.alma.core.command.CommandJSON;
+import fr.univnantes.alma.core.game.GameJSON;
 import fr.univnantes.alma.core.notification.NotificationJSON;
 import fr.univnantes.alma.commons.notification.NotificationReplyJSON;
-import fr.univnantes.alma.commons.player.PlayerJSON;
+import fr.univnantes.alma.core.player.PlayerJSON;
 import fr.univnantes.alma.commons.command.CommandController;
 import fr.univnantes.alma.commons.construction.ConstructionController;
-import fr.univnantes.alma.commons.construction.ConstructionJSON;
-import fr.univnantes.alma.commons.construction.constructableArea.ConstructableAreaJSON;
+import fr.univnantes.alma.core.construction.ConstructionJSON;
+import fr.univnantes.alma.core.construction.constructableArea.AreaJSON;
 import fr.univnantes.alma.commons.construction.type.building.city.City;
 import fr.univnantes.alma.commons.construction.type.building.colony.Colony;
 import fr.univnantes.alma.commons.construction.type.road.RoadImpl;
@@ -16,24 +19,24 @@ import fr.univnantes.alma.commons.dice.DiceImpl;
 import fr.univnantes.alma.commons.notification.NotificationNoReplyJSON;
 import fr.univnantes.alma.commons.player.PlayerController;
 import fr.univnantes.alma.commons.resource.ResourceController;
-import fr.univnantes.alma.commons.resource.ResourceJSON;
+import fr.univnantes.alma.core.resource.ResourceJSON;
 import fr.univnantes.alma.commons.territory.TerritoryController;
-import fr.univnantes.alma.commons.territory.TerritoryJSON;
+import fr.univnantes.alma.core.territory.TerritoryJSON;
 import fr.univnantes.alma.commons.trade.TradeController;
-import fr.univnantes.alma.commons.trade.TradeJSON;
+import fr.univnantes.alma.core.trade.TradeJSON;
 import fr.univnantes.alma.core.card.CardManager;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.command.CommandManager;
 import fr.univnantes.alma.core.construction.ConstructionManager;
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.constructableArea.Area;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
 import fr.univnantes.alma.core.dice.Dice;
 import fr.univnantes.alma.core.game.Game;
 import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.player.PlayerManager;
-import fr.univnantes.alma.core.ressource.Resource;
-import fr.univnantes.alma.core.ressource.ResourceManager;
+import fr.univnantes.alma.core.resource.Resource;
+import fr.univnantes.alma.core.resource.ResourceManager;
 import fr.univnantes.alma.core.territory.Territory;
 import fr.univnantes.alma.core.territory.TerritoryManager;
 import fr.univnantes.alma.core.trade.Trade;
@@ -44,11 +47,17 @@ import org.springframework.lang.Nullable;
 import java.util.*;
 import java.util.stream.Stream;
 
+/**
+ * Implementation of a game
+ */
 public class GameImpl implements Game {
 
+    /**
+     * Fields
+     */
     private final UUID uuid;
     private final TerritoryManager territoryManager = new TerritoryController();
-    private final ConstructionManager constructionManager = new ConstructionController(territoryManager.getTerritories());
+    private final ConstructionManager constructionManager = new ConstructionController(territoryManager);
     private final PlayerManager playerManager = new PlayerController();
     private final CardManager cardManager = new CardController();
     private final ResourceManager resourceManager = new ResourceController();
@@ -95,12 +104,13 @@ public class GameImpl implements Game {
      */
     @Override
     public @NonNull GameJSON getGameInformation() {
-        return new GameJSON(uuid)
+        return new GameJSONImpl(uuid)
                 .players(playerManager.getPlayerInformation())
                 .resources(resourceManager.getResourcesInformation())
                 .developmentCards(cardManager.getDevelopmentCardsInformation())
+                .specialCards(cardManager.getSpecialCardsInformation())
                 .territories(territoryManager.getTerritoriesInformation())
-                .constructableAreas(constructionManager.getConstructableAreasInformation());
+                .areas(constructionManager.getAreasInformation());
     }
 
     /**
@@ -116,6 +126,8 @@ public class GameImpl implements Game {
      */
     @Override
     public void addPlayer(@NonNull PlayerJSON playerJSON) {
+        Objects.requireNonNull(playerJSON, "playerJSON cannot be null!");
+
         if (playerManager.hasPlayer(playerJSON)) {
             return;
         }
@@ -132,6 +144,8 @@ public class GameImpl implements Game {
      */
     @Override
     public void removePlayer(@NonNull PlayerJSON playerJSON) {
+        Objects.requireNonNull(playerJSON, "playerJSON cannot be null!");
+
         if (!playerManager.hasPlayer(playerJSON)) {
             return;
         }
@@ -146,6 +160,8 @@ public class GameImpl implements Game {
      */
     @Override
     public boolean canPlay(@NonNull PlayerJSON playerJSON) {
+        Objects.requireNonNull(playerJSON, "playerJSON cannot be null!");
+
         if (!playerManager.hasPlayer(playerJSON)) {
             return false;
         }
@@ -160,7 +176,18 @@ public class GameImpl implements Game {
      */
     @Override
     public @NonNull NotificationJSON executeCommand(@NonNull String name, @NonNull List<Object> parameters) {
-        return commandManager.execute(name, parameters);
+        Objects.requireNonNull(name, "name cannot be null!");
+        Objects.requireNonNull(parameters, "parameters cannot be null!");
+
+        //Checks if the command is valid
+        if (!commandManager.hasCommand(name)) {
+            return NotificationNoReplyJSON.COMMAND_NOT_FOUND;
+        }
+
+        //Gets data from the server
+        Command command = commandManager.getCommand(name);
+
+        return commandManager.execute(command, parameters);
     }
 
     /**
@@ -236,9 +263,9 @@ public class GameImpl implements Game {
         commandManager.addCommand("buildRoad", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            ConstructableAreaJSON constructableAreaJSON = (ConstructableAreaJSON) action.getParameters().get(1);
-            ConstructionJSON constructionJSON = (ConstructionJSON) action.getParameters().get(2);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            AreaJSON areaJSON = (AreaJSON) action.parameters().get(1);
+            ConstructionJSON constructionJSON = (ConstructionJSON) action.parameters().get(2);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -246,7 +273,7 @@ public class GameImpl implements Game {
             }
 
             //Checks if the constructable area is valid
-            if (!constructionManager.hasConstructableArea(constructableAreaJSON, Road.class)) {
+            if (!constructionManager.hasArea(areaJSON, Road.class)) {
                 return NotificationNoReplyJSON.CONSTRUCTABLE_AREA_NOT_FOUND;
             }
 
@@ -259,7 +286,7 @@ public class GameImpl implements Game {
             }
 
             //Gets data from the server
-            ConstructableArea<Road> constructableArea = constructionManager.getConstructableArea(constructableAreaJSON, Road.class);
+            Area<Road> area = constructionManager.getArea(areaJSON, Road.class);
             RoadImpl road = constructionManager.generateConstruction(constructionJSON, RoadImpl.class, player);
             List<Resource> resources = constructionManager.getConstructionCost(road);
 
@@ -270,16 +297,16 @@ public class GameImpl implements Game {
 
             //Checks if the player has resources
             if (!playerManager.hasResources(player, resources)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the road is constructable
-            if (!constructionManager.isConstructable(constructableArea, road)) {
+            if (!constructionManager.areaIsConstructable(area, road)) {
                 return NotificationNoReplyJSON.CONSTRUCTION_NOT_CONSTRUCTABLE;
             }
 
             //Constructs the road and make the player pay
-            constructionManager.construct(constructableArea, road);
+            constructionManager.constructOnArea(area, road);
             playerManager.removeResources(player, resources);
             playerManager.removeConstruction(player, road);
 
@@ -298,9 +325,9 @@ public class GameImpl implements Game {
         commandManager.addCommand("buildColony", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            ConstructableAreaJSON constructableAreaJSON = (ConstructableAreaJSON) action.getParameters().get(1);
-            ConstructionJSON constructionJSON = (ConstructionJSON) action.getParameters().get(2);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            AreaJSON areaJSON = (AreaJSON) action.parameters().get(1);
+            ConstructionJSON constructionJSON = (ConstructionJSON) action.parameters().get(2);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -308,7 +335,7 @@ public class GameImpl implements Game {
             }
 
             //Checks if the constructable area is valid
-            if (!constructionManager.hasConstructableArea(constructableAreaJSON, Road.class)) {
+            if (!constructionManager.hasArea(areaJSON, Building.class)) {
                 return NotificationNoReplyJSON.CONSTRUCTABLE_AREA_NOT_FOUND;
             }
 
@@ -321,7 +348,7 @@ public class GameImpl implements Game {
             }
 
             //Gets data from the server
-            ConstructableArea<Building> constructableArea = constructionManager.getConstructableArea(constructableAreaJSON, Building.class);
+            Area<Building> area = constructionManager.getArea(areaJSON, Building.class);
             Colony colony = constructionManager.generateConstruction(constructionJSON, Colony.class, player);
             List<Resource> resources = constructionManager.getConstructionCost(colony);
 
@@ -332,16 +359,16 @@ public class GameImpl implements Game {
 
             //Checks if the player has resources
             if (!playerManager.hasResources(player, resources)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the colony is constructable
-            if (!constructionManager.isConstructable(constructableArea, colony)) {
+            if (!constructionManager.areaIsConstructable(area, colony)) {
                 return NotificationNoReplyJSON.CONSTRUCTION_NOT_CONSTRUCTABLE;
             }
 
             //Constructs the colony and make the player pay
-            constructionManager.construct(constructableArea, colony);
+            constructionManager.constructOnArea(area, colony);
             playerManager.removeResources(player, resources);
             playerManager.removeConstruction(player, colony);
 
@@ -360,9 +387,9 @@ public class GameImpl implements Game {
         commandManager.addCommand("buildCity", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            ConstructableAreaJSON constructableAreaJSON = (ConstructableAreaJSON) action.getParameters().get(1);
-            ConstructionJSON constructionJSON = (ConstructionJSON) action.getParameters().get(2);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            AreaJSON areaJSON = (AreaJSON) action.parameters().get(1);
+            ConstructionJSON constructionJSON = (ConstructionJSON) action.parameters().get(2);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -370,7 +397,7 @@ public class GameImpl implements Game {
             }
 
             //Checks if the constructable area is valid
-            if (!constructionManager.hasConstructableArea(constructableAreaJSON, Road.class)) {
+            if (!constructionManager.hasArea(areaJSON, Building.class)) {
                 return NotificationNoReplyJSON.CONSTRUCTABLE_AREA_NOT_FOUND;
             }
 
@@ -383,7 +410,7 @@ public class GameImpl implements Game {
             }
 
             //Gets data from the server
-            ConstructableArea<Building> constructableArea = constructionManager.getConstructableArea(constructableAreaJSON, Building.class);
+            Area<Building> area = constructionManager.getArea(areaJSON, Building.class);
             City city = constructionManager.generateConstruction(constructionJSON, City.class, player);
             List<Resource> resources = constructionManager.getConstructionCost(city);
 
@@ -394,16 +421,16 @@ public class GameImpl implements Game {
 
             //Checks if the player has resources
             if (!playerManager.hasResources(player, resources)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the city is constructable
-            if (!constructionManager.isConstructable(constructableArea, city)) {
+            if (!constructionManager.areaIsConstructable(area, city)) {
                 return NotificationNoReplyJSON.CONSTRUCTION_NOT_CONSTRUCTABLE;
             }
 
             //Constructs the city and make the player pay
-            constructionManager.construct(constructableArea, city);
+            constructionManager.constructOnArea(area, city);
             playerManager.removeResources(player, resources);
             playerManager.removeConstruction(player, city);
 
@@ -420,7 +447,7 @@ public class GameImpl implements Game {
         commandManager.addCommand("buyDevelopmentCard", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -455,14 +482,14 @@ public class GameImpl implements Game {
      * Registers build road command
      * <p>
      * Parameters : - a PlayerJSON
-     *              - a DevelopmentCardJSON
+     *              - a CardJSON
      */
     private void registerPlayDevelopmentCardCommand() {
         commandManager.addCommand("playDevelopmentCard", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            DevelopmentCardJSON developmentCardJSON = (DevelopmentCardJSON) action.getParameters().get(1);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            CardJSON cardJSON = (CardJSON) action.parameters().get(1);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -471,16 +498,19 @@ public class GameImpl implements Game {
 
             //Gets data from the server
             Player player = playerManager.getPlayer(playerJSON);
-            DevelopmentCard developmentCard = cardManager.generateDevelopmentCard(developmentCardJSON);
+            DevelopmentCard developmentCard = cardManager.generateDevelopmentCard(cardJSON);
 
             //Checks if the player has the development card
             if (playerManager.hasDevelopmentCard(player, developmentCard)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_DEVELOPMENT_CARD;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_DEVELOPMENT_CARD;
             }
 
             //Uses the development card
             playerManager.removeDevelopmentCard(player, developmentCard);
-            return playerManager.useDevelopmentCard(player, developmentCard, commandManager);
+
+            CommandJSON commandJSON = playerManager.useDevelopmentCard(player, developmentCard);
+
+            return executeCommand(commandJSON.getName(), commandJSON.getParameters());
         });
     }
 
@@ -494,8 +524,8 @@ public class GameImpl implements Game {
         commandManager.addCommand("updateVictoryPoint", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            int amount = (int) action.getParameters().get(1);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            int amount = (int) action.parameters().get(1);
 
             //Checks if the player is valid
             if (playerManager.hasPlayer(playerJSON)) {
@@ -525,11 +555,11 @@ public class GameImpl implements Game {
         commandManager.addCommand("placeTwoFreeRoad", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
 
             return Stream.of(1, 3).map(i -> {
-                ConstructableAreaJSON constructableAreaJSON = (ConstructableAreaJSON) action.getParameters().get(i);
-                ConstructionJSON constructionJSON = (ConstructionJSON) action.getParameters().get(i + 1);
+                AreaJSON areaJSON = (AreaJSON) action.parameters().get(i);
+                ConstructionJSON constructionJSON = (ConstructionJSON) action.parameters().get(i + 1);
 
                 //Checks if the player is valid
                 if (!playerManager.hasPlayer(playerJSON)) {
@@ -537,7 +567,7 @@ public class GameImpl implements Game {
                 }
 
                 //Checks if the constructable area is valid
-                if (!constructionManager.hasConstructableArea(constructableAreaJSON, Road.class)) {
+                if (!constructionManager.hasArea(areaJSON, Road.class)) {
                     return NotificationNoReplyJSON.CONSTRUCTABLE_AREA_NOT_FOUND;
                 }
 
@@ -550,16 +580,16 @@ public class GameImpl implements Game {
                 }
 
                 //Gets data from the server
-                ConstructableArea<Road> constructableArea = constructionManager.getConstructableArea(constructableAreaJSON, Road.class);
+                Area<Road> area = constructionManager.getArea(areaJSON, Road.class);
                 RoadImpl road = constructionManager.generateConstruction(constructionJSON, RoadImpl.class, player);
 
                 //Checks if the road is constructable
-                if (!constructionManager.isConstructable(constructableArea, road)) {
+                if (!constructionManager.areaIsConstructable(area, road)) {
                     return NotificationNoReplyJSON.CONSTRUCTION_NOT_CONSTRUCTABLE;
                 }
 
                 //Constructs the road and make the player pay
-                constructionManager.construct(constructableArea, road);
+                constructionManager.constructOnArea(area, road);
                 playerManager.removeConstruction(player, road);
 
                 return NotificationNoReplyJSON.COMMAND_SUCCESS;
@@ -581,10 +611,10 @@ public class GameImpl implements Game {
         commandManager.addCommand("takeTwoResources", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
 
             return Stream.of(1, 2).map(i -> {
-                ResourceJSON resourceJSON = (ResourceJSON) action.getParameters().get(i);
+                ResourceJSON resourceJSON = (ResourceJSON) action.parameters().get(i);
 
                 //Checks if the player is valid
                 if (!playerManager.hasPlayer(playerJSON)) {
@@ -623,9 +653,9 @@ public class GameImpl implements Game {
         commandManager.addCommand("moveThiefAndTakeCard", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            TerritoryJSON territoryJSON = (TerritoryJSON) action.getParameters().get(1);
-            PlayerJSON victimJSON = (PlayerJSON) action.getParameters().get(2);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            TerritoryJSON territoryJSON = (TerritoryJSON) action.parameters().get(1);
+            PlayerJSON victimJSON = (PlayerJSON) action.parameters().get(2);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -674,8 +704,8 @@ public class GameImpl implements Game {
         commandManager.addCommand("stealResourceFromAllPlayers", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            ResourceJSON resourceJSON = (ResourceJSON) action.getParameters().get(1);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            ResourceJSON resourceJSON = (ResourceJSON) action.parameters().get(1);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -703,8 +733,8 @@ public class GameImpl implements Game {
         commandManager.addCommand("giveResources", action -> {
 
             //Gets parameters
-            PlayerJSON playerJSON = (PlayerJSON) action.getParameters().get(0);
-            ResourceJSON resourceJSON = (ResourceJSON) action.getParameters().get(1);
+            PlayerJSON playerJSON = (PlayerJSON) action.parameters().get(0);
+            ResourceJSON resourceJSON = (ResourceJSON) action.parameters().get(1);
 
             //Checks if the player is valid
             if (!playerManager.hasPlayer(playerJSON)) {
@@ -730,7 +760,7 @@ public class GameImpl implements Game {
         commandManager.addCommand("proposeTrade", action -> {
 
             //Gets parameters
-            TradeJSON tradeJSON = (TradeJSON) action.getParameters().get(0);
+            TradeJSON tradeJSON = (TradeJSON) action.parameters().get(0);
 
             //Checks if the sender is valid
             if (!playerManager.hasPlayer(tradeJSON.getSender())) {
@@ -751,12 +781,12 @@ public class GameImpl implements Game {
 
             //Checks if the sender has resources of offer
             if (!playerManager.hasResources(sender, offer)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the receiver has resources of request
             if (tradeJSON.hasReceiver() && !playerManager.hasResources(receiver, request)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the bank has resources of request
@@ -779,7 +809,7 @@ public class GameImpl implements Game {
         commandManager.addCommand("acceptTrade", action -> {
 
             //Gets parameters
-            TradeJSON tradeJSON = (TradeJSON) action.getParameters().get(0);
+            TradeJSON tradeJSON = (TradeJSON) action.parameters().get(0);
 
             //Checks if the trade is valid
             if (!tradeManager.hasTrade(tradeJSON)) {
@@ -805,12 +835,12 @@ public class GameImpl implements Game {
 
             //Checks if the sender has resources of offer
             if (!playerManager.hasResources(sender, offer)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the receiver has resources of request
             if (tradeManager.hasReceiver(trade) && !playerManager.hasResources(receiver, request)) {
-                return NotificationNoReplyJSON.PLAYER_HAS_NOT_RESOURCE;
+                return NotificationNoReplyJSON.PLAYER_HAS_NO_RESOURCE;
             }
 
             //Checks if the bank has resources of request
@@ -846,7 +876,7 @@ public class GameImpl implements Game {
         commandManager.addCommand("refuseTrade", action -> {
 
             //Gets parameters
-            TradeJSON tradeJSON = (TradeJSON) action.getParameters().get(0);
+            TradeJSON tradeJSON = (TradeJSON) action.parameters().get(0);
 
             //Checks if the trade is valid
             if (!tradeManager.hasTrade(tradeJSON)) {

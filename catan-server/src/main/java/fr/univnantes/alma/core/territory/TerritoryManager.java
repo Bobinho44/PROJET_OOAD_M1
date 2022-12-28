@@ -1,11 +1,12 @@
 package fr.univnantes.alma.core.territory;
 
-import fr.univnantes.alma.commons.territory.TerritoryJSON;
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.constructableArea.Area;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
+import fr.univnantes.alma.core.exception.UndefinedTerritoryResourceException;
+import fr.univnantes.alma.core.exception.UnregisteredTerritoryException;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import org.springframework.lang.NonNull;
 
 import java.util.*;
@@ -34,9 +35,9 @@ public interface TerritoryManager {
      *
      * @param territoryJSON the territory information
      * @return the territory
-     * @throws RuntimeException if the territory does not exist
+     * @throws UnregisteredTerritoryException if the trade does not exist
      */
-    @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws RuntimeException;
+    @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws UnregisteredTerritoryException;
 
     /**
      * Checks if the territory exist
@@ -50,10 +51,10 @@ public interface TerritoryManager {
      * Checks if the territory has neighbour buildings
      *
      * @param territory the territory
-     * @param constructableArea the constructable area
+     * @param area the constructable area
      * @return true if the territory has neighbour buildings, false otherwise
      */
-    boolean hasNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> constructableArea);
+    boolean hasNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> area);
 
     /**
      * Adds a neighbour building to the territory
@@ -61,7 +62,7 @@ public interface TerritoryManager {
      * @param territory the territory
      * @param building the building (constructableArea with a building)
      */
-    void addNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building);
+    void addNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> building);
 
     /**
      * Removes a neighbour building from the territory
@@ -69,16 +70,16 @@ public interface TerritoryManager {
      * @param territory the territory
      * @param building the building (constructableArea with a building)
      */
-    void removeNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building);
+    void removeNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> building);
 
     /**
      * Checks if the territory has neighbour roads
      *
      * @param territory the territory
-     * @param constructableArea the constructable area
+     * @param area the constructable area
      * @return true if the territory has neighbour roads, false otherwise
      */
-    boolean hasNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> constructableArea);
+    boolean hasNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> area);
 
     /**
      * Adds a neighbour road to the territory
@@ -86,7 +87,7 @@ public interface TerritoryManager {
      * @param territory the territory
      * @param road the road (constructableArea with a road)
      */
-    void addNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road);
+    void addNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> road);
 
     /**
      * Removes a neighbour road from the territory
@@ -94,7 +95,7 @@ public interface TerritoryManager {
      * @param territory the territory
      * @param road the building (constructableArea with a road)
      */
-    void removeNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road);
+    void removeNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> road);
 
     /**
      * Checks if the territory has resource
@@ -109,9 +110,9 @@ public interface TerritoryManager {
      *
      * @param territory the territory
      * @return the territory resource
-     * @throws RuntimeException if the resource does not exist
+     * @throws UndefinedTerritoryResourceException if the resource does not exist
      */
-    @NonNull Resource getResource(@NonNull Territory territory) throws RuntimeException;
+    @NonNull Resource getResource(@NonNull Territory territory) throws UndefinedTerritoryResourceException;
 
     /**
      * Moves the thief

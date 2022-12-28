@@ -1,17 +1,16 @@
 package fr.univnantes.alma.commons.card.development.progress.cards;
 
-import fr.univnantes.alma.core.notification.NotificationJSON;
-import fr.univnantes.alma.commons.notification.NotificationReplyJSON;
-import fr.univnantes.alma.core.command.CommandManager;
+import fr.univnantes.alma.commons.command.CommandJSONImpl;
+import fr.univnantes.alma.core.command.CommandJSON;
 import fr.univnantes.alma.commons.card.development.progress.ProgressCard;
 import fr.univnantes.alma.core.player.Player;
 import org.springframework.lang.NonNull;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Objects;
 
 /**
- * Class representing the progress card: road building
+ * Implementation of a progress card: road building
  */
 public class RoadBuildingCard extends ProgressCard {
 
@@ -26,11 +25,10 @@ public class RoadBuildingCard extends ProgressCard {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull NotificationJSON useEffect(@NonNull CommandManager commandManager, @NonNull Player player) {
-        Objects.requireNonNull(commandManager, "commandManager cannot be null!");
+    public @NonNull CommandJSON useEffect(@NonNull Player player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        return new NotificationReplyJSON(List.of("placeTwoFreeRoad"));
+        return new CommandJSONImpl("askPlaceTwoFreeRoad", Collections.emptyList(), true);
     }
 
 }

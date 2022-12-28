@@ -4,6 +4,9 @@ import fr.univnantes.alma.core.player.Player;
 import fr.univnantes.alma.core.construction.type.Building;
 import org.springframework.lang.NonNull;
 
+/**
+ * Implementation of a building: colony
+ */
 public class Colony extends Building {
 
     /**

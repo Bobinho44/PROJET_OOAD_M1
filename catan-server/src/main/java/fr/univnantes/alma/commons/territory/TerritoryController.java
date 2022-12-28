@@ -1,17 +1,20 @@
 package fr.univnantes.alma.commons.territory;
 
-import fr.univnantes.alma.commons.resource.ResourceJSON;
+import fr.univnantes.alma.commons.resource.ResourceJSONImpl;
 import fr.univnantes.alma.commons.token.TokenImpl;
 import fr.univnantes.alma.commons.utils.collector.CollectorsUtils;
 import fr.univnantes.alma.commons.utils.reflection.ReflectionUtils;
 import fr.univnantes.alma.commons.utils.stream.IndexedStream;
 import fr.univnantes.alma.core.configuration.Configuration;
-import fr.univnantes.alma.core.construction.constructableArea.ConstructableArea;
+import fr.univnantes.alma.core.construction.constructableArea.Area;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.core.construction.type.Road;
+import fr.univnantes.alma.core.exception.UndefinedTerritoryResourceException;
+import fr.univnantes.alma.core.exception.UnregisteredTerritoryException;
 import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.ressource.Resource;
+import fr.univnantes.alma.core.resource.Resource;
 import fr.univnantes.alma.core.territory.Territory;
+import fr.univnantes.alma.core.territory.TerritoryJSON;
 import fr.univnantes.alma.core.territory.TerritoryManager;
 import org.springframework.lang.NonNull;
 
@@ -44,7 +47,7 @@ public class TerritoryController implements TerritoryManager {
      * @return all territories
      */
     private @NonNull Map<UUID, Territory> createTerritories() {
-        return ReflectionUtils.getClassesOf(Territory.class, "fr.univnantes.alma.commons.territory.type").stream()
+        return ReflectionUtils.getSubClassesOf(Territory.class, "fr.univnantes.alma.commons.territory.type").stream()
                 .flatMap(territory -> IntStream.range(0, Configuration.getTerritoryAmount(territory.getSimpleName()))
                         .mapToObj(i -> ReflectionUtils.getInstancesOf(territory)))
                 .collect(CollectorsUtils.toShuffledMap(Territory::getUUID, territory -> territory));
@@ -67,10 +70,10 @@ public class TerritoryController implements TerritoryManager {
     public @NonNull List<TerritoryJSON> getTerritoriesInformation() {
         return territories.values().stream()
                 .map(territory -> {
-                    TerritoryJSON territoryJSON = new TerritoryJSON(territory.getUUID(), territory.hasThief());
+                    TerritoryJSON territoryJSON = new TerritoryJSONImpl(territory.getUUID(), territory.hasThief());
 
                     if (hasResource(territory)) {
-                        territoryJSON.resource(new ResourceJSON(getResource(territory).getName(), getResource(territory).getAmount()));
+                        territoryJSON.resource(new ResourceJSONImpl(getResource(territory).getName(), getResource(territory).getAmount()));
                     }
 
                     return territoryJSON;
@@ -90,8 +93,10 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws RuntimeException {
-        return Optional.ofNullable(territories.get(territoryJSON.getUUID())).orElseThrow();
+    public @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws UnregisteredTerritoryException {
+        Objects.requireNonNull(territoryJSON, "territoryJSON cannot be null!");
+
+        return Optional.ofNullable(territories.get(territoryJSON.getUUID())).orElseThrow(UnregisteredTerritoryException::new);
     }
 
     /**
@@ -99,6 +104,8 @@ public class TerritoryController implements TerritoryManager {
      */
     @Override
     public boolean hasTerritory(@NonNull TerritoryJSON territoryJSON) {
+        Objects.requireNonNull(territoryJSON, "territoryJSON cannot be null!");
+
         return Optional.ofNullable(territories.get(territoryJSON.getUUID())).isPresent();
     }
 
@@ -106,48 +113,66 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> constructableArea) {
-        return territory.getNeighbourBuildings().contains(constructableArea);
+    public boolean hasNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> buildingArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(buildingArea, "buildingArea cannot be null!");
+
+        return territory.getNeighbourBuildings().contains(buildingArea);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building) {
-        territory.getNeighbourBuildings().add(building);
+    public void addNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> buildingArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(buildingArea, "buildingArea cannot be null!");
+
+        territory.getNeighbourBuildings().add(buildingArea);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeNeighbourBuilding(@NonNull Territory territory, @NonNull ConstructableArea<Building> building) {
-        territory.getNeighbourBuildings().remove(building);
+    public void removeNeighbourBuilding(@NonNull Territory territory, @NonNull Area<Building> buildingArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(buildingArea, "buildingArea cannot be null!");
+
+        territory.getNeighbourBuildings().remove(buildingArea);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean hasNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> constructableArea) {
-        return territory.getNeighbourRoads().contains(constructableArea);
+    public boolean hasNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> roadArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(roadArea, "roadArea cannot be null!");
+
+        return territory.getNeighbourRoads().contains(roadArea);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road) {
-        territory.getNeighbourRoads().add(road);
+    public void addNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> roadArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(roadArea, "roadArea cannot be null!");
+
+        territory.getNeighbourRoads().add(roadArea);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeNeighbourRoad(@NonNull Territory territory, @NonNull ConstructableArea<Road> road) {
-        territory.getNeighbourRoads().remove(road);
+    public void removeNeighbourRoad(@NonNull Territory territory, @NonNull Area<Road> roadArea) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+        Objects.requireNonNull(roadArea, "roadArea cannot be null!");
+
+        territory.getNeighbourRoads().remove(roadArea);
     }
 
     /**
@@ -155,6 +180,8 @@ public class TerritoryController implements TerritoryManager {
      */
     @Override
     public boolean hasResource(@NonNull Territory territory) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+
         return territory.getResource().isPresent();
     }
 
@@ -162,8 +189,10 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Resource getResource(@NonNull Territory territory) {
-        return territory.getResource().orElseThrow();
+    public @NonNull Resource getResource(@NonNull Territory territory) throws UndefinedTerritoryResourceException {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+
+        return territory.getResource().orElseThrow(UndefinedTerritoryResourceException::new);
     }
 
     /**
@@ -171,6 +200,8 @@ public class TerritoryController implements TerritoryManager {
      */
     @Override
     public void moveThief(@NonNull Territory territory) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+
         territories.values().stream().filter(Territory::hasThief).findFirst().ifPresent(from -> from.setThiefOccupation(false));
         territory.setThiefOccupation(true);
     }
@@ -184,11 +215,19 @@ public class TerritoryController implements TerritoryManager {
                 .filter(this::hasResource)
                 .filter(territory -> territory.getToken().getNumber() == diceNumber)
                 .filter(territory -> !territory.hasThief())
-                .flatMap(this::extractLoot)
+                .flatMap(this::extractLoots)
                 .toList();
     }
 
-    private Stream<Map.Entry<Player, Resource>> extractLoot(@NonNull Territory territory) {
+    /**
+     * Extracts loots from the territory
+     *
+     * @param territory the territory
+     * @return the loots
+     */
+    private @NonNull Stream<Map.Entry<Player, Resource>> extractLoots(@NonNull Territory territory) {
+        Objects.requireNonNull(territory, "territory cannot be null!");
+
         return territory.getNeighbourBuildings().stream()
                 .filter(area -> area.getConstruction().isPresent())
                 .flatMap(area -> IntStream.range(0, area.getLootAmount())

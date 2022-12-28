@@ -4,25 +4,38 @@ import fr.univnantes.alma.core.notification.NotificationJSON;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
+import java.util.Objects;
 
-public class NotificationReplyJSON implements NotificationJSON {
+/**
+ * Implementation of a reply notification
+ */
+public record NotificationReplyJSON(List<Object> replyInformation) implements NotificationJSON {
 
-    private final boolean needReply;
-    private final List<Object> informationReply;
+    /**
+     * Creates a new notification reply json
+     *
+     * @param replyInformation the reply information
+     */
+    public NotificationReplyJSON(@NonNull List<Object> replyInformation) {
+        Objects.requireNonNull(replyInformation, "replyInformation cannot be null!");
 
-    public NotificationReplyJSON(@NonNull List<Object> informationReply) {
-        this.needReply = true;
-        this.informationReply = informationReply;
+        this.replyInformation = replyInformation;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean needReply() {
-        return needReply;
+        return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public @NonNull List<Object> getInformationReply() {
-        return informationReply;
+    public @NonNull List<Object> replyInformation() {
+        return replyInformation;
     }
 
 }
