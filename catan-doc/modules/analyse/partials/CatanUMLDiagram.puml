@@ -10,7 +10,7 @@ enum TerritoryType {
 }
 
 class Territory {
-  type: TerritoryType 
+  TerritoryType type
 }
 
 enum ResourceType {
@@ -22,7 +22,7 @@ enum ResourceType {
 }
 
 class Resource {
-  type: ResourceType 
+  ResourceType type
 }
 
 enum ProgressType {
@@ -32,7 +32,7 @@ enum ProgressType {
 }
 
 class ProgressCard {
-  type: ProgressType 
+  ProgressType type
 }
 
 enum SpecialType {
@@ -41,7 +41,7 @@ enum SpecialType {
 }
 
 class SpecialCard {
-  type: SpecialType 
+  SpecialType type
 }
 
 enum VictoryPointType {
@@ -53,31 +53,23 @@ enum VictoryPointType {
 }
 
 class VictoryPointCard{
-  type: VictoryPointType  
+  VictoryPointType type
 }
 
 interface Card
 interface Construction
 abstract DevelopmentCard
-class ConstructableArea <? extends Construction>
-GameManager<-- Game
+class Area <? extends Construction>
 
-Game <-- CommandManager
-Game <-- TradeManager
-Game <-- CardManager
-Game <-- ResourceManager
-Game <-- PlayerManager
-Game <-- ConstructionManager
-Game <-- TerritoryManager
-Game <-- Dice
+Game <-- "                              *" Command
+Game <-- "            *" Trade
+Game <-- "25 " Card
+Game <-- "95 " Resource
+Game <-- "[0, 2]" Player
+Game <-- " 125" Area
+Game <-- "19" Territory
+Game <--  "            1" Dice
 
-CommandManager <-- Command
-TradeManager <-- Trade
-CardManager <-- Card
-ResourceManager <-- Resource
-PlayerManager <-- Player
-ConstructionManager <-- ConstructableArea
-TerritoryManager <-- Territory
 
 Card <|-- DevelopmentCard
 Card <|-- SpecialCard
@@ -86,16 +78,15 @@ DevelopmentCard <|-- ProgressCard
 DevelopmentCard <|-- VictoryPointCard
 DevelopmentCard <|-- KnightCard
 
-ConstructableArea <-- Construction
+Area <-- "[0, 1]" Construction
 Construction <|-- Building
 Construction <|-- Road
 
-ConstructableArea <-- Territory
-Player <-- Resource
-Player <-- Construction
-Player <-- Card
-Territory <-- Resource
-Territory <-- ConstructableArea 
-ConstructableArea <-- ConstructableArea 
-ConstructableArea <-- Dock
+Area <-- "12" Territory
+Player <-- "[0, 95]   " Resource
+Player <-- "[0, 24]" Construction
+Player <-- "  [0, 25]" Card
+Territory <-- "   [0, 1]" Resource
+Territory <-- "[1, 3]   " Area 
+Area <-- "[0, 1]" Dock
 @enduml
