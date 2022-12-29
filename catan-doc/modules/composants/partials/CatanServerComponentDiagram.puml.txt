@@ -1,0 +1,12 @@
+@startuml
+
+package "Server" {
+  [GameManager] <-- [Game]
+  [Game] <-- [ConstructionManager]
+  [Game] <-- [TradeManager]
+  [Game] <-- [CommandManager]
+  [Game] <-- [PlayerManager]
+  [Game] <-- [TerritoryManager]
+}
+
+@enduml
