@@ -105,7 +105,7 @@ Ensuite, nous avons des notifications qui vont servir à questionner un client (
 include::partial$CatanRequestWithoutReplySequenceDiagram.puml[]
 ....
 
-Alors que le premier diagramme nous montrait un communication assez standard, ce deuxième diagramme permet de visualiser les interactions entre les clients et le serveur en cas de requête nécessitant plusieurs interactions des clients vers le serveur.
+Alors que le premier diagramme nous montrait une communication assez standard, ce deuxième     diagramme permet de visualiser les interactions entre les clients et le serveur en cas de requête nécessitant plusieurs interactions des clients vers le serveur.
 
 Ainsi, comme la première notification renvoyée par le serveur, nécessite une réponse (adressée au client2), celui-ci exécute à son tour une requête.
 

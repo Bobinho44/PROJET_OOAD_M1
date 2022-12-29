@@ -7,11 +7,6 @@ L’objectif de ce document est de détailler la spécification des composants, 
 
 == Réponses aux exigences non-fonctionnelles
 
-[NOTE]
-====
-Expliquez dans cette section les répondes aux différentes exigences non-fonctionnelles spécifiées.
-====
-
 === Concurrence
 
 Pour gérer la concurrence, nous avons mis en place un système de verrouillage de l'envois de requête, qui empêche les deux joueurs d'exécuter simultanément des commandes. Ainsi seul le joueur actif peut intéragir avec le serveur.
