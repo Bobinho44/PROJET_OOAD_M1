@@ -5,6 +5,7 @@ import fr.univnantes.alma.core.card.CardJSON;
 import fr.univnantes.alma.core.player.PlayerJSON;
 import fr.univnantes.alma.core.resource.ResourceJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.*;
 
@@ -130,6 +131,24 @@ public class PlayerJSONImpl implements PlayerJSON {
         this.victoryPoints = victoryPoints;
 
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlayerJSONImpl playerJSON)) return false;
+        return Objects.equals(uuid, playerJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
 }

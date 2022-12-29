@@ -24,13 +24,6 @@ public interface TerritoryManager {
     @NonNull List<TerritoryJSON> getTerritoriesInformation();
 
     /**
-     * Gets all territories
-     *
-     * @return all territories
-     */
-    @NonNull List<Territory> getTerritories();
-
-    /**
      * Gets the territory
      *
      * @param territoryJSON the territory information

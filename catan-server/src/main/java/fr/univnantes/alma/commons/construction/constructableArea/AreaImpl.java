@@ -10,10 +10,7 @@ import fr.univnantes.alma.core.construction.type.Road;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Implementation of an area
@@ -134,11 +131,10 @@ public class AreaImpl<T extends Construction> implements Area<T> {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(@Nullable Object o) {
+    public boolean equals(@NonNull Object o) {
         if (this == o) return true;
-        if (!(o instanceof AreaImpl<?>)) return false;
-
-        return uuid.equals(((AreaImpl<?>) o).getUUID());
+        if (!(o instanceof AreaImpl<?> area)) return false;
+        return Objects.equals(uuid, area.uuid);
     }
 
     /**
@@ -146,7 +142,7 @@ public class AreaImpl<T extends Construction> implements Area<T> {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

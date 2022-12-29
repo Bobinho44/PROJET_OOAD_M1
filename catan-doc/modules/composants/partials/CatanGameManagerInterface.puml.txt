@@ -1,0 +1,22 @@
+@startuml
+
+interface GameManager {
+
+    Game getGame(GameJSON gameJSON)
+
+    boolean hasGame(GameJSON gameJSON)
+
+    void addGame(GameJSON gameJSON)
+
+    void removeGame(Game game)
+
+    GameJSON join(PlayerJSON playerJSON)
+
+    void leave(GameJSON gameJSON, PlayerJSON playerJSON)
+
+    NotificationJSON executeCommand(GameJSON gameJSON, CommandJSON commandJSON)
+
+    GameJSON updateInformation( GameJSON gameJSON)
+}
+
+@enduml

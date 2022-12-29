@@ -14,9 +14,21 @@ import java.util.function.Function;
  */
 public interface CommandManager {
 
-
+    /**
+     * Gets the command
+     *
+     * @param name the name
+     * @return the command
+     * @throws UnregisteredCommandException if the command does not exist
+     */
     @NonNull Command getCommand(@NonNull String name) throws UnregisteredCommandException;
 
+    /**
+     * Checks if the command exist
+     *
+     * @param name the name
+     * @return true if the command exist, false otherwise
+     */
     boolean hasCommand(@NonNull String name);
 
     /**

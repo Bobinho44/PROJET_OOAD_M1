@@ -123,9 +123,8 @@ public class ClientImpl implements Client {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof ClientImpl)) return false;
-
-        return Objects.equals(player.getUUID(), ((ClientImpl) o).getPlayer().getUUID());
+        if (!(o instanceof ClientImpl client)) return false;
+        return Objects.equals(player, client.player);
     }
 
     /**
@@ -133,7 +132,7 @@ public class ClientImpl implements Client {
      */
     @Override
     public int hashCode() {
-        return player.getUUID().hashCode();
+        return Objects.hash(player);
     }
 
 }

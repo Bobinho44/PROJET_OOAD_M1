@@ -45,15 +45,15 @@ class TerritoryControllerTest {
      */
     @BeforeEach
     public void setup() {
-        territory = territoryController.getTerritories().stream()
-                .filter(territory1 -> territory1.getResource().isPresent())
+        territory = territoryController.getTerritory(territoryController.getTerritoriesInformation().stream()
+                .filter(TerritoryJSON::hasResource)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow());
 
-        desert = territoryController.getTerritories().stream()
-                .filter(territory1 -> territory1.getResource().isEmpty())
+        desert = territoryController.getTerritory(territoryController.getTerritoriesInformation().stream()
+                .filter(territoryInformation -> !territoryInformation.hasResource())
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow());
 
         when(territoryJSON.getUUID()).thenReturn(territory.getUUID());
     }
@@ -116,10 +116,10 @@ class TerritoryControllerTest {
     @Test
     void moveThiefTest() {
         territoryController.moveThief(territory);
-        Territory thief = territoryController.getTerritories().stream()
-                .filter(Territory::hasThief)
+        Territory thief = territoryController.getTerritory(territoryController.getTerritoriesInformation().stream()
+                .filter(TerritoryJSON::hasThief)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow());
 
         assertEquals(territory, thief);
     }

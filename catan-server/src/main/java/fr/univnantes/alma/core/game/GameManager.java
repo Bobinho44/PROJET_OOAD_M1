@@ -65,5 +65,12 @@ public interface GameManager {
      */
     @NonNull NotificationJSON executeCommand(@NonNull GameJSON gameJSON, @NonNull CommandJSON commandJSON);
 
+    /**
+     * Updates the game information
+     *
+     * @param gameJSON the actual game information
+     * @return the updated game information
+     */
     @NonNull GameJSON updateInformation(@NonNull GameJSON gameJSON);
+
 }

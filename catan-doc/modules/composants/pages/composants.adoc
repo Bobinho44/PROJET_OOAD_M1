@@ -13,3 +13,80 @@ L’objectif de ce document est de décrire l'échange de messages entre les com
 ....
 include::partial$CatanComponentDiagram.puml[]
 ....
+
+== Serveur
+
+.Diagramme de composants du serveur
+[plantuml]
+....
+include::partial$CatanServerComponentDiagram.puml[]
+....
+
+Le serveur a pour objectif de gérer la partie logique, données et gestion de notre jeu. Pour cela, nous avons choisis de diviser ce composant en différents sous systèmes gérant chacun une partie spécifique de notre application.
+
+=== Manager des parties
+
+Le controlleur des parties va permettre la création des parties, leurs remplissages et est la porte d'entré de la partie serveur. C'est par cette interface que les clients vont demander des interactions avec leur partie.
+
+.Diagramme UML de l'interface ConstructionManager
+[plantuml]
+....
+include::partial$CatanGameManagerInterface.puml[]
+....
+
+
+=== Manager des constructions
+
+Le controlleur des constructions va permettre de manipuler toute la partie construction sur le plateau. Que ça soit les emplacements, vérifier si nous pouvons construire quelques part ou encore la gestion des ports.
+
+.Diagramme UML de l'interface ConstructionManager
+[plantuml]
+....
+include::partial$CatanConstructionManagerInterface.puml[]
+....
+
+
+=== Manager des échanges
+
+Le controlleur des échanges va permettre de créer, supprimer et manipuler les différents échanges de la partie. Que ça soit des échanges entre joueurs ou avec la banque directement.
+
+.Diagramme UML de l'interface TradeManager
+[plantuml]
+....
+include::partial$CatanTradeManagerInterface.puml[]
+....
+
+
+=== Manager des joueurs
+
+Le controlleur des joueurs va permettre de créer et manipuler les joueurs, ainsi que leurs données. Notamment les constructions, les cartes ou les resources qu'il possède. Ce controlleur va aussi de permettre de gérer le joueur actif de notre partie.
+
+.Diagramme UML de l'interface PlayerManager
+[plantuml]
+....
+include::partial$CatanPlayerManagerInterface.puml[]
+....
+
+
+=== Manager des territoires
+
+Le controlleur des territoires va permettre gérer les territoires et tout ce qui en est associés, comme la position du voleur ou encore les resources générées par chaque territoires.
+
+.Diagramme UML de l'interface TerritoryManager
+[plantuml]
+....
+include::partial$CatanTerritoryManagerInterface.puml[]
+....
+
+
+=== Manager des commandes
+
+Le controlleur des commandes va permettre de créer et d'exécuter des commandes de manière extensible pour permettre aux clients de communiquer et d'intéragir avec leur partie.
+
+.Diagramme UML de l'interface CommandManager
+[plantuml]
+....
+include::partial$CatanCommandeManagerInterface.puml[]
+....
+
+== Client

@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.card;
 
 import fr.univnantes.alma.core.card.CardJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -45,6 +46,25 @@ public class CardJSONImpl implements CardJSON {
     @Override
     public @NonNull String getType() {
         return type;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardJSONImpl cardJSON = (CardJSONImpl) o;
+        return Objects.equals(uuid, cardJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
 }

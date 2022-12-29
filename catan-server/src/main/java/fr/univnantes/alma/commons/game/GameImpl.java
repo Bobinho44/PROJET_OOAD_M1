@@ -899,9 +899,8 @@ public class GameImpl implements Game {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof GameImpl)) return false;
-
-        return Objects.equals(uuid, ((GameImpl) o).getUUID());
+        if (!(o instanceof GameImpl game)) return false;
+        return Objects.equals(uuid, game.uuid);
     }
 
     /**
@@ -909,7 +908,7 @@ public class GameImpl implements Game {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

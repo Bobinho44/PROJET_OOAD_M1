@@ -38,4 +38,5 @@ public record NotificationReplyJSON(List<Object> replyInformation) implements No
         return replyInformation;
     }
 
+
 }

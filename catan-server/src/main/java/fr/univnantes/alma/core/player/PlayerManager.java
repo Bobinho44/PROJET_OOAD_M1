@@ -3,7 +3,6 @@ package fr.univnantes.alma.core.player;
 import fr.univnantes.alma.core.command.CommandJSON;
 import fr.univnantes.alma.core.exception.EmptyCardDeckException;
 import fr.univnantes.alma.core.exception.UnregisteredPlayerException;
-import fr.univnantes.alma.core.notification.NotificationJSON;
 import fr.univnantes.alma.core.card.type.DevelopmentCard;
 import fr.univnantes.alma.core.construction.Construction;
 import fr.univnantes.alma.core.resource.Resource;
@@ -224,4 +223,5 @@ public interface PlayerManager {
      * @param amount the amount
      */
     void removeVictoryPoints(@NonNull Player player, int amount);
+
 }

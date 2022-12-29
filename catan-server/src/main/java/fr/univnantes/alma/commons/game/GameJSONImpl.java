@@ -174,9 +174,8 @@ public class GameJSONImpl implements GameJSON {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof GameJSONImpl)) return false;
-
-        return Objects.equals(uuid, ((GameJSONImpl) o).getUUID());
+        if (!(o instanceof GameJSONImpl gameJSON)) return false;
+        return Objects.equals(uuid, gameJSON.uuid);
     }
 
     /**
@@ -184,7 +183,7 @@ public class GameJSONImpl implements GameJSON {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

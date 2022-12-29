@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.command;
 
 import fr.univnantes.alma.core.command.CommandJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +57,24 @@ public class CommandJSONImpl implements CommandJSON {
     @Override
     public boolean isNeedActive() {
         return needActive;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommandJSONImpl commandJSON)) return false;
+        return Objects.equals(name, commandJSON.name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
 }

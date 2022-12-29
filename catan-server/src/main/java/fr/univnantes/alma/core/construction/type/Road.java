@@ -53,9 +53,8 @@ public abstract class Road implements Construction {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof Road)) return false;
-
-        return uuid.equals(((Road) o).getUUID());
+        if (!(o instanceof Road road)) return false;
+        return Objects.equals(uuid, road.uuid);
     }
 
     /**
@@ -63,7 +62,7 @@ public abstract class Road implements Construction {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

@@ -125,4 +125,22 @@ public final class TradeJSONImpl implements TradeJSON {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TradeJSONImpl tradeJSON)) return false;
+        return Objects.equals(uuid, tradeJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
+    }
+
 }

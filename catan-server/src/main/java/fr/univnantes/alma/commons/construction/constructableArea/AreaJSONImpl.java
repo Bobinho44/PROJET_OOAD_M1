@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.construction.constructableArea;
 
 import fr.univnantes.alma.core.construction.constructableArea.AreaJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -44,6 +45,24 @@ public class AreaJSONImpl implements AreaJSON {
     @Override
     public @NonNull String getType() {
         return type;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AreaJSONImpl areaJSON)) return false;
+        return Objects.equals(uuid, areaJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
 }

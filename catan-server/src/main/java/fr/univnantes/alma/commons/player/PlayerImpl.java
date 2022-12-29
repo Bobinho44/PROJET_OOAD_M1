@@ -99,9 +99,8 @@ public class PlayerImpl implements Player {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof PlayerImpl)) return false;
-
-        return Objects.equals(uuid, ((PlayerImpl) o).getUUID());
+        if (!(o instanceof PlayerImpl player)) return false;
+        return Objects.equals(uuid, player.uuid);
     }
 
     /**
@@ -109,7 +108,7 @@ public class PlayerImpl implements Player {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

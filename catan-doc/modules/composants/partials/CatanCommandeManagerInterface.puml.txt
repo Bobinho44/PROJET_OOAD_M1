@@ -1,0 +1,16 @@
+@startuml
+
+interface CommandManager {
+
+    Command getCommand(String name)
+
+    boolean hasCommand(String name)
+
+    void addCommand(String name, Function<CommandExecutor, NotificationJSON> action)
+
+    void removeCommand(Command command)
+
+    NotificationJSON execute(Command command, List<Object> parameters)
+}
+
+@enduml

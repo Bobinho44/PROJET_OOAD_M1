@@ -1,0 +1,58 @@
+@startuml
+
+interface PlayerManager {
+
+    List<PlayerJSON> getPlayerInformation()
+
+    Player getPlayer(PlayerJSON playerJSON)
+
+    boolean hasPlayer(PlayerJSON playerJSON)
+
+    void createPlayer(PlayerJSON playerJSON
+
+    void deletePlayer(Player player)
+
+    boolean canPlay(Player player)
+
+    void nextPlayer()
+
+    boolean hasConstruction( Player player, Construction construction)
+
+    void addConstruction(Player player, Construction construction)
+
+    void removeConstruction(Player player, Construction construction)
+
+    boolean hasResource(Player player, Resource resource)
+
+    boolean hasResources(Player player, List<Resource> resources)
+
+    void addResource( Player player, Resource resource)
+
+    void addResources(Player player, List<Resource> resources)
+
+    void removeResource(Player player, Resource resource)
+
+    void removeResources(Player player, List<Resource> resources)
+
+    void pickAllResources(Player player, Resource resource)
+
+    DevelopmentCard getDevelopmentCard(Player player)
+
+    boolean hasDevelopmentCard(Player player, DevelopmentCard developmentCard)
+
+    boolean hasDevelopmentCard(Player player)
+
+    void addDevelopmentCard(Player player, DevelopmentCard developmentCard)
+
+    void removeDevelopmentCard(Player player, DevelopmentCard developmentCard)
+
+    CommandJSON useDevelopmentCard(Player player, DevelopmentCard developmentCard)
+
+    int getVictoryPoint(Player player)
+
+    void addVictoryPoints(Player player, int amount)
+
+    void removeVictoryPoints(Player player, int amount)
+}
+
+@enduml

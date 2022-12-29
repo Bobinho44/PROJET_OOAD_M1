@@ -85,14 +85,6 @@ public class TerritoryController implements TerritoryManager {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull List<Territory> getTerritories() {
-        return territories.values().stream().toList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public @NonNull Territory getTerritory(@NonNull TerritoryJSON territoryJSON) throws UnregisteredTerritoryException {
         Objects.requireNonNull(territoryJSON, "territoryJSON cannot be null!");
 

@@ -92,9 +92,8 @@ public class TradeImpl implements Trade {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof TradeImpl)) return false;
-
-        return Objects.equals(uuid, ((TradeImpl) o).getUUID());
+        if (!(o instanceof TradeImpl trade)) return false;
+        return Objects.equals(uuid, trade.uuid);
     }
 
     /**
@@ -102,7 +101,7 @@ public class TradeImpl implements Trade {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

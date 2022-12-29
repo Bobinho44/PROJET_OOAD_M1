@@ -1,0 +1,62 @@
+@startuml
+
+interface ConstructionManager {
+
+    List<AreaJSON> getAreasInformation();
+
+    Area<T> getArea(AreaJSON areaJSON, Class<T> type)
+
+    boolean hasArea(AreaJSON areaJSON, Class<T> type)
+
+    void createArea(ConstructStrategy<T> constructStrategy, LootStrategy<T> lootStrategy, Dock dock)
+
+    void deleteArea(Area<T> area)
+
+    boolean isAreaOwnedByPlayer(Area<T> area, Player player)
+
+    boolean areaHasNeighbourBuilding(Area<T> area)
+
+    boolean buildingAreaIsAreaNeighbour(Area<T> area, Area<Building> buildingArea)
+
+    void addNeighbourBuildingToArea(Area<T> area, Area<Building> buildingArea)
+
+    void removeNeighbourBuildingFromArea(Area<T> area, Area<Building> buildingArea)
+
+    boolean areaHasNeighbourRoad(Area<T> area)
+
+    boolean roadAreaIsAreaNeighbour(Area<T> area, Area<Road> roadArea)
+
+    void addNeighbourRoadToArea(Area<T> area, Area<Road> roadArea)
+
+    void removeNeighbourRoadToArea(Area<T> area, Area<Road> roadArea)
+
+    Construction getAreaConstruction(Area<T> area)
+
+    boolean areaHasConstruction( Area<T> area)
+
+    Dock getAreaDock(Area<T> area)
+
+    boolean areaHasDock(Area<T> area)
+
+    Resource getDockResource(Dock dock)
+
+    boolean dockHasResource(Dock dock)
+
+    int getDockRatio(Dock dock)
+
+    boolean isValidDockResource(Dock dock, Resource resource)
+
+    boolean areaIsConstructable(Area<T> area, T construction)
+
+    void constructOnArea(Area<T> area, T construction)
+
+    T generateConstruction(ConstructionJSON constructionJSON, Class<T> type, Player player)
+
+    boolean hasConstruction(ConstructionJSON constructionJSON, Class<T> type, Player player)
+
+    List<Resource> getConstructionCost(Construction construction)
+
+    int getPlayerDockRatio(Player player, Resource resource)
+}
+
+@enduml

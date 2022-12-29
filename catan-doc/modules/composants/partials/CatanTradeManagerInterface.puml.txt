@@ -1,0 +1,25 @@
+@startuml
+
+interface TradeManager {
+
+
+    Trade getTrade(TradeJSON tradeJSON)
+
+    boolean hasTrade(TradeJSON tradeJSON);
+
+    void createTrade(UUID uuid, Player sender, Player receiver, List<Resource> offer, List<Resource> request)
+
+    void deleteTrade(Trade trade)
+
+    boolean hasReceiver(Trade trade)
+
+    Player getSender(Trade trade)
+
+    Player getReceiver(Trade trade)
+
+    List<Resource> getOffer(Trade trade)
+
+    List<Resource> getRequest(Trade trade)
+}
+
+@enduml

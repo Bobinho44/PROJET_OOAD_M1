@@ -79,9 +79,8 @@ public abstract class ResourceImpl implements Resource {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof ResourceImpl)) return false;
-
-        return name.equals(((ResourceImpl) o).getName());
+        if (!(o instanceof ResourceImpl resource)) return false;
+        return Objects.equals(name, resource.name);
     }
 
     /**
@@ -89,7 +88,7 @@ public abstract class ResourceImpl implements Resource {
      */
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return Objects.hash(name);
     }
 
 }

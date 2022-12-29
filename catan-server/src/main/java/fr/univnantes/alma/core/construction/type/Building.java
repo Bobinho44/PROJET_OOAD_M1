@@ -53,9 +53,8 @@ public abstract class Building implements Construction {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof Building)) return false;
-
-        return uuid.equals(((Building) o).getUUID());
+        if (!(o instanceof Building building)) return false;
+        return Objects.equals(uuid, building.uuid);
     }
 
     /**
@@ -63,7 +62,7 @@ public abstract class Building implements Construction {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

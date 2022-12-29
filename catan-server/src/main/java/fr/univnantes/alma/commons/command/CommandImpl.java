@@ -5,6 +5,7 @@ import fr.univnantes.alma.commons.command.executor.CommandExecutorImpl;
 import fr.univnantes.alma.core.command.Command;
 import fr.univnantes.alma.core.command.executor.CommandExecutor;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -51,6 +52,24 @@ public class CommandImpl implements Command {
         Objects.requireNonNull(parameters, "parameters cannot be null!");
 
         return action.apply(new CommandExecutorImpl(parameters));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommandImpl command)) return false;
+        return Objects.equals(name, command.name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
 }

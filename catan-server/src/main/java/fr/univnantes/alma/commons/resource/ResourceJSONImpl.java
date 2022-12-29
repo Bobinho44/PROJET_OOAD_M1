@@ -52,10 +52,8 @@ public class ResourceJSONImpl implements ResourceJSON {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ResourceJSONImpl that = (ResourceJSONImpl) o;
-
-        return amount == that.amount && Objects.equals(name, that.name);
+        if (!(o instanceof ResourceJSONImpl resourceJSON)) return false;
+        return amount == resourceJSON.amount && Objects.equals(name, resourceJSON.name);
     }
 
     /**

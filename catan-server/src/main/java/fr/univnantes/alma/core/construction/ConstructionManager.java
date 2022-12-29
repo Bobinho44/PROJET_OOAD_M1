@@ -257,4 +257,5 @@ public interface ConstructionManager {
      * @return the minimum dock ratio of the player for the selected resource
      */
     int getPlayerDockRatio(@NonNull Player player, @NonNull Resource resource);
+
 }

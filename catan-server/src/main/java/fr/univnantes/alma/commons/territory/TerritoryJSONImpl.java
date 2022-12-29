@@ -4,6 +4,7 @@ import fr.univnantes.alma.core.resource.ResourceJSON;
 import fr.univnantes.alma.core.exception.UndefinedTerritoryResourceException;
 import fr.univnantes.alma.core.territory.TerritoryJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -76,6 +77,24 @@ public final class TerritoryJSONImpl implements TerritoryJSON {
         this.resource = resource;
 
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TerritoryJSONImpl territoryJSON)) return false;
+        return Objects.equals(uuid, territoryJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
 }

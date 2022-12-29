@@ -1,0 +1,32 @@
+@startuml
+
+interface TerritoryManager {
+
+    List<TerritoryJSON> getTerritoriesInformation()
+
+    Territory getTerritory(TerritoryJSON territoryJSON)
+
+    boolean hasTerritory(TerritoryJSON territoryJSON)
+
+    boolean hasNeighbourBuilding( Territory territory, Area<Building> area)
+
+    void addNeighbourBuilding(Territory territory, Area<Building> building)
+
+    void removeNeighbourBuilding(Territory territory, Area<Building> building)
+
+    boolean hasNeighbourRoad(Territory territory, Area<Road> area)
+
+    void addNeighbourRoad( Territory territory,  Area<Road> road)
+
+    void removeNeighbourRoad(Territory territory, Area<Road> road)
+
+    boolean hasResource(Territory territory)
+
+    Resource getResource(Territory territory)
+
+    void moveThief(Territory territory)
+
+    List<Map.Entry<Player, Resource>> getLoot(int number)
+}
+
+@enduml

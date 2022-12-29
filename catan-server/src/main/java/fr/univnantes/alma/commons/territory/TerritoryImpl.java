@@ -109,9 +109,8 @@ public abstract class TerritoryImpl implements Territory {
     @Override
     public boolean equals(@Nullable Object o) {
         if (this == o) return true;
-        if (!(o instanceof TerritoryImpl)) return false;
-
-        return uuid.equals(((TerritoryImpl) o).getUUID());
+        if (!(o instanceof TerritoryImpl territory)) return false;
+        return Objects.equals(uuid, territory.uuid);
     }
 
     /**
@@ -119,7 +118,7 @@ public abstract class TerritoryImpl implements Territory {
      */
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        return Objects.hash(uuid);
     }
 
 }

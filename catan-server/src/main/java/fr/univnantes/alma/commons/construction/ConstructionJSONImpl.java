@@ -2,6 +2,7 @@ package fr.univnantes.alma.commons.construction;
 
 import fr.univnantes.alma.core.construction.ConstructionJSON;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -45,6 +46,24 @@ public class ConstructionJSONImpl implements ConstructionJSON {
     @Override
     public @NonNull String getType() {
         return type;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConstructionJSONImpl constructionJSON)) return false;
+        return Objects.equals(uuid, constructionJSON.uuid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 
 }
