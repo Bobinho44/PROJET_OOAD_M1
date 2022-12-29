@@ -68,7 +68,7 @@ a|
 
 
 | Extensions	
-|__
+|_Nous devons permettre d'ajouter simplement de nouveaux comportements, de nouveau bonus de carte qui entraineraient de nouvelles actions_
 
 | Alternatives	
 a| 

@@ -69,10 +69,10 @@ a|
 
 
 | Extensions
-| __
+| _Nous devons permettre l'extension du plateau avec potentielement plus de case, plus de port, de nouvelles cartes ou encore de nouvelles structures_
 
 | Alternatives	
-| _On peut, au lieu de partir du centre du plateau, partir d'un emplacement frontalier d'une zone "mer" pour placer la première tuile de ressource. Le placement des tuiles suivantes se fera toujours en spirale jusqu'au centre du plateau_
+| _Nous pouvons, au lieu de partir du centre du plateau, partir d'un emplacement frontalier d'une zone "mer" pour placer la première tuile de ressource. Le placement des tuiles suivantes se fera toujours en spirale jusqu'au centre du plateau_
 
 | Cas d'utilisation supérieur
 | _Aucun_

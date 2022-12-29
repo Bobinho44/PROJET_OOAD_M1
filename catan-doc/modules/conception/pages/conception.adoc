@@ -1,16 +1,8 @@
 = Conception détaillée
 
-== Travail à réaliser
+Ce chapitre répond aux différentes exigences non-fonctionnelles du projet «Catane».
 
-// ainsi que de décrire comment vous répondez aux différentes exigences non-fonctionnelles.
-
-Objectif::
-Spécification détaillée des composants: leur structure (diagramme de classes de conception), ainsi que le comportement de chaque opération fournie par le composants. Le comportement peut-être décrit en utilisant les diagrammes d'activité, d'interaction, les machines d'état, ainsi que OCL.
-
-Moyens::
-Appliquez les concepts vus en cours: design patterns, principes GRASP, bonnes pratiques, etc.
-
-
+L’objectif de ce document est de détailler la spécification des composants, notamment leur structure, ainsi que le comportement de chaque opération fournie par le composants.
 
 
 == Réponses aux exigences non-fonctionnelles
@@ -22,55 +14,50 @@ Expliquez dans cette section les répondes aux différentes exigences non-foncti
 
 === Concurrence
 
-NOTE: TODO!
+Pour gérer la concurrence, nous avons mis en place un système de verrouillage de l'envois de requête, qui empêche les deux joueurs d'exécuter simultanément des commandes. Ainsi seul le joueur actif peut intéragir avec le serveur.
+
+Cependant il est possible de spécifier qu'une commande n'a pas besoin de posséder le verrou pour pouvoir s'exécuter. C'est notamment utile pour les cas ou le serveur attent une réponse à la suite d'une requête.
 
 === Performance
 
-NOTE: TODO!
+Pour améliorer les performances du jeu, nous avons optimisé le code en utilisant des algorithmes efficaces et en réduisant au minimum les appels aux systèmes gérant les données. 
+
+Nous avons également mis en place un système d'identifiant pour nos objets, afin réduire le temps de chargement des données.
 
 === Interopérabilité
 
-NOTE: TODO!
+Pour assurer l'interopérabilité du jeu, nous avons utilisé des formats de fichiers standard et des protocoles de communication couramment utilisés dans l'industrie. 
+
+Nous avons également inclus des options de configuration pour permettre aux joueurs de personnaliser leur expérience de jeu en fonction de leurs préférences.
 
 
 === Portabilité
 
-NOTE: TODO!
+Pour rendre le jeu portable, nous avons utilisé des technologies cross-platform permettant de faire fonctionner le jeu sur différents systèmes d'exploitation et appareils.
 
 === Sécurité
 
-NOTE: TODO!
-
-==== Exigence de sécurité
-
 Notre système doit être sécurisé, même si nous ne manipulons pas des données sensibles. Pour cela nous devons vérifier l'identité de l'utilisateur.
-
 
 N'ayant pas à nous occuper de l'authentification de l'utilisateur nous admettons que le système s'occupant de cela est correct et lui-même sécurisé. Nous admettons également que, quelle que soit la plateforme utilisée (web, logiciel, application) le service d'authentification sera le même pour tous.
 
 === Maintenanbilité
 
-NOTE: TODO!
+Pour assurer la maintenabilité du jeu, nous avons adopté une approche de conception modulaire qui permet de mettre à jour ou de remplacer facilement les différentes parties du jeu sans affecter l'ensemble du système. 
 
-==== Maintenabilité
-
-NOTE: TODO!
+Nous avons également fais en sorte de rendre le système extensible. Ainsi, il est  très simple de créer de nouvelles cartes, de rajouter de nouveaux types de routes ou de bâtiments, modifier les règles de constructions etc...
 
 === Interface utilisateur
 
-NOTE: TODO!
+La partie interface utilisateur n'a, jusqu'à présent, pas été notre priorité sur ce projet. Ainsi l'interface actuelle n'est que purement visuel et non interactive.
+
+Cependant une interface interactive du plateau a été développé mais n'a pas encore été utilisé comme interface de base.
 
 === Interface logicielle
 
-NOTE: TODO!
+Pour faciliter l'intégration du jeu avec d'autres logiciels, nous avons défini des interfaces claires et simples qui spécifient les fonctionnalités et les données disponibles pour les développeurs tiers. 
 
-=== Interface ou protocoles de communication
-
-NOTE: TODO!
-
-=== Correction
-
-NOTE: TODO!
+Nous avons également inclus une documentation complète de nos interfaces, de leurs implémentations et du projet en général.
 
 == Patrons logiciels utilisés
 
@@ -86,11 +73,6 @@ NOTE: TODO!
 NOTE: TODO!
 
 == Choix techniques - Distribution des processus
-
-[NOTE]
-====
-Explicitez les différents choix techniques et les réponses technologiques aux différentes contraintes que le système implique.
-====
 
 Pour cela nous allons donc vous présenter l'environnement général de développement puis énoncer les 4 contraintes que nous avons déterminées de notre logiciel.
 

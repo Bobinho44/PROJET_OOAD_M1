@@ -91,9 +91,12 @@ include::partial$CatanCommandManagerInterface.puml[]
 
 == Client
 
-Le client va communiquer avec le serveur via des commandes envoyé à celui ci. À chaque requête, le serveur renverra une notification au client. Il y a cependant deux types de notifications. 
-Tout d'abord, nous avons des notifications classiques informants du bon déroulé de l'opération ou d'éventuelles erreurs. 
+Le client va communiquer avec le serveur via des commandes envoyé à celui-ci. À chaque requête, le serveur renverra une notification au client. Il y a cependant deux types de notifications.
+
+Tout d'abord, nous avons des notifications classiques informant du bon déroulé de l'opération ou d'éventuelles erreurs.
+
 Ensuite, nous avons des notifications qui vont servir à questionner un client (le même ou non). Cela permet les interactions entre le client et le serveur, et entre les clients eux même.
+
 À chaque réception de notification, les informations de tous les clients de la partie seront mise à jour pour prendre en compte les modifications des données faisant suite à la requête.
 
 .Diagramme de séquence d'une requête sans demande de réponse
@@ -101,6 +104,12 @@ Ensuite, nous avons des notifications qui vont servir à questionner un client (
 ....
 include::partial$CatanRequestWithoutReplySequenceDiagram.puml[]
 ....
+
+Alors que le premier diagramme nous montrait un communication assez standard, ce deuxième diagramme permet de visualiser les interactions entre les clients et le serveur en cas de requête nécessitant plusieurs interactions des clients vers le serveur.
+
+Ainsi, comme la première notification renvoyée par le serveur, nécessite une réponse (adressée au client2), celui-ci exécute à son tour une requête.
+
+Finalement, après l'exécution de cette deuxième requête, les deux clients recevront leur notification propre et une mise à jour des données de la partie.
 
 .Diagramme de séquence d'une requête avec demande de réponse
 [plantuml]
