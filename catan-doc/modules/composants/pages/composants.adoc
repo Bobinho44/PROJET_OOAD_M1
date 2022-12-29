@@ -86,7 +86,24 @@ Le controlleur des commandes va permettre de créer et d'exécuter des commandes
 .Diagramme UML de l'interface CommandManager
 [plantuml]
 ....
-include::partial$CatanCommandeManagerInterface.puml[]
+include::partial$CatanCommandManagerInterface.puml[]
 ....
 
 == Client
+
+Le client va communiquer avec le serveur via des commandes envoyé à celui ci. À chaque requête, le serveur renverra une notification au client. Il y a cependant deux types de notifications. 
+Tout d'abord, nous avons des notifications classiques informants du bon déroulé de l'opération ou d'éventuelles erreurs. 
+Ensuite, nous avons des notifications qui vont servir à questionner un client (le même ou non). Cela permet les interactions entre le client et le serveur, et entre les clients eux même.
+À chaque réception de notification, les informations de tous les clients de la partie seront mise à jour pour prendre en compte les modifications des données faisant suite à la requête.
+
+.Diagramme de séquence d'une requête sans demande de réponse
+[plantuml]
+....
+include::partial$CatanRequestWithoutReplySequenceDiagram.puml[]
+....
+
+.Diagramme de séquence d'une requête avec demande de réponse
+[plantuml]
+....
+include::partial$CatanRequestWithReplySequenceDiagram.puml[]
+....

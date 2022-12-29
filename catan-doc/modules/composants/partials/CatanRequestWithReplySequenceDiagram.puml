@@ -1,0 +1,22 @@
+@startuml
+participant Client1 as 1
+participant Client2 as 2
+participant ClientMiddleware as 3
+participant ServerMiddleware as 4
+participant Server as 5
+1 -[#blue]> 3 : request: executeCommand()
+3 -[#blue]> 4 : request: executeCommand()
+4 -[#blue]> 5 : request: executeCommand()
+5 -[#green]> 4 : response: notification1
+4 -[#green]> 3 : response: notification1
+3 -[#orange]> 2 : ask: needReply()
+2 -[#blue]> 3 : request: executeCommand()
+3 -[#blue]> 4 : request: executeCommand()
+4 -[#blue]> 5 : request: executeCommand()
+5 -[#green]> 4 : response: notification2
+4 -[#green]> 3 : response: notification2
+3 -[#red]-> 2 : update: gameInformation
+3 -[#red]-> 1 : update: gameInformation
+3 -[#green]> 2 : response: notification2
+3 -[#green]> 1 : response: notification1
+@enduml
