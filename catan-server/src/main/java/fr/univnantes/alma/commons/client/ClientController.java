@@ -121,11 +121,13 @@ public class ClientController implements ClientManager {
         }
 
         //Updates the game information of all players in the same game
-        GameJSON updatedGameJSON = gameManager.updateInformation(gameJSON);
-        clients.stream()
-                .filter(this::hasGame)
-                .filter(testedClient -> getGame(testedClient).getUUID().equals(gameJSON.getUUID()))
-                .forEach(inGameClient -> inGameClient.updateGameInformation(updatedGameJSON));
+        else {
+            GameJSON updatedGameJSON = gameManager.updateInformation(gameJSON);
+            clients.stream()
+                    .filter(this::hasGame)
+                    .filter(testedClient -> getGame(testedClient).getUUID().equals(gameJSON.getUUID()))
+                    .forEach(inGameClient -> inGameClient.updateGameInformation(updatedGameJSON));
+        }
 
         return notificationJSON;
     }

@@ -56,16 +56,29 @@ Nous avons également inclus une documentation complète de nos interfaces, de l
 
 == Patrons logiciels utilisés
 
-NOTE: Décrivez dans cette partie les patrons logiciels utilisés pour mettre en œuvre l'application.
+=== Patron de conception Singleton
 
+Le patron de conception Singleton est un patron de conception de logiciel qui garantit qu'une seule instance d'une classe donnée sera créée et qu'il y aura un point d'accès global à cette instance. 
 
-=== Patron de conception "A"
+Cela peut être utile lorsque nous avons besoin de garantir qu'il n'y a qu'une seule instance d'une classe dans toute l'application. Ce patron a été utilisé pour créer les différentes stratégies de construction ou de générations de resource des territoires.
 
-NOTE: TODO!
+=== Patron architectural Strategy
 
-=== Patron architectural "B"
+Le patron de conception Strategy est un patron de conception de logiciel qui permet de définir une famille d'algorithmes, de les encapsuler individuellement et de les rendre interchangeables. 
 
-NOTE: TODO!
+Cela permet à une application de choisir l'algorithme à utiliser à l'exécution, plutôt que de devoir choisir un algorithme spécifique lors de la compilation. Ce patron a été utilisé pour gérer les différentes stratégies de construction ou de générations de resource des territoires.
+
+=== Patron architectural Facade
+
+Le patron de conception Facade est un patron de conception de logiciel qui vise à simplifier l'interface d'un système complexe en fournissant une interface simplifiée à une sous-partie de ce système. 
+
+Le but de ce patron est de rendre le système plus facile à utiliser en masquant la complexité de ses sous-systèmes et en fournissant une interface commune pour accéder à ces sous-systèmes. Ce patron a été utilisé pour nos différents controlleurs. Ces controlleurs fournissent des interfaces simples permettant de manipuler simplement ce dont ce controlleur à la charge.
+
+=== Patron architectural Command
+
+Le patron de conception Command est un patron de conception de logiciel qui vise à encapsuler une requête sous la forme d'un objet, de manière à pouvoir paramétrer des objets avec des comportements différents, enregistrer ces objets et les exécuter ultérieurement. 
+
+Le patron Command permet de découpler l'objet qui envoie la requête de l'objet qui exécute la requête, ce qui rend votre code plus flexible et plus facile à maintenir. Ce patron a été utilisé pour que le client puisse envoyé des requêtes au serveur, et que la partie puisse recevoir cette requête et la traiter.
 
 == Choix techniques - Distribution des processus
 
