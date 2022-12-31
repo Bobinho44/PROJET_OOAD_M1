@@ -1,7 +1,7 @@
 package fr.univnantes.alma.core.construction.type;
 
-import fr.univnantes.alma.core.player.Player;
-import fr.univnantes.alma.core.construction.Construction;
+import fr.univnantes.alma.core.player.IPlayer;
+import fr.univnantes.alma.core.construction.IConstruction;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -11,20 +11,20 @@ import java.util.UUID;
 /**
  * Abstract Class representing a building
  */
-public abstract class Building implements Construction {
+public abstract class Building implements IConstruction {
 
     /**
      * Fields
      */
     private final UUID uuid;
-    private final Player owner;
+    private final IPlayer owner;
 
     /**
      * Creates a new building
      *
      * @param owner the owner
      */
-    public Building(@NonNull Player owner) {
+    public Building(@NonNull IPlayer owner) {
         Objects.requireNonNull(owner, "owner cannot be null!");
 
         this.uuid = UUID.randomUUID();
@@ -43,7 +43,7 @@ public abstract class Building implements Construction {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull Player getOwner() {
+    public @NonNull IPlayer getOwner() {
         return owner;
     }
 

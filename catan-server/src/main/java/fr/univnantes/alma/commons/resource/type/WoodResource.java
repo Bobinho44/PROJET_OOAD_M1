@@ -1,11 +1,11 @@
 package fr.univnantes.alma.commons.resource.type;
 
-import fr.univnantes.alma.commons.resource.ResourceImpl;
+import fr.univnantes.alma.commons.resource.Resource;
 
 /**
  * Class representing the resource: wood
  */
-public class WoodResource extends ResourceImpl {
+public class WoodResource extends Resource {
 
     /**
      * Creates a new wood resource

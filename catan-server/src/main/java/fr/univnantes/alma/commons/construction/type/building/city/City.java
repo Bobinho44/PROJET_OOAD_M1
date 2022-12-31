@@ -1,7 +1,7 @@
 package fr.univnantes.alma.commons.construction.type.building.city;
 
 import fr.univnantes.alma.core.construction.type.Building;
-import fr.univnantes.alma.core.player.Player;
+import fr.univnantes.alma.core.player.IPlayer;
 import org.springframework.lang.NonNull;
 
 /**
@@ -14,7 +14,7 @@ public class City extends Building {
      *
      * @param owner the owner
      */
-    public City(@NonNull Player owner) {
+    public City(@NonNull IPlayer owner) {
         super(owner);
     }
 

@@ -80,7 +80,7 @@ DevelopmentCard <|-- KnightCard
 
 Area <-- "[0, 1]" Construction
 Construction <|-- Building
-Construction <|-- Road
+Construction <|-- Path
 
 Area <-- "12" Territory
 Player <-- "[0, 95]   " Resource

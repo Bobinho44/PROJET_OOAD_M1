@@ -1,6 +1,6 @@
 package fr.univnantes.alma.core.card.type;
 
-import fr.univnantes.alma.core.card.Card;
+import fr.univnantes.alma.core.card.ICard;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * Abstract Class representing a development card
  */
-public abstract class DevelopmentCard implements Card {
+public abstract class DevelopmentCard implements ICard {
 
     /**
      * Fields

@@ -3,8 +3,8 @@ package fr.univnantes.alma.commons.construction.type.building.city.constructStra
 import fr.univnantes.alma.commons.construction.type.building.city.City;
 import fr.univnantes.alma.core.construction.type.Building;
 import fr.univnantes.alma.commons.construction.type.building.colony.Colony;
-import fr.univnantes.alma.core.construction.constructStrategy.ConstructStrategy;
-import fr.univnantes.alma.core.construction.constructableArea.Area;
+import fr.univnantes.alma.core.construction.constructStrategy.IConstructStrategy;
+import fr.univnantes.alma.core.construction.constructableArea.IArea;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Implementation of a building construct strategy: city construct strategy
  */
-public class CityConstructStrategy implements ConstructStrategy<Building> {
+public class CityConstructStrategy implements IConstructStrategy<Building> {
 
     /**
      * Singleton
@@ -23,7 +23,7 @@ public class CityConstructStrategy implements ConstructStrategy<Building> {
      * {@inheritDoc}
      */
     @Override
-    public boolean isConstructable(@NonNull Area<Building> area, @NonNull Building building) {
+    public boolean isConstructable(@NonNull IArea<Building> area, @NonNull Building building) {
         Objects.requireNonNull(area, "area cannot be null!");
         Objects.requireNonNull(building, "building cannot be null!");
 
@@ -42,7 +42,7 @@ public class CityConstructStrategy implements ConstructStrategy<Building> {
         }
 
         //Checks if the area has a friendly neighbour road
-        return area.getNeighbourRoads().stream()
+        return area.getNeighbourPaths().stream()
                 .anyMatch(roadNeighbour -> roadNeighbour.getConstruction()
                         .map(nearbyRoad -> nearbyRoad.getOwner().equals(building.getOwner()))
                         .orElse(false));
@@ -53,7 +53,7 @@ public class CityConstructStrategy implements ConstructStrategy<Building> {
      * {@inheritDoc}
      */
     @Override
-    public void construct(@NonNull Area<Building> area, @NonNull Building building) {
+    public void construct(@NonNull IArea<Building> area, @NonNull Building building) {
         Objects.requireNonNull(area, "area cannot be null!");
         Objects.requireNonNull(building, "building cannot be null!");
 

@@ -1,9 +1,9 @@
 package fr.univnantes.alma.core.card.type;
 
-import fr.univnantes.alma.commons.command.CommandJSONImpl;
-import fr.univnantes.alma.core.command.CommandJSON;
-import fr.univnantes.alma.core.card.Card;
-import fr.univnantes.alma.core.player.Player;
+import fr.univnantes.alma.commons.command.CommandJSON;
+import fr.univnantes.alma.core.card.ICard;
+import fr.univnantes.alma.core.command.ICommandJSON;
+import fr.univnantes.alma.core.player.IPlayer;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * Abstract Class representing a special card
  */
-public abstract class SpecialCard implements Card {
+public abstract class SpecialCard implements ICard {
 
     /**
      * Fields
@@ -23,7 +23,7 @@ public abstract class SpecialCard implements Card {
     private final UUID uuid;
     private final String name;
     private final String picture;
-    private Player owner;
+    private IPlayer owner;
 
     /**
      * Creates a new special card
@@ -69,7 +69,7 @@ public abstract class SpecialCard implements Card {
      *
      * @return the owner
      */
-    public @NonNull Optional<Player> getOwner() {
+    public @NonNull Optional<IPlayer> getOwner() {
         return Optional.ofNullable(owner);
     }
 
@@ -86,16 +86,16 @@ public abstract class SpecialCard implements Card {
      * {@inheritDoc}
      */
     @Override
-    public @NonNull CommandJSON useEffect(@NonNull Player player) {
+    public @NonNull ICommandJSON useEffect(@NonNull IPlayer player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
         if (hasOwner()) {
-            new CommandJSONImpl("addVictoryPoint", List.of(owner.getUUID(), -1), false);
+            new CommandJSON("addVictoryPoint", List.of(owner.getUUID(), -1), false);
         }
 
         this.owner = player;
 
-        return new CommandJSONImpl("addVictoryPoint", List.of(owner.getUUID(), 1), true);
+        return new CommandJSON("addVictoryPoint", List.of(owner.getUUID(), 1), true);
     }
 
     /**

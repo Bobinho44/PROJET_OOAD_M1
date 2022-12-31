@@ -1,8 +1,8 @@
 package fr.univnantes.alma.commons.construction.type.building.city.lootStrategy;
 
 import fr.univnantes.alma.core.construction.type.Building;
-import fr.univnantes.alma.core.construction.constructableArea.Area;
-import fr.univnantes.alma.core.construction.lootStrategy.LootStrategy;
+import fr.univnantes.alma.core.construction.constructableArea.IArea;
+import fr.univnantes.alma.core.construction.lootStrategy.ILootStrategy;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Implementation of a building loot strategy: city loot strategy
  */
-public class CityLootStrategy implements LootStrategy<Building> {
+public class CityLootStrategy implements ILootStrategy<Building> {
 
     /**
      * Singleton
@@ -21,7 +21,7 @@ public class CityLootStrategy implements LootStrategy<Building> {
      * {@inheritDoc}
      */
     @Override
-    public int getLootAmount(@NonNull Area<Building> area) {
+    public int getLootAmount(@NonNull IArea<Building> area) {
         Objects.requireNonNull(area, "area cannot be null!");
 
         return 2;

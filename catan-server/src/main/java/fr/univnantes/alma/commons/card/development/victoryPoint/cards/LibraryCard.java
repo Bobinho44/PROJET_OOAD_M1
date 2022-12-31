@@ -11,7 +11,7 @@ public class LibraryCard extends VictoryPointCard {
      * Creates a new library card
      */
     public LibraryCard() {
-        super("Library", "catan-web/catan-client/src/assets/special-card/Librairy.png");
+        super("Library", "catan-web/catan-client/src/assets/special-card/Library.png");
     }
 
 }

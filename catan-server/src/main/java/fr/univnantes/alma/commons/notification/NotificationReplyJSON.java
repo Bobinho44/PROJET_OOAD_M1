@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.notification;
 
-import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.core.notification.INotificationJSON;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Implementation of a reply notification
  */
-public record NotificationReplyJSON(List<Object> replyInformation) implements NotificationJSON {
+public record NotificationReplyJSON(List<Object> replyInformation) implements INotificationJSON {
 
     /**
      * Creates a new notification reply json

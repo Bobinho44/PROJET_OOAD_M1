@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.notification;
 
-import fr.univnantes.alma.core.notification.NotificationJSON;
+import fr.univnantes.alma.core.notification.INotificationJSON;
 import org.springframework.lang.NonNull;
 
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Implementation of a no reply notification
  */
-public enum NotificationNoReplyJSON implements NotificationJSON {
+public enum NotificationNoReplyJSON implements INotificationJSON {
     COMMAND_SUCCESS,
     COMMAND_NOT_FOUND,
     PLAYER_NOT_FOUND,

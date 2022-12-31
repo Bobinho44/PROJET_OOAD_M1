@@ -1,6 +1,6 @@
 package fr.univnantes.alma.commons.construction.type.building.colony;
 
-import fr.univnantes.alma.core.player.Player;
+import fr.univnantes.alma.core.player.IPlayer;
 import fr.univnantes.alma.core.construction.type.Building;
 import org.springframework.lang.NonNull;
 
@@ -14,7 +14,7 @@ public class Colony extends Building {
      *
      * @param owner the owner
      */
-    public Colony(@NonNull Player owner) {
+    public Colony(@NonNull IPlayer owner) {
         super(owner);
     }
 

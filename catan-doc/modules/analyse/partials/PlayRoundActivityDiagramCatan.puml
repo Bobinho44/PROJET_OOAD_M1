@@ -59,9 +59,7 @@ if ( acheter carte développement? ) then (yes)
   :piocher la carte;
 else (no)
 endif
-if ( jouer carte développement? ) then (yes)
-  switch (quelle carte?)
-case ( chevalier )
+if ( jouer carte chevalier ? ) then (yes)
   :déplacer le voleur;
   :prend carte d’un autre joueur;
   if ( joueur actuel ne possède pas la carte "Plus grosse armée" ET nombre de carte chevalier >= 3 ?) then (yes)
@@ -72,14 +70,19 @@ case ( chevalier )
     else (no)
       #Pink:le joueur actuel remporte la carte "Plus grosse armée";
     endif
-  endif
-case ( point de victoire )
+else (no)
+ endif
+if (jouer carte point de victoire?) then ( yes)
   :gagner un point de victoire;
-case ( monopole )
+else (no)
+endif
+if ( jouer carte monopole ) then (yes)
   :prendre tous les 
 ressources d'un type
 choisi aux autres joueurs;
-case ( construction de routes )
+else (no)
+endif
+if( jouer carte construction de routes ) then (yes)
   :placer 2 routes;
   if ( joueur actuel ne possède pas la carte "Route la plus longue" ET nombre de route >= 5 ?) then (yes)
     if ( carte "Route la plus longue" déjà remportée par un autre joueur ) then (yes)
@@ -90,9 +93,12 @@ case ( construction de routes )
       #Pink:le joueur actuel remporte la carte "Route la plus longue";
     endif
   endif
-case ( invention )
+else (no)
+endif
+if( jouer carte invention ) then (yes)
   :prendre 2 ressources au choix;
-endswitch
+else (no)
+endif
 else (no)
 endif
 if ( échanger avec un joueur? ) then (yes)
@@ -123,4 +129,3 @@ else (no)
 stop
 endif
 @enduml
-
