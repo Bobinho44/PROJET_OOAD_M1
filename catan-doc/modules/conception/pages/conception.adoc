@@ -1,5 +1,7 @@
 = Conception détaillée
 
+== Introduction
+
 Ce chapitre répond aux différentes exigences non-fonctionnelles du projet «Catane».
 
 L’objectif de ce document est de détailler la spécification des composants, notamment leur structure, ainsi que le comportement de chaque opération fournie par le composants.
@@ -36,7 +38,7 @@ Notre système doit être sécurisé, même si nous ne manipulons pas des donné
 
 N'ayant pas à nous occuper de l'authentification de l'utilisateur nous admettons que le système s'occupant de cela est correct et lui-même sécurisé. Nous admettons également que, quelle que soit la plateforme utilisée (web, logiciel, application) le service d'authentification sera le même pour tous.
 
-=== Maintenanbilité
+=== Maintenabilité
 
 Pour assurer la maintenabilité du jeu, nous avons adopté une approche de conception modulaire qui permet de mettre à jour ou de remplacer facilement les différentes parties du jeu sans affecter l'ensemble du système. 
 

@@ -38,8 +38,6 @@ Le système {project} permettra à des joueurs de différents endroits de s'affr
 
 Le reste de ce document contient une description globale du système logiciel {project} (section <<description>>, les exigences fonctionnelles spécifiques (section <<features>>) et les exigences non-fonctionnelles du système (voir <<nonfunctional>>).
 
-== Organisation du chapitre
-
 [#description]
 == Description générale
 
@@ -68,21 +66,8 @@ Le logiciel {project} doit assurer deux fonctions principales :
 . Création de jeu : permettre à deux joueurs de se découvrir et de commencer une partie.
 . Le jeu{nbsp}: permettre aux joueurs de jouer effectivement à {project} jusqu'à la victoire de l'un d'entre eux.
 
-[NOTE]
-====
-Une image des principaux groupes d'exigences connexes et de leurs relations, comme une carte conceptuelle, est souvent utile.
-====
-
 
 === Caractéristiques et classes d'utilisateurs
-
-[NOTE]
-====
-Identifiez les différentes classes d'utilisateurs qui, selon vous, utiliseront ce produit. 
-Les classes d'utilisateurs peuvent être différenciées en fonction de la fréquence d'utilisation, du sous-ensemble de fonctions du produit utilisé, de l'expertise technique, des niveaux de sécurité ou de privilège, du niveau d'éducation ou de l'expérience. 
-Décrivez les caractéristiques pertinentes de chaque classe d'utilisateurs.  Certaines exigences peuvent ne concerner que certaines classes d'utilisateurs. 
-Distinguez les classes d'utilisateurs les plus importantes pour ce produit de celles qui sont moins importantes à satisfaire.
-====
 
 Le logiciel {project} n'a qu'une seule classe d'utilisateurs : les joueurs.
 Les joueurs peuvent avoir différents niveaux : débutants, intermédiaires ou experts.
@@ -101,10 +86,9 @@ NOTE: Décrivez l'environnement dans lequel le logiciel fonctionnera, y compris 
 Le logiciel {project} doit fonctionner sur tout système d'exploitation populaire et récent{nbsp}: Linux, Windows, ou MacOS.
 Le client Web devrait fonctionner sur tout navigateur Web récent{nbsp}: Firefox, Chrome, Safari, ou Edge.
 
-[NOTE]
-====
-TODO: Complétez la description ci-dessus
-====
+Il sera installé sur un ordinateur ou un appareil mobile disposant d'une configuration matérielle suffisante pour exécuter les applications et le système d'exploitation. Il sera également compatible avec toutes les versions récentes des systèmes d'exploitation mentionnés ci-dessus.
+
+Le logiciel devra également coexister pacifiquement avec tout autre logiciel ou application installé sur l'ordinateur ou l'appareil mobile, en prenant en compte les éventuelles restrictions de compatibilité et de fonctionnalité.
 
 [#contrainte]
 == Contraintes de conception et de mise en œuvre
@@ -196,70 +180,19 @@ Les communications entre le client et le serveur de jeu doivent utiliser des Web
 [#features]
 == Exigences fonctionnelles
 
-[NOTE]
-====
-Décrire les exigences fonctionnelles du système qui peuvent être exprimées et langage naturel. Pour plusieurs applications, c’est la partie principale de la SEL et son organisation doit, par conséquent, être bien réfléchie. Elle est habituellement hiérarchisée par caractéristiques, mais elle peut l’être, par utilisateur ou par sous-système. Les exigences fonctionnelles peuvent inclure les caractéristiques, les capacités et la sécurité.
-
-Lorsque des outils de développement, tels des référentiels d’exigences ou des outils de modélisation sont utilisés, on peut référer à ces données en indiquant l’endroit et le nom de cet outil]
-====
-
-[TIP]
-====
-Ici, il ne s'agit plus de décrire le domaine métier, mais de spécifier ce que le système *doit* faire.
-
-N'oubliez pas qu'il s'agit d'une spécification de que le système *doit* faire et non pas de *comment* il le fait.
-====
-
 === Fonctionnalité Rejoindre une partie
-
-[NOTE]
-====
-Ajoutez la description de la fonctionnalité "A".
-====
-
-TIP: Ne dites pas vraiment "Fonctionnalité A". Indiquez le nom de la fonctionnalité en quelques mots seulement.
-
-==== Description et priorité
 
 La fonctionnalité Rejoindre une partie permet à un joueur de rejoindre une partie en cours, en fournissant son nom.
 Cette fonctionnalité a une priorité moyenne.
-
-[NOTE]
-====
-Fournissez une brève description de la fonctionnalité et indiquez si elle a une priorité élevée, moyenne ou faible. 
-Vous pouvez également inclure des évaluations spécifiques des éléments de priorité, comme les avantages, les pénalités, les coûts et les risques (chacun étant évalué sur une échelle relative allant de 1 à 9).
-====
 
 ==== Séquences de Stimulus/Réponse
 
 La fonctionnalité Rejoindre une partie est déclenchée par l'action de l'utilisateur de cliquer sur le bouton "Rejoindre une partie" de l'interface web.
 
-NOTE: Liste des séquences d'actions de l'utilisateur et des réponses du système qui stimulent le comportement défini pour cette fonctionnalité. Celles-ci correspondront aux éléments de dialogue associés aux cas d'utilisation.
-
 ==== Exigences fonctionnelles
 * REQ-1: Le système doit permettre à un joueur de fournir son nom.
 * REQ-2: Le système doit permettre à un joueur de rejoindre une partie en cours.
 * REQ-3: Le sustème doit vérifier que le nom du joueur est valide.
-
-
-[NOTE]
-====
-Détaillez les exigences fonctionnelles détaillées associées à cette fonctionnalité. Il s'agit des capacités logicielles qui doivent être présentes pour permettre à l'utilisateur d'effectuer les services fournis par la fonction ou d'exécuter le cas d'utilisation. 
-
-Indiquez comment le produit doit réagir aux conditions d'erreur prévues ou aux entrées non valides. Les exigences doivent être concises, complètes, non ambiguës, vérifiables et nécessaires. 
-
-Utilisez la mention "A faire" pour indiquer que les informations nécessaires ne sont pas encore disponibles.
-
-Chaque exigence doit être identifiée de manière unique par un numéro de séquence ou une étiquette significative.
-
-* REQ-1:	
-* REQ-2:
-====
-
-==== Description sous la forme d'un cas d'utilisation
-
-.Cas d'utilisation A
-include::partial$uc-a.adoc[]
 
 === Fonctionnalité Jouer un tour
 
@@ -280,12 +213,6 @@ La fonctionnalité Jouer un tour est déclenchée par le serveur qui indique au 
 
 * REQ-1: Le système doit permettre de communiquer au joueur qu'il est son tour de jouer.
 * REQ-2: Le système doit permettre au joueur de choisir une action à effectuer.
-
-
-
-==== Description sous la forme d'un cas d'utilisation
-.Cas d'utilisation Jouer un tour
-include::partial$uc-b.adoc[]
 
 === Fonctionnalité Finir la partie
 
@@ -308,77 +235,38 @@ La fonctionnalité Vérifier fin de partie est déclenchée à chaque fois qu'un
 * REQ-2: Le système doit pouvoir afficher le gagnant de la partie.
 * REQ-3: Le système doit pouvoir clôturer la partie.
 
-==== Description sous la forme d'un cas d'utilisation
-
-.Cas d'utilisation Finir la partie
-include::partial$uc-c.adoc[]
-
 
 [#nonfunctional]
 == Autres exigences non-fonctionnelles
+
+=== Exigences de concurrence 
+
+. Seul le joueur actif peut modifier les données du jeu de lui même (sans que le serveur lui demande).
 
 === Exigences de performance 
 
 . Le jeu doit être _jouable_, ce qui signifie que les utilisateurs doivent avoir un retour rapide de leurs actions et que les retards dus aux problèmes de communication/connexion doivent être correctement tenus.
 . Le client Web doit pouvoir s'exécuter sur un ordinateur personnel doté de 4 Go de RAM.
 
+=== Exigences d'interopérabilité
+
+. Le logiciel doit être configurable facilement.
+
+
+=== Exigences de portabilité
+
+. Le logiciel doit fonctionner sur plusieurs appareils ou plateformes.
 
 === Exigences de sécurité
 
-NOTE: Précisez toute exigence concernant les questions de sécurité ou de confidentialité entourant l'utilisation du produit ou la protection des données utilisées ou créées par le produit. Définissez toute exigence en matière d'authentification de l'identité de l'utilisateur. Faites référence à toute politique ou réglementation externe contenant des questions de sécurité qui affectent le produit. Définissez toutes les certifications de sécurité ou de confidentialité qui doivent être satisfaites.
+. Un joueur ne peut pas jouer un tour s'il n'est pas son tour. 
+. Un joueur ne peut pas jouer un tour s'il n'est pas connecté au serveur.
+. Un joueur ne peut pas jeffectuer une action qui n'est pas autorisée par les règles du jeu.
+. Un joueur ne peut pas voir les cartes d'un autre joueur.
+. Un joueur ne peut pas jouer à la place d'un autre joueur.
 
-[%hardbreaks]
-Les exigences de sécurité suivantes doivent être satisfaites :
-- Un joueur ne peut pas jouer un tour s'il n'est pas son tour. 
-- Un joueur ne peut pas jouer un tour s'il n'est pas connecté au serveur.
-- Un joueur ne peut pas jeffectuer une action qui n'est pas autorisée par les règles du jeu.
-- Un joueur ne peut pas voir les cartes d'un autre joueur.
-- Un joueur ne peut pas jouer à la place d'un autre joueur.
+=== Exigences de maintenabilité
 
-=== Attributs de qualité logicielle
-
-[NOTE]
-====
-Précisez toute autre caractéristique de qualité du produit qui sera importante pour les clients ou les développeurs. En voici quelques-unes : adaptabilité, disponibilité, exactitude, flexibilité, interopérabilité, maintenabilité, portabilité, fiabilité, réutilisabilité, robustesse, testabilité et convivialité. 
-
-Rédigez-les de manière à ce qu'elles soient spécifiques, quantitatives et vérifiables, si possible. 
-
-Au minimum, clarifiez les préférences relatives pour divers attributs, comme la facilité d'utilisation par rapport à la facilité d'apprentissage. 
-====
-
-
-==== Extensibilité
-
-Il doit être possible d'ajouter des règles de jeu supplémentaires.
-Ainsi que des cartes supplémentaires.
-
-==== Maintenabilité
-
+. Il doit être possible d'ajouter du contenue supplémentaire facilement (cartes, constructions...).
 . Le logiciel doit être lisible et facile à maintenir.
 . La source Java doit respecter les directives de Google : https://google-styleguide.googlecode.com/svn/trunk/javaguide.html.
-
-=== Règles métier
-
-NOTE: Énumérez tous les principes de fonctionnement du produit, tels que les personnes ou les rôles qui peuvent remplir telle ou telle fonction dans des circonstances spécifiques. Il ne s'agit pas d'exigences fonctionnelles en soi, mais elles peuvent impliquer certaines exigences fonctionnelles pour faire respecter les règles.
-
-
-== Autres exigences
-
-NOTE: Définissez toute autre exigence non couverte ailleurs dans le SRS. Il peut s'agir d'exigences relatives à la base de données, à l'internationalisation, à la législation, aux objectifs de réutilisation du projet, etc. Ajoutez toute nouvelle section pertinente pour le projet.
-
-=== Annexe A : Glossaire
-
-TIP: https://docs.asciidoctor.org/asciidoc/latest/sections/glossary/
-
-
-NOTE: Définissez tous les termes nécessaires pour interpréter correctement le SRS, y compris les acronymes et les abréviations. Vous pouvez créer un glossaire distinct couvrant plusieurs projets ou l'ensemble de l'organisation, et vous contenter d'inclure les termes spécifiques à un seul projet dans chaque SRS.
-
-=== Annexe B : Modèles d'analyse
-
-Voir le chapitre <<domain>> (analyse du domaine) pour plus de détails.
-
-NOTE: En option, inclure tout modèle d'analyse pertinent, tel que des diagrammes de flux de données, des diagrammes de classe, des diagrammes d'état-transition ou des diagrammes entité-relation.
-
-=== Annexe C : Liste à déterminer
-
-NOTE: Recueillir une liste numérotée des références TBD (To Be Done) qui restent dans le SRS afin de pouvoir les suivre jusqu'à leur fermeture.
