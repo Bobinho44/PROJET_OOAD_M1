@@ -48,7 +48,7 @@ include::example$deployment-diagram-example.plantuml[]
 .Initialisation du système
 [plantuml]
 ----
-include::example$ad-initialization.plantuml[]
+include::example$CatanInitialization.plantuml[]
 ----
 
 == Vue du développement
@@ -81,7 +81,7 @@ dans les différents projets qui respectent une même architecture.
 ** Pour chaque instance de package UML, une instance de package Java doit être créée. 
 * Leurs noms doivent correspondre. Cependant, contrairement aux packages UML qui ont des noms simples, le nom du package Java contient l'information complète sur le chemin d'accès.
 
-**Pour chaque instance de classe UML, une instance de JavaClass doit être créée. 
+** Pour chaque instance de classe UML, une instance de JavaClass doit être créée. 
 * Leurs noms doivent correspondre. 
 * La référence du paquetage doit correspondre. 
 * Les modificateurs doivent correspondre. 
