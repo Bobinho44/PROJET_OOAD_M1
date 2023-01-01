@@ -30,7 +30,7 @@ public abstract class VictoryPointCard extends DevelopmentCard {
     public @NonNull ICommandJSON useEffect(@NonNull IPlayer player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        return new CommandJSON("addVictoryPoint", List.of(player, 1), true);
+        return new CommandJSON("updateVictoryPoint", List.of(player, 1), true);
     }
 
 }

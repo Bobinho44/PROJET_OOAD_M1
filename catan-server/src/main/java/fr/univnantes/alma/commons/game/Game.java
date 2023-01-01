@@ -1,6 +1,7 @@
 package fr.univnantes.alma.commons.game;
 
 import fr.univnantes.alma.commons.card.CardManager;
+import fr.univnantes.alma.commons.player.PlayerJSON;
 import fr.univnantes.alma.core.card.ICardJSON;
 import fr.univnantes.alma.core.card.ICardManager;
 import fr.univnantes.alma.core.command.ICommand;
@@ -50,6 +51,7 @@ import java.util.stream.Stream;
 /**
  * Implementation of a game
  */
+@SuppressWarnings("Duplicates")
 public class Game implements IGame {
 
     /**
@@ -81,14 +83,19 @@ public class Game implements IGame {
         registerBuyDevelopmentCardCommand();
         registerPlayDevelopmentCardCommand();
         registerUpdateVictoryPointCommand();
+        registerAskPlaceTwoFreeRoadCommand();
         registerPlaceTwoFreeRoadCommand();
+        registerAskTakeTwoResourcesCommand();
         registerTakeTwoResourcesCommand();
+        registerAskMoveThiefAndTakeCardCommand();
         registerMoveThiefAndTakeCardCommand();
+        registerAskStealResourceFromAllPlayersCommand();
         registerStealResourceFromAllPlayersCommand();
         registerGiveResourcesCommand();
         registerProposeTradeCommand();
         registerAcceptTradeCommand();
         registerRefuseTradeCommand();
+        registerStartCommand();
     }
 
     /**
@@ -135,7 +142,7 @@ public class Game implements IGame {
         playerManager.createPlayer(playerJSON);
 
         if (isFull()) {
-            executeCommand("nextPlayer", Collections.emptyList());
+            executeCommand("start", Collections.emptyList());
         }
     }
 
@@ -256,8 +263,8 @@ public class Game implements IGame {
      * Registers build road command
      * <p>
      * Parameters : - a PlayerJSON
-     *              - a ConstructableAreaJSON (type = road)
-     *              - a ConstructionJSON (type = roadImpl)
+     *              - a AreaJSON (type = path)
+     *              - a ConstructionJSON (type = road)
      */
     private void registerBuildRoadCommand() {
         commandManager.addCommand("buildRoad", action -> {
@@ -318,7 +325,7 @@ public class Game implements IGame {
      * Registers build road command
      * <p>
      * Parameters : - a PlayerJSON
-     *              - a ConstructableAreaJSON (type = building)
+     *              - a AreaJSON (type = building)
      *              - a ConstructionJSON (type = colony)
      */
     private void registerBuildColonyCommand() {
@@ -380,7 +387,7 @@ public class Game implements IGame {
      * Registers build road command
      * <p>
      * Parameters : - a PlayerJSON
-     *              - a ConstructableAreaJSON (type = building)
+     *              - a AreaJSON (type = building)
      *              - a ConstructionJSON (type = city)
      */
     private void registerBuildCityCommand() {
@@ -517,23 +524,15 @@ public class Game implements IGame {
     /**
      * Registers update victory point command
      * <p>
-     * Parameters : - a PlayerJSON
+     * Parameters : - a Player
      *              - an int
      */
     private void registerUpdateVictoryPointCommand() {
         commandManager.addCommand("updateVictoryPoint", action -> {
 
             //Gets parameters
-            IPlayerJSON playerJSON = (IPlayerJSON) action.parameters().get(0);
+            IPlayer player = (IPlayer) action.parameters().get(0);
             int amount = (int) action.parameters().get(1);
-
-            //Checks if the player is valid
-            if (playerManager.hasPlayer(playerJSON)) {
-                return NotificationNoReplyJSON.PLAYER_NOT_FOUND;
-            }
-
-            //Gets data from the server
-            IPlayer player = playerManager.getPlayer(playerJSON);
 
             //Updates victory point of the player
             playerManager.addVictoryPoints(player, amount);
@@ -543,13 +542,28 @@ public class Game implements IGame {
     }
 
     /**
+     * Registers ask place two free road command
+     * <p>
+     * Parameters : - a Player
+     */
+    private void registerAskPlaceTwoFreeRoadCommand() {
+        commandManager.addCommand("askPlaceTwoFreeRoad", action -> {
+
+            //Gets parameters
+            IPlayer player = (IPlayer) action.parameters().get(0);
+
+            return new NotificationReplyJSON(List.of(new PlayerJSON(player.getUUID()), "placeTwoFreeRoad"));
+        });
+    }
+
+    /**
      * Registers place two free road command
      * <p>
      * Parameters : - a PlayerJSON
-     *              - a ConstructableAreaJSON (type = road)
-     *              - a ConstructionJSON (type = roadImpl)
-     *              - a ConstructableAreaJSON (type = road)
-     *              - a ConstructionJSON (type = roadImpl)
+     *              - a AreaJSON (type = path)
+     *              - a ConstructionJSON (type = road)
+     *              - a AreaJSON (type = path)
+     *              - a ConstructionJSON (type = road)
      */
     private void registerPlaceTwoFreeRoadCommand() {
         commandManager.addCommand("placeTwoFreeRoad", action -> {
@@ -601,7 +615,22 @@ public class Game implements IGame {
     }
 
     /**
-     * Registers build road command
+     * Registers ask take two resources command
+     * <p>
+     * Parameters : - a Player
+     */
+    private void registerAskTakeTwoResourcesCommand() {
+        commandManager.addCommand("askTakeTwoResources", action -> {
+
+            //Gets parameters
+            IPlayer player = (IPlayer) action.parameters().get(0);
+
+            return new NotificationReplyJSON(List.of(new PlayerJSON(player.getUUID()), "takeTwoResources"));
+        });
+    }
+
+    /**
+     * Registers take two resources command
      * <p>
      * Parameters : - a PlayerJSON
      *              - a ResourceJSON (amount = 1)
@@ -639,6 +668,21 @@ public class Game implements IGame {
                     .filter(notificationNoReplyJSON -> notificationNoReplyJSON != NotificationNoReplyJSON.COMMAND_SUCCESS)
                     .findFirst()
                     .orElse(NotificationNoReplyJSON.COMMAND_SUCCESS);
+        });
+    }
+
+    /**
+     * Registers ask move thief and take card command
+     * <p>
+     * Parameters : - a Player
+     */
+    private void registerAskMoveThiefAndTakeCardCommand() {
+        commandManager.addCommand("askMoveThiefAndTakeCard", action -> {
+
+            //Gets parameters
+            IPlayer player = (IPlayer) action.parameters().get(0);
+
+            return new NotificationReplyJSON(List.of(new PlayerJSON(player.getUUID()), "moveThiefAndTakeCard"));
         });
     }
 
@@ -691,6 +735,21 @@ public class Game implements IGame {
             playerManager.removeDevelopmentCard(victim, developmentCard);
 
             return NotificationNoReplyJSON.COMMAND_SUCCESS;
+        });
+    }
+
+    /**
+     * Registers ask steal resource from all players command
+     * <p>
+     * Parameters : - a Player
+     */
+    private void registerAskStealResourceFromAllPlayersCommand() {
+        commandManager.addCommand("askStealResourceFromAllPlayers", action -> {
+
+            //Gets parameters
+            IPlayer player = (IPlayer) action.parameters().get(0);
+
+            return new NotificationReplyJSON(List.of(new PlayerJSON(player.getUUID()), "stealResourceFromAllPlayers"));
         });
     }
 
@@ -891,6 +950,23 @@ public class Game implements IGame {
 
             return NotificationNoReplyJSON.COMMAND_SUCCESS;
         });
+    }
+
+    /**
+     * Register start command
+     */
+    private void registerStartCommand() {
+            commandManager.addCommand("start", action -> {
+                /*
+                TODO initialise player : - give initial piece of construction
+                                         - place 2 free roads
+                                         - give first loot
+                 */
+
+                executeCommand("start", Collections.emptyList());
+
+                return NotificationNoReplyJSON.COMMAND_SUCCESS;
+            });
     }
 
     /**

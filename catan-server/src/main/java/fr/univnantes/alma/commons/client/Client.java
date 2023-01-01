@@ -1,12 +1,13 @@
 package fr.univnantes.alma.commons.client;
 
 import fr.univnantes.alma.commons.command.CommandJSON;
+import fr.univnantes.alma.commons.resource.ResourceJSON;
 import fr.univnantes.alma.core.game.IGameJSON;
 import fr.univnantes.alma.commons.player.PlayerJSON;
 import fr.univnantes.alma.core.client.IClient;
 import fr.univnantes.alma.core.notification.INotificationJSON;
 import fr.univnantes.alma.core.player.IPlayerJSON;
-import fr.univnantes.alma.core.territory.ITerritoryJSON;
+import fr.univnantes.alma.core.resource.IResourceJSON;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -74,18 +75,16 @@ public class Client implements IClient {
         game = gameJSON;
     }
 
-    private @NonNull UUID getOtherPlayer() {
-        return game.getPlayers().stream()
-                .map(IPlayerJSON::getUUID)
-                .filter(uuid -> !uuid.equals(player.getUUID()))
-                .findFirst()
-                .orElseThrow();
-    }
-
-    private @NonNull ITerritoryJSON getTerritory() {
-        return game.getTerritories().stream()
-                .filter(territory -> !territory.hasThief())
-                .findFirst()
+    /**
+     * Gets a resource
+     *
+     * @return the resource
+     */
+    private @NonNull IResourceJSON getResource() {
+        return game.getResources().stream()
+                .filter(resource -> resource.amount() > 0)
+                .findAny()
+                .map(resource -> new ResourceJSON(resource.name(), 1))
                 .orElseThrow();
     }
 
@@ -100,18 +99,16 @@ public class Client implements IClient {
         String command = (String) notificationJSON.replyInformation().get(1);
 
         switch ((String) notificationJSON.replyInformation().get(1)) {
-            case "placeTwoFreeRoad" ->
-                    clientController.executeCommand(this, new CommandJSON(command, List.of(sender), true));
-            case "takeTwoResources" ->
-                    clientController.executeCommand(this, new CommandJSON(command, List.of(sender, "Wheat"), true));
-            case "moveThiefAndTakeCard" ->
-                    clientController.executeCommand(this, new CommandJSON(command, List.of(sender, getTerritory(), getOtherPlayer()), true));
-            case "stealResourceFromAllPlayers" ->
-                    clientController.executeCommand(this, new CommandJSON(command, List.of(sender, "Wheat"), true));
-            case "discardMoveThiefAndSteal" ->
-                    clientController.executeCommand(this, new CommandJSON(command, List.of(sender, "Wheat", getTerritory(), getOtherPlayer()), true));
-            case "RespondTrade" ->
-                    clientController.executeCommand(this, new CommandJSON("acceptTrade", List.of(sender, notificationJSON.replyInformation().get(2)), false));
+
+            /*
+            TODO add replies for all client (stub) command
+             */
+            case "takeTwoResources" -> {
+                IResourceJSON resourceJSON1 = getResource();
+                IResourceJSON resourceJSON2 = getResource();
+
+                clientController.executeCommand(this, new CommandJSON(command, List.of(sender, resourceJSON1, resourceJSON2), true));
+            }
             case "testThrow" ->
                 throw new RuntimeException();
         }

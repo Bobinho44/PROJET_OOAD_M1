@@ -127,6 +127,12 @@ public class GameManager implements IGameManager {
         return game.executeCommand(commandJSON.name(), commandJSON.parameters());
     }
 
+    /**
+     * Updates the game information
+     *
+     * @param gameJSON the actual game information
+     * @return the updated game information
+     */
     public @NonNull IGameJSON updateInformation(@NonNull IGameJSON gameJSON) {
         Objects.requireNonNull(gameJSON, "gameJSON cannot be null!");
 

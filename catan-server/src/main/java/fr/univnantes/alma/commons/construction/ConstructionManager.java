@@ -39,9 +39,14 @@ public class ConstructionManager implements IConstructionManager {
     /**
      * Creates a new construction manager
      */
+    @SuppressWarnings("unchecked")
     public ConstructionManager(@NonNull ITerritoryManager territoryManager) {
-        Map<UUID, ITerritory> territories = (Map<UUID, ITerritory>) ReflectionUtils.getObjectField(territoryManager, "territories");
-        //TODO createConstructableArea
+        List<ITerritory> territories = ((Map<UUID, ITerritory>) ReflectionUtils.getObjectField(territoryManager, "territories")).values().stream()
+                .toList();
+
+        /*
+        TODO create area associated with territories (path and building) and add dock
+         */
     }
 
     /**

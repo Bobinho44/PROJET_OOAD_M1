@@ -6,7 +6,7 @@ import fr.univnantes.alma.core.command.ICommandJSON;
 import fr.univnantes.alma.core.player.IPlayer;
 import org.springframework.lang.NonNull;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,7 +28,7 @@ public class KnightCard extends DevelopmentCard {
     public @NonNull ICommandJSON useEffect(@NonNull IPlayer player) {
         Objects.requireNonNull(player, "player cannot be null!");
 
-        return new CommandJSON("askMoveThiefAndTakeCard", Collections.emptyList(), true);
+        return new CommandJSON("askMoveThiefAndTakeCard", List.of(player), true);
     }
 
 }

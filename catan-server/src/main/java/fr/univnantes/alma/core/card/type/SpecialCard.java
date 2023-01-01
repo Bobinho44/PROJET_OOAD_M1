@@ -90,12 +90,12 @@ public abstract class SpecialCard implements ICard {
         Objects.requireNonNull(player, "player cannot be null!");
 
         if (hasOwner()) {
-            new CommandJSON("addVictoryPoint", List.of(owner.getUUID(), -1), false);
+            new CommandJSON("updateVictoryPoint", List.of(owner, -1), false);
         }
 
         this.owner = player;
 
-        return new CommandJSON("addVictoryPoint", List.of(owner.getUUID(), 1), true);
+        return new CommandJSON("updateVictoryPoint", List.of(owner, 1), true);
     }
 
     /**
