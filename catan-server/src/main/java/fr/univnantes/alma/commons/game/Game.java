@@ -963,7 +963,7 @@ public class Game implements IGame {
                                          - give first loot
                  */
 
-                executeCommand("start", Collections.emptyList());
+                executeCommand("nextPlayer", Collections.emptyList());
 
                 return NotificationNoReplyJSON.COMMAND_SUCCESS;
             });
