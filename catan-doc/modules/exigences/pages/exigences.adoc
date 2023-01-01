@@ -81,8 +81,6 @@ Il doit être possible d'inviter différents joueurs à jouer ensemble.
 
 === Environnement opérationnel
 
-NOTE: Décrivez l'environnement dans lequel le logiciel fonctionnera, y compris la plate-forme matérielle, le système d'exploitation et ses versions, ainsi que tout autre composant logiciel ou application avec lequel il doit coexister pacifiquement.
-
 Le logiciel {project} doit fonctionner sur tout système d'exploitation populaire et récent{nbsp}: Linux, Windows, ou MacOS.
 Le client Web devrait fonctionner sur tout navigateur Web récent{nbsp}: Firefox, Chrome, Safari, ou Edge.
 

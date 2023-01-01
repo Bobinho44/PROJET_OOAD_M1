@@ -3,72 +3,47 @@
 
 == Introduction
 
-[NOTE]
-====
-Le but de ce chapitre est de spécifier l'architecture d'une famille de produits,
-dont le projet {project} en fait partie.
+Ce chapitre décrit l'architecture d'une famille de produits, dont le projet {project} en fait partie.
 
-Il s'agit ici de choix génériques, qui peuvent s'appliquer à plusieurs projets.
-====
+L’objectif de ce document est de décrire choix génériques, qui peuvent s'appliquer à plusieurs projets de ce type.
 
 == Vue physique
 
-[NOTE]
-====
-La vue physique a pour but de décrire comment devrait être déployé le logiciel selon des nœuds logiques.
-Ainsi que de définir comment ou plutôt par quel moyen les différents nœuds vont communiquer entre eux.
-Et enfin le dernier but de cette vue est de donner les différentes contraintes de déploiement,
-comme quelles librairies sont utilisées, quels sont les besoins matériels.
-====
+=== Dépandances
 
-[NOTE]
-====
-Pour décrire la vue physique, vous allez vous appuyer sur deux diagrammes{nbsp}:
+** Serveur
 
-. Le diagramme de déploiement, qui ci doit expliquer la plupart des points énoncés précédemment.
-. Le diagramme de déploiement au niveau des instances, qui respecte les spécifications du diagramme précédent,
-pour montrer comment seront réparties les instances de ceci.
-====
+* Java 16
+* Maven v4.0.0
+* Spring v5.3.1
+* Junit v5.9.1
+* Mockito v3.6.0
+* Reflections v0.10.2
+* Snakeyaml v1.33
 
-.Exemple d'un diagramme de déploiement (niveau spécification)
+** Client
+
+* Angular v15.1.0
+* Node v19.3.0
+
+=== Besoins matériels
+* 1 à 2 navigateurs web
+* 1 serveur d'hébergement
+
+.Diagramme de déploiement (niveau spécification)
 [plantuml]
 ----
 include::example$deployment-diagram-example.plantuml[]
 ----
 
-[NOTE]
-====
-Décrivez les nœuds logiques, ainsi que les artefacts qui peuvent être déployés sur ces nœuds.
-Vous pouvez profiter de ce diagramme pour expliquer le protocole de communication entre les nœuds.
-====
 
-.Exemple d'un diagramme de déploiement (niveau instance)
+.Diagramme de déploiement (niveau instance)
 [plantuml]
 ----
 include::example$deployment-diagram-example.plantuml[]
 ----
-
-[NOTE]
-====
-Expliquez ce diagramme, si les artefacts déployés sont différents, vous pouvez le montrer.
-====
 
 == Vue de la fiabilité
-
-[NOTE]
-====
-Dans cette partie, vous allez présenter les différents choix architecturaux pour assurer la fiabilité du système.
-
-Vous devez aussi présenter les prévisions de fonctionnement dans des conditions limite{nbsp}:
-* Comment le système est initialisé{nbsp}?
-* Comment le système est arrêté{nbsp}?
-* Comment sont gérés les failles et le redémarrage du système{nbsp}?
-====
-
-[TIP]
-====
-Utilisez des diagrammes d'activité UML pour décrire l'initialisation et l'arrêt du système.
-====
 
 .Initialisation du système
 [plantuml]
@@ -78,26 +53,17 @@ include::example$ad-initialization.plantuml[]
 
 == Vue du développement
 
-[NOTE]
-====
-Décrivez ici l'organisation du code source.
-Plutôt que décrire les paquetages Java ou Typescript, décrivez plutôt les artefacts Maven et les modules Node.js.
-====
-
-
-[TIP]
-====
-Utilisez un https://www.uml-diagrams.org/package-diagrams-overview.html[Diagramme de paquetages]
-pour décrire l'organisation du code source.
-====
-
-.Organisation des modules
+.Organisation des modules serveur
 [plantuml]
 ----
-include::example$pd-example.plantuml[]
+include::example$CatanPackageDiagram.puml[]
 ----
 
-
+.Organisation des modules client
+[plantuml]
+----
+include::example$CatanClientPackageDiagram.puml[]
+----
 
 
 == Vue logique
@@ -109,21 +75,36 @@ dans les différents projets qui respectent une même architecture.
 ====
 
 
-== Vue des processus
-
-[NOTE]
-====
-TODO!
-====
-
-
 == Vue technique : traduction de UML en code source
 
-[NOTE]
-====
-Expliquez, dans cette section, l'ensemble de règles que vous utiliserez par la suite pour traduire les
-diagrammes de conception UML en code source Java et TypeScript.
-====
+
+** Pour chaque instance de package UML, une instance de package Java doit être créée. 
+* Leurs noms doivent correspondre. Cependant, contrairement aux packages UML qui ont des noms simples, le nom du package Java contient l'information complète sur le chemin d'accès. 
+des noms simples, le nom du package Java contient des informations complètes sur le chemin. La séparation du chemin 
+est un point ".". 
+
+**Pour chaque instance de classe UML, une instance de JavaClass doit être créée. 
+* Leurs noms doivent correspondre. 
+* La référence du paquetage doit correspondre. 
+* Les modificateurs doivent correspondre. 
+
+** Pour chaque instance de DataType UML, une instance de PrimitiveType Java doit être créée. 
+* Leurs noms doivent correspondre. 
+* La référence du paquet doit correspondre. 
+
+** Pour chaque instance d'attribut UML, une instance de champ Java doit être créée. 
+* Leurs noms doivent correspondre. 
+* Leurs types doivent correspondre. 
+* Les modificateurs doivent correspondre. 
+* Les classes doivent correspondre.
+ 
+** Pour chaque instance d'opération UML, une instance de méthode Java doit être créée. 
+* Leurs noms doivent correspondre. 
+* Leurs types doivent correspondre. 
+* Les modificateurs doivent correspondre. 
+* Les classes doivent correspondre.
+
+Traduit avec www.DeepL.com/Translator (version gratuite)
 
 
 
@@ -134,42 +115,35 @@ diagrammes de conception UML en code source Java et TypeScript.
 | UML | Java | TypeScript
 
 | Integer
-|
-|
+| Integer
+| number
 
 | Boolean
-|
-|
+| Boolean
+| boolean
 
 | String
-|
-|
+| String
+| string
 
 | Real
-|
-|
+| Double
+| number
 
 |===
 
 === Conventions de codage
 
-NOTE: Expliquez ici les conventions de codage, Java et TypeScript, que les développeurs devront respecter.
+** Java
+* Les classes et les interfaces utilisent le PascalCase
+* Les noms de méthodes et de variables utilisent le camelCase
 
-=== Règles de traduction des composants
-
-NOTE: Explique ici les règles que vous allez utiliser pour mettre en œuvre les composants UML.
-
-=== Règles de traduction des classes
-
-NOTE: Explique ici les règles que vous allez utiliser pour mettre en œuvre les classes UML.
-
-=== Règles de traduction des associations
-
-NOTE: Expliquez ici les règles qui vous devrez  suivre pour mettre en œuvre les associations,
-agrégations composites et agrégations partagées.
-
+** Typescript
+* Les classes et les interfaces utilisent le PascalCase
+* Les noms de fichiers et les pages utilisent le PascalCase
+* Les variables utilisent le camelCase
 
 == Conclusion
 
-NOTE: Ajoutez une conclusion à la section "architecture" de votre documentation.
+Le backend a été construit avec une structure modulaire et non cyclique, ce qui signifie qu'il n'y a pas de dépendances entre les différents modules et que chacun peut être facilement remplacé.
 

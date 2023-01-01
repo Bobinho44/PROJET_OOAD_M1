@@ -1,0 +1,10 @@
+@startuml
+package lobby {}
+package components {}
+package model {}
+package assets {}
+
+model ..> lobby : <<import>>
+assets ..> components : <<import>>
+components ..> lobby : <<import>>
+@enduml
