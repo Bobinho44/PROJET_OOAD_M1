@@ -56,13 +56,13 @@ include::example$ad-initialization.plantuml[]
 .Organisation des modules serveur
 [plantuml]
 ----
-include::example$CatanPackageDiagram.puml[]
+include::example$CatanPackageDiagram.plantuml[]
 ----
 
 .Organisation des modules client
 [plantuml]
 ----
-include::example$CatanClientPackageDiagram.puml[]
+include::example$CatanClientPackageDiagram.plantuml[]
 ----
 
 
@@ -79,9 +79,7 @@ dans les différents projets qui respectent une même architecture.
 
 
 ** Pour chaque instance de package UML, une instance de package Java doit être créée. 
-* Leurs noms doivent correspondre. Cependant, contrairement aux packages UML qui ont des noms simples, le nom du package Java contient l'information complète sur le chemin d'accès. 
-des noms simples, le nom du package Java contient des informations complètes sur le chemin. La séparation du chemin 
-est un point ".". 
+* Leurs noms doivent correspondre. Cependant, contrairement aux packages UML qui ont des noms simples, le nom du package Java contient l'information complète sur le chemin d'accès.
 
 **Pour chaque instance de classe UML, une instance de JavaClass doit être créée. 
 * Leurs noms doivent correspondre. 
