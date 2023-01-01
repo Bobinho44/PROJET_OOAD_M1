@@ -102,8 +102,6 @@ dans les différents projets qui respectent une même architecture.
 * Les modificateurs doivent correspondre. 
 * Les classes doivent correspondre.
 
-Traduit avec www.DeepL.com/Translator (version gratuite)
-
 
 
 === Règles de traduction des types de base
