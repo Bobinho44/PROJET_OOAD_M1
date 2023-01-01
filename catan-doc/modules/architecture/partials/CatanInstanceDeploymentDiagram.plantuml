@@ -1,0 +1,18 @@
+@startuml
+node "__:Server__" as server {
+    artifact "core" as modeA
+    artifact "commons" as modeB
+}
+node "__Alice:Client__" as playerOne {
+}
+
+node "__Bob:Client__" as playerTwo {
+}
+
+node "__Jean:Client__" as playerThree {
+}
+
+server  --  playerOne
+server  --  playerTwo
+server  --  playerThree
+@enduml

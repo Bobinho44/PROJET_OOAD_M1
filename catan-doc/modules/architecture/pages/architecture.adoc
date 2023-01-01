@@ -33,14 +33,14 @@ L’objectif de ce document est de décrire choix génériques, qui peuvent s'ap
 .Diagramme de déploiement (niveau spécification)
 [plantuml]
 ----
-include::example$deployment-diagram-example.plantuml[]
+include::partial$CatanDeploymentDiagram.plantuml[]
 ----
 
 
 .Diagramme de déploiement (niveau instance)
 [plantuml]
 ----
-include::example$deployment-diagram-example.plantuml[]
+include::partial$CatanInstanceDeploymentDiagram.plantuml[]
 ----
 
 == Vue de la fiabilité
@@ -48,7 +48,7 @@ include::example$deployment-diagram-example.plantuml[]
 .Initialisation du système
 [plantuml]
 ----
-include::example$CatanInitialization.plantuml[]
+include::partial$CatanInitialization.plantuml[]
 ----
 
 == Vue du développement
@@ -56,13 +56,13 @@ include::example$CatanInitialization.plantuml[]
 .Organisation des modules serveur
 [plantuml]
 ----
-include::example$CatanPackageDiagram.plantuml[]
+include::partial$CatanPackageDiagram.plantuml[]
 ----
 
 .Organisation des modules client
 [plantuml]
 ----
-include::example$CatanClientPackageDiagram.plantuml[]
+include::partial$CatanClientPackageDiagram.plantuml[]
 ----
 
 

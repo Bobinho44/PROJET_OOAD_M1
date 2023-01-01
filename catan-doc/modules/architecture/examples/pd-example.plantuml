@@ -1,6 +1,0 @@
-@startuml
-package core {}
-package commons {}
-
-core ..> commons : <<import>>
-@enduml

@@ -1,0 +1,13 @@
+@startuml
+node "Server" as server {
+    artifact "core" as modeA
+    artifact "commons" as modeB
+}
+node "Client" as player {
+    artifact "lobby" as modeC
+    artifact "components" as modeD
+    artifact "models" as modeE
+    artifact "assets" as modeF
+}
+server "[1]" -- "[*]" player : <<protocol>> Web Sockets
+@enduml
