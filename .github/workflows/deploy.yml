@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: docker-registry.univ-nantes.fr/sunye-g/docker-antora-assembler
+    steps:
+    - uses: actions/checkout@v2
+    - name: Assemble Antora documentation
+      run: |
+        antora --stacktrace --fetch --cache-dir .cache/antora --attribute page-pagination= --to-dir public antora-playbook.yml
+    - name: Publish documentation
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: public
