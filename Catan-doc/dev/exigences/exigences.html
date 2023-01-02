@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spécification des exigences :: Catan Docs</title>
+    <link rel="prev" href="../conception/conception.html">
+    <meta name="generator" content="Antora 3.1.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Catan Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="Catan-doc" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Projet Catan</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../analyse/analyse.html">Analyse du domaine</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/architecture.html">Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../composants/composants.html">Spécification des composants</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../conception/conception.html">Conception détaillée</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="exigences.html">Spécification des exigences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Projet Catan</span>
+    <span class="version">dev.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Projet Catan</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">dev.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Projet Catan</a></li>
+    <li><a href="exigences.html">Spécification des exigences</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Spécification des exigences</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce chapitre décrit les exigences du projet «Les colons de Catane». Il suit la norme IEEE 830-1998.</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;objectif de ce document est de décrire les spécifications des exigences du projet "Les colons de Catane" pour les étudiants en génie logiciel.</p>
+</div>
+<div class="sect2">
+<h3 id="_définitions_acronymes_et_abréviations"><a class="anchor" href="#_définitions_acronymes_et_abréviations"></a>Définitions, acronymes et abréviations</h3>
+<div class="paragraph">
+<p>Aucune jusqu&#8217;à présent.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_visé_et_suggestions_de_lecture"><a class="anchor" href="#_public_visé_et_suggestions_de_lecture"></a>Public visé et suggestions de lecture</h3>
+<div class="paragraph">
+<p>Le public visé par cette spécification sont les développeurs ainsi que les personnes chargées de l&#8217;évaluation technique de l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>La section <a href="#description">Description générale</a> s&#8217;adresse à tous les lecteurs de ce document. Elle permet de bien comprendre le but de cette application.</p>
+</div>
+<div class="paragraph">
+<p>La partie <a href="#contrainte">Contraintes de conception et de mise en œuvre</a> s&#8217;adresse principalement aux développeurs, et défini toutes les bonnes pratiques, les contraintes et les différentes technologies à utiliser pour le développement de cette application.</p>
+</div>
+<div class="paragraph">
+<p>La section <a href="#features">Exigences fonctionnelles</a> s&#8217;adresse une nouvelle fois aux développeurs et aux personnes chargées de l&#8217;évaluation technique. Cette section décrit concrètement toutes les fonctionnalitées que doit posséder l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>Enfin, la partie <a href="#nonfunctional">Environnement opérationnel</a> s&#8217;adresse exclusivement aux développeurs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_portée_du_projet"><a class="anchor" href="#_portée_du_projet"></a>Portée du projet</h3>
+<div class="paragraph">
+<p>Le système logiciel à produire est une version simplifiée du jeu de plateau Les colons de Catane, qui sera désigné par le terme "Les colons de Catane" dans le présent document.</p>
+</div>
+<div class="paragraph">
+<p>Le système Les colons de Catane permettra à des joueurs de différents endroits de s&#8217;affronter dans des parties courtes et intensives.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_références"><a class="anchor" href="#_références"></a>Références</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>IEEE Standard 830-1993: IEEE Recommended Practice for Software Requirements Specifications</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vue_densemble"><a class="anchor" href="#_vue_densemble"></a>Vue d’ensemble</h3>
+<div class="paragraph">
+<p>Le reste de ce document contient une description globale du système logiciel Les colons de Catane (section <a href="#description">Description générale</a>, les exigences fonctionnelles spécifiques (section <a href="#features">Exigences fonctionnelles</a>) et les exigences non-fonctionnelles du système (voir <a href="#nonfunctional">Environnement opérationnel</a>).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="description"><a class="anchor" href="#description"></a>Description générale</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_perspectives_du_produit"><a class="anchor" href="#_perspectives_du_produit"></a>Perspectives du produit</h3>
+<div class="paragraph">
+<p>Les colons de Catane est un jeu de cartes où plusieurs joueurs s&#8217;affrontent.
+Le logiciel Les colons de Catane doit permettre aux joueurs qui sont connectés à Internet d&#8217;utiliser leurs appareils connectés pour jouer.
+Ainsi, "Les colons de Catane" est une version électronique en ligne du jeu de cartes.</p>
+</div>
+<div class="paragraph">
+<p>Bien que le système soit distribué et organisé en différents composants, les joueurs doivent le percevoir comme un seul logiciel.
+La figure <a href="#deployment">Figure 1</a> présente l&#8217;architecture globale du logiciel.
+Les joueurs interagissent avec un client Web, qui utilise le protocole HTTP pour communiquer avec (au maximum) un serveur de jeu.
+Les serveurs utilisent le protocole TCP/IP pour communiquer avec un serveur de gestion de base de données, qui stocke toutes les données du logiciel.</p>
+</div>
+<div id="deployment" class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuUBAoqz9LN3EoKpDAr6evb800g1CPbfYSeb2U6eIH8Ah5gekEBMeBBK8NPrxOcugH0Qkq2Mn934fiJWLNQcBasymI17SQ0NTeipqZ19TcD5M2XuX8G5SK9vkQO4kmYmha54XpW7wdW5SN0wfUIb03m00" alt="diagram">
+</div>
+<div class="title">Figure 1. Diagramme de déploiement</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fonctionnalités_du_produit"><a class="anchor" href="#_fonctionnalités_du_produit"></a>Fonctionnalités du produit</h3>
+<div class="paragraph">
+<p>Le logiciel Les colons de Catane doit assurer deux fonctions principales :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Création de jeu : permettre à deux joueurs de se découvrir et de commencer une partie.</p>
+</li>
+<li>
+<p>Le jeu&#160;: permettre aux joueurs de jouer effectivement à Les colons de Catane jusqu&#8217;à la victoire de l&#8217;un d&#8217;entre eux.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_caractéristiques_et_classes_dutilisateurs"><a class="anchor" href="#_caractéristiques_et_classes_dutilisateurs"></a>Caractéristiques et classes d&#8217;utilisateurs</h3>
+<div class="paragraph">
+<p>Le logiciel Les colons de Catane n&#8217;a qu&#8217;une seule classe d&#8217;utilisateurs : les joueurs.
+Les joueurs peuvent avoir différents niveaux : débutants, intermédiaires ou experts.
+Cependant, indépendamment de leur niveau, les joueurs doivent utiliser la même interface utilisateur pour jouer les uns contre les autres.
+Il doit être possible d&#8217;inviter différents joueurs à jouer ensemble.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="nonfunctional"><a class="anchor" href="#nonfunctional"></a>Environnement opérationnel</h3>
+<div class="paragraph">
+<p>Le logiciel Les colons de Catane doit fonctionner sur tout système d&#8217;exploitation populaire et récent&#160;: Linux, Windows, ou MacOS.
+Le client Web devrait fonctionner sur tout navigateur Web récent&#160;: Firefox, Chrome, Safari, ou Edge.</p>
+</div>
+<div class="paragraph">
+<p>Il sera installé sur un ordinateur ou un appareil mobile disposant d&#8217;une configuration matérielle suffisante pour exécuter les applications et le système d&#8217;exploitation. Il sera également compatible avec toutes les versions récentes des systèmes d&#8217;exploitation mentionnés ci-dessus.</p>
+</div>
+<div class="paragraph">
+<p>Le logiciel devra également coexister pacifiquement avec tout autre logiciel ou application installé sur l&#8217;ordinateur ou l&#8217;appareil mobile, en prenant en compte les éventuelles restrictions de compatibilité et de fonctionnalité.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contrainte"><a class="anchor" href="#contrainte"></a>Contraintes de conception et de mise en œuvre</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_langages_de_programmation"><a class="anchor" href="#_langages_de_programmation"></a>Langages de programmation</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le serveur de jeu doit être développé en Java (version ≥ 11), en utilisant le <a href="https://spring.io" class="bare">https://spring.io</a> [Spring Framework].</p>
+</li>
+<li>
+<p>Le client doit être développé en TypeScript (version ≥ 4.0), en utilisant le <a href="https://angular.io" class="bare">https://angular.io</a> [Angular Framework].</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_langage_de_conception"><a class="anchor" href="#_langage_de_conception"></a>Langage de conception</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Les documents sur le développement du logiciel doivent être écrits dans le format Asciidoc.</p>
+</li>
+<li>
+<p>Les diagrammes UML d&#8217;analyse, conception et mise en œuvre devront être réalisés en PlantUML.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conception"><a class="anchor" href="#_conception"></a>Conception</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_mise_en_œuvre"><a class="anchor" href="#_mise_en_œuvre"></a>Mise en œuvre</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Les tests dynamiques doivent utiliser JUnit (version &gt;= 5.0) et Jasmine (version &gt;= 3.5.0).</p>
+</li>
+<li>
+<p>Le code doit journaliser ses principales opérations en utilisant <a href="https://www.slf4j.org" class="bare">https://www.slf4j.org</a> [SLF4J].</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outils_de_construction"><a class="anchor" href="#_outils_de_construction"></a>Outils de construction</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Tous les artefacts logiciels doivent utiliser un outil de construction : Maven ou Groovy pour Java, npm pour TypeScript.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outils_de_développement"><a class="anchor" href="#_outils_de_développement"></a>Outils de développement</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_bibliothèques_et_composants_logiciels"><a class="anchor" href="#_bibliothèques_et_composants_logiciels"></a>Bibliothèques et composants logiciels</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vérification"><a class="anchor" href="#_vérification"></a>Vérification</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Les doubles tests doivent être utilisés pour tester chaque composant indépendamment.</p>
+</li>
+<li>
+<p>Chaque test unitaire doit décrire son intention.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation_utilisateur"><a class="anchor" href="#_documentation_utilisateur"></a>Documentation utilisateur</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Aucune documentation utilisateur n&#8217;est requise pour la première version du logiciel.</p>
+</div>
+<div class="sect2">
+<h3 id="_hypothèses_et_dépendances"><a class="anchor" href="#_hypothèses_et_dépendances"></a>Hypothèses et dépendances</h3>
+<div class="paragraph">
+<p>Aucun jusqu&#8217;à présent.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_reportées"><a class="anchor" href="#_exigences_reportées"></a>Exigences reportées</h3>
+<div class="paragraph">
+<p>Les versions futures du système comprendront l’utilisation d’un mécanisme de persistance de données ainsi que différentes interfaces utilisateur: web, IHM classique, etc. Elles permettront aussi l’accès distant à travers une interface REST.</p>
+</div>
+<div class="paragraph">
+<p>Les versions futures pourraient permettre de jouer une partie avec plus de deux joueurs (3-4).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exigences_en_matière_dinterface_externe"><a class="anchor" href="#_exigences_en_matière_dinterface_externe"></a>Exigences en matière d&#8217;interface externe</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_interfaces_utilisateur"><a class="anchor" href="#_interfaces_utilisateur"></a>Interfaces utilisateur</h3>
+<div class="paragraph">
+<p>L&#8217;interface web du logiciel devra comporter les éléments suivants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>un champ de saisie pour le nom du joueur</p>
+</li>
+<li>
+<p>un bouton pour lancer une partie</p>
+</li>
+<li>
+<p>un bouton pour quitter la partie</p>
+</li>
+<li>
+<p>plusieurs boutons représentant les actions possibles pour le joueur</p>
+</li>
+<li>
+<p>une représentation du plateau de jeu</p>
+</li>
+<li>
+<p>les ressources d&#8217;un joueur (nombre de pièces, nombre de points de victoire &#8230;&#8203;)</p>
+</li>
+<li>
+<p>une représentation des cartes en main du joueur adverse</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interfaces_matérielles"><a class="anchor" href="#_interfaces_matérielles"></a>Interfaces matérielles</h3>
+<div class="paragraph">
+<p>Le logiciel n&#8217;interagit pas directement avec un quelconque dispositif matériel.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interfaces_logicielles"><a class="anchor" href="#_interfaces_logicielles"></a>Interfaces logicielles</h3>
+<div class="paragraph">
+<p>La partie client du logiciel doit fonctionner sur des navigateurs web, tandis que la partie serveur doit interagir avec une base de données par le biais de l&#8217;API Java Persistence (JPA).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interfaces_de_communication"><a class="anchor" href="#_interfaces_de_communication"></a>Interfaces de communication</h3>
+<div class="paragraph">
+<p>Les communications entre le client et le serveur de jeu doivent utiliser des Websockets.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="features"><a class="anchor" href="#features"></a>Exigences fonctionnelles</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_fonctionnalité_rejoindre_une_partie"><a class="anchor" href="#_fonctionnalité_rejoindre_une_partie"></a>Fonctionnalité Rejoindre une partie</h3>
+<div class="paragraph">
+<p>La fonctionnalité Rejoindre une partie permet à un joueur de rejoindre une partie en cours, en fournissant son nom.
+Cette fonctionnalité a une priorité moyenne.</p>
+</div>
+<div class="sect3">
+<h4 id="_séquences_de_stimulusréponse"><a class="anchor" href="#_séquences_de_stimulusréponse"></a>Séquences de Stimulus/Réponse</h4>
+<div class="paragraph">
+<p>La fonctionnalité Rejoindre une partie est déclenchée par l&#8217;action de l&#8217;utilisateur de cliquer sur le bouton "Rejoindre une partie" de l&#8217;interface web.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exigences_fonctionnelles"><a class="anchor" href="#_exigences_fonctionnelles"></a>Exigences fonctionnelles</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>REQ-1: Le système doit permettre à un joueur de fournir son nom.</p>
+</li>
+<li>
+<p>REQ-2: Le système doit permettre à un joueur de rejoindre une partie en cours.</p>
+</li>
+<li>
+<p>REQ-3: Le sustème doit vérifier que le nom du joueur est valide.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fonctionnalité_jouer_un_tour"><a class="anchor" href="#_fonctionnalité_jouer_un_tour"></a>Fonctionnalité Jouer un tour</h3>
+<div class="paragraph">
+<p>La fonctionnalité Jouer un tour permet à un joueur de jouer un tour en choisissant quelles actions il veut effectuer.</p>
+</div>
+<div class="sect3">
+<h4 id="_description_et_priorité"><a class="anchor" href="#_description_et_priorité"></a>Description et priorité</h4>
+<div class="paragraph">
+<p>La fonctionnalité Jouer un tour permet à un joueur de jouer un tour en choisissant quelles actions il veut effectuer, en fonction de ses cartes en main et de la situation de la partie.
+Cette fonctionnalité a une priorité moyenne.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_séquences_de_stimulusréponse_2"><a class="anchor" href="#_séquences_de_stimulusréponse_2"></a>Séquences de Stimulus/Réponse</h4>
+<div class="paragraph">
+<p>La fonctionnalité Jouer un tour est déclenchée par le serveur qui indique au joueur qu&#8217;il est son tour de jouer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exigences_fonctionnelles_2"><a class="anchor" href="#_exigences_fonctionnelles_2"></a>Exigences fonctionnelles</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>REQ-1: Le système doit permettre de communiquer au joueur qu&#8217;il est son tour de jouer.</p>
+</li>
+<li>
+<p>REQ-2: Le système doit permettre au joueur de choisir une action à effectuer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fonctionnalité_finir_la_partie"><a class="anchor" href="#_fonctionnalité_finir_la_partie"></a>Fonctionnalité Finir la partie</h3>
+<div class="paragraph">
+<p>La fonctionnalité Vérifier fin de partie permet de vérifier si la partie est terminée. Si c&#8217;est le cas, le système doit afficher le gagnant, et clôturer la partie.</p>
+</div>
+<div class="sect3">
+<h4 id="_description_et_priorité_2"><a class="anchor" href="#_description_et_priorité_2"></a>Description et priorité</h4>
+<div class="paragraph">
+<p>La fonctionnalité Vérifier fin de partie permet de vérifier si la partie est terminée. Si c&#8217;est le cas, le système doit afficher le gagnant, et clôturer la partie.
+Cette fonctionnalité a une priorité moyenne.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_séquences_de_stimulusréponse_3"><a class="anchor" href="#_séquences_de_stimulusréponse_3"></a>Séquences de Stimulus/Réponse</h4>
+<div class="paragraph">
+<p>La fonctionnalité Vérifier fin de partie est déclenchée à chaque fois qu&#8217;un joueur joue un tour. Le système vérifie alors si la partie est terminée. Si c&#8217;est le cas, le système affiche le gagnant, et clôture la partie.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exigences_fonctionnelles_3"><a class="anchor" href="#_exigences_fonctionnelles_3"></a>Exigences fonctionnelles</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>REQ-1: Le système doit pouvoir vérifier si la partie est terminée.</p>
+</li>
+<li>
+<p>REQ-2: Le système doit pouvoir afficher le gagnant de la partie.</p>
+</li>
+<li>
+<p>REQ-3: Le système doit pouvoir clôturer la partie.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="nonfunctional"><a class="anchor" href="#nonfunctional"></a>Autres exigences non-fonctionnelles</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_exigences_de_concurrence"><a class="anchor" href="#_exigences_de_concurrence"></a>Exigences de concurrence</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Seul le joueur actif peut modifier les données du jeu de lui même (sans que le serveur lui demande).</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_de_performance"><a class="anchor" href="#_exigences_de_performance"></a>Exigences de performance</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le jeu doit être <em>jouable</em>, ce qui signifie que les utilisateurs doivent avoir un retour rapide de leurs actions et que les retards dus aux problèmes de communication/connexion doivent être correctement tenus.</p>
+</li>
+<li>
+<p>Le client Web doit pouvoir s&#8217;exécuter sur un ordinateur personnel doté de 4 Go de RAM.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_dinteropérabilité"><a class="anchor" href="#_exigences_dinteropérabilité"></a>Exigences d&#8217;interopérabilité</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le logiciel doit être configurable facilement.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_de_portabilité"><a class="anchor" href="#_exigences_de_portabilité"></a>Exigences de portabilité</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le logiciel doit fonctionner sur plusieurs appareils ou plateformes.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_de_sécurité"><a class="anchor" href="#_exigences_de_sécurité"></a>Exigences de sécurité</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Un joueur ne peut pas jouer un tour s&#8217;il n&#8217;est pas son tour.</p>
+</li>
+<li>
+<p>Un joueur ne peut pas jouer un tour s&#8217;il n&#8217;est pas connecté au serveur.</p>
+</li>
+<li>
+<p>Un joueur ne peut pas jeffectuer une action qui n&#8217;est pas autorisée par les règles du jeu.</p>
+</li>
+<li>
+<p>Un joueur ne peut pas voir les cartes d&#8217;un autre joueur.</p>
+</li>
+<li>
+<p>Un joueur ne peut pas jouer à la place d&#8217;un autre joueur.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exigences_de_maintenabilité"><a class="anchor" href="#_exigences_de_maintenabilité"></a>Exigences de maintenabilité</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Il doit être possible d&#8217;ajouter du contenue supplémentaire facilement (cartes, constructions&#8230;&#8203;).</p>
+</li>
+<li>
+<p>Le logiciel doit être lisible et facile à maintenir.</p>
+</li>
+<li>
+<p>La source Java doit respecter les directives de Google : <a href="https://google-styleguide.googlecode.com/svn/trunk/javaguide.html" class="bare">https://google-styleguide.googlecode.com/svn/trunk/javaguide.html</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../conception/conception.html">Conception détaillée</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

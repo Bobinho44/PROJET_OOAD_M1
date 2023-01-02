@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Conception détaillée :: Catan Docs</title>
+    <link rel="prev" href="../composants/composants.html">
+    <link rel="next" href="../exigences/exigences.html">
+    <meta name="generator" content="Antora 3.1.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Catan Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="Catan-doc" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Projet Catan</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../analyse/analyse.html">Analyse du domaine</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/architecture.html">Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../composants/composants.html">Spécification des composants</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="conception.html">Conception détaillée</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../exigences/exigences.html">Spécification des exigences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Projet Catan</span>
+    <span class="version">dev.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Projet Catan</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">dev.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Projet Catan</a></li>
+    <li><a href="conception.html">Conception détaillée</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Conception détaillée</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce chapitre répond aux différentes exigences non-fonctionnelles du projet «Catane».</p>
+</div>
+<div class="paragraph">
+<p>L’objectif de ce document est de détailler la spécification des composants, notamment leur structure, ainsi que le comportement de chaque opération fournie par le composants.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_réponses_aux_exigences_non_fonctionnelles"><a class="anchor" href="#_réponses_aux_exigences_non_fonctionnelles"></a>Réponses aux exigences non-fonctionnelles</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_concurrence"><a class="anchor" href="#_concurrence"></a>Concurrence</h3>
+<div class="paragraph">
+<p>Pour gérer la concurrence, nous avons mis en place un système de verrouillage de l&#8217;envois de requête, qui empêche les deux joueurs d&#8217;exécuter simultanément des commandes. Ainsi seul le joueur actif peut intéragir avec le serveur.</p>
+</div>
+<div class="paragraph">
+<p>Cependant il est possible de spécifier qu&#8217;une commande n&#8217;a pas besoin de posséder le verrou pour pouvoir s&#8217;exécuter. C&#8217;est notamment utile pour les cas ou le serveur attent une réponse à la suite d&#8217;une requête.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_performance"><a class="anchor" href="#_performance"></a>Performance</h3>
+<div class="paragraph">
+<p>Pour améliorer les performances du jeu, nous avons optimisé le code en utilisant des algorithmes efficaces et en réduisant au minimum les appels aux systèmes gérant les données.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons également mis en place un système d&#8217;identifiant pour nos objets, afin réduire le temps de chargement des données.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interopérabilité"><a class="anchor" href="#_interopérabilité"></a>Interopérabilité</h3>
+<div class="paragraph">
+<p>Pour assurer l&#8217;interopérabilité du jeu, nous avons utilisé des formats de fichiers standard et des protocoles de communication couramment utilisés dans l&#8217;industrie.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons également inclus des options de configuration pour permettre aux joueurs de personnaliser leur expérience de jeu en fonction de leurs préférences.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_portabilité"><a class="anchor" href="#_portabilité"></a>Portabilité</h3>
+<div class="paragraph">
+<p>Pour rendre le jeu portable, nous avons utilisé des technologies cross-platform permettant de faire fonctionner le jeu sur différents systèmes d&#8217;exploitation et appareils.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sécurité"><a class="anchor" href="#_sécurité"></a>Sécurité</h3>
+<div class="paragraph">
+<p>Notre système doit être sécurisé, même si nous ne manipulons pas des données sensibles. Pour cela nous devons vérifier l&#8217;identité de l&#8217;utilisateur.</p>
+</div>
+<div class="paragraph">
+<p>N&#8217;ayant pas à nous occuper de l&#8217;authentification de l&#8217;utilisateur nous admettons que le système s&#8217;occupant de cela est correct et lui-même sécurisé. Nous admettons également que, quelle que soit la plateforme utilisée (web, logiciel, application) le service d&#8217;authentification sera le même pour tous.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maintenabilité"><a class="anchor" href="#_maintenabilité"></a>Maintenabilité</h3>
+<div class="paragraph">
+<p>Pour assurer la maintenabilité du jeu, nous avons adopté une approche de conception modulaire qui permet de mettre à jour ou de remplacer facilement les différentes parties du jeu sans affecter l&#8217;ensemble du système.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons également fais en sorte de rendre le système extensible. Ainsi, il est  très simple de créer de nouvelles cartes, de rajouter de nouveaux types de routes ou de bâtiments, modifier les règles de constructions etc&#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interface_utilisateur"><a class="anchor" href="#_interface_utilisateur"></a>Interface utilisateur</h3>
+<div class="paragraph">
+<p>La partie interface utilisateur n&#8217;a, jusqu&#8217;à présent, pas été notre priorité sur ce projet. Ainsi l&#8217;interface actuelle n&#8217;est que purement visuel et non interactive.</p>
+</div>
+<div class="paragraph">
+<p>Cependant une interface interactive du plateau a été développé mais n&#8217;a pas encore été utilisé comme interface de base.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interface_logicielle"><a class="anchor" href="#_interface_logicielle"></a>Interface logicielle</h3>
+<div class="paragraph">
+<p>Pour faciliter l&#8217;intégration du jeu avec d&#8217;autres logiciels, nous avons défini des interfaces claires et simples qui spécifient les fonctionnalités et les données disponibles pour les développeurs tiers.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons également inclus une documentation complète de nos interfaces, de leurs implémentations et du projet en général.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_patrons_logiciels_utilisés"><a class="anchor" href="#_patrons_logiciels_utilisés"></a>Patrons logiciels utilisés</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_patron_de_conception_singleton"><a class="anchor" href="#_patron_de_conception_singleton"></a>Patron de conception Singleton</h3>
+<div class="paragraph">
+<p>Le patron de conception Singleton est un patron de conception de logiciel qui garantit qu&#8217;une seule instance d&#8217;une classe donnée sera créée et qu&#8217;il y aura un point d&#8217;accès global à cette instance.</p>
+</div>
+<div class="paragraph">
+<p>Cela peut être utile lorsque nous avons besoin de garantir qu&#8217;il n&#8217;y a qu&#8217;une seule instance d&#8217;une classe dans toute l&#8217;application. Ce patron a été utilisé pour créer les différentes stratégies de construction ou de générations de resource des territoires.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patron_architectural_strategy"><a class="anchor" href="#_patron_architectural_strategy"></a>Patron architectural Strategy</h3>
+<div class="paragraph">
+<p>Le patron de conception Strategy est un patron de conception de logiciel qui permet de définir une famille d&#8217;algorithmes, de les encapsuler individuellement et de les rendre interchangeables.</p>
+</div>
+<div class="paragraph">
+<p>Cela permet à une application de choisir l&#8217;algorithme à utiliser à l&#8217;exécution, plutôt que de devoir choisir un algorithme spécifique lors de la compilation. Ce patron a été utilisé pour gérer les différentes stratégies de construction ou de générations de resource des territoires.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patron_architectural_facade"><a class="anchor" href="#_patron_architectural_facade"></a>Patron architectural Facade</h3>
+<div class="paragraph">
+<p>Le patron de conception Facade est un patron de conception de logiciel qui vise à simplifier l&#8217;interface d&#8217;un système complexe en fournissant une interface simplifiée à une sous-partie de ce système.</p>
+</div>
+<div class="paragraph">
+<p>Le but de ce patron est de rendre le système plus facile à utiliser en masquant la complexité de ses sous-systèmes et en fournissant une interface commune pour accéder à ces sous-systèmes. Ce patron a été utilisé pour nos différents controlleurs. Ces controlleurs fournissent des interfaces simples permettant de manipuler simplement ce dont ce controlleur à la charge.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patron_architectural_command"><a class="anchor" href="#_patron_architectural_command"></a>Patron architectural Command</h3>
+<div class="paragraph">
+<p>Le patron de conception Command est un patron de conception de logiciel qui vise à encapsuler une requête sous la forme d&#8217;un objet, de manière à pouvoir paramétrer des objets avec des comportements différents, enregistrer ces objets et les exécuter ultérieurement.</p>
+</div>
+<div class="paragraph">
+<p>Le patron Command permet de découpler l&#8217;objet qui envoie la requête de l&#8217;objet qui exécute la requête, ce qui rend votre code plus flexible et plus facile à maintenir. Ce patron a été utilisé pour que le client puisse envoyé des requêtes au serveur, et que la partie puisse recevoir cette requête et la traiter.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_choix_techniques_distribution_des_processus"><a class="anchor" href="#_choix_techniques_distribution_des_processus"></a>Choix techniques - Distribution des processus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pour cela nous allons donc vous présenter l&#8217;environnement général de développement puis énoncer les 4 contraintes que nous avons déterminées de notre logiciel.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons fais le choix d&#8217;utiliser comme environnement de travail l&#8217;IDE eclipse.
+Pour la raison que nous connaissons tous très bien cette environnement, ce qui nous permet d&#8217;avoir tous le même environnement de développement.</p>
+</div>
+<div class="paragraph">
+<p>Également, cette IDE permet la gestion d&#8217;un projet maven ce qui nous sera parfaitement adapté.</p>
+</div>
+<div class="paragraph">
+<p>Voici les 4 contraintes que nous avons déterminées :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>L&#8217;interface graphique.</p>
+</li>
+<li>
+<p>La communication vers la base de données.</p>
+</li>
+<li>
+<p>La communication entre les machines.</p>
+</li>
+<li>
+<p>La sécurité.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../composants/composants.html">Spécification des composants</a></span>
+  <span class="next"><a href="../exigences/exigences.html">Spécification des exigences</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

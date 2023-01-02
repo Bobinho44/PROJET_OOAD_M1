@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Analyse du domaine :: Catan Docs</title>
+    <link rel="prev" href="../index.html">
+    <link rel="next" href="../architecture/architecture.html">
+    <meta name="generator" content="Antora 3.1.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Catan Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="Catan-doc" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Projet Catan</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="analyse.html">Analyse du domaine</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/architecture.html">Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../composants/composants.html">Spécification des composants</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../conception/conception.html">Conception détaillée</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../exigences/exigences.html">Spécification des exigences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Projet Catan</span>
+    <span class="version">dev.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Projet Catan</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">dev.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Projet Catan</a></li>
+    <li><a href="analyse.html">Analyse du domaine</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Analyse du domaine</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce chapitre décrit le domaine du projet «Catane».</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;objectif de ce document est de comprendre les concepts, la dynamique, les règles générales qui définissent le domaine d&#8217;application dans lequel l&#8217;application «Catane» doit être utilisé.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modèle_du_domaine"><a class="anchor" href="#_modèle_du_domaine"></a>Modèle du domaine</h2>
+<div class="sectionbody">
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/VLHTRvim57tthx1uh5ffPCj3f6Yh2wn19HWPagYgeiWZNeh6HsJ8jAZRVzyr130qMnvY-_hSSuxllUA-hBYiJbcAaCXF6Ow4b4bLo7DqFWhyXZ3-IfaJHh1PEiIc6nLn7S-6TU5wdehJbHyHruUjxOGEYz0VXEAKbsNFLZCDkIluKyXQbecoECbOTAeRIkrcKHARXKEK1SiZpx20erwZJQtJ1Zm3XK0M1odAibDOKfy6r5DyZ19xPr4_ZDZAYbogdkBwQyUlzvrIIs5nkQyf1fm3jV0eueIddPX7_KUeuaufmH64BW72bi-zmYMj4z1f1lph95Q538eahteHzu4HfXwq9Ep9YNQ1Hon7-IJCSyaItgDgk5WnQm6RbU-k7HQwaMP0vrKk5EqxhTO9d8Nypg7q2geVYxoiv2ckaY97_1liULnXM_mKQN7CH4DzKIHIS3p_WiMlIkJxSf3x6Q57dWaylxl31lxlxyQ0p2pZ-VuVAG289DyBxNeo1KXjfO_DLAoT8Yt-yk4MJxO63b9-5bBNC2TJetw55ZHdHZ_jVNpeo3ImdO08GdM_vxy1CQvHVwED1a8ZM8FGn_CwOjpTwwYdF3cyDlUewKvR07Dh37kh7vhaXrEIxfFySEKguDMhpcXEz28rXUsrPjCjndelne39fx4R7O5nZPbkBntklqJjPBGFwWH6a1Vp5dziFDIUhzJ2Bk8Vw1x65hwVVm40" alt="diagram">
+</div>
+<div class="title">Figure 1. Classes conceptuelles</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cas_dutilisation"><a class="anchor" href="#_cas_dutilisation"></a>Cas d&#8217;utilisation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_cas_dutilisation_mise_en_place_dune_partie"><a class="anchor" href="#_cas_dutilisation_mise_en_place_dune_partie"></a>Cas d&#8217;utilisation "Mise en place d&#8217;une partie"</h3>
+<table class="tableblock frame-sides grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>#</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mise en place</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alias</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Préparation, Initialisation</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Objectif contextuel</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Installer le plateau, avec les territoires, les ports, le voleur, les jetons, les cartes (fiche de coût, fiche spéciale, cartes de développement&#8230;&#8203;). Les joueurs placent leurs premières colonies et routes pour commencer la partie.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Portée</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le jeu</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niveau</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Summary</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Condition de succès</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le plateau, les cartes, les territoires sont mis en place. Les joueurs ont placé leurs pièce et ont leur fiche de coût</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Condition d&#8217;échec</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Les fiches, pièces, territoires et le plateau ne sont pas distribués ou installés</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Acteurs principaux</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Les joueurs</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Acteurs secondaires</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">__</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Événement déclencheur</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le début du jeu</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Priorité</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Haute</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Fréquence</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Une fois par partie</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Pré-conditions</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Il y a spécifiquement 2 joueurs disponibles</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Post-conditions</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><em>Le plateau est prêt</em></p>
+</li>
+<li>
+<p><em>Les pièces sont placés (jeton, ressouces)</em></p>
+</li>
+<li>
+<p><em>Le voleur est placé sur le territoire "désert"</em></p>
+</li>
+<li>
+<p><em>Tous les joueurs ont placé leurs 2 colonies et leurs 2 routes</em></p>
+</li>
+<li>
+<p><em>Les joueurs ont leurs fiches</em></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Scénario nominal</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>Placer les six zones "mer" aléatoirement</em></p>
+</li>
+<li>
+<p><em>Placer aléatoirement les tuiles territoires en partant du centre du plateau et en avançant en spirale</em></p>
+</li>
+<li>
+<p><em>Placer les jetons dans l&#8217;ordre lexicographique en partant du centre du plateau en tourant dans le sens des aiguilles d&#8217;une montre</em></p>
+</li>
+<li>
+<p><em>Placer le voleur sur la case désert</em></p>
+</li>
+<li>
+<p><em>Chaque joueur reçoit une fiche "Coûts de construction" et toutes les pièces de jeu de sa couleur</em></p>
+</li>
+<li>
+<p><em>Les fiches spéciales "Route la plus longue" et "Armée la plus puissante" sont placées face visible</em></p>
+</li>
+<li>
+<p><em>Les cartes Ressource sont triées en 5 piles, par type et placées face visible</em></p>
+</li>
+<li>
+<p><em>Les cartes Développement sont mélangées et placées face cachée</em></p>
+</li>
+<li>
+<p><em>Chaque joueur place une première colonie, qui sera marquée d&#8217;une étoile, et une route (du plus jeune au plus vieux), et puis recommence l&#8217;opération une deuxième fois dans l&#8217;autre sens (du plus vieux au plus jeune)</em></p>
+</li>
+<li>
+<p><em>Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production de ressources</em></p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extensions</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nous devons permettre l&#8217;extension du plateau avec potentielement plus de case, plus de port, de nouvelles cartes ou encore de nouvelles structures</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternatives</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nous pouvons, au lieu de partir du centre du plateau, partir d&#8217;un emplacement frontalier d&#8217;une zone "mer" pour placer la première tuile de ressource. Le placement des tuiles suivantes se fera toujours en spirale jusqu&#8217;au centre du plateau</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation supérieur</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation subordonnés</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Objectif de performance</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le temps que l&#8217;initialisation prend</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problèmes ouverts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Les variantes ne sont pas considérées</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Échéancier</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Version 1.0.0</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contraintes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">__</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Annexes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/ZPD1KiCm34NtEOLdsC0LsWMTOS6sLp2EQDnnB5Uo2yEAQt02o1bOvYQS1DbjqW2bxSgPyPV--vApuAWffjPLvQDwQgm3TVs27bGBf6hB0RrzS71xKobrjTGExWd0pmA1hmbK4kKerwxlT4HBq8AFSwcO1QUDt3WzgkQLL1QZmIu2aIrb5ncgYVw48qnru1K7Iz9DrTfplcMGiq4YBOA_K6k8w4_mB0SRLaNA-yPVhsz86TJ1ipMu8XqQkqa50TXeMc4yot3ehhRe897YL8PeD4k2lcCWIJkWOigI_ra9-dUqiIphqPe6r1tsdr6GGHb1ZvHCjEZB_0Pnn1I1Iy1W-my3HRw6b0yM54oPx33pqjwW4mP9ktEZtEINfEza9pcyC1k84PJijXKB6ikFhEDSnWiGXcG1yq3rA6mrRLBVoM1bUJy8zGGj4DR3c0wBAhRvxUq6o_BC-ivOmUBvz5OMBq49cCNSm94xsUeM78QmVyeSCLGBSPBVyni0" alt="diagram">
+</div>
+<div class="title">Figure 2. Diagramme d&#8217;activités: Mise en place d&#8217;une partie</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cas_dutilisation_jouer_un_tour"><a class="anchor" href="#_cas_dutilisation_jouer_un_tour"></a>Cas d&#8217;utilisation "Jouer un tour"</h3>
+<table class="tableblock frame-sides grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>#</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Jouer un tour</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alias</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Préparation, Initialisation</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Objectif contextuel</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lancer les dés, donner les ressources ou bouger le voleur et laisser le joueur actif progressé dans le jeu en construisant de routes, des villes et des colonies, en faisant du commerce ou en utilisant les différentes cartes</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Portée</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le jeu</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Niveau</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Summary</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Condition de succès</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le joueur finit son tour ou gagne la partie</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Condition d&#8217;échec</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le joueur n&#8217;a pas finit son tour</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Acteurs principaux</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le joueur actif</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Acteurs secondaires</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>L&#8217;autre joueur</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Événement déclencheur</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La fin du tour du joueur précédent ou le lancement de la partie</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Priorité</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Haute</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Fréquence</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Autant de fois que nécessaire avant qu&#8217;un joueur gagne</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Pré-conditions</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><em>La partie est lancée</em></p>
+</li>
+<li>
+<p><em>Le joueur précédent a fini son tour</em></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Post-conditions</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le joueur actif a fini son tour ou il a gagné la partie</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Scénario nominal</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>Le joueur actif lance les deux dés</em></p>
+</li>
+<li>
+<p><em>Pour chaque colonie adjacente à un territoire numéroté par la somme des dès lancés, les joueurs recoivent une ressource associée à ce territoire.</em></p>
+</li>
+<li>
+<p><em>Le joueur actif peut:</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Créer une route, payer sa construction et la placer sur un emplacement valide</em></p>
+</li>
+<li>
+<p><em>Créer une colonie, payer sa construction et la placer sur un emplacement valide</em></p>
+</li>
+<li>
+<p><em>Créer une ville, payer sa construction et la placer à la place d&#8217;une de ses colonies</em></p>
+</li>
+<li>
+<p><em>Acheter une carte développement</em></p>
+</li>
+<li>
+<p><em>Jouer une carte développement obtenue dans un des tours précédents</em></p>
+</li>
+<li>
+<p><em>Négocier des ressources à échanger avec l&#8217;autre joueur</em></p>
+</li>
+<li>
+<p><em>Echanger des ressources avec l&#8217;autre joueur</em></p>
+</li>
+<li>
+<p><em>Echanger contre la "banque" 4 ressources du même type contre une ressource au choix</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><em>Vérifier si le joueur actif a gagné</em></p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extensions</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nous devons permettre d&#8217;ajouter simplement de nouveaux comportements, de nouveau bonus de carte qui entraineraient de nouvelles actions</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Alternatives</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><em>Le joueur reçoit 2 ressources (au lieu d&#8217;une) si il possède une ville au lieu d&#8217;une colonie, qui est elle aussi adjacente à un territoire associée à la ressource</em></p>
+</li>
+<li>
+<p><em>Si le joueur possède une ville ou une colonie sur un port qui ne demande pas de ressource précise, il peut échanger 3 ressources au choix contre une ressource au choix</em></p>
+</li>
+<li>
+<p><em>Si le joueur possède une ville ou une colonie sur un port qui demande une ressource précisément, il peut échanger 2 ressources associées à ce port contre une ressource au choix_</em></p>
+</li>
+<li>
+<p><em>Si le joueur obtiens 7 aux dés, tous les joueurs (y compris le joueur actuel) ayant plus de 7 cartes défossent la moitié de leurs cartes (arrondi à l&#8217;inférieur). Puis il déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main de l&#8217;autre joueur.</em></p>
+</li>
+<li>
+<p><em>Si le voleur est situé sur un territoire associé au résultat des dès, ce territoire ne donne pas de ressource</em></p>
+</li>
+<li>
+<p><em>Si lors d&#8217;un lancé de dés, le nombre de carte ressources à distribuer est inférieur au nombre de cartes ressources restantes, celles-ci sont distribués jusqu&#8217;à épuisement dans l&#8217;ordre du tour de jeu, en partant du joueur qui vient de lancer les dés</em></p>
+</li>
+<li>
+<p><em>Si le joueur choisit d&#8217;utiliser une carte développement dans sa main:</em></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>La carte chevalier: le joueur déplace le voleur sur un autre territoire, et prend une carte aléatoirement dans la main de l&#8217;autre joueur</em></p>
+</li>
+<li>
+<p><em>La carte point de victoire: le joueur gagne un point de victoire</em></p>
+</li>
+<li>
+<p><em>La carte monopole: le joueur choisis une ressource, tous les autres joueurs donnent au joueur actuf les cartes de cette ressource qu&#8217;ils possèdent</em></p>
+</li>
+<li>
+<p><em>La carte construction de routes: le joueur construit deux routes gratuitement</em></p>
+</li>
+<li>
+<p><em>La carte invention: le joueur prend deux ressources au choix dans la réserve</em></p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation supérieur</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cas d&#8217;utilisation subordonnés</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Objectif de performance</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Le temps que les actions se fassent</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Problèmes ouverts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">__</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Échéancier</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Version 1.0.0</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contraintes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">__</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Annexes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aucun</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/xLTBSjms4Dtp55tsmj8ojbEkqbGiRrBUUA5AvG8GsPg1WW4GVCRIBjV8Bhjupi6Rv2Jf1iWXYA6iKQoiabc8f0YyVjtz7flyu8Dm8MvLaqwQ2oLqYmuKUkWmta7Nx_sgaJTmPgw3H1tWtUKvX0rgEBj7Vzu0VDv8XN1sQo961vtqrcXvhV2IRmBmNckyxxzq25P51ePtq58uz3KM_rvU2OKV7QA-eEWt8dhFZ0HiZGootw_IEjITl6dICH6WKrvkbM3-EwE83A-yi8wMECm1eVy3eeRCTTMWyiHSc_FcvPNKlrm8kX66zEdeP33IqRcu5vGvPQdZjjyx0rGCr16XwOJsp4r9J-YKsRGDEgCrx-i8WL2yYQx5gfe5PhKv3adCIrGKnqThdTmckiNEvh0p1IxJ60WrDQ6f3BcgGqSVJQLkzbm9kMXHK-cDzi75DaYZGNItr2BDrLgI2jLojXnznjX9nUk-AXU7_P-a4NXTSXHqrf9i-3GMvHXaT4XzH6CTZ43VJK0JpY9ChSRoPAheZTJSs62uhKa7q3g2T2b5n-AxX2h78ZyhxhCJoWfbaMVPCugL_PTs0EDxAShOaZP4LC2h3euKIR_P7Iz-ubrydOogZ5v7V04__WpQRAzT4dW2XlS_mFTmt8wSqjUmoAEtP4A7MsjSu79QmSIfge4234GN-foWtG8cLtIUttjeaTJ2RDKhqUtGUK6jMW2TbLTXXJEGnCSAj1hGHXKy9Ajl3528Z8wrQMirjOOsosVJqm2tUZHkDkepHKrW3Uab5OJkKhDFvIJQ3VB3F1UMTBT3PQp5BJryJkF76pCnQGYi_ETYH6xk68_MxuIIT7qKgvXJf8XwL8ry__hjzyeLJtRp5KjexUWcFRGSJPdQopLLSlMRHrozXFbjdYxeZ4Jy0vwEyj_mz49Ap-de1-5h7yCafL99riWqUSaCRHevXmR1AAYrMEjadEF59qXrQxInfC8ZdOwlJZIlV7edQihP_uh2XNkBJRinqajgzbrkk1zgufTYLoufH_quNFmnaUoMryFz_yVQVscipHKZzOwUtooNXzGwV_kBmFAyEvRYeYtwVRiHUatHn0xRwLFXw1a-cZGbtQ8bPhHut7wieA8VKmnLlOVF2tmwJIhhjT2_Hboa2TDFJ1CQF55lqXF3XSFBBUHHUo1rOYApaW_Q86kpyZdWr8ISOSMge3PCT6YOtJyWzuc-XsfoRvv6Rj9tLlS4zFO9GBbtuz_yAS1f2-1dTR-VS_V1sABJ-J9j_a07-Zp_6m00" alt="diagram">
+</div>
+<div class="title">Figure 3. Diagramme d&#8217;activités: Jouer un tour</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_activités"><a class="anchor" href="#_activités"></a>Activités</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_préparer_le_plateau"><a class="anchor" href="#_préparer_le_plateau"></a>Préparer le plateau</h3>
+<div class="paragraph">
+<p>Les zones mers sont placé aléatoirement, le désert est placé au centre du plateau, les territoires sont placé dans un ordre aléatoire en suivant un chemin en escargot partant du désert. Ensuite les jetons sont placé en suivant le même ordre.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_choix_dune_couleur"><a class="anchor" href="#_choix_dune_couleur"></a>Choix d’une couleur</h3>
+<div class="paragraph">
+<p>Chaque joueur choisit une couleur parmis le rouge, le orange, le blanc et le bleu</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_distribution_du_matériel"><a class="anchor" href="#_distribution_du_matériel"></a>Distribution du matériel</h3>
+<div class="paragraph">
+<p>Chaque joueur reçoit une fiche Coûts de construction et toutes les pièces de jeu de sa couleur : 5 Colonies, 4 Villes et 15 Routes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_placement_des_premières_constructions"><a class="anchor" href="#_placement_des_premières_constructions"></a>Placement des premières constructions</h3>
+<div class="paragraph">
+<p>Chaque joueur (du plus vieux au plus jeune) place tour à tour une route et une colonie sur le plateau. L&#8217;opération est recommencé une deuxième fois dans le sens inverse
+Chaque joueur place devant lui ses pièces de jeu restantes. S’il n’y a que 3 joueurs, les pièces de jeu rouges retournent dans la boîte</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_placement_des_fiches_spéciales_et_des_dés"><a class="anchor" href="#_placement_des_fiches_spéciales_et_des_dés"></a>Placement des fiches spéciales et des dés</h3>
+<div class="paragraph">
+<p>Les fiches spéciales Route la plus longue et Armée la plus puissante sont placées à côté de la zone de jeu, ainsi que les 2 dés</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_créer_la_pioche_ressource"><a class="anchor" href="#_créer_la_pioche_ressource"></a>Créer la pioche ressource</h3>
+<div class="paragraph">
+<p>Les cartes Ressource sont triées en 5 piles, par type et placées face visible</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_créer_la_pioche_développement"><a class="anchor" href="#_créer_la_pioche_développement"></a>Créer la pioche développement</h3>
+<div class="paragraph">
+<p>Les cartes Développement sont mélangées et placées face cachée</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_distribution_de_la_première_production"><a class="anchor" href="#_distribution_de_la_première_production"></a>Distribution de la première production</h3>
+<div class="paragraph">
+<p>Chaque joueur reçoit pour sa colonie marquée d’une étoile sa première production</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_choix_du_joueur_qui_débute"><a class="anchor" href="#_choix_du_joueur_qui_débute"></a>Choix du joueur qui débute</h3>
+<div class="paragraph">
+<p>Le joueur le plus agée débute la partie</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lancer_les_dés"><a class="anchor" href="#_lancer_les_dés"></a>Lancer les dés</h3>
+<div class="paragraph">
+<p>Le joueur actif lancent les deux dés</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le lanceur est le joueur actif</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le résultat est compris entre 2 et 12</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_commercer_avec_les_joueurs"><a class="anchor" href="#_commercer_avec_les_joueurs"></a>Commercer avec les joueurs</h3>
+<div class="paragraph">
+<p>Le joueur actif peut échanger n&#8217;importe qu&#8217;elle ressource avec n&#8217;importe quel joueur</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Les deux joueurs sont d'accord ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Les deux joueurs possèdent les ressources</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Chaque joueur a perdu les ressources qu'il échangeait et a gagné les ressources qui lui était promises</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_echanger_des_ressources"><a class="anchor" href="#_echanger_des_ressources"></a>Echanger des ressources</h3>
+<div class="paragraph">
+<p>Le joueur actif peut échanger plusieurs ressources du même type contre une ressource au Choix</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur possède assez de ressource du même type ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>La banque possède la ressource que le joueur souhaite</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a perdu ses ressources qu'il échangeait et a gagné la ressource souhaité</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_construire_une_route"><a class="anchor" href="#_construire_une_route"></a>Construire une route</h3>
+<div class="paragraph">
+<p>Le joueur peut construire une route sur un chemin en échange de ressource. Cette route peut uniquement être construite sur un chelin voisin à une route, une colonie ou une ville de sa couleur</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a les ressource pour construire une route ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Un emplacement valide est disponible pour construire la route</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a perdu les ressources liées au coût de construction ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a placé une route sur le plateau</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_construire_une_colonie"><a class="anchor" href="#_construire_une_colonie"></a>Construire une colonie</h3>
+<div class="paragraph">
+<p>Le joueur actif peut installer une nouvelle colonie sur une intersection en échange de ressource. Cette colonie peut uniquement être construite sur une intersection voisine à une route, une colonie ou une ville de sa couleur</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a les ressource pour construire une colonie ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Un emplacement valide est disponible pour construire la colonie</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a perdu les ressources liées au coût de construction ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a placé une colonie sur le plateau</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_construire_une_ville"><a class="anchor" href="#_construire_une_ville"></a>Construire une ville</h3>
+<div class="paragraph">
+<p>Le joueur actif peut installer une nouvelle ville à la place d&#8217;une colonie en échange de ressource. Cette ville peut uniquement être construite sur colonie de sa couleur</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a les ressource pour construire une ville ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur possède une colonie</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a perdu les ressources liées au coût de construction ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a retiré une colonie du plateau et y a placé une ville</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_acheter_une_carte_développement"><a class="anchor" href="#_acheter_une_carte_développement"></a>Acheter une carte développement</h3>
+<div class="paragraph">
+<p>Le joueur actif peut acheter une carte développement en échange de ressource.</p>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a les ressource pour acheter la carte développement ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>La carte développement est disponible</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a perdu les ressources liées au coût l'achat de la carte développement ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a possède la carte développement</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_utiliser_une_carte_développement"><a class="anchor" href="#_utiliser_une_carte_développement"></a>Utiliser une carte développement</h3>
+<div class="paragraph">
+<p>Le joueur actif peut utiliser une carte développement</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/pLHBJiCm5Dpx54_Ty16DMBEeAb8MHQfK8S7UTLzQ8zSk_cG3tASvHox6eub377MP1TbvPkndpumoTvvR7mwANOtyCQ6uS_1i0WRB-CPvouM7dCOXV380B0hqrpVi-uzSr5M9oXoFU43jsnDMHfkZKTWkSwD97OINHY_mnGIFhgMMkgHjXBVhHxbHqlXzVVe8SVjQSO6BiE9MxEigWjog_iYddP8kxdZLiaJhf2TvTzErDJjRd-BaV8ybLnA73rs_ZU_h-0V2KiWx40ZEQ0_-R2beuy2Yuhz-EY1lB9wnhIoAkh84a4XI5bmBT1bhWeRfT0QJ-oox1PYqOJ_0Et6CfUcIyclMA5Xqiy46BUYylSmsDb_aOdCQieliKeC6agv90pnfLEy5b7DQh04N-vN2JSrIhDUsbFZ_FPgZtjAVv0S0" alt="diagram">
+</div>
+<div class="title">Figure 4. Diagramme de classes des cartes développement</div>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur possède une carte développement</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>L'effet de la carte développement a été activé</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_déplacer_le_voleur"><a class="anchor" href="#_déplacer_le_voleur"></a>Déplacer le voleur</h3>
+<div class="paragraph">
+<p>Le joueur actif peut déplacer le voleur sur un nouveau territoire</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/TP6nJWCn38RtF8LL1kZGMv4E2PKY5WOcn9vUBCvLY8lZeBvIdwClXjtIwWHYYPpVVpxBVvPLesZxo24ySyCciBY7cqVJ48OHls8cb3dqiB7kr78BiUqW7VRLkxnMmb8l1dUyeWWfao2it3ECJ9Kc7ZEzSVQwTz0snm53E4cBtuY7ELnbAjWBfZilkiIgLYlkr4KmocSZq_v3hCw8Tq4iFv1OnpFaA3j6SCDasuJ25iFigQX4CqEEiELQQKsPzB27XCUbB8RhLa0lasOGAxpOsp2DgUjEcXzWbpyfXx34akmllW40" alt="diagram">
+</div>
+<div class="title">Figure 5. Diagramme d&#8217;utilisation du déplacement du voleur</div>
+</div>
+<div class="paragraph">
+<p><strong>pré-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur a réalisé un 7 aux dés OU</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur utilise une carte chevalier</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>post-condition</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le voleur a changé de territoire ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Le joueur actif a volé une carte ET</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Un joueur possèdant une colonie adjacente au voleur s'est fait volé une carte</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opérations"><a class="anchor" href="#_opérations"></a>Opérations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Monopole::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte ET
+    Le joueur a choisit une ressource</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a volé toutes les ressources du type choisi aux autres joueurs ET
+    Les autres joueurs ne possèdent plus de ressources du type choisi</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>ConstructionDeRoute::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a placé 2 nouvelles routes sur le plateau, adjacentes
+    à une de ses villes, colonies ou routes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Invention::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur gagne 2 ressources au choix ET
+    La réserve perd ces 2 ressources</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Bibliothèque::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a gagné un point de victoire</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>PlaceDuMarché::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a gagné un point de victoire</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Parlement::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a gagné un point de victoire</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Eglise::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a gagné un point de victoire</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Université::effet()</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pre:
+    Le joueur possède la carte ET
+    Le joueur a joué la carte</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>post:
+    Le joueur a gagné un point de victoire</pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../index.html">Projet Catan</a></span>
+  <span class="next"><a href="../architecture/architecture.html">Architecture</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

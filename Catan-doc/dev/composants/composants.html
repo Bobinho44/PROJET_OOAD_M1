@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spécification des composants :: Catan Docs</title>
+    <link rel="prev" href="../architecture/architecture.html">
+    <link rel="next" href="../conception/conception.html">
+    <meta name="generator" content="Antora 3.1.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Catan Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="Catan-doc" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Projet Catan</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../analyse/analyse.html">Analyse du domaine</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/architecture.html">Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="composants.html">Spécification des composants</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../conception/conception.html">Conception détaillée</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../exigences/exigences.html">Spécification des exigences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Projet Catan</span>
+    <span class="version">dev.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Projet Catan</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">dev.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Projet Catan</a></li>
+    <li><a href="composants.html">Spécification des composants</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Spécification des composants</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce chapitre décrit les composants du projet «Catane».</p>
+</div>
+<div class="paragraph">
+<p>L’objectif de ce document est de décrire l&#8217;échange de messages entre les composants pour en déduire leurs interfaces. Cela a pour but de découper la solution en composants (ou sous-systèmes) et d&#8217;en déduire la spécification des interfaces fournies et requises par ces composants</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modèle_des_composants"><a class="anchor" href="#_modèle_des_composants"></a>Modèle des composants</h2>
+<div class="sectionbody">
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/VP4z3i8m38Ltd-8f4qllK8cPYHD4n42gDAbSjnqGTwUYbFu4aSMAxVVvMIvRjQ9T7OW2NnMQ8FvsLpWlV56V8j4brKsA71N7uCT0UUhadGiyM64y242JH5EdC9ZVqCBC5HzXj9toXfvht9cbP_c5Wnd-ILPzbUtjT-wxUJA9eZWiZYhk36r-OttjYxRcCpMsSapwnIHbksI4FUB3s2r09KStdkW5" alt="diagram">
+</div>
+<div class="title">Figure 1. Diagramme de composants</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_serveur"><a class="anchor" href="#_serveur"></a>Serveur</h2>
+<div class="sectionbody">
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuU8gI4pEJanFLL0AJYqgIorIKgZcKb28Ta_CJVLDp0DA5CKgsEZgGaHYOL9GCUVylEAIejBaaipyF9XgD2KXHOafgJZadFDpSnFpKd381kGaLgOMuJ8sjQWeioI_g18kNyl5vP2QbmBq4m00" alt="diagram">
+</div>
+<div class="title">Figure 2. Diagramme de composants du serveur</div>
+</div>
+<div class="paragraph">
+<p>Le serveur a pour objectif de gérer la partie logique, données et gestion de notre jeu. Pour cela, nous avons choisis de diviser ce composant en différents sous systèmes gérant chacun une partie spécifique de notre application.</p>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_parties"><a class="anchor" href="#_manager_des_parties"></a>Manager des parties</h3>
+<div class="paragraph">
+<p>Le controlleur des parties va permettre la création des parties, leurs remplissages et est la porte d&#8217;entré de la partie serveur. C&#8217;est par cette interface que les clients vont demander des interactions avec leur partie.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/XP512i8m44NtESKiM_0G1HUYO1KymPXCQwJ9I3ejYdXtsrXQaLApI7ucRtu-ILOB1cbSfPJrGg50JR11HtlqM5A0frBGZRu49Kc_9lsqEnroA0UHVg0pSqNeuOBr8jUoDO36_8S2EMvfv2AJJebYtvMjJuuLFYZ4_MsKtqvTi7RciXKiTUOijh0QnRAF1Dr9Dq9hTWwzcRCRZc9LJ_etT7CpABJr1GSNxHEOUOYNKXbvqttF6m00" alt="diagram">
+</div>
+<div class="title">Figure 3. Diagramme UML de l&#8217;interface ConstructionManager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_constructions"><a class="anchor" href="#_manager_des_constructions"></a>Manager des constructions</h3>
+<div class="paragraph">
+<p>Le controlleur des constructions va permettre de manipuler toute la partie construction sur le plateau. Que ça soit les emplacements, vérifier si nous pouvons construire quelques part ou encore la gestion des ports.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/hLNRRi8m37tlL-GHfFx1468mJMDYC46rzxGn9Lf8K1AOgcd_lYIzXxPYQ3oKs3q-jeyLTwOqblfyP450kGQvnmcWXU1AotEYgU1lcECK9FeE0cH-Awhqv542VjrjrbEKWhQ6MlAza4Ti0qRZXnngNqoY2ZCgen0k3Y5QCAoKnUZi1ECyB1Q20UReWDLVmYw24fGOY0ONLlMmqzBuqipY4zyPefKGBGXhs25w4iad8kRHp4A0GP6bxD7MvjLFNVcRBmvadhqpd85imKEKEz79_NdH5l62rHfeUeZ5MSxFb17Aqw6CSO6naANBNeLxcPrLKavRWSr6CI5N1KJYgl6R-IGSnGMkA9-bEDv5sYVMLc0o99GqxsyKoL9Dgu0-SIogNvX-3a-GEsYQLxMyQKtVa0o5R2quwi2xIr1ms_CDd7smBIZJfranXivYIdlaNxIIpxeCNo_EBAsAowwVNYAgFZ2Zf3jfM1ScYqD7NyjQAXmpy6OKrTl52DdQIgL_mpjcsnaNcQOus2tKcaxJS3inyHpURXpUCGTlzl_3xhuGfPnk-pTv5qBfLgAkxekXvkprQ5lPEaVs4mGpuCHypdu1" alt="diagram">
+</div>
+<div class="title">Figure 4. Diagramme UML de l&#8217;interface ConstructionManager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_échanges"><a class="anchor" href="#_manager_des_échanges"></a>Manager des échanges</h3>
+<div class="paragraph">
+<p>Le controlleur des échanges va permettre de créer, supprimer et manipuler les différents échanges de la partie. Que ça soit des échanges entre joueurs ou avec la banque directement.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/ZP7DYW8n48JlUOe-AlW6okB1oughoxZp0BsJ6ZSmJh2J32pYkniJ5VynXz0fFb9LoTXv5X_MZLAczP2QAz2FiCONjxo2q5OfHN4baLRmQUYbVRfSpCcVfdu6Vwrjm2tziNkE3ZFRMQEf4h17PiloSq8X63sWxuR_exz3go7dew22wGx2p3W_Ak1ia0eVPElwWIhO13ZVlx3JQ72oowLIhFlqnT7g0NKC4rzZcUAzH5xSSvCsmej3ZRV88bUxPdTAZMEY-A5x" alt="diagram">
+</div>
+<div class="title">Figure 5. Diagramme UML de l&#8217;interface TradeManager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_joueurs"><a class="anchor" href="#_manager_des_joueurs"></a>Manager des joueurs</h3>
+<div class="paragraph">
+<p>Le controlleur des joueurs va permettre de créer et manipuler les joueurs, ainsi que leurs données. Notamment les constructions, les cartes ou les resources qu&#8217;il possède. Ce controlleur va aussi de permettre de gérer le joueur actif de notre partie.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/hLJ9ReCm4Btp5JwcKZwXYbBHIwikKIlrFhKdAQhjGRP1ZQh-Ura2SKn0XC39utdpdcTXrjQ1SPcIKPHeXsOB7Db6mXxDCsZOeM6_KSIAxocnxhRsFBw_lgpO3brjFkWj6GKk8RsugS6rumXP70DPsXuFu4yYYQ3P5zWHw9mImRX1S3Y4zi029GRW0p1u00TTkizYAYQDFqr2tRV7fAqp6Q_gm4uubintCkuPFZq8SK8oXSEWeXoleV5IUaDBcU4OKZJtXLfzw0-rOMmrHurtrJBOe12jD1kf7GPE4gwhTsdQPq8dgQS9_xwJifUZJ_yUSvIKAjGk1YFAtowu6Xpxebk3y6L7G9pQ5_853Pj5ssl1B7mnAGLQL4ibi_Dm5WksRCr7mXsP_OOAUx0mFh0p2oKPACgqwrPWTE1V5ArHYsBz_mC0" alt="diagram">
+</div>
+<div class="title">Figure 6. Diagramme UML de l&#8217;interface PlayerManager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_territoires"><a class="anchor" href="#_manager_des_territoires"></a>Manager des territoires</h3>
+<div class="paragraph">
+<p>Le controlleur des territoires va permettre gérer les territoires et tout ce qui en est associés, comme la position du voleur ou encore les resources générées par chaque territoires.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/hPF1QiCm38RlVWeVKoXxWX3QmGuRRJVQle1IAuaWiORY5CBOky_9ak2n4CAO3yQo__-pPEHTxK1SKvLAaNKe6TnGNr6474jx10ivYlvGIljneDh5q-7BvVMKw1pTk4DOFzkCfG97RAFDjsdIXz8s-e7HBem6OyfS8bXTGFr7smafBr9kvB6Xqf3Deo2RoRlLUq68HqsYmOS3xCvaD1ZpcxG6b0wh42POyHt_XJTNwPd1BB2wu-K2Uy3yCuK8yVD2MQlI21X1AMUiFU26S_P1FKgwZbeXxnFiqhiMXDc2iE_l8xm_F5adRVnMGekodQvB-cu_CBl8_nLjcof5sQXFfNPeZVz3Nm00" alt="diagram">
+</div>
+<div class="title">Figure 7. Diagramme UML de l&#8217;interface TerritoryManager</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manager_des_commandes"><a class="anchor" href="#_manager_des_commandes"></a>Manager des commandes</h3>
+<div class="paragraph">
+<p>Le controlleur des commandes va permettre de créer et d&#8217;exécuter des commandes de manière extensible pour permettre aux clients de communiquer et d&#8217;intéragir avec leur partie.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/TP1D2eD038NtSueiAtW44Q6qYzBgmXF4cMYdE9aoHYcKthtM7oZIPfEGz_7oIDO91kbTgvHbeL2Z9jXxvv3D1HaR2l1K2iPQjj2GBEEkb62v0KP7qGnLthU435Vi_aE3jmRGc1z43CUUjLZFoQ8U7gHxyI66t8kjhSQFUYgBF0MSo6_NGCuFj1glaVNS5t3h0pITe2qUmzbsaXJLZRIaSCSm1Xn_r4NgfLH6RCQ_lG40" alt="diagram">
+</div>
+<div class="title">Figure 8. Diagramme UML de l&#8217;interface CommandManager</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_client"><a class="anchor" href="#_client"></a>Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Le client va communiquer avec le serveur via des commandes envoyé à celui-ci. À chaque requête, le serveur renverra une notification au client. Il y a cependant deux types de notifications.</p>
+</div>
+<div class="paragraph">
+<p>Tout d&#8217;abord, nous avons des notifications classiques informant du bon déroulé de l&#8217;opération ou d&#8217;éventuelles erreurs.</p>
+</div>
+<div class="paragraph">
+<p>Ensuite, nous avons des notifications qui vont servir à questionner un client (le même ou non). Cela permet les interactions entre le client et le serveur, et entre les clients eux même.</p>
+</div>
+<div class="paragraph">
+<p>À chaque réception de notification, les informations de tous les clients de la partie seront mise à jour pour prendre en compte les modifications des données faisant suite à la requête.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/XT4zZy8m30RWlR_24iinCAGVImU4nCJ0n8WOSiqBYjGu9N6u-_dN7k9KT2rCblm-iYrv4qK7IQxDkhxQndQQXRQj1OiY7KbD1FaGv1F1tXhJuai73A9u4WU46yApA2V4qAyoHQlZuhDDEAsfe9e2hWbHQi8tcYJOUkSqcuzbLena-LAM8rczbDKWBm7Wlw6nynnH4tknPzjeiPxl4n-kc7U_DmQOqsfDUSzIPxJqwA8TTdpsmVrtwfrxx5NpUpTWq__s1m00" alt="diagram">
+</div>
+<div class="title">Figure 9. Diagramme de séquence d&#8217;une requête sans demande de réponse</div>
+</div>
+<div class="paragraph">
+<p>Alors que le premier diagramme nous montrait une communication assez standard, ce deuxième     diagramme permet de visualiser les interactions entre les clients et le serveur en cas de requête nécessitant plusieurs interactions des clients vers le serveur.</p>
+</div>
+<div class="paragraph">
+<p>Ainsi, comme la première notification renvoyée par le serveur, nécessite une réponse (adressée au client2), celui-ci exécute à son tour une requête.</p>
+</div>
+<div class="paragraph">
+<p>Finalement, après l&#8217;exécution de cette deuxième requête, les deux clients recevront leur notification propre et une mise à jour des données de la partie.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/rTAxJiGm40NGFbzXYGQABUmaJGgqqbOKD52YBORuRcGHF_23nzzZRnIqaQ8iBPKbpz7S6Tdx4Cd7fCVAvLFrof69x30gcCWP1SPN2g8Kn4hXKKavufCyYgWNuXd-0tufcXLHxjkAiztBpUkOSBndDUkOntj2Y1t35_eKSR1Qav6tTrLz8PjDsLp8TbEsHGuUCBzDWxCce6F6HdLIFKLb3PzQph3UWESfhISpb7IH9OMtZ03v13T-vr3n7rOMVrrPJ5DwoEDkMZWvIJ6hWJGUpCbwVOOBnw-vELXS2vuXttYKFOpCN_y7" alt="diagram">
+</div>
+<div class="title">Figure 10. Diagramme de séquence d&#8217;une requête avec demande de réponse</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../architecture/architecture.html">Architecture</a></span>
+  <span class="next"><a href="../conception/conception.html">Conception détaillée</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Architecture :: Catan Docs</title>
+    <link rel="prev" href="../analyse/analyse.html">
+    <link rel="next" href="../composants/composants.html">
+    <meta name="generator" content="Antora 3.1.1">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">Catan Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="Catan-doc" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Projet Catan</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../analyse/analyse.html">Analyse du domaine</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="architecture.html">Architecture</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../composants/composants.html">Spécification des composants</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../conception/conception.html">Conception détaillée</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../exigences/exigences.html">Spécification des exigences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Projet Catan</span>
+    <span class="version">dev.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Projet Catan</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">dev.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Projet Catan</a></li>
+    <li><a href="architecture.html">Architecture</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Architecture</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce chapitre décrit l&#8217;architecture d&#8217;une famille de produits, dont le projet Les colons de Catane en fait partie.</p>
+</div>
+<div class="paragraph">
+<p>L’objectif de ce document est de décrire choix génériques, qui peuvent s&#8217;appliquer à plusieurs projets de ce type.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vue_physique"><a class="anchor" href="#_vue_physique"></a>Vue physique</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dépandances"><a class="anchor" href="#_dépandances"></a>Dépandances</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Serveur</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Java 16</p>
+</li>
+<li>
+<p>Maven v4.0.0</p>
+</li>
+<li>
+<p>Spring v5.3.1</p>
+</li>
+<li>
+<p>Junit v5.9.1</p>
+</li>
+<li>
+<p>Mockito v3.6.0</p>
+</li>
+<li>
+<p>Reflections v0.10.2</p>
+</li>
+<li>
+<p>Snakeyaml v1.33</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Client</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Angular v15.1.0</p>
+</li>
+<li>
+<p>Node v19.3.0</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_besoins_matériels"><a class="anchor" href="#_besoins_matériels"></a>Besoins matériels</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>1 à 2 navigateurs web</p>
+</li>
+<li>
+<p>1 serveur d&#8217;hébergement</p>
+</li>
+</ul>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/RP2n2i8m48RtFCMHKUZWAgLKgts13WxYaAOd59DSIQ9Gn7VtBAMLram_-Ux_k2GFKVdui4OuQX1aXVw9Ne8A48O8Bm5yUAYzAHr1Ql8uSCk5_GfQIovC_23UexWmBReuWCwe_e_OK5ttKxDOcpjoh9ZbnyN8zyxC-BJ0AWJyQPUyslX4UTbU9IG9Xms7SRyTf6ddAP8casLmnXegqdTsY1nTmt_s0G00" alt="diagram">
+</div>
+<div class="title">Figure 1. Diagramme de déploiement (niveau spécification)</div>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/RP0n3i8m34NtdCBAtWjqQil6mW1x558Z8YKEIa8HGhqxfeg24F5c_-V_PGyfwvZltWaACu9KgZzYN30g9K4dI5i3Bm5SJDgBDXca2H4ttVFM-2Tw7oXLVH9hTH-TDTZld4NA9UBcz1FZWP1JLb79APnRtEaHVhazQcg2ruZ5iXm1NGVVjCQKlLlJZv4Oa6P-qni0" alt="diagram">
+</div>
+<div class="title">Figure 2. Diagramme de déploiement (niveau instance)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vue_de_la_fiabilité"><a class="anchor" href="#_vue_de_la_fiabilité"></a>Vue de la fiabilité</h2>
+<div class="sectionbody">
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pkAnyyXDJ578JynBJKukAhQ7yvFoyjCpqqgB4aipyF6kkrBmKBWSW0TG60000" alt="diagram">
+</div>
+<div class="title">Figure 3. Initialisation du système</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vue_du_développement"><a class="anchor" href="#_vue_du_développement"></a>Vue du développement</h2>
+<div class="sectionbody">
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIf8JCvEJ4zLICulIbMehaNYv-RcvnM3XBZ0SdfwTd11AmKRcypSWloY4ZixBeVKl1IWIG00" alt="diagram">
+</div>
+<div class="title">Figure 4. Organisation des modules serveur</div>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIf8JCvEJ4zLoCbFIgfKgAw52oJdvnRavwNcbHGZY-RcfwJc80ia5XUdGfHmGUJqzEoWXbafsDXa0WqfAh6puuAg0yaYcOoY14aSXo4EgNafG4S30000" alt="diagram">
+</div>
+<div class="title">Figure 5. Organisation des modules client</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vue_logique"><a class="anchor" href="#_vue_logique"></a>Vue logique</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>L&#8217;objectif de la vue logique est de décrire les différents composants qui jouent un rôle commun
+dans les différents projets qui respectent une même architecture.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vue_technique_traduction_de_uml_en_code_source"><a class="anchor" href="#_vue_technique_traduction_de_uml_en_code_source"></a>Vue technique : traduction de UML en code source</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Pour chaque instance de package UML, une instance de package Java doit être créée.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leurs noms doivent correspondre. Cependant, contrairement aux packages UML qui ont des noms simples, le nom du package Java contient l&#8217;information complète sur le chemin d&#8217;accès.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Pour chaque instance de classe UML, une instance de JavaClass doit être créée.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leurs noms doivent correspondre.</p>
+</li>
+<li>
+<p>La référence du paquetage doit correspondre.</p>
+</li>
+<li>
+<p>Les modificateurs doivent correspondre.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Pour chaque instance de DataType UML, une instance de PrimitiveType Java doit être créée.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leurs noms doivent correspondre.</p>
+</li>
+<li>
+<p>La référence du paquet doit correspondre.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Pour chaque instance d&#8217;attribut UML, une instance de champ Java doit être créée.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leurs noms doivent correspondre.</p>
+</li>
+<li>
+<p>Leurs types doivent correspondre.</p>
+</li>
+<li>
+<p>Les modificateurs doivent correspondre.</p>
+</li>
+<li>
+<p>Les classes doivent correspondre.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Pour chaque instance d&#8217;opération UML, une instance de méthode Java doit être créée.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leurs noms doivent correspondre.</p>
+</li>
+<li>
+<p>Leurs types doivent correspondre.</p>
+</li>
+<li>
+<p>Les modificateurs doivent correspondre.</p>
+</li>
+<li>
+<p>Les classes doivent correspondre.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_règles_de_traduction_des_types_de_base"><a class="anchor" href="#_règles_de_traduction_des_types_de_base"></a>Règles de traduction des types de base</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Traduction des types de base</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">UML</th>
+<th class="tableblock halign-left valign-top">Java</th>
+<th class="tableblock halign-left valign-top">TypeScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_conventions_de_codage"><a class="anchor" href="#_conventions_de_codage"></a>Conventions de codage</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Les classes et les interfaces utilisent le PascalCase</p>
+</li>
+<li>
+<p>Les noms de méthodes et de variables utilisent le camelCase</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Typescript</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Les classes et les interfaces utilisent le PascalCase</p>
+</li>
+<li>
+<p>Les noms de fichiers et les pages utilisent le PascalCase</p>
+</li>
+<li>
+<p>Les variables utilisent le camelCase</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Le backend a été construit avec une structure modulaire et non cyclique, ce qui signifie qu&#8217;il n&#8217;y a pas de dépendances entre les différents modules et que chacun peut être facilement remplacé.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../analyse/analyse.html">Analyse du domaine</a></span>
+  <span class="next"><a href="../composants/composants.html">Spécification des composants</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
