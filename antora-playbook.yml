@@ -11,7 +11,7 @@ asciidoc:
   
 content:
   sources:
-  - url: https://oauth2:glpat-V5xL5s3vjNdh_3mbkQsb@gitlab.univ-nantes.fr/E197248A/projet-2022
+  - url: https://github.com/Bobinho44/Projet_OOAD_M1
     branches: master
     start_path: catan-doc
 
